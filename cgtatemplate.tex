@@ -1,0 +1,54 @@
+%template file for CGTA 2015 Abstract page
+\documentclass[11pt,a4paper]{article}
+\usepackage{graphicx}
+
+% uncomment according to your operating system:
+% ------------------------------------------------
+\usepackage[latin1]{inputenc}    %% European characters can be used (Windows, old Linux)
+%\usepackage[utf8]{inputenc}     %% European characters can be used (Linux)
+%\usepackage[applemac]{inputenc} %% European characters can be used (Mac OS)
+% ------------------------------------------------
+\usepackage[T1]{fontenc}   %% get hyphenation and accented letters right
+\usepackage{mathptmx}      %% use fitting times fonts also in formulas
+% do not change these lines:
+\pagestyle{empty}                %% no page numbers!
+\usepackage[left=35mm, right=35mm, top=15mm, bottom=20mm, noheadfoot]{geometry}
+%% please don't change geometry settings!
+% begin the document
+\begin{document}
+\thispagestyle{empty}
+\title{\textbf{Sample One-Page Abstract for the  \\
+Conference on Geometry: Theory and Applications}}
+\author{Christopher Robin, \quad Winnie Puuh\\
+Institute of Applied Geometry, JKU - Johannes Kepler University Linz\\
+Altenberger Straﬂe 69, 4020 Linz, Austria\\
+\{Christopher.Robin,Winnie.Puuh\}@sampleemail.org}
+\date{} % <--- leave date empty
+\maketitle\thispagestyle{empty} %% <-- you need this for the first page
+
+This document is an example of one-page abstract for the book of abstracts
+of Conference on Geometry: Theory and Applications (CGTA 2015).
+If accepted, the abstract will be included into a small book of abstracts 
+and will be printed and made available to all participants.
+
+In order to make your abstract more appealing, you may wish to 
+include figures, such as Fig. \ref{fig5}, and a few references, such as \cite{pu}
+or \cite{model}.
+\begin{figure}[h]
+	%uncomment next line to include a graphic file
+	%\centerline{\includegraphics[width=6cm, angle=-90]{fig5.eps}}
+	%and comment out next line
+\centerline{\framebox[6cm]{\rule{0cm}{3.5cm} figure example}}
+\caption{Sample figure}
+\label{fig5}
+\end{figure}
+The abstract (including figures anf references) must not exceed one
+page. Do not modify the specifications of the page layout as provided
+in this template.
+\begin{thebibliography}{00}
+\addcontentsline{toc}{chapter}{References}
+\bibitem{pu} A.A. Milne, Winnie-the-Pooh, Methuen, 1926.
+\bibitem{model} S.E. Author, H. Buthor, M. Cuthor: Very important topic, 
+The Really Good Journal 6 (1969), 501-510.
+\end{thebibliography}
+\end{document}

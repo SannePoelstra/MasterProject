@@ -1,0 +1,434 @@
+---
+title: "Plots adjusted ones"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r, include = FALSE}
+rm(list=ls())
+library(plotfunctions)
+#rmarkdown::render("C:/Users/Sanne/Dropbox/MasterProject/Modelling/FixingVHW.Rmd")
+source("C:/Users/Sanne/Dropbox/MasterProject/Modelling/MoreTrials.R")
+```
+
+# **More Trials**
+## **Comparing the scores per condition**
+
+#### **Original paper graph:**
+![Scores per condition of the original paper](C:/Users/Sanne/Dropbox/MasterProject/Modelling/ScoresPerCondition.png){width=60%}
+
+#### **Rescorla-Wagner model prediction:**
+On the left, the average weights for each food group per condition. This average is taken over all trials and all participants. However only the 16 trials in which the food was asked. <br />
+```{r, echo = FALSE}
+par(mfrow = c(1,2))
+A <- c((aggAll$x)[aggAll$Group.1 == "Outcome000" & aggAll$Group.2 == "A"], (aggAll$x)[aggAll$Group.1 == "Outcome050" & aggAll$Group.2 == "A"], (aggAll$x)[aggAll$Group.1 == "Outcome100" & aggAll$Group.2 == "A"])
+B <- c((aggAll$x)[aggAll$Group.1 == "Outcome000" & aggAll$Group.2 == "B"], (aggAll$x)[aggAll$Group.1 == "Outcome050" & aggAll$Group.2 == "B"], (aggAll$x)[aggAll$Group.1 == "Outcome100" & aggAll$Group.2 == "B"])
+X <- c((aggAll$x)[aggAll$Group.1 == "Outcome000" & aggAll$Group.2 == "X"], (aggAll$x)[aggAll$Group.1 == "Outcome050" & aggAll$Group.2 == "X"], (aggAll$x)[aggAll$Group.1 == "Outcome100" & aggAll$Group.2 == "X"])
+emptyPlot(c(-5,105),c(-0.02,0.07), xmark = c(0,50,100), bty='n', main = "Weights allergic", xlab = "Condition", ylab = "Probability")
+points(c(0, 50, 100),A, pch = 0, type = "b")
+points(c(0, 50, 100),B, pch =16, type = "b", lty = 2)
+points(c(0, 50, 100),X, pch =15, type = "b", lty = 4)
+legend(0.05,0,legend =c("A", "B", "X"), pch = c(0,16,15))
+
+
+A<- c(((aggAll$x)[aggAll$Group.1 == "Outcome000" & aggAll$Group.2 == "A"] - ((aggAllNot$x)[aggAllNot$Group.1 == "Outcome000" & aggAllNot$Group.2 == "A"])), ((aggAll$x)[aggAll$Group.1 == "Outcome050" & aggAll$Group.2 == "A"] - ((aggAllNot$x)[aggAllNot$Group.1 == "Outcome050" & aggAllNot$Group.2 == "A"])), ((aggAll$x)[aggAll$Group.1 == "Outcome100" & aggAll$Group.2 == "A"] - ((aggAllNot$x)[aggAllNot$Group.1 == "Outcome100" & aggAllNot$Group.2 == "A"])))
+B<- c(((aggAll$x)[aggAll$Group.1 == "Outcome000" & aggAll$Group.2 == "B"] - ((aggAllNot$x)[aggAllNot$Group.1 == "Outcome000" & aggAllNot$Group.2 == "B"])), ((aggAll$x)[aggAll$Group.1 == "Outcome050" & aggAll$Group.2 == "B"] - ((aggAllNot$x)[aggAllNot$Group.1 == "Outcome050" & aggAllNot$Group.2 == "B"])), ((aggAll$x)[aggAll$Group.1 == "Outcome100" & aggAll$Group.2 == "B"] - ((aggAllNot$x)[aggAllNot$Group.1 == "Outcome100" & aggAllNot$Group.2 == "B"])))
+X<- c(((aggAll$x)[aggAll$Group.1 == "Outcome000" & aggAll$Group.2 == "X"] - ((aggAllNot$x)[aggAllNot$Group.1 == "Outcome000" & aggAllNot$Group.2 == "X"])), ((aggAll$x)[aggAll$Group.1 == "Outcome050" & aggAll$Group.2 == "X"] - ((aggAllNot$x)[aggAllNot$Group.1 == "Outcome050" & aggAllNot$Group.2 == "X"])), ((aggAll$x)[aggAll$Group.1 == "Outcome100" & aggAll$Group.2 == "X"] - ((aggAllNot$x)[aggAllNot$Group.1 == "Outcome100" & aggAllNot$Group.2 == "X"])))
+emptyPlot(c(-5,105),c(-0.08,0.08), xmark = c(0,50,100), bty='n', main = "Weights allergic minus not", xlab = "Condition", ylab = "Probability")
+points(c(0, 50, 100),A, pch = 0, type = "b")
+points(c(0, 50, 100),B, pch =16, type = "b", lty = 2)
+points(c(0, 50, 100),X, pch =15, type = "b", lty = 4)
+legend(0.05,-0.02,legend =c("A", "B", "X"), pch = c(0,16,15))
+
+```
+SCALE IS A BIT BIGGER NOW, but general shapes? still the same
+
+
+#### **Van Hamme-Wasserman model prediction:**
+```{r, echo = FALSE}
+par(mfrow = c(1,2))
+A <- c((aggAll2$x)[aggAll2$Group.1 == "Outcome000" & aggAll2$Group.2 == "A"], (aggAll2$x)[aggAll2$Group.1 == "Outcome050" & aggAll2$Group.2 == "A"], (aggAll2$x)[aggAll2$Group.1 == "Outcome100" & aggAll2$Group.2 == "A"])
+B <- c((aggAll2$x)[aggAll2$Group.1 == "Outcome000" & aggAll2$Group.2 == "B"], (aggAll2$x)[aggAll2$Group.1 == "Outcome050" & aggAll2$Group.2 == "B"], (aggAll2$x)[aggAll2$Group.1 == "Outcome100" & aggAll2$Group.2 == "B"])
+X <- c((aggAll2$x)[aggAll2$Group.1 == "Outcome000" & aggAll2$Group.2 == "X"], (aggAll2$x)[aggAll2$Group.1 == "Outcome050" & aggAll2$Group.2 == "X"], (aggAll2$x)[aggAll2$Group.1 == "Outcome100" & aggAll2$Group.2 == "X"])
+emptyPlot(c(-5,105),c(-0.05,0.08), xmark = c(0,50,100), bty='n', main = "Weights allergic", xlab = "Condition", ylab = "Probability")
+points(c(0, 50, 100),A, pch = 0, type = "b")
+points(c(0, 50, 100),B, pch =16, type = "b", lty = 2)
+points(c(0, 50, 100),X, pch =15, type = "b", lty = 4)
+legend(0.05,-0.02,legend =c("A", "B", "X"), pch = c(0,16,15))
+
+A<- c(((aggAll2$x)[aggAll2$Group.1 == "Outcome000" & aggAll2$Group.2 == "A"] - ((aggAllNot2$x)[aggAllNot2$Group.1 == "Outcome000" & aggAllNot2$Group.2 == "A"])), ((aggAll2$x)[aggAll2$Group.1 == "Outcome050" & aggAll2$Group.2 == "A"] - ((aggAllNot2$x)[aggAllNot2$Group.1 == "Outcome050" & aggAllNot2$Group.2 == "A"])), ((aggAll2$x)[aggAll2$Group.1 == "Outcome100" & aggAll2$Group.2 == "A"] - ((aggAllNot2$x)[aggAllNot2$Group.1 == "Outcome100" & aggAllNot2$Group.2 == "A"])))
+B<- c(((aggAll2$x)[aggAll2$Group.1 == "Outcome000" & aggAll2$Group.2 == "B"] - ((aggAllNot2$x)[aggAllNot2$Group.1 == "Outcome000" & aggAllNot2$Group.2 == "B"])), ((aggAll2$x)[aggAll2$Group.1 == "Outcome050" & aggAll2$Group.2 == "B"] - ((aggAllNot2$x)[aggAllNot2$Group.1 == "Outcome050" & aggAllNot2$Group.2 == "B"])), ((aggAll2$x)[aggAll2$Group.1 == "Outcome100" & aggAll2$Group.2 == "B"] - ((aggAllNot2$x)[aggAllNot2$Group.1 == "Outcome100" & aggAllNot2$Group.2 == "B"])))
+X<- c(((aggAll2$x)[aggAll2$Group.1 == "Outcome000" & aggAll2$Group.2 == "X"] - ((aggAllNot2$x)[aggAllNot2$Group.1 == "Outcome000" & aggAllNot2$Group.2 == "X"])), ((aggAll2$x)[aggAll2$Group.1 == "Outcome050" & aggAll2$Group.2 == "X"] - ((aggAllNot2$x)[aggAllNot2$Group.1 == "Outcome050" & aggAllNot2$Group.2 == "X"])), ((aggAll2$x)[aggAll2$Group.1 == "Outcome100" & aggAll2$Group.2 == "X"] - ((aggAllNot2$x)[aggAllNot2$Group.1 == "Outcome100" & aggAllNot2$Group.2 == "X"])))
+emptyPlot(c(-5,105),c(-0.11,0.12), xmark = c(0,50,100), bty='n', main = "Weights allergic minus not", xlab = "Condition", ylab = "Probability")
+points(c(0, 50, 100),A, pch = 0, type = "b")
+points(c(0, 50, 100),B, pch =16, type = "b", lty = 2)
+points(c(0, 50, 100),X, pch =15, type = "b", lty = 4)
+legend(0.05,-0.02,legend =c("A", "B", "X"), pch = c(0,16,15))
+```
+Same here, the general shapes are the same, although the proobabilty scale is larger
+
+## **Comparing scores over trials for each condition seperately**
+
+### **Condition 0.00**
+A was either Strawberry or Walnut. <br />
+B either Peanut or Peach. <br />
+X either Shrimp or Wheat.<br />
+
+#### **Original paper graph:** 
+
+![Scores over all 16 trials (plus a pre measure), condition 0.00)](C:/Users/Sanne/Dropbox/MasterProject/Modelling/ScoresPerDay000.png){width=60%}
+
+Note that the pre measure was not taken with the models (since that would just be 0 for all of them). This is also not done in any of the other conditions.
+
+#### **Rescorla-Wagner model prediction:**
+
+```{r,echo = FALSE}
+par(mfrow = c(1,2))
+
+emptyPlot(c(1,32),c(-0.01,0.12), xmark = c(1:32), bty='n', main= "Cond000, weights to allergic", ylab = "Weight", xlab = "Trial")
+points(c(1:32), (Cond000$Allergic)[Cond000$FoodGroup == "A"], pch = 0, type = "b")
+points(c(1:32), (Cond000$Allergic)[Cond000$FoodGroup == "B"], pch = 16, type = "b", lty = 2)
+points(c(1:32), (Cond000$Allergic)[Cond000$FoodGroup == "X"], pch = 15, type = "b", lty = 4)
+legend(1,0.06,legend =c("A", "B", "X"), pch = c(0,16,15))
+
+
+
+emptyPlot(c(1,32),c(-0.015,0.025), xmark = c(1:32), bty='n', main= "Cond000, weigths allergic\n minus not", ylab = "Weight", xlab = "Trial")
+points(c(1:32), (Cond000$Allergic - Cond000$Not)[Cond000$FoodGroup == "A"], pch = 0, type = "b")
+points(c(1:32), (Cond000$Allergic - Cond000$Not)[Cond000$FoodGroup == "B"], pch = 16, type = "b", lty = 2)
+points(c(1:32), (Cond000$Allergic - Cond000$Not)[Cond000$FoodGroup == "X"], pch = 15, type = "b", lty = 4)
+legend(1,0.025,legend =c("A", "B", "X"), pch = c(0,16,15))
+```
+
+
+
+#### **Van Hamme-Wasserman model prediction:**
+```{r, echo = FALSE}
+par(mfrow = c(1,2))
+
+emptyPlot(c(1,32),c(-0.02,0.12), xmark = c(1:32), bty='n', main= "Cond000, weights to allergic", ylab = "Weight", xlab = "Trial")
+points(c(1:32), (Cond000_2$Allergic)[Cond000_2$FoodGroup == "A"], pch = 0, type = "b")
+points(c(1:32), (Cond000_2$Allergic)[Cond000_2$FoodGroup == "B"], pch = 16, type = "b", lty = 2)
+points(c(1:32), (Cond000_2$Allergic)[Cond000_2$FoodGroup == "X"], pch = 15, type = "b", lty = 4)
+legend(1,0.08,legend =c("A", "B", "X"), pch = c(0,16,15))
+
+
+
+emptyPlot(c(1,32),c(-0.02,0.04), xmark = c(1:32), bty='n', main= "Cond000, weigths allergic\n minus not", ylab = "Weight", xlab = "Trial")
+points(c(1:32), (Cond000_2$Allergic - Cond000_2$Not)[Cond000_2$FoodGroup == "A"], pch = 0, type = "b")
+points(c(1:32), (Cond000_2$Allergic - Cond000_2$Not)[Cond000_2$FoodGroup == "B"], pch = 16, type = "b", lty = 2)
+points(c(1:32), (Cond000_2$Allergic - Cond000_2$Not)[Cond000_2$FoodGroup == "X"], pch = 15, type = "b", lty = 4)
+legend(1,0.04,legend =c("A", "B", "X"), pch = c(0,16,15))
+```
+
+
+### **Condition 0.50**
+A was either Bran or Horseradish. <br />
+B either Cabbage or Lobster. <br />
+X either Yogurt or Corn. <br />
+
+#### **Original paper graph:**
+
+![Scores over all 16 trials (plus a pre measure), condition 0.50](C:/Users/Sanne/Dropbox/MasterProject/Modelling/ScoresPerDay050.png){width=60%}
+
+
+#### **Rescorla-Wagner model prediction:**
+```{r, echo = FALSE}
+par(mfrow = c(1,2))
+
+emptyPlot(c(1,32),c(-0.01,0.12), xmark = c(1:32), bty='n', main= "Cond050, weights to allergic", ylab = "Weight", xlab = "Trial")
+points(c(1:32), (Cond050$Allergic)[Cond050$FoodGroup == "A"], pch = 0, type = "b")
+points(c(1:32), (Cond050$Allergic)[Cond050$FoodGroup == "B"], pch = 16, type = "b", lty = 2)
+points(c(1:32), (Cond050$Allergic)[Cond050$FoodGroup == "X"], pch = 15, type = "b", lty = 4)
+legend(1,0.08,legend =c("A", "B", "X"), pch = c(0,16,15))
+
+
+emptyPlot(c(1,32),c(-0.08,0.09), xmark = c(1:32), bty='n', main= "Cond050, weigths allergic\n minus not", ylab = "Weight", xlab = "Trial")
+points(c(1:32), (Cond050$Allergic - Cond050$Not)[Cond050$FoodGroup == "A"], pch = 0, type = "b")
+points(c(1:32), (Cond050$Allergic - Cond050$Not)[Cond050$FoodGroup == "B"], pch = 16, type = "b", lty = 2)
+points(c(1:32), (Cond050$Allergic - Cond050$Not)[Cond050$FoodGroup == "X"], pch = 15, type = "b", lty = 4)
+legend(1,-0.03,legend =c("A", "B", "X"), pch = c(0,16,15))
+```
+
+#### **Van Hamme-Wasserman model prediction:**
+```{r, echo = FALSE}
+par(mfrow = c(1,2))
+
+emptyPlot(c(1,32),c(-0.06,0.12), xmark = c(1:32), bty='n', main= "Cond050, weights to allergic", ylab = "Weight", xlab = "Trial")
+points(c(1:32), (Cond050_2$Allergic)[Cond050_2$FoodGroup == "A"], pch = 0, type = "b")
+points(c(1:32), (Cond050_2$Allergic)[Cond050_2$FoodGroup == "B"], pch = 16, type = "b", lty = 2)
+points(c(1:32), (Cond050_2$Allergic)[Cond050_2$FoodGroup == "X"], pch = 15, type = "b", lty = 4)
+legend(1,0.10,legend =c("A", "B", "X"), pch = c(0,16,15))
+
+
+emptyPlot(c(1,32),c(-0.15,0.15), xmark = c(1:32), bty='n', main= "Cond050, weigths allergic\n minus not", ylab = "Weight", xlab = "Trial")
+points(c(1:32), (Cond050_2$Allergic - Cond050_2$Not)[Cond050_2$FoodGroup == "A"], pch = 0, type = "b")
+points(c(1:32), (Cond050_2$Allergic - Cond050_2$Not)[Cond050_2$FoodGroup == "B"], pch = 16, type = "b", lty = 2)
+points(c(1:32), (Cond050_2$Allergic - Cond050_2$Not)[Cond050_2$FoodGroup == "X"], pch = 15, type = "b", lty = 4)
+legend(1,-0.05,legend =c("A", "B", "X"), pch = c(0,16,15))
+```
+
+### **Condition 1.00**
+A was either Chicken or Cheese. <br />
+B either Mustard or Pork. <br />
+X either Bananas or Blueberries. <br />
+
+
+#### **Original paper graph:**
+
+![Scores over all 16 trials (plus a pre measure), condition 1.00](C:/Users/Sanne/Dropbox/MasterProject/Modelling/ScoresPerDay100.png){width=60%}
+
+
+#### **Rescorla-Wagner model prediction:**
+```{r, echo = FALSE}
+par(mfrow = c(1,2))
+
+emptyPlot(c(1,32),c(-0.03,0.14), xmark = c(1:32), bty='n', main= "Cond100, weights to allergic", ylab = "Weight", xlab = "Trial")
+points(c(1:32), (Cond100$Allergic)[Cond100$FoodGroup == "A"], pch = 0, type = "b")
+points(c(1:32), (Cond100$Allergic)[Cond100$FoodGroup == "B"], pch = 16, type = "b", lty = 2)
+points(c(1:32), (Cond100$Allergic)[Cond100$FoodGroup == "X"], pch = 15, type = "b", lty = 4)
+legend(1,0.10,legend =c("A", "B", "X"), pch = c(0,16,15))
+
+
+
+emptyPlot(c(1,32),c(-0.15,0.15), xmark = c(1:32), bty='n', main= "Cond100, weigths allergic\n minus not", ylab = "Weight", xlab = "Trial")
+points(c(1:32), (Cond100$Allergic - Cond100$Not)[Cond100$FoodGroup == "A"], pch = 0, type = "b")
+points(c(1:32), (Cond100$Allergic - Cond100$Not)[Cond100$FoodGroup == "B"], pch = 16, type = "b", lty = 2)
+points(c(1:32), (Cond100$Allergic - Cond100$Not)[Cond100$FoodGroup == "X"], pch = 15, type = "b", lty = 4)
+legend(1,0.14,legend =c("A", "B", "X"), pch = c(0,16,15))
+```
+
+#### **Van Hamme-Wasserman model prediction:**
+
+
+```{r, echo = FALSE}
+par(mfrow = c(1,2))
+
+emptyPlot(c(1,32),c(-0.15,0.15), xmark = c(1:32), bty='n', main= "Cond100, weights to allergic", ylab = "Weight", xlab = "Trial")
+points(c(1:32), (Cond100_2$Allergic)[Cond100_2$FoodGroup == "A"], pch = 0, type = "b")
+points(c(1:32), (Cond100_2$Allergic)[Cond100_2$FoodGroup == "B"], pch = 16, type = "b", lty = 2)
+points(c(1:32), (Cond100_2$Allergic)[Cond100_2$FoodGroup == "X"], pch = 15, type = "b", lty = 4)
+legend(1,-0.04,legend =c("A", "B", "X"), pch = c(0,16,15))
+
+
+
+emptyPlot(c(1,32),c(-0.3,0.3), xmark = c(1:32), bty='n', main= "Cond100, weigths allergic\n minus not", ylab = "Weight", xlab = "Trial")
+points(c(1:32), (Cond100_2$Allergic - Cond100_2$Not)[Cond100_2$FoodGroup == "A"], pch = 0, type = "b")
+points(c(1:32), (Cond100_2$Allergic - Cond100_2$Not)[Cond100_2$FoodGroup == "B"], pch = 16, type = "b", lty = 2)
+points(c(1:32), (Cond100_2$Allergic - Cond100_2$Not)[Cond100_2$FoodGroup == "X"], pch = 15, type = "b", lty = 4)
+legend(1,-0.1,legend =c("A", "B", "X"), pch = c(0,16,15))
+```
+<br />
+
+# **More Stimuli**
+
+```{r, include = FALSE}
+rm(list=ls())
+library(plotfunctions)
+#rmarkdown::render("C:/Users/Sanne/Dropbox/MasterProject/Modelling/FixingVHW.Rmd")
+source("C:/Users/Sanne/Dropbox/MasterProject/Modelling/MoreStimuli.R")
+```
+
+![Scores per condition of the original paper](C:/Users/Sanne/Dropbox/MasterProject/Modelling/ScoresPerCondition.png){width=60%}
+
+
+#### **Rescorla-Wagner model prediction:**
+```{r, echo = FALSE}
+par(mfrow = c(1,2))
+A <- c((aggAll$x)[aggAll$Group.1 == "Outcome000" & aggAll$Group.2 == "A"], (aggAll$x)[aggAll$Group.1 == "Outcome050" & aggAll$Group.2 == "A"], (aggAll$x)[aggAll$Group.1 == "Outcome100" & aggAll$Group.2 == "A"])
+B <- c((aggAll$x)[aggAll$Group.1 == "Outcome000" & aggAll$Group.2 == "B"], (aggAll$x)[aggAll$Group.1 == "Outcome050" & aggAll$Group.2 == "B"], (aggAll$x)[aggAll$Group.1 == "Outcome100" & aggAll$Group.2 == "B"])
+X <- c((aggAll$x)[aggAll$Group.1 == "Outcome000" & aggAll$Group.2 == "X"], (aggAll$x)[aggAll$Group.1 == "Outcome050" & aggAll$Group.2 == "X"], (aggAll$x)[aggAll$Group.1 == "Outcome100" & aggAll$Group.2 == "X"])
+emptyPlot(c(-5,105),c(-0.02,0.05), xmark = c(0,50,100), bty='n', main = "Weights allergic", xlab = "Condition", ylab = "Probability")
+points(c(0, 50, 100),A, pch = 0, type = "b")
+points(c(0, 50, 100),B, pch =16, type = "b", lty = 2)
+points(c(0, 50, 100),X, pch =15, type = "b", lty = 4)
+legend(0.05,0,legend =c("A", "B", "X"), pch = c(0,16,15))
+
+
+A<- c(((aggAll$x)[aggAll$Group.1 == "Outcome000" & aggAll$Group.2 == "A"] - ((aggAllNot$x)[aggAllNot$Group.1 == "Outcome000" & aggAllNot$Group.2 == "A"])), ((aggAll$x)[aggAll$Group.1 == "Outcome050" & aggAll$Group.2 == "A"] - ((aggAllNot$x)[aggAllNot$Group.1 == "Outcome050" & aggAllNot$Group.2 == "A"])), ((aggAll$x)[aggAll$Group.1 == "Outcome100" & aggAll$Group.2 == "A"] - ((aggAllNot$x)[aggAllNot$Group.1 == "Outcome100" & aggAllNot$Group.2 == "A"])))
+B<- c(((aggAll$x)[aggAll$Group.1 == "Outcome000" & aggAll$Group.2 == "B"] - ((aggAllNot$x)[aggAllNot$Group.1 == "Outcome000" & aggAllNot$Group.2 == "B"])), ((aggAll$x)[aggAll$Group.1 == "Outcome050" & aggAll$Group.2 == "B"] - ((aggAllNot$x)[aggAllNot$Group.1 == "Outcome050" & aggAllNot$Group.2 == "B"])), ((aggAll$x)[aggAll$Group.1 == "Outcome100" & aggAll$Group.2 == "B"] - ((aggAllNot$x)[aggAllNot$Group.1 == "Outcome100" & aggAllNot$Group.2 == "B"])))
+X<- c(((aggAll$x)[aggAll$Group.1 == "Outcome000" & aggAll$Group.2 == "X"] - ((aggAllNot$x)[aggAllNot$Group.1 == "Outcome000" & aggAllNot$Group.2 == "X"])), ((aggAll$x)[aggAll$Group.1 == "Outcome050" & aggAll$Group.2 == "X"] - ((aggAllNot$x)[aggAllNot$Group.1 == "Outcome050" & aggAllNot$Group.2 == "X"])), ((aggAll$x)[aggAll$Group.1 == "Outcome100" & aggAll$Group.2 == "X"] - ((aggAllNot$x)[aggAllNot$Group.1 == "Outcome100" & aggAllNot$Group.2 == "X"])))
+emptyPlot(c(-5,105),c(-0.05,0.05), xmark = c(0,50,100), bty='n', main = "Weights allergic minus not", xlab = "Condition", ylab = "Probability")
+points(c(0, 50, 100),A, pch = 0, type = "b")
+points(c(0, 50, 100),B, pch =16, type = "b", lty = 2)
+points(c(0, 50, 100),X, pch =15, type = "b", lty = 4)
+legend(0.05,-0.02,legend =c("A", "B", "X"), pch = c(0,16,15))
+
+```
+
+#### **Van Hamme-Wasserman model prediction:**
+```{r, echo = FALSE}
+par(mfrow = c(1,2))
+A <- c((aggAll2$x)[aggAll2$Group.1 == "Outcome000" & aggAll2$Group.2 == "A"], (aggAll2$x)[aggAll2$Group.1 == "Outcome050" & aggAll2$Group.2 == "A"], (aggAll2$x)[aggAll2$Group.1 == "Outcome100" & aggAll2$Group.2 == "A"])
+B <- c((aggAll2$x)[aggAll2$Group.1 == "Outcome000" & aggAll2$Group.2 == "B"], (aggAll2$x)[aggAll2$Group.1 == "Outcome050" & aggAll2$Group.2 == "B"], (aggAll2$x)[aggAll2$Group.1 == "Outcome100" & aggAll2$Group.2 == "B"])
+X <- c((aggAll2$x)[aggAll2$Group.1 == "Outcome000" & aggAll2$Group.2 == "X"], (aggAll2$x)[aggAll2$Group.1 == "Outcome050" & aggAll2$Group.2 == "X"], (aggAll2$x)[aggAll2$Group.1 == "Outcome100" & aggAll2$Group.2 == "X"])
+emptyPlot(c(-5,105),c(-0.05,0.05), xmark = c(0,50,100), bty='n', main = "Weights allergic", xlab = "Condition", ylab = "Probability")
+points(c(0, 50, 100),A, pch = 0, type = "b")
+points(c(0, 50, 100),B, pch =16, type = "b", lty = 2)
+points(c(0, 50, 100),X, pch =15, type = "b", lty = 4)
+legend(0.05,-0.02,legend =c("A", "B", "X"), pch = c(0,16,15))
+
+A<- c(((aggAll2$x)[aggAll2$Group.1 == "Outcome000" & aggAll2$Group.2 == "A"] - ((aggAllNot2$x)[aggAllNot2$Group.1 == "Outcome000" & aggAllNot2$Group.2 == "A"])), ((aggAll2$x)[aggAll2$Group.1 == "Outcome050" & aggAll2$Group.2 == "A"] - ((aggAllNot2$x)[aggAllNot2$Group.1 == "Outcome050" & aggAllNot2$Group.2 == "A"])), ((aggAll2$x)[aggAll2$Group.1 == "Outcome100" & aggAll2$Group.2 == "A"] - ((aggAllNot2$x)[aggAllNot2$Group.1 == "Outcome100" & aggAllNot2$Group.2 == "A"])))
+B<- c(((aggAll2$x)[aggAll2$Group.1 == "Outcome000" & aggAll2$Group.2 == "B"] - ((aggAllNot2$x)[aggAllNot2$Group.1 == "Outcome000" & aggAllNot2$Group.2 == "B"])), ((aggAll2$x)[aggAll2$Group.1 == "Outcome050" & aggAll2$Group.2 == "B"] - ((aggAllNot2$x)[aggAllNot2$Group.1 == "Outcome050" & aggAllNot2$Group.2 == "B"])), ((aggAll2$x)[aggAll2$Group.1 == "Outcome100" & aggAll2$Group.2 == "B"] - ((aggAllNot2$x)[aggAllNot2$Group.1 == "Outcome100" & aggAllNot2$Group.2 == "B"])))
+X<- c(((aggAll2$x)[aggAll2$Group.1 == "Outcome000" & aggAll2$Group.2 == "X"] - ((aggAllNot2$x)[aggAllNot2$Group.1 == "Outcome000" & aggAllNot2$Group.2 == "X"])), ((aggAll2$x)[aggAll2$Group.1 == "Outcome050" & aggAll2$Group.2 == "X"] - ((aggAllNot2$x)[aggAllNot2$Group.1 == "Outcome050" & aggAllNot2$Group.2 == "X"])), ((aggAll2$x)[aggAll2$Group.1 == "Outcome100" & aggAll2$Group.2 == "X"] - ((aggAllNot2$x)[aggAllNot2$Group.1 == "Outcome100" & aggAllNot2$Group.2 == "X"])))
+emptyPlot(c(-5,105),c(-0.08,0.08), xmark = c(0,50,100), bty='n', main = "Weights allergic minus not", xlab = "Condition", ylab = "Probability")
+points(c(0, 50, 100),A, pch = 0, type = "b")
+points(c(0, 50, 100),B, pch =16, type = "b", lty = 2)
+points(c(0, 50, 100),X, pch =15, type = "b", lty = 4)
+legend(0.05,-0.02,legend =c("A", "B", "X"), pch = c(0,16,15))
+```
+
+
+## **Comparing scores over trials for each condition seperately**
+
+### **Condition 0.00**
+A was either Strawberry or Walnut. <br />
+B either Peanut or Peach. <br />
+X either Shrimp or Wheat.<br />
+
+#### **Original paper graph:** 
+
+![Scores over all 16 trials (plus a pre measure), condition 0.00)](C:/Users/Sanne/Dropbox/MasterProject/Modelling/ScoresPerDay000.png){width=60%}
+
+Note that the pre measure was not taken with the models (since that would just be 0 for all of them). This is also not done in any of the other conditions.
+
+#### **Rescorla-Wagner model prediction:**
+
+```{r,echo = FALSE}
+par(mfrow = c(1,2))
+
+emptyPlot(c(1,16),c(-0.01,0.08), xmark = c(1:16), bty='n', main= "Cond000, weights to allergic", ylab = "Weight", xlab = "Trial")
+points(c(1:16), (Cond000$Allergic)[Cond000$FoodGroup == "A"], pch = 0, type = "b")
+points(c(1:16), (Cond000$Allergic)[Cond000$FoodGroup == "B"], pch = 16, type = "b", lty = 2)
+points(c(1:16), (Cond000$Allergic)[Cond000$FoodGroup == "X"], pch = 15, type = "b", lty = 4)
+legend(1,0.06,legend =c("A", "B", "X"), pch = c(0,16,15))
+
+
+
+emptyPlot(c(1,16),c(-0.015,0.025), xmark = c(1:16), bty='n', main= "Cond000, weigths allergic\n minus not", ylab = "Weight", xlab = "Trial")
+points(c(1:16), (Cond000$Allergic - Cond000$Not)[Cond000$FoodGroup == "A"], pch = 0, type = "b")
+points(c(1:16), (Cond000$Allergic - Cond000$Not)[Cond000$FoodGroup == "B"], pch = 16, type = "b", lty = 2)
+points(c(1:16), (Cond000$Allergic - Cond000$Not)[Cond000$FoodGroup == "X"], pch = 15, type = "b", lty = 4)
+legend(1,0.025,legend =c("A", "B", "X"), pch = c(0,16,15))
+```
+
+
+
+#### **Van Hamme-Wasserman model prediction:**
+```{r, echo = FALSE}
+par(mfrow = c(1,2))
+par(las = 1)
+
+emptyPlot(c(1,16),c(-0.02,0.08), xmark = c(1:16), bty='n', main= "Cond000, weights to allergic", ylab = "Weight", xlab = "Trial")
+points(c(1:16), (Cond000_2$Allergic)[Cond000_2$FoodGroup == "A"], pch = 0, type = "b")
+points(c(1:16), (Cond000_2$Allergic)[Cond000_2$FoodGroup == "B"], pch = 16, type = "b", lty = 2)
+points(c(1:16), (Cond000_2$Allergic)[Cond000_2$FoodGroup == "X"], pch = 15, type = "b", lty = 4)
+legend(1,0.08,legend =c("A", "B", "X"), pch = c(0,16,15))
+
+
+
+emptyPlot(c(1,16),c(-0.02,0.04), xmark = c(1:16), bty='n', main= "Cond000, weigths allergic\n minus not", ylab = "Weight", xlab = "Trial")
+points(c(1:16), (Cond000_2$Allergic - Cond000_2$Not)[Cond000_2$FoodGroup == "A"], pch = 0, type = "b")
+points(c(1:16), (Cond000_2$Allergic - Cond000_2$Not)[Cond000_2$FoodGroup == "B"], pch = 16, type = "b", lty = 2)
+points(c(1:16), (Cond000_2$Allergic - Cond000_2$Not)[Cond000_2$FoodGroup == "X"], pch = 15, type = "b", lty = 4)
+legend(1,0.04,legend =c("A", "B", "X"), pch = c(0,16,15))
+```
+
+
+### **Condition 0.50**
+A was either Bran or Horseradish. <br />
+B either Cabbage or Lobster. <br />
+X either Yogurt or Corn. <br />
+
+#### **Original paper graph:**
+
+![Scores over all 16 trials (plus a pre measure), condition 0.50](C:/Users/Sanne/Dropbox/MasterProject/Modelling/ScoresPerDay050.png){width=60%}
+
+
+#### **Rescorla-Wagner model prediction:**
+```{r, echo = FALSE}
+par(mfrow = c(1,2))
+
+emptyPlot(c(1,16),c(-0.01,0.08), xmark = c(1:16), bty='n', main= "Cond050, weights to allergic", ylab = "Weight", xlab = "Trial")
+points(c(1:16), (Cond050$Allergic)[Cond050$FoodGroup == "A"], pch = 0, type = "b")
+points(c(1:16), (Cond050$Allergic)[Cond050$FoodGroup == "B"], pch = 16, type = "b", lty = 2)
+points(c(1:16), (Cond050$Allergic)[Cond050$FoodGroup == "X"], pch = 15, type = "b", lty = 4)
+legend(1,0.08,legend =c("A", "B", "X"), pch = c(0,16,15))
+
+
+emptyPlot(c(1,16),c(-0.04,0.05), xmark = c(1:16), bty='n', main= "Cond050, weigths allergic\n minus not", ylab = "Weight", xlab = "Trial")
+points(c(1:16), (Cond050$Allergic - Cond050$Not)[Cond050$FoodGroup == "A"], pch = 0, type = "b")
+points(c(1:16), (Cond050$Allergic - Cond050$Not)[Cond050$FoodGroup == "B"], pch = 16, type = "b", lty = 2)
+points(c(1:16), (Cond050$Allergic - Cond050$Not)[Cond050$FoodGroup == "X"], pch = 15, type = "b", lty = 4)
+legend(1,-0.03,legend =c("A", "B", "X"), pch = c(0,16,15))
+```
+
+#### **Van Hamme-Wasserman model prediction:**
+```{r, echo = FALSE}
+par(mfrow = c(1,2))
+
+emptyPlot(c(1,16),c(-0.05,0.08), xmark = c(1:16), bty='n', main= "Cond050, weights to allergic", ylab = "Weight", xlab = "Trial")
+points(c(1:16), (Cond050_2$Allergic)[Cond050_2$FoodGroup == "A"], pch = 0, type = "b")
+points(c(1:16), (Cond050_2$Allergic)[Cond050_2$FoodGroup == "B"], pch = 16, type = "b", lty = 2)
+points(c(1:16), (Cond050_2$Allergic)[Cond050_2$FoodGroup == "X"], pch = 15, type = "b", lty = 4)
+legend(1,0.08,legend =c("A", "B", "X"), pch = c(0,16,15))
+
+
+emptyPlot(c(1,16),c(-0.09,0.09), xmark = c(1:16), bty='n', main= "Cond050, weigths allergic\n minus not", ylab = "Weight", xlab = "Trial")
+points(c(1:16), (Cond050_2$Allergic - Cond050_2$Not)[Cond050_2$FoodGroup == "A"], pch = 0, type = "b")
+points(c(1:16), (Cond050_2$Allergic - Cond050_2$Not)[Cond050_2$FoodGroup == "B"], pch = 16, type = "b", lty = 2)
+points(c(1:16), (Cond050_2$Allergic - Cond050_2$Not)[Cond050_2$FoodGroup == "X"], pch = 15, type = "b", lty = 4)
+legend(1,-0.04,legend =c("A", "B", "X"), pch = c(0,16,15))
+```
+
+### **Condition 1.00**
+A was either Chicken or Cheese. <br />
+B either Mustard or Pork. <br />
+X either Bananas or Blueberries. <br />
+
+
+#### **Original paper graph:**
+
+![Scores over all 16 trials (plus a pre measure), condition 1.00](C:/Users/Sanne/Dropbox/MasterProject/Modelling/ScoresPerDay100.png){width=60%}
+
+
+#### **Rescorla-Wagner model prediction:**
+```{r, echo = FALSE}
+par(mfrow = c(1,2))
+
+emptyPlot(c(1,16),c(-0.01,0.08), xmark = c(1:16), bty='n', main= "Cond100, weights to allergic", ylab = "Weight", xlab = "Trial")
+points(c(1:16), (Cond100$Allergic)[Cond100$FoodGroup == "A"], pch = 0, type = "b")
+points(c(1:16), (Cond100$Allergic)[Cond100$FoodGroup == "B"], pch = 16, type = "b", lty = 2)
+points(c(1:16), (Cond100$Allergic)[Cond100$FoodGroup == "X"], pch = 15, type = "b", lty = 4)
+legend(1,0.06,legend =c("A", "B", "X"), pch = c(0,16,15))
+
+
+
+emptyPlot(c(1,16),c(-0.08,0.08), xmark = c(1:16), bty='n', main= "Cond100, weigths allergic\n minus not", ylab = "Weight", xlab = "Trial")
+points(c(1:16), (Cond100$Allergic - Cond100$Not)[Cond100$FoodGroup == "A"], pch = 0, type = "b")
+points(c(1:16), (Cond100$Allergic - Cond100$Not)[Cond100$FoodGroup == "B"], pch = 16, type = "b", lty = 2)
+points(c(1:16), (Cond100$Allergic - Cond100$Not)[Cond100$FoodGroup == "X"], pch = 15, type = "b", lty = 4)
+legend(1,0.08,legend =c("A", "B", "X"), pch = c(0,16,15))
+```
+
+#### **Van Hamme-Wasserman model prediction:**
+
+
+```{r, echo = FALSE}
+par(mfrow = c(1,2))
+
+emptyPlot(c(1,16),c(-0.08,0.08), xmark = c(1:16), bty='n', main= "Cond100, weights to allergic", ylab = "Weight", xlab = "Trial")
+points(c(1:16), (Cond100_2$Allergic)[Cond100_2$FoodGroup == "A"], pch = 0, type = "b")
+points(c(1:16), (Cond100_2$Allergic)[Cond100_2$FoodGroup == "B"], pch = 16, type = "b", lty = 2)
+points(c(1:16), (Cond100_2$Allergic)[Cond100_2$FoodGroup == "X"], pch = 15, type = "b", lty = 4)
+legend(1,-0.04,legend =c("A", "B", "X"), pch = c(0,16,15))
+
+
+
+emptyPlot(c(1,16),c(-0.15,0.15), xmark = c(1:16), bty='n', main= "Cond100, weigths allergic\n minus not", ylab = "Weight", xlab = "Trial")
+points(c(1:16), (Cond100_2$Allergic - Cond100_2$Not)[Cond100_2$FoodGroup == "A"], pch = 0, type = "b")
+points(c(1:16), (Cond100_2$Allergic - Cond100_2$Not)[Cond100_2$FoodGroup == "B"], pch = 16, type = "b", lty = 2)
+points(c(1:16), (Cond100_2$Allergic - Cond100_2$Not)[Cond100_2$FoodGroup == "X"], pch = 15, type = "b", lty = 4)
+legend(1,-0.05,legend =c("A", "B", "X"), pch = c(0,16,15))
+```

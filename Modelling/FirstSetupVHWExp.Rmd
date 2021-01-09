@@ -1,0 +1,742 @@
+---
+title: "Modelling VHW"
+author: "Sanne Poelstra"
+date: "10/16/2020"
+output: html_document
+---
+
+```{r, loading in packages, include = FALSE}
+rm(list=ls())
+
+#install.packages("ndl")
+library(ndl)
+#install.packages("http://www.jacolienvanrij.com/NDL/NDLvisualization_0.4.tar.gz", repos=NULL, type="source", dependencies=TRUE, INSTALL_opts = c('--no-lock'))
+#library(NDLvisualization)
+library(plotfunctions)
+library(data.table)
+#install.packages("https://jacolienvanrij.com/Rpackages/edl/edl_0.3.tar.gz", repos=NULL, type="source")
+library(edl)
+library(stringr)
+library(rlist)
+library(dplyr)
+library(roperators)
+```
+## The adjusted functions <br />
+Here are the adjusted updateWeights (now `updateWeights2`) and RWlearning (now `EDLearning`). All that changed in the latter is just that when updating weights, now `updateWeights2` is used and an extra variable is given. This extra variable is `etaNeg` and is put to `FALSE` as default. This means that the default way of learning is the same as how RWlearning worked. <br />
+As for updateWeights2, if `etaNeg` is set to `TRUE` (which indicates that VHW learning) then we check which of all the cues seen up until this moment are in the current cue set. For those that are, the same procedure is used as in RWlearning, as the change in weights between cue and outcome when the cue is present does not change in VHW learning. For the cues that have been seen before and are not in the current set of cues, the learning rate is multiplied by -1, thus making it negative (therefore the name `etaNeg`). Other than that the procedures are practically the same.
+
+```{r}
+#The update to both the UpdateWeights function and the RWlearning function to also include VHW way of learning
+
+
+#Set etaNeg to true if you want the VHW way of learning, leave it false if you want the RWlearning way
+updateWeights2 <- function (cur.cues, cur.outcomes, wm = NULL, eta = 0.01, lambda = 1, 
+  alpha = 0.1, beta1 = 0.1, beta2 = 0.1, etaNeg = FALSE)
+{
+  bg <- getOption("background")
+  cur.cues <- c(bg, cur.cues)
+  if (is.null(wm)) {
+    wm <- createWM(cues = cur.cues, outcomes = cur.outcomes)
+  }
+  else {
+    wm <- checkWM(cues = cur.cues, outcomes = cur.outcomes, 
+      wm = wm)
+  }
+  Vtotal = 0
+  if (length(cur.cues) <= 1) {
+    Vtotal = wm[cur.cues, ]
+  }
+  else {
+    if (ncol(wm) > 1) {
+      Vtotal = colSums(wm[cur.cues, ], na.rm = TRUE)
+    }
+    else {
+      Vtotal = sum(wm[cur.cues, ], na.rm = TRUE)
+    }
+  }
+  Lambda = rep(0, ncol(wm))
+  Lambda[which(colnames(wm) %in% cur.outcomes)] <- lambda
+  lr = rep(eta, length(Lambda)) 
+  ###################################################
+  #New code
+  
+  m <- matrix() #create an empty matrix (matrix(rep) does not work in the VHW case)
+  flag <- FALSE #flag since a completely empty matrix is not possible, so we remove the first row (however we don't want to keep doing that)
+  if(etaNeg == TRUE){
+    for (i in 1:nrow(wm)){
+      cues = rownames(wm) #for each row in wm, get the rowname and that is the cue
+      if(cues[i] %in% cur.cues){ #if that cue is one of the current cues we can treat it like RW and let the lr be positive
+        if(all(dim(m) == c(1,1)) && flag == FALSE){ #is the first row?
+          m <- matrix(lr * (Lambda - Vtotal), nrow = 1, ncol = length(Lambda), byrow = TRUE) #if so don't rowbind but just overwrite it
+          flag <- TRUE
+        }
+        else{ #else rowbind it
+          m <- rbind(m,matrix(lr * (Lambda - Vtotal), nrow = 1, ncol = length(Lambda), byrow = TRUE))
+        }
+      }
+      else if(!(cues[i] %in% cur.cues)){ #if that cue is NOT one of the current cues we set lr to negative, since the cue is absent now
+        if(all(dim(m) == c(1,1)) && flag == FALSE){
+          m <- matrix(lr * (-1) * (Lambda - Vtotal), nrow = 1, ncol = length(Lambda), byrow = TRUE)
+          flag <- TRUE
+        }
+        else{
+          m <- rbind(m,matrix(lr * (-1) * (Lambda - Vtotal), nrow = 1, ncol = length(Lambda), byrow = TRUE))
+        }
+      }
+    }
+    matrix <- m
+  }
+  
+  ##################################################################
+  if (is.null(eta)) {
+    lr = alpha * (beta1 * Lambda + beta2 * (lambda - Lambda))
+  }
+
+  ################################################################
+  if(etaNeg == TRUE){ #if you have VHW learning, we don't have to update only the current cues, we wanna update them all
+    wm = wm + matrix
+  }
+  if(etaNeg == FALSE){ #but if we have RW learning we want to only update the current ones and we can just keep the lr the same everywhere
+    wm[cur.cues, ] = wm[cur.cues, ] + matrix(rep(lr * (Lambda - Vtotal), length(cur.cues)), nrow = length(cur.cues), byrow = TRUE)
+  }
+  return(wm)
+}
+
+
+#that was updateWeights!
+```
+
+```{r}
+##The only thing to change here is making sure that etaNeg is given and that updateWeights2 is called instead of the normal one
+EDLearning <- function (data, wm = NULL, eta = 0.01, etaNeg = FALSE, lambda = 1, alpha = 0.1, 
+  beta1 = 0.1, beta2 = 0.1, progress = TRUE, ...) 
+{
+  if (!all(c("Cues", "Outcomes") %in% names(data))) {
+    stop("Specify a column Cues and a column Outcomes in data.")
+  }
+  out <- list()
+  lout <- 0
+  if (!is.null(wm)) {
+    if (is.list(wm)) {
+      out <- wm
+      lout <- length(wm)
+      wm <- wm[[length(wm)]]
+    }
+    if (!is.matrix(wm)) {
+      stop(sprintf("Argument wm cannot be class %s: wm should specify weight matrix or list of weight matrices.", 
+        class(wm)[1]))
+    }
+  }
+  if (progress & (nrow(data) > 2)) {
+    pb <- txtProgressBar(style = 3, min = 1, max = nrow(data))
+    step <- min(c(max(c(1, round(0.01 * nrow(data)))), nrow(data)))
+    for (i in 1:nrow(data)) {
+      if ((i%%step == 0) | i == 1 | i == nrow(data)) {
+        setTxtProgressBar(pb, i)
+      }
+      wm <- updateWeights2(cur.cues = getValues(data[i, 
+        ]$Cues, ...), cur.outcomes = getValues(data[i, 
+        ]$Outcomes, ...), wm = wm, eta = eta, lambda = lambda, 
+        alpha = alpha, beta1 = beta1, beta2 = beta2, etaNeg = etaNeg)
+      out[[length(out) + 1]] = wm
+    }
+    close(pb)
+  }
+  else {
+    for (i in 1:nrow(data)) {
+      wm <- updateWeights2(cur.cues = getValues(data[i, 
+        ]$Cues, ...), cur.outcomes = getValues(data[i, 
+        ]$Outcomes, ...), wm = wm, eta = eta, lambda = lambda, 
+        alpha = alpha, beta1 = beta1, beta2 = beta2, etaNeg = etaNeg)
+      out[[length(out) + 1]] = wm
+    }
+  }
+  return(out)
+}
+
+```
+
+## All cues and outcomes to replicate the experiment <br />
+Normally you would solve the multiple occurances of the cues with frequencies (something that can be done if we want to randomise the process completely), however since the VHW always has the same structure I opted to hardcode it. <br />
+The code includes a background cue `env`, which is added to all trials.
+
+```{r, all cues and outcomes}
+#AX, BX, BX, AX, AX, BX, AX, BX, BX, AX, BX, AX, AX, BX, AX, BX
+Cue <- c("A_X", "B_X", "B_X", "A_X", "A_X", "B_X", "A_X", "B_X", "B_X", "A_X", "B_X", "A_X", "A_X", "B_X", "A_X", "B_X")
+Cue <- paste("env", Cue, sep = "_")
+
+FillInCues <- function(A, B, X, Cue){
+  Cue <- str_replace(Cue, "A", A)
+  Cue <- str_replace(Cue, "B", B)
+  Cue <- str_replace(Cue, "X", X)
+  return(Cue)
+}
+
+Cues1 <- FillInCues("strawberries", "peanuts", "shrimp", Cue)
+Cues2 <- FillInCues("bran", "cabbage", "yoghurt", Cue)
+Cues3 <- FillInCues("chicken", "mustard", "bananas", Cue)
+Cues4 <- FillInCues("walnuts", "peaches", "wheat", Cue)
+Cues5 <- FillInCues("horseradish", "lobster", "corn", Cue)
+Cues6 <- FillInCues("cheese", "pork", "blueberries", Cue)
+
+###
+Outcome000 <- c("Allergic", "Not", "Allergic", "Not", "Not", "Allergic", "Allergic", "Not", "Allergic", "Not", "Not", "Allergic", "Not", "Allergic", "Allergic", "Not")
+Outcome050 <- c("Allergic", "Not", "Allergic", "Allergic", "Not", "Not", "Allergic", "Not", "Allergic", "Allergic", "Not", "Allergic", "Not", "Not", "Allergic", "Not")
+Outcome100 <- c("Allergic", "Not", "Not", "Allergic", "Allergic", "Not", "Allergic", "Not", "Not", "Allergic", "Not", "Allergic", "Allergic", "Not", "Allergic", "Not")
+```
+
+## Simulations for a single person<br />
+Here I'll simulate a person from group 1, seeing food condition 2, 1, 3.<br />
+I'll assume that, since the outcomes are the same in all these conditions, the cues of a previous sheet are still in the set of cues seen by the participant.<br />
+<br />
+First RWlearning
+```{r}
+FirstSheet <- data.frame(Cues = Cues2, Outcomes = Outcome050, stringsAsFactors = FALSE)
+SecondSheet <- data.frame(Cues = Cues1, Outcomes = Outcome000, stringsAsFactors = FALSE)
+ThirdSheet <- data.frame(Cues = Cues3, Outcomes = Outcome100, stringsAsFactors = FALSE)
+
+train.FS <- createTrainingData(FirstSheet, random = F) #random would be set to True if we wanted to create a random combination, but since VHW trail order is rigit, no ranomdised stuff here
+train.SS <- createTrainingData(SecondSheet, random = F)
+train.TS <- createTrainingData(ThirdSheet, random = F)
+
+wm.FS <- EDLearning(train.FS, progress = F) #left all the alpha, beta etc on their standard values
+wm.SS <- EDLearning(train.SS, progress = F, wm = wm.FS[[16]])
+wm.TS <- EDLearning(train.TS, progress = F, wm = wm.SS[[16]])
+getWM(wm.FS,1)
+getWM(wm.FS,2)
+getWM(wm.TS,16)
+
+plot1 <- plotOutcomeWeights(wm.FS, outcome = "Allergic", main = "Weights to outcome \"Allergic\", 0.50", xlab = "Trial", add.labels = T)
+plot2 <- plotOutcomeWeights(wm.FS, outcome = "Not", main = "Weights to outcome \"Not\"", xlab = "Trial", add.labels = T)
+
+plot3 <- plotOutcomeWeights(wm.SS, outcome = "Allergic", main = "Weights to outcome \"Allergic\", 0.00", xlab = "Trial", add.labels = T)
+plot4 <- plotOutcomeWeights(wm.TS, outcome = "Allergic", main = "Weights to outcome \"Allergic\", 1.00", xlab = "Trial", add.labels = T)
+
+plot5 <- plotCueWeights(wm = wm.FS, cue = "yoghurt", main = "Weights from cue \"Yoghurt\", 0.50", xlab = "Trial", add.labels = T)
+plot6 <- plotCueWeights(wm = wm.FS, cue = "bran", main = "Weights from cue \"Bran\", 0.50", xlab = "Trial", add.labels = T)
+
+```
+<br />
+<br />
+
+Now the same person, but with the VHW theory of learning
+```{r}
+wm.FS <- EDLearning(train.FS, progress = F, etaNeg = TRUE) #left all the alpha, beta etc on their standard values
+wm.SS <- EDLearning(train.SS, progress = F, wm = wm.FS[[16]], etaNeg = TRUE)
+wm.TS <- EDLearning(train.TS, progress = F, wm = wm.SS[[16]], etaNeg = TRUE)
+getWM(wm.FS,1)
+getWM(wm.FS,2)
+getWM(wm.TS,16)
+
+plot1 <- plotOutcomeWeights(wm.FS, outcome = "Allergic", main = "Weights to outcome \"Allergic\", 0.50", xlab = "Trial", add.labels = T)
+plot2 <- plotOutcomeWeights(wm.FS, outcome = "Not", main = "Weights to outcome \"Not\"", xlab = "Trial", add.labels = T)
+
+plot3 <- plotOutcomeWeights(wm.SS, outcome = "Allergic", main = "Weights to outcome \"Allergic\", 0.00", xlab = "Trial", add.labels = T)
+plot4 <- plotOutcomeWeights(wm.TS, outcome = "Allergic", main = "Weights to outcome \"Allergic\", 1.00", xlab = "Trial", add.labels = T)
+
+plot5 <- plotCueWeights(wm = wm.FS, cue = "yoghurt", main = "Weights from cue \"Yoghurt\", 0.50", xlab = "Trial", add.labels = T)
+plot6 <- plotCueWeights(wm = wm.FS, cue = "bran", main = "Weights from cue \"Bran\", 0.50", xlab = "Trial", add.labels = T)
+```
+You can indeed see that, since yoghurt, bran and cabbage are no longer seen in the second sheet (third graph), they decrease in strength instead of staying the same, as with RW learning.
+
+
+## Run the whole experiment<br />
+### Part 1: groups within groups <br />
+
+Here I create a function to run the experiment for x participants. The function takes in sheet (or food condition) 1 to 3 and the amount of participants to run it for.<br />
+The long if functions in the beginning are to determine which sheet has which outcome condition. I felt like giving it to the function would be a bit hard code-y, but this also feels a bit long (especially if we will add other conditions soon).
+
+```{r, function to run the experiment for x participant}
+values_list <- list()
+participantRun <- function(Sheet1, Sheet2, Sheet3, NrOfPart, etaNeg = FALSE){
+  if(Sheet1 == Cues1 || Sheet1 == Cues4){
+    Outc1 = Outcome000 
+    Cond1 = "Outcome000"
+  }
+  if(Sheet1 == Cues2 || Sheet1 == Cues5){
+    Outc1 = Outcome050
+    Cond1 = "Outcome050"
+  }
+  if(Sheet1 == Cues3 || Sheet1 == Cues6){
+    Outc1 = Outcome100
+    Cond1 = "Outcome100"
+  }
+  if(Sheet2 == Cues1 || Sheet2 == Cues4){
+    Outc2 = Outcome000
+    Cond2 = "Outcome000"
+  }
+  if(Sheet2 == Cues2 || Sheet2 == Cues5){
+    Outc2 = Outcome050
+    Cond2 = "Outcome050"
+  }
+  if(Sheet2 == Cues3 || Sheet2 == Cues6){
+    Outc2 = Outcome100
+    Cond2 = "Outcome100"
+  }
+  if(Sheet3 == Cues1 || Sheet3 == Cues4){
+    Outc3 = Outcome000
+    Cond3 = "Outcome000"
+  }
+  if(Sheet3 == Cues2 || Sheet3 == Cues5){
+    Outc3 = Outcome050
+    Cond3 = "Outcome050"
+  }
+  if(Sheet3 == Cues3 || Sheet3 == Cues6){
+    Outc3 = Outcome100
+    Cond3 = "Outcome100"
+  }
+  
+  #for each participant
+  for (i in 1:NrOfPart) {
+    FirstSheet <- data.frame(Cues = Sheet1, Outcomes = Outc1, stringsAsFactors = FALSE)
+    SecondSheet <- data.frame(Cues = Sheet2, Outcomes = Outc2, stringsAsFactors = FALSE)
+    ThirdSheet <- data.frame(Cues = Sheet3, Outcomes = Outc3, stringsAsFactors = FALSE)
+    
+    train.FS <- createTrainingData(FirstSheet, random = F) 
+    train.SS <- createTrainingData(SecondSheet, random = F)
+    train.TS <- createTrainingData(ThirdSheet, random = F)
+    
+    wm.FS <- EDLearning(train.FS, progress = F, etaNeg = etaNeg) #left all the alpha, beta etc on their standard values
+    wm.SS <- EDLearning(train.SS, progress = F, etaNeg = etaNeg, wm = wm.FS[[16]])
+    wm.TS <- EDLearning(train.TS, progress = F, etaNeg = etaNeg, wm = wm.SS[[16]])
+    
+    ValuesFS <- as.data.frame(getWM(wm.FS,16)) #create a dataframe from the last trial of activation functions, just as VHW gathered it
+    ValuesSS <- as.data.frame(getWM(wm.SS,16))
+    ValuesTS <- as.data.frame(getWM(wm.TS,16))
+    ValuesFS$Cond <- Cond1 #and set the condition in there, since we will need that to recreate their graph on page 139
+    ValuesSS$Cond <- Cond2
+    ValuesTS$Cond <- Cond3
+    
+    values_list <- list.append(values_list, ValuesFS, ValuesSS, ValuesTS) #append all of them to a big list
+    
+  }
+  return(values_list) #and return that list
+}
+
+#I still want to get the seperate wm.'s. While there is of course a complete wm at the end of all 3, with all 3x3 = 9 cues and the two outcomes in there, participants are asked to rate right after the 16th trial (not after 3x16 trails), so the decay in activation in the VHW case would not be reflective of their final answer.
+
+```
+<br />
+Here I create a lookup table. The table has all the words in one column and the according food group in the other. We then make `getwords` which basically makes a table, so then we can ask `getwords['bananas']` and it will return `X`, since bananas is from the X category.
+
+```{r}
+#create a lookup table
+word <- c("shrimp", "yoghurt", "bananas", "wheat", "corn", "blueberries", "strawberries", "bran", "chicken", "walnuts", "horseradish", "cheese", "peanuts", "cabbage", "mustard", "peaches", "lobster", "pork")
+wordType <- c("X","X","X","X","X","X","A","A","A","A","A","A","B","B","B","B","B","B")
+words <- data.frame(Word = word, wordType = wordType, stringsAsFactors = FALSE)
+getwords <- words$wordType
+names(getwords) <- words$Word
+getwords['bananas']
+```
+<br />
+Now to recreate the experiment for within group variation conditions. To recreate the graph on page 139 we will need the activation of allergic reaction from all 3 food types over all 3 food conditions averaged.
+
+#### RW version, split group
+```{r}
+#recreating the experiment with within group variation conditions RW
+
+#Group 1
+#split in 3,4
+Group1_1 <- bind_rows(participantRun(Cues2, Cues1, Cues3, 3))
+Group1_2 <- bind_rows(participantRun(Cues5, Cues6, Cues4, 4))
+#now I want to make one big 
+Group1 <- rbind(Group1_1, Group1_2)
+
+#Group2, split 4,4
+Group2_1 <- bind_rows(participantRun(Cues1, Cues3, Cues2, 4))
+Group2_2 <- bind_rows(participantRun(Cues4, Cues5, Cues6, 4))
+Group2 <- rbind(Group2_1, Group2_2)
+
+#Group3, split 3,3
+Group3_1 <- bind_rows(participantRun(Cues3, Cues2, Cues1, 3))
+Group3_2 <- bind_rows(participantRun(Cues6, Cues4, Cues5, 3))
+Group3 <- rbind(Group3_1, Group3_2)
+
+#Group4, split 4,4
+Group4_1 <- bind_rows(participantRun(Cues5, Cues6, Cues4, 4))
+Group4_2 <- bind_rows(participantRun(Cues2, Cues1, Cues3, 4))
+Group4 <- rbind(Group4_1, Group4_2)
+
+#Group5, split 5,5
+Group5_1 <- bind_rows(participantRun(Cues4, Cues5, Cues6, 5))
+Group5_2 <- bind_rows(participantRun(Cues1, Cues3, Cues2, 5))
+Group5 <- rbind(Group5_1, Group5_2)
+
+#Group6, split 5,4
+Group6_1 <- bind_rows(participantRun(Cues6, Cues4, Cues5, 4))
+Group6_2 <- bind_rows(participantRun(Cues3, Cues2, Cues1, 4))
+Group6 <- rbind(Group6_1, Group6_2)
+
+All <- rbind(Group1, Group2, Group3, Group4, Group5, Group6)
+
+
+#all the rows have names like bran...1
+#I've created a lookup table, where in getwords[] a word can be typed in and X, A or B will be returned.
+#So we do a gsub of the name of the row, where we replace ...[digit] by nothing, such that the name will match the lookup table
+All$wordType <- NA
+for(i in 1:nrow(All)){
+  All[i,]$wordType <- getwords[gsub("...[0-9]+", "",row.names(All[i,]))]
+  
+}
+
+#So now that we have all, we wanna aggregate over Cond and wordType, to see if we can get the same averages
+aggAll <- aggregate(All$Allergic, list(All$Cond, All$wordType), mean)
+aggAll
+aggAllNot <- aggregate(All$Not, list(All$Cond, All$wordType), mean)
+aggAllNot
+#
+```
+```{r}
+A<- c(0.044621507/(0.044621507+0.016698781), 0.049203595/(0.049203595	+0.011894645), 0.054285071/(0.054285071+0.006780709))
+B<- c(0.016152933/(0.016152933+0.044874246	), 0.010966638/(0.010966638+0.049839555	), 0.006219752/(0.006219752+0.054554135))
+X<- c(0.060774439/(0.060774439+0.061573027), 0.060170233/(0.060170233+0.061734200), 0.060504823/(0.060504823+0.061334844))
+emptyPlot(c(-5,105),c(0,1), xmark = c(0,50,100), bty='n')
+points(c(0, 50, 100),A, pch = 0, type = "b")
+points(c(0, 50, 100),B, pch =16, type = "b", lty = 2)
+points(c(0, 50, 100),X, pch =15, type = "b", lty = 4)
+legend(0.05,0.2,legend =c("A", "B", "X"), pch = c(0,16,15))
+```
+
+```{r, plotting aggAll}
+A <- c(0.044621507, 0.049203595, 0.054285071)
+B <- c(0.016152933, 0.010966638	, 0.006219752)
+X <- c(0.060774439, 0.060170233, 0.060504823)
+#sorry for the weird solution. I couldnt get it to work so I just wanted something plotted in the first place
+emptyPlot(c(-5,105),c(-0.01,0.08), xmark = c(0,50,100), bty='n')
+points(c(0, 50, 100),A, pch = 0, type = "b")
+points(c(0, 50, 100),B, pch =16, type = "b", lty = 2)
+points(c(0, 50, 100),X, pch =15, type = "b", lty = 4)
+legend(0.05,0.02,legend =c("A", "B", "X"), pch = c(0,16,15))
+```
+<br />
+#### VHW version, split group
+```{r}
+Group1_1 <- bind_rows(participantRun(Cues2, Cues1, Cues3, 3, etaNeg = TRUE))
+Group1_2 <- bind_rows(participantRun(Cues5, Cues6, Cues4, 4, etaNeg = TRUE))
+#now I want to make one big 
+Group1 <- rbind(Group1_1, Group1_2)
+
+#Group2, split 4,4
+Group2_1 <- bind_rows(participantRun(Cues1, Cues3, Cues2, 4, etaNeg = TRUE))
+Group2_2 <- bind_rows(participantRun(Cues4, Cues5, Cues6, 4, etaNeg = TRUE))
+Group2 <- rbind(Group2_1, Group2_2)
+
+#Group3, split 3,3
+Group3_1 <- bind_rows(participantRun(Cues3, Cues2, Cues1, 3, etaNeg = TRUE))
+Group3_2 <- bind_rows(participantRun(Cues6, Cues4, Cues5, 3, etaNeg = TRUE))
+Group3 <- rbind(Group3_1, Group3_2)
+
+#Group4, split 4,4
+Group4_1 <- bind_rows(participantRun(Cues5, Cues6, Cues4, 4, etaNeg = TRUE))
+Group4_2 <- bind_rows(participantRun(Cues2, Cues1, Cues3, 4, etaNeg = TRUE))
+Group4 <- rbind(Group4_1, Group4_2)
+
+#Group5, split 5,5
+Group5_1 <- bind_rows(participantRun(Cues4, Cues5, Cues6, 5, etaNeg = TRUE))
+Group5_2 <- bind_rows(participantRun(Cues1, Cues3, Cues2, 5, etaNeg = TRUE))
+Group5 <- rbind(Group5_1, Group5_2)
+
+#Group6, split 5,4
+Group6_1 <- bind_rows(participantRun(Cues6, Cues4, Cues5, 4, etaNeg = TRUE))
+Group6_2 <- bind_rows(participantRun(Cues3, Cues2, Cues1, 4, etaNeg = TRUE))
+Group6 <- rbind(Group6_1, Group6_2)
+
+All2 <- rbind(Group1, Group2, Group3, Group4, Group5, Group6)
+
+
+#all the rows have names like bran...1
+#I've created a lookup table, where in getwords[] a word can be typed in and X, A or B will be returned.
+#So we do a gsub of the name of the row, where we replace ...[digit] by nothing, such that the name will match the lookup table
+All2$wordType <- NA
+for(i in 1:nrow(All2)){
+  All2[i,]$wordType <- getwords[gsub("...[0-9]+", "",row.names(All[i,]))]
+  
+}
+
+#So now that we have all, we wanna aggregate over Cond and wordType, to see if we can get the same averages
+aggAll2 <- aggregate(All2$Allergic, list(All2$Cond, All2$wordType), mean)
+aggAll2
+
+
+```
+
+
+```{r, plotting aggAll2}
+A <- c(-0.007435959	, 0.001060549, 0.009696656)
+B <- c(-0.054236676, -0.064576655		, -0.074688303	)
+X <- c(0.026820755, 0.025356779	, 0.024891583)
+#sorry for the weird solution. I couldnt get it to work so I just wanted something plotted in the first place
+emptyPlot(c(-5,105),c(-0.08,0.04), xmark = c(0,50,100), bty='n')
+points(c(0, 50, 100),A, pch = 0, type = "b")
+points(c(0, 50, 100),B, pch =16, type = "b", lty = 2)
+points(c(0, 50, 100),X, pch =15, type = "b", lty = 4)
+legend(0.05,0.02,legend =c("A", "B", "X"), pch = c(0,16,15))
+```
+
+
+### Part 2: everyone does it all <br />
+For this I will need to adjust the `participantRun` function a bit, since now instead of 3 sheets, participants see 6 sheets.
+```{r, function to run the experiment for x participants}
+#This has to be abl to be more efficiently written
+#TODO WHEN TIME!!
+values_list <- list()
+participantRun <- function(Sheet1, Sheet2, Sheet3, Sheet4, Sheet5, Sheet6, NrOfPart, etaNeg = FALSE){
+  if(Sheet1 == Cues1 || Sheet1 == Cues4){
+    Outc1 = Outcome000 
+    Cond1 = "Outcome000"
+  }
+  if(Sheet1 == Cues2 || Sheet1 == Cues5){
+    Outc1 = Outcome050
+    Cond1 = "Outcome050"
+  }
+  if(Sheet1 == Cues3 || Sheet1 == Cues6){
+    Outc1 = Outcome100
+    Cond1 = "Outcome100"
+  }
+  if(Sheet2 == Cues1 || Sheet2 == Cues4){
+    Outc2 = Outcome000
+    Cond2 = "Outcome000"
+  }
+  if(Sheet2 == Cues2 || Sheet2 == Cues5){
+    Outc2 = Outcome050
+    Cond2 = "Outcome050"
+  }
+  if(Sheet2 == Cues3 || Sheet2 == Cues6){
+    Outc2 = Outcome100
+    Cond2 = "Outcome100"
+  }
+  if(Sheet3 == Cues1 || Sheet3 == Cues4){
+    Outc3 = Outcome000
+    Cond3 = "Outcome000"
+  }
+  if(Sheet3 == Cues2 || Sheet3 == Cues5){
+    Outc3 = Outcome050
+    Cond3 = "Outcome050"
+  }
+  if(Sheet3 == Cues3 || Sheet3 == Cues6){
+    Outc3 = Outcome100
+    Cond3 = "Outcome100"
+  }
+  if(Sheet4 == Cues1 || Sheet4 == Cues4){
+    Outc4 = Outcome000 
+    Cond4 = "Outcome000"
+  }
+  if(Sheet4 == Cues2 || Sheet4 == Cues5){
+    Outc4 = Outcome050
+    Cond4 = "Outcome050"
+  }
+  if(Sheet4 == Cues3 || Sheet4 == Cues6){
+    Outc4 = Outcome100
+    Cond4 = "Outcome100"
+  }
+  if(Sheet5 == Cues1 || Sheet5 == Cues4){
+    Outc5 = Outcome000
+    Cond5 = "Outcome000"
+  }
+  if(Sheet5 == Cues2 || Sheet5 == Cues5){
+    Outc5 = Outcome050
+    Cond5 = "Outcome050"
+  }
+  if(Sheet5 == Cues3 || Sheet5 == Cues6){
+    Outc5 = Outcome100
+    Cond5 = "Outcome100"
+  }
+  if(Sheet6 == Cues1 || Sheet6 == Cues4){
+    Outc6 = Outcome000
+    Cond6 = "Outcome000"
+  }
+  if(Sheet6 == Cues2 || Sheet6 == Cues5){
+    Outc6 = Outcome050
+    Cond6 = "Outcome050"
+  }
+  if(Sheet6 == Cues3 || Sheet6 == Cues6){
+    Outc6 = Outcome100
+    Cond6 = "Outcome100"
+  }
+  #FIX THIS PLEAAASE
+  
+  
+  #for each participant
+  for (i in 1:NrOfPart) {
+    FirstSheet <- data.frame(Cues = Sheet1, Outcomes = Outc1, stringsAsFactors = FALSE)
+    SecondSheet <- data.frame(Cues = Sheet2, Outcomes = Outc2, stringsAsFactors = FALSE)
+    ThirdSheet <- data.frame(Cues = Sheet3, Outcomes = Outc3, stringsAsFactors = FALSE)
+    FourthSheet <- data.frame(Cues = Sheet4, Outcomes = Outc4, stringsAsFactors = FALSE)
+    FifthSheet <- data.frame(Cues = Sheet5, Outcomes = Outc5, stringsAsFactors = FALSE)
+    SixthSheet <- data.frame(Cues = Sheet6, Outcomes = Outc6, stringsAsFactors = FALSE)
+    
+    train.1S <- createTrainingData(FirstSheet, random = F) 
+    train.2S <- createTrainingData(SecondSheet, random = F)
+    train.3S <- createTrainingData(ThirdSheet, random = F)
+    train.4S <- createTrainingData(FourthSheet, random = F) 
+    train.5S <- createTrainingData(FifthSheet, random = F)
+    train.6S <- createTrainingData(SixthSheet, random = F)
+    
+    wm.1S <- EDLearning(train.1S, progress = F, etaNeg = etaNeg) #left all the alpha, beta etc on their standard values
+    wm.2S <- EDLearning(train.2S, progress = F, etaNeg = etaNeg, wm = wm.1S[[16]])
+    wm.3S <- EDLearning(train.3S, progress = F, etaNeg = etaNeg, wm = wm.2S[[16]])
+    wm.4S <- EDLearning(train.4S, progress = F, etaNeg = etaNeg, wm = wm.3S[[16]]) 
+    wm.5S <- EDLearning(train.5S, progress = F, etaNeg = etaNeg, wm = wm.4S[[16]])
+    wm.6S <- EDLearning(train.6S, progress = F, etaNeg = etaNeg, wm = wm.5S[[16]])
+    
+    Values1S <- as.data.frame(getWM(wm.1S,16)) #create a dataframe from the last trial of activation functions, just as VHW gathered it
+    Values2S <- as.data.frame(getWM(wm.2S,16))
+    Values3S <- as.data.frame(getWM(wm.3S,16))
+    Values4S <- as.data.frame(getWM(wm.4S,16))
+    Values5S <- as.data.frame(getWM(wm.5S,16))
+    Values6S <- as.data.frame(getWM(wm.6S,16))
+    Values1S$Cond <- Cond1 #and set the condition in there, since we will need that to recreate their graph on page 139
+    Values2S$Cond <- Cond2
+    Values3S$Cond <- Cond3
+    Values4S$Cond <- Cond4 
+    Values5S$Cond <- Cond5
+    Values6S$Cond <- Cond6
+    
+    values_list <- list.append(values_list, Values1S, Values2S, Values3S, Values4S, Values5S, Values6S) #append all of them to a big list
+    
+  }
+  return(values_list) #and return that list
+}
+```
+
+#### RW version, same group
+```{r}
+
+Group1 <- bind_rows(participantRun(Cues2, Cues1, Cues3, Cues5, Cues6, Cues4, 7))
+Group2 <- bind_rows(participantRun(Cues1, Cues3, Cues2, Cues4, Cues5, Cues6, 8))
+Group3 <- bind_rows(participantRun(Cues3, Cues2, Cues1, Cues6, Cues4, Cues5, 6))
+Group4 <- bind_rows(participantRun(Cues5, Cues6, Cues4, Cues2, Cues1, Cues3, 8))
+Group5 <- bind_rows(participantRun(Cues4, Cues5, Cues6, Cues1, Cues3, Cues2, 10))
+Group6 <- bind_rows(participantRun(Cues6, Cues4, Cues5, Cues3, Cues2, Cues1, 8))
+
+All3 <- rbind(Group1, Group2, Group3, Group4, Group5, Group6)
+
+All3$wordType <- NA
+for(i in 1:nrow(All3)){
+  All3[i,]$wordType <- getwords[gsub("...[0-9]+", "",row.names(All3[i,]))]
+  
+}
+
+#So now that we have all, we wanna ddply over Cond and wordType, to see if we can get the same averages
+aggAll3 <- aggregate(All3$Allergic, list(All3$Cond, All3$wordType), mean)
+aggAll3
+
+```
+```{r, plotting aggAll3}
+A <- c(0.043222559, 0.045833032, 0.048681987)
+B <- c(0.010261771, 0.007237710, 0.004553705)
+X <- c(0.053484330, 0.053070741, 0.053235692)
+#sorry for the weird solution. I couldnt get it to work so I just wanted something plotted in the first place
+emptyPlot(c(-5,105),c(-0.01,0.08),  xmark = c(0,50,100), bty='n')
+points(c(0, 50, 100),A, pch = 0, type = "b")
+points(c(0, 50, 100),B, pch =16, type = "b", lty = 2)
+points(c(0, 50, 100),X, pch =15, type = "b", lty = 4)
+legend(0.05,0.02,legend =c("A", "B", "X"), pch = c(0,16,15))
+```
+
+
+
+#### VHW version, same group
+```{r}
+
+Group1 <- bind_rows(participantRun(Cues2, Cues1, Cues3, Cues5, Cues6, Cues4, 7, etaNeg = TRUE))
+Group2 <- bind_rows(participantRun(Cues1, Cues3, Cues2, Cues4, Cues5, Cues6, 8, etaNeg = TRUE))
+Group3 <- bind_rows(participantRun(Cues3, Cues2, Cues1, Cues6, Cues4, Cues5, 6, etaNeg = TRUE))
+Group4 <- bind_rows(participantRun(Cues5, Cues6, Cues4, Cues2, Cues1, Cues3, 8, etaNeg = TRUE))
+Group5 <- bind_rows(participantRun(Cues4, Cues5, Cues6, Cues1, Cues3, Cues2, 10, etaNeg = TRUE))
+Group6 <- bind_rows(participantRun(Cues6, Cues4, Cues5, Cues3, Cues2, Cues1, 8, etaNeg = TRUE))
+
+All4 <- rbind(Group1, Group2, Group3, Group4, Group5, Group6)
+
+All4$wordType <- NA
+for(i in 1:nrow(All4)){
+  All4[i,]$wordType <- getwords[gsub("...[0-9]+", "",row.names(All4[i,]))]
+  
+}
+
+#So now that we have all, we wanna ddply over Cond and wordType, to see if we can get the same averages
+aggAll4 <- aggregate(All4$Allergic, list(All4$Cond, All4$wordType), mean)
+aggAll4
+aggAllNot4 <- aggregate(All4$Not, list(All4$Cond, All4$wordType), mean)
+aggAllNot4
+```
+
+
+```{r}
+A<- c(abs(-0.04105868)/(abs(-0.04105868)+abs(-0.10659553)),abs(-0.03608634)/(abs(-0.03608634)	+abs(-0.11360791)), abs(-0.03163774)/(abs(-0.03163774)+abs(-0.11858878)))
+B<- c(abs(-0.09697271)/(abs(-0.09697271)+abs(-0.04412385)), abs(-0.10286912)/(abs(-0.10286912)+abs(-0.04029242)), abs(-0.10897523)/(abs(-0.10897523)+abs(-0.03472443)))
+X<- c(abs(-0.01878328)/(abs(-0.01878328)+abs(-0.01898319)), abs(-0.01962451)/(abs(-0.01962451)+abs(-0.02060010)), abs(-0.02032451)/(abs(-0.02032451	)+abs(-0.02053020)))
+emptyPlot(c(-5,105),c(0,1), xmark = c(0,50,100), bty='n')
+points(c(0, 50, 100),A, pch = 0, type = "b")
+points(c(0, 50, 100),B, pch =16, type = "b", lty = 2)
+points(c(0, 50, 100),X, pch =15, type = "b", lty = 4)
+legend(0.05,0.2,legend =c("A", "B", "X"), pch = c(0,16,15))
+```
+
+```{r, plotting aggAll4}
+A <- c(-0.04105868	, -0.03608634, -0.03163774	)
+B <- c(-0.09697271	, -0.10286912	, -0.10897523	)
+X <- c(-0.01878328	, -0.01962451	,-0.02032451)
+#sorry for the weird solution. I couldnt get it to work so I just wanted something plotted in the first place
+emptyPlot(c(-5,105),c(-0.11,0.01),  xmark = c(0,50,100), bty='n')
+points(c(0, 50, 100),A, pch = 0, type = "b")
+points(c(0, 50, 100),B, pch =16, type = "b", lty = 2)
+points(c(0, 50, 100),X, pch =15, type = "b", lty = 4)
+legend(0.05,0.02,legend =c("A", "B", "X"), pch = c(0,16,15))
+```
+
+
+## Randomized trail <br />
+I do believe that it's correct that the averages are the same all the time for everything above here. This is because each step is always the same, since the order is always the same. For different participants there are of course different orders of seeing the sheets, but the values for these participants will always be the same every time I run it again. Therefore it should *differ* when I randomize the trials, since then it's not the same each time I run it.
+
+```{r}
+randCue <- sample(Cue) #not replace = TRUE, since we still would like to keep the same ratio of 50/50 A and B
+#The rule of "never more than 2 times BX or AX in a row is broken now though
+randCue
+
+#now not only do the food groups differ from each other, they will differ from themselves each time I run the code as well
+#if this gives wildly varying answers, maybe also try it with just 1 random cue which then is filled in with the different foods (kind of like in the org experiment, but then every time I run this block of code the random cue is different)
+
+randCues1 <- FillInCues("strawberries", "peanuts", "shrimp", sample(Cue))
+randCues2 <- FillInCues("bran", "cabbage", "yoghurt", sample(Cue))
+randCues3 <- FillInCues("chicken", "mustard", "bananas", sample(Cue))
+randCues4 <- FillInCues("walnuts", "peaches", "wheat", sample(Cue))
+randCues5 <- FillInCues("horseradish", "lobster", "corn", sample(Cue))
+randCues6 <- FillInCues("cheese", "pork", "blueberries", sample(Cue))
+
+#The outcomes can be the way they are for now I think.
+
+FirstSheet <- data.frame(Cues = randCues2, Outcomes = Outcome050, stringsAsFactors = FALSE)
+SecondSheet <- data.frame(Cues = randCues1, Outcomes = Outcome000, stringsAsFactors = FALSE)
+ThirdSheet <- data.frame(Cues = randCues3, Outcomes = Outcome100, stringsAsFactors = FALSE)
+
+train.FS <- createTrainingData(FirstSheet, random = F) #random would be set to True if we wanted to create a random combination, but since VHW trail order is rigit, no ranomdised stuff here
+train.SS <- createTrainingData(SecondSheet, random = F)
+train.TS <- createTrainingData(ThirdSheet, random = F)
+
+wm.FS <- EDLearning(train.FS, progress = F) #left all the alpha, beta etc on their standard values
+wm.SS <- EDLearning(train.SS, progress = F, wm = wm.FS[[16]])
+wm.TS <- EDLearning(train.TS, progress = F, wm = wm.SS[[16]])
+getWM(wm.FS,1)
+getWM(wm.FS,2)
+getWM(wm.TS,16)
+
+plot1 <- plotOutcomeWeights(wm.FS, outcome = "Allergic", main = "Weights to outcome \"Allergic\", 0.50", xlab = "Trial", add.labels = T)
+#plot2 <- plotOutcomeWeights(wm.FS, outcome = "Not", main = "Weights to outcome \"Not\"", xlab = "Trial", add.labels = T)
+
+plot3 <- plotOutcomeWeights(wm.SS, outcome = "Allergic", main = "Weights to outcome \"Allergic\", 0.00", xlab = "Trial", add.labels = T)
+plot4 <- plotOutcomeWeights(wm.TS, outcome = "Allergic", main = "Weights to outcome \"Allergic\", 1.00", xlab = "Trial", add.labels = T)
+
+#plot5 <- plotCueWeights(wm = wm.FS, cue = "yoghurt", main = "Weights from cue \"Yoghurt\", 0.50", xlab = "Trial", add.labels = T)
+plot6 <- plotCueWeights(wm = wm.FS, cue = "bran", main = "Weights from cue \"Bran\", 0.50", xlab = "Trial", add.labels = T)
+
+
+
+
+
+
+```
+
+This way the wm at the end of the 16th sheet does indeed differ every time (unlike before), So i'd think that if we randomize things that the same averages will go away.
+
+

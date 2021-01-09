@@ -1,0 +1,617 @@
+---
+title: "Plots"
+author: "Sanne Poelstra"
+date: "10/30/2020"
+output: html_document
+---
+```{r, include = FALSE}
+rm(list=ls())
+library(plotfunctions)
+#rmarkdown::render("C:/Users/Sanne/Dropbox/MasterProject/Modelling/FixingVHW.Rmd")
+source("C:/Users/Sanne/Dropbox/MasterProject/Modelling/OriginalExperimentRun.R")
+```
+
+## **Comparing the scores per condition**
+
+#### **Original paper graph:**
+![Scores per condition of the original paper](C:/Users/Sanne/Dropbox/MasterProject/Modelling/ScoresPerCondition.png){width=60%}
+
+#### **Rescorla-Wagner model prediction:**
+On the left, the average weights for each food group per condition. This average is taken over all trials and all participants. However only the 16 trials in which the food was asked. <br />
+```{r, echo = FALSE}
+par(mfrow = c(1,2))
+par(las=1)
+A <- c((aggAll$x)[aggAll$Group.1 == "Outcome000" & aggAll$Group.2 == "A"], (aggAll$x)[aggAll$Group.1 == "Outcome050" & aggAll$Group.2 == "A"], (aggAll$x)[aggAll$Group.1 == "Outcome100" & aggAll$Group.2 == "A"])
+B <- c((aggAll$x)[aggAll$Group.1 == "Outcome000" & aggAll$Group.2 == "B"], (aggAll$x)[aggAll$Group.1 == "Outcome050" & aggAll$Group.2 == "B"], (aggAll$x)[aggAll$Group.1 == "Outcome100" & aggAll$Group.2 == "B"])
+X <- c((aggAll$x)[aggAll$Group.1 == "Outcome000" & aggAll$Group.2 == "X"], (aggAll$x)[aggAll$Group.1 == "Outcome050" & aggAll$Group.2 == "X"], (aggAll$x)[aggAll$Group.1 == "Outcome100" & aggAll$Group.2 == "X"])
+emptyPlot(c(-5,105),c(-0.02,0.05), xmark = c(0,50,100), bty='n', main = "Weights allergic", xlab = "Condition", ylab = "Probability")
+points(c(0, 50, 100),A, pch = 0, type = "b")
+points(c(0, 50, 100),B, pch =16, type = "b", lty = 2)
+points(c(0, 50, 100),X, pch =15, type = "b", lty = 4)
+legend(0.05,0,legend =c("A", "B", "X"), pch = c(0,16,15))
+
+A<- c(((aggAll$x)[aggAll$Group.1 == "Outcome000" & aggAll$Group.2 == "A"] - ((aggAllNot$x)[aggAllNot$Group.1 == "Outcome000" & aggAllNot$Group.2 == "A"])), ((aggAll$x)[aggAll$Group.1 == "Outcome050" & aggAll$Group.2 == "A"] - ((aggAllNot$x)[aggAllNot$Group.1 == "Outcome050" & aggAllNot$Group.2 == "A"])), ((aggAll$x)[aggAll$Group.1 == "Outcome100" & aggAll$Group.2 == "A"] - ((aggAllNot$x)[aggAllNot$Group.1 == "Outcome100" & aggAllNot$Group.2 == "A"])))
+B<- c(((aggAll$x)[aggAll$Group.1 == "Outcome000" & aggAll$Group.2 == "B"] - ((aggAllNot$x)[aggAllNot$Group.1 == "Outcome000" & aggAllNot$Group.2 == "B"])), ((aggAll$x)[aggAll$Group.1 == "Outcome050" & aggAll$Group.2 == "B"] - ((aggAllNot$x)[aggAllNot$Group.1 == "Outcome050" & aggAllNot$Group.2 == "B"])), ((aggAll$x)[aggAll$Group.1 == "Outcome100" & aggAll$Group.2 == "B"] - ((aggAllNot$x)[aggAllNot$Group.1 == "Outcome100" & aggAllNot$Group.2 == "B"])))
+X<- c(((aggAll$x)[aggAll$Group.1 == "Outcome000" & aggAll$Group.2 == "X"] - ((aggAllNot$x)[aggAllNot$Group.1 == "Outcome000" & aggAllNot$Group.2 == "X"])), ((aggAll$x)[aggAll$Group.1 == "Outcome050" & aggAll$Group.2 == "X"] - ((aggAllNot$x)[aggAllNot$Group.1 == "Outcome050" & aggAllNot$Group.2 == "X"])), ((aggAll$x)[aggAll$Group.1 == "Outcome100" & aggAll$Group.2 == "X"] - ((aggAllNot$x)[aggAllNot$Group.1 == "Outcome100" & aggAllNot$Group.2 == "X"])))
+emptyPlot(c(-5,105),c(-0.05,0.05), xmark = c(0,50,100), bty='n', main = "Rescorla-Wagner", xlab = "Condition", ylab = "Probability")
+points(c(0, 50, 100),A, pch = 0, type = "b")
+points(c(0, 50, 100),B, pch =16, type = "b", lty = 2)
+points(c(0, 50, 100),X, pch =15, type = "b", lty = 4)
+legend(0.05,-0.02,legend =c("A", "B", "X"), pch = c(0,16,15))
+
+
+# A<- c(0.015888184/(0.015888184+0.017845894	), 0.027604386	/(0.027604386		+0.005708984	), 0.037861935	/(0.037861935	+(-0.004657375)))
+# B<- c(0.017863459	/(0.017863459	+0.014812799		), 0.008840776	/(0.008840776	+0.023427966		), -0.004592513	/(-0.004592513	+0.036755858))
+# X<- c(0.033751643	/(0.033751643	+0.032658693	), 0.036445162	/(0.036445162	+0.029136949	), 0.033269422	/(0.033269422	+0.032098483	))
+# #NOT SURE IF THERE SHOULD BE ABSOLUTES IN HERE SINCE NOW THERE IS THE ISSUE OF GOING HIGHER THAN 1 AND LOWER THAN 0. HOWVEVER WITH ABS IN THERE IT LOOKS MORE STRAIGHT, WHICH ALSO DOES NOT SEEM RIGHT
+# emptyPlot(c(-5,105),c(0,1), xmark = c(0,50,100), bty='n', main = "Weights transformed\n with the x/x+y method", xlab = "Condition", ylab = "Probability")
+# points(c(0, 50, 100),A, pch = 0, type = "b")
+# points(c(0, 50, 100),B, pch =16, type = "b", lty = 2)
+# points(c(0, 50, 100),X, pch =15, type = "b", lty = 4)
+# legend(0.05,0.2,legend =c("A", "B", "X"), pch = c(0,16,15))
+# 
+# A<- c(0.015888184/(0.015888184+0.017845894	), 0.027604386	/(0.027604386		+0.005708984	), 0.037861935	/(0.037861935	+0))
+# B<- c(0.017863459	/(0.017863459	+0.014812799		), 0.008840776	/(0.008840776	+0.023427966		), 0	/(0	+0.036755858))
+# X<- c(0.033751643	/(0.033751643	+0.032658693	), 0.036445162	/(0.036445162	+0.029136949	), 0.033269422	/(0.033269422	+0.032098483	))
+# #RELU
+# emptyPlot(c(-5,105),c(0,1), xmark = c(0,50,100), bty='n', main = "Weights transformed\n with the x/x+y method, with RELU", xlab = "Condition", ylab = "Probability")
+# points(c(0, 50, 100),A, pch = 0, type = "b")
+# points(c(0, 50, 100),B, pch =16, type = "b", lty = 2)
+# points(c(0, 50, 100),X, pch =15, type = "b", lty = 4)
+# legend(0.05,0.2,legend =c("A", "B", "X"), pch = c(0,16,15))
+
+emptyPlot(c(-5,105),c(0,8), xmark = c(0,50,100), ymark=c(0,1,2,3,4,5,6,7,8), bty='n', main = "Original paper", xlab = "Condition", ylab = "Causal rating score")
+A <- c(4.3,5.7,7.6)
+B <- c(2.7, 1.1, 0.2)
+X <- c(3.2,3,1.6)
+points(c(0, 50, 100),A, pch = 0, type = "b")
+points(c(0, 50, 100),B, pch =16, type = "b", lty = 2)
+points(c(0, 50, 100),X, pch =15, type = "b", lty = 4)
+legend(0.05,8,legend =c("A", "B", "X"), pch = c(0,16,15))
+
+```
+
+
+
+#### **Van Hamme-Wasserman model prediction:**
+```{r, echo = FALSE}
+par(mfrow = c(1,2))
+par(las=1)
+A <- c((aggAll2$x)[aggAll2$Group.1 == "Outcome000" & aggAll2$Group.2 == "A"], (aggAll2$x)[aggAll2$Group.1 == "Outcome050" & aggAll2$Group.2 == "A"], (aggAll2$x)[aggAll2$Group.1 == "Outcome100" & aggAll2$Group.2 == "A"])
+B <- c((aggAll2$x)[aggAll2$Group.1 == "Outcome000" & aggAll2$Group.2 == "B"], (aggAll2$x)[aggAll2$Group.1 == "Outcome050" & aggAll2$Group.2 == "B"], (aggAll2$x)[aggAll2$Group.1 == "Outcome100" & aggAll2$Group.2 == "B"])
+X <- c((aggAll2$x)[aggAll2$Group.1 == "Outcome000" & aggAll2$Group.2 == "X"], (aggAll2$x)[aggAll2$Group.1 == "Outcome050" & aggAll2$Group.2 == "X"], (aggAll2$x)[aggAll2$Group.1 == "Outcome100" & aggAll2$Group.2 == "X"])
+emptyPlot(c(-5,105),c(-0.05,0.05), xmark = c(0,50,100), bty='n', main = "Weights allergic", xlab = "Condition", ylab = "Probability")
+points(c(0, 50, 100),A, pch = 0, type = "b")
+points(c(0, 50, 100),B, pch =16, type = "b", lty = 2)
+points(c(0, 50, 100),X, pch =15, type = "b", lty = 4)
+legend(0.05,-0.02,legend =c("A", "B", "X"), pch = c(0,16,15))
+
+A<- c(((aggAll2$x)[aggAll2$Group.1 == "Outcome000" & aggAll2$Group.2 == "A"] - ((aggAllNot2$x)[aggAllNot2$Group.1 == "Outcome000" & aggAllNot2$Group.2 == "A"])), ((aggAll2$x)[aggAll2$Group.1 == "Outcome050" & aggAll2$Group.2 == "A"] - ((aggAllNot2$x)[aggAllNot2$Group.1 == "Outcome050" & aggAllNot2$Group.2 == "A"])), ((aggAll2$x)[aggAll2$Group.1 == "Outcome100" & aggAll2$Group.2 == "A"] - ((aggAllNot2$x)[aggAllNot2$Group.1 == "Outcome100" & aggAllNot2$Group.2 == "A"])))
+B<- c(((aggAll2$x)[aggAll2$Group.1 == "Outcome000" & aggAll2$Group.2 == "B"] - ((aggAllNot2$x)[aggAllNot2$Group.1 == "Outcome000" & aggAllNot2$Group.2 == "B"])), ((aggAll2$x)[aggAll2$Group.1 == "Outcome050" & aggAll2$Group.2 == "B"] - ((aggAllNot2$x)[aggAllNot2$Group.1 == "Outcome050" & aggAllNot2$Group.2 == "B"])), ((aggAll2$x)[aggAll2$Group.1 == "Outcome100" & aggAll2$Group.2 == "B"] - ((aggAllNot2$x)[aggAllNot2$Group.1 == "Outcome100" & aggAllNot2$Group.2 == "B"])))
+X<- c(((aggAll2$x)[aggAll2$Group.1 == "Outcome000" & aggAll2$Group.2 == "X"] - ((aggAllNot2$x)[aggAllNot2$Group.1 == "Outcome000" & aggAllNot2$Group.2 == "X"])), ((aggAll2$x)[aggAll2$Group.1 == "Outcome050" & aggAll2$Group.2 == "X"] - ((aggAllNot2$x)[aggAllNot2$Group.1 == "Outcome050" & aggAllNot2$Group.2 == "X"])), ((aggAll2$x)[aggAll2$Group.1 == "Outcome100" & aggAll2$Group.2 == "X"] - ((aggAllNot2$x)[aggAllNot2$Group.1 == "Outcome100" & aggAllNot2$Group.2 == "X"])))
+emptyPlot(c(-5,105),c(-0.07,0.09), xmark = c(0,50,100), bty='n', main = "Van Hamme-Wasserman", xlab = "Condition", ylab = "Probability")
+points(c(0, 50, 100),A, pch = 0, type = "b")
+points(c(0, 50, 100),B, pch =16, type = "b", lty = 2)
+points(c(0, 50, 100),X, pch =15, type = "b", lty = 4)
+legend(0.05,-0.02,legend =c("A", "B", "X"), pch = c(0,16,15))
+
+
+#A<- c(-0.001586264/(-0.001586264+0.002950476), 0.018682717/(0.018682717+(-0.017336148)), 0.041685812/(0.041685812+(-0.040343811)))
+#B<- c(0.010979232/(0.010979232+(-0.003574658)), -0.009350853/(-0.009350853+0.016659667), -0.032363305/(-0.032363305+0.039647324))
+#X<- c(0.034207713/(0.034207713+0.033326685), 0.036980211/(0.036980211+0.029680798), 0.033639368/(0.033639368+0.032795492))
+#NOT SURE IF THERE SHOULD BE ABSOLUTES IN HERE SINCE NOW THERE IS THE ISSUE OF GOING HIGHER THAN 1 AND LOWER THAN 0. HOWVEVER WITH ABS IN THERE IT LOOKS MORE STRAIGHT, WHICH ALSO DOES NOT SEEM RIGHT
+#emptyPlot(c(-5,105),c(0,1), xmark = c(0,50,100), bty='n', main = "Weights transformed\n with the x/x+y method", xlab = "Condition", ylab = "Probability")
+#points(c(0, 50, 100),A, pch = 0, type = "b")
+#points(c(0, 50, 100),B, pch =16, type = "b", lty = 2)
+#points(c(0, 50, 100),X, pch =15, type = "b", lty = 4)
+#legend(0.05,0.2,legend =c("A", "B", "X"), pch = c(0,16,15))
+
+# A<- c(0/(0+0.002950476), 0.018682717/(0.018682717+0), 0.037861935/(0.037861935+0))
+# B<- c(0.010979232/(0.010979232+0), 0/(0+0.016659667), 0/(0	+0.039647324))
+# X<- c(0.034207713/(0.034207713+0.033326685), 0.036980211/(0.036980211+0.029680798), 0.033639368/(0.033639368+0.032795492))
+# #RELU
+# emptyPlot(c(-5,105),c(0,1), xmark = c(0,50,100), bty='n', main = "Weights transformed\n with the x/x+y method, with RELU", xlab = "Condition", ylab = "Probability")
+# points(c(0, 50, 100),A, pch = 0, type = "b")
+# points(c(0, 50, 100),B, pch =16, type = "b", lty = 2)
+# points(c(0, 50, 100),X, pch =15, type = "b", lty = 4)
+# legend(0.05,0.2,legend =c("A", "B", "X"), pch = c(0,16,15))
+```
+
+## **For in paper**
+```{r, echo = FALSE}
+par(mfrow = c(1,2), las = 1)
+A<- c(((aggAll$x)[aggAll$Group.1 == "Outcome000" & aggAll$Group.2 == "A"] - ((aggAllNot$x)[aggAllNot$Group.1 == "Outcome000" & aggAllNot$Group.2 == "A"])), ((aggAll$x)[aggAll$Group.1 == "Outcome050" & aggAll$Group.2 == "A"] - ((aggAllNot$x)[aggAllNot$Group.1 == "Outcome050" & aggAllNot$Group.2 == "A"])), ((aggAll$x)[aggAll$Group.1 == "Outcome100" & aggAll$Group.2 == "A"] - ((aggAllNot$x)[aggAllNot$Group.1 == "Outcome100" & aggAllNot$Group.2 == "A"])))
+B<- c(((aggAll$x)[aggAll$Group.1 == "Outcome000" & aggAll$Group.2 == "B"] - ((aggAllNot$x)[aggAllNot$Group.1 == "Outcome000" & aggAllNot$Group.2 == "B"])), ((aggAll$x)[aggAll$Group.1 == "Outcome050" & aggAll$Group.2 == "B"] - ((aggAllNot$x)[aggAllNot$Group.1 == "Outcome050" & aggAllNot$Group.2 == "B"])), ((aggAll$x)[aggAll$Group.1 == "Outcome100" & aggAll$Group.2 == "B"] - ((aggAllNot$x)[aggAllNot$Group.1 == "Outcome100" & aggAllNot$Group.2 == "B"])))
+X<- c(((aggAll$x)[aggAll$Group.1 == "Outcome000" & aggAll$Group.2 == "X"] - ((aggAllNot$x)[aggAllNot$Group.1 == "Outcome000" & aggAllNot$Group.2 == "X"])), ((aggAll$x)[aggAll$Group.1 == "Outcome050" & aggAll$Group.2 == "X"] - ((aggAllNot$x)[aggAllNot$Group.1 == "Outcome050" & aggAllNot$Group.2 == "X"])), ((aggAll$x)[aggAll$Group.1 == "Outcome100" & aggAll$Group.2 == "X"] - ((aggAllNot$x)[aggAllNot$Group.1 == "Outcome100" & aggAllNot$Group.2 == "X"])))
+emptyPlot(c(-5,105),c(-0.07,0.09), xmark = c(0,50,100), bty='n', main = "Rescorla-Wagner\n Weights to allergic minus to not", xlab = "Condition", ylab = "Probability")
+points(c(0, 50, 100),A, pch = 0, type = "b")
+points(c(0, 50, 100),B, pch =16, type = "b", lty = 2)
+points(c(0, 50, 100),X, pch =15, type = "b", lty = 4)
+legend(0.05,-0.02,legend =c("A", "B", "X"), pch = c(0,16,15))
+
+A<- c(((aggAll2$x)[aggAll2$Group.1 == "Outcome000" & aggAll2$Group.2 == "A"] - ((aggAllNot2$x)[aggAllNot2$Group.1 == "Outcome000" & aggAllNot2$Group.2 == "A"])), ((aggAll2$x)[aggAll2$Group.1 == "Outcome050" & aggAll2$Group.2 == "A"] - ((aggAllNot2$x)[aggAllNot2$Group.1 == "Outcome050" & aggAllNot2$Group.2 == "A"])), ((aggAll2$x)[aggAll2$Group.1 == "Outcome100" & aggAll2$Group.2 == "A"] - ((aggAllNot2$x)[aggAllNot2$Group.1 == "Outcome100" & aggAllNot2$Group.2 == "A"])))
+B<- c(((aggAll2$x)[aggAll2$Group.1 == "Outcome000" & aggAll2$Group.2 == "B"] - ((aggAllNot2$x)[aggAllNot2$Group.1 == "Outcome000" & aggAllNot2$Group.2 == "B"])), ((aggAll2$x)[aggAll2$Group.1 == "Outcome050" & aggAll2$Group.2 == "B"] - ((aggAllNot2$x)[aggAllNot2$Group.1 == "Outcome050" & aggAllNot2$Group.2 == "B"])), ((aggAll2$x)[aggAll2$Group.1 == "Outcome100" & aggAll2$Group.2 == "B"] - ((aggAllNot2$x)[aggAllNot2$Group.1 == "Outcome100" & aggAllNot2$Group.2 == "B"])))
+X<- c(((aggAll2$x)[aggAll2$Group.1 == "Outcome000" & aggAll2$Group.2 == "X"] - ((aggAllNot2$x)[aggAllNot2$Group.1 == "Outcome000" & aggAllNot2$Group.2 == "X"])), ((aggAll2$x)[aggAll2$Group.1 == "Outcome050" & aggAll2$Group.2 == "X"] - ((aggAllNot2$x)[aggAllNot2$Group.1 == "Outcome050" & aggAllNot2$Group.2 == "X"])), ((aggAll2$x)[aggAll2$Group.1 == "Outcome100" & aggAll2$Group.2 == "X"] - ((aggAllNot2$x)[aggAllNot2$Group.1 == "Outcome100" & aggAllNot2$Group.2 == "X"])))
+emptyPlot(c(-5,105),c(-0.07,0.09), xmark = c(0,50,100), bty='n', main = "Van Hamme-Wasserman\n Weights to allergic minus to not", xlab = "Condition", ylab = "Probability")
+points(c(0, 50, 100),A, pch = 0, type = "b")
+points(c(0, 50, 100),B, pch =16, type = "b", lty = 2)
+points(c(0, 50, 100),X, pch =15, type = "b", lty = 4)
+legend(0.05,-0.02,legend =c("A", "B", "X"), pch = c(0,16,15))
+
+```
+
+
+
+
+## **Comparing scores over trials for each condition seperately**
+
+### **Condition 0.00**
+A was either Strawberry or Walnut. <br />
+B either Peanut or Peach. <br />
+X either Shrimp or Wheat.<br />
+
+#### **Original paper graph:** 
+
+![Scores over all 16 trials (plus a pre measure), condition 0.00)](C:/Users/Sanne/Dropbox/MasterProject/Modelling/ScoresPerDay000.png){width=60%}
+
+Note that the pre measure was not taken with the models (since that would just be 0 for all of them). This is also not done in any of the other conditions.
+
+#### **Rescorla-Wagner model prediction:**
+
+```{r,echo = FALSE}
+par(las=1)
+par(mfrow = c(1,2))
+
+emptyPlot(c(1,16),c(-0.01,0.08), xmark = c(1:16), bty='n', main= "Cond000, weights to allergic", ylab = "Weight", xlab = "Trial")
+points(c(1:16), (Cond000$Allergic)[Cond000$FoodGroup == "A"], pch = 0, type = "b")
+points(c(1:16), (Cond000$Allergic)[Cond000$FoodGroup == "B"], pch = 16, type = "b", lty = 2)
+points(c(1:16), (Cond000$Allergic)[Cond000$FoodGroup == "X"], pch = 15, type = "b", lty = 4)
+legend(1,0.06,legend =c("A", "B", "X"), pch = c(0,16,15))
+
+
+
+emptyPlot(c(1,16),c(-0.015,0.025), xmark = c(1:16), bty='n', main= "Rescorla wagner", ylab = "Weight", xlab = "Trial")
+points(c(1:16), (Cond000$Allergic - Cond000$Not)[Cond000$FoodGroup == "A"], pch = 0, type = "b")
+points(c(1:16), (Cond000$Allergic - Cond000$Not)[Cond000$FoodGroup == "B"], pch = 16, type = "b", lty = 2)
+points(c(1:16), (Cond000$Allergic - Cond000$Not)[Cond000$FoodGroup == "X"], pch = 15, type = "b", lty = 4)
+legend(1,0.025,legend =c("A", "B", "X"), pch = c(0,16,15))
+
+emptyPlot(c(0,16),c(0,8), xmark = c(1:16), ymark=c(0,1,2,3,4,5,6,7,8), bty='n', main = "Original paper", xlab = "Trial", ylab = "Causal rating score")
+A <- c(4.9, 5, 5.1, 3.2, 2.8, 2.4, 2.2, 4.5, 4, 3, 2.2, 3.4, 4.7, 2.8, 2.6, 4.3, 4.1)
+B <- c(3.8, 1.9, 1.5, 3.9, 3.7, 3.8, 4.7, 2.9, 2.7, 4.5, 4.3, 2.8, 2.5, 3.5, 4.5, 3, 2.4)
+X <- c(4.5, 5, 2.1, 4.9, 2.7, 2.4, 4.3, 4.9, 3.3, 4.9, 3, 2.8, 4.8,2.8, 4.8, 5.1, 3.1)
+points(c(0:16),A, pch = 0, type = "b")
+points(c(0:16),B, pch =16, type = "b", lty = 2)
+points(c(0:16),X, pch =15, type = "b", lty = 4)
+legend(0.05,8,legend =c("A", "B", "X"), pch = c(0,16,15))
+```
+
+
+
+#### **Van Hamme-Wasserman model prediction:**
+```{r, echo = FALSE}
+par(mfrow = c(1,2))
+par(las=1)
+emptyPlot(c(1,16),c(-0.02,0.08), xmark = c(1:16), bty='n', main= "Cond000, weights to allergic", ylab = "Weight", xlab = "Trial")
+points(c(1:16), (Cond000_2$Allergic)[Cond000_2$FoodGroup == "A"], pch = 0, type = "b")
+points(c(1:16), (Cond000_2$Allergic)[Cond000_2$FoodGroup == "B"], pch = 16, type = "b", lty = 2)
+points(c(1:16), (Cond000_2$Allergic)[Cond000_2$FoodGroup == "X"], pch = 15, type = "b", lty = 4)
+legend(1,0.06,legend =c("A", "B", "X"), pch = c(0,16,15))
+
+
+
+emptyPlot(c(1,16),c(-0.02,0.04), xmark = c(1:16), bty='n', main= "Van Hamme-Wasserman", ylab = "Weight", xlab = "Trial")
+points(c(1:16), (Cond000_2$Allergic - Cond000_2$Not)[Cond000_2$FoodGroup == "A"], pch = 0, type = "b")
+points(c(1:16), (Cond000_2$Allergic - Cond000_2$Not)[Cond000_2$FoodGroup == "B"], pch = 16, type = "b", lty = 2)
+points(c(1:16), (Cond000_2$Allergic - Cond000_2$Not)[Cond000_2$FoodGroup == "X"], pch = 15, type = "b", lty = 4)
+legend(1,0.04,legend =c("A", "B", "X"), pch = c(0,16,15))
+```
+
+
+### **Condition 0.50**
+A was either Bran or Horseradish. <br />
+B either Cabbage or Lobster. <br />
+X either Yogurt or Corn. <br />
+
+#### **Original paper graph:**
+
+![Scores over all 16 trials (plus a pre measure), condition 0.50](C:/Users/Sanne/Dropbox/MasterProject/Modelling/ScoresPerDay050.png){width=60%}
+
+
+#### **Rescorla-Wagner model prediction:**
+```{r, echo = FALSE}
+par(mfrow = c(1,2))
+par(las=1)
+emptyPlot(c(1,16),c(-0.01,0.08), xmark = c(1:16), bty='n', main= "Cond050, weights to allergic", ylab = "Weight", xlab = "Trial")
+points(c(1:16), (Cond050$Allergic)[Cond050$FoodGroup == "A"], pch = 0, type = "b")
+points(c(1:16), (Cond050$Allergic)[Cond050$FoodGroup == "B"], pch = 16, type = "b", lty = 2)
+points(c(1:16), (Cond050$Allergic)[Cond050$FoodGroup == "X"], pch = 15, type = "b", lty = 4)
+legend(1,0.06,legend =c("A", "B", "X"), pch = c(0,16,15))
+
+
+emptyPlot(c(1,16),c(-0.03,0.04), xmark = c(1:16), bty='n', main= "Rescorla-Wagner", ylab = "Weight", xlab = "Trial")
+points(c(1:16), (Cond050$Allergic - Cond050$Not)[Cond050$FoodGroup == "A"], pch = 0, type = "b")
+points(c(1:16), (Cond050$Allergic - Cond050$Not)[Cond050$FoodGroup == "B"], pch = 16, type = "b", lty = 2)
+points(c(1:16), (Cond050$Allergic - Cond050$Not)[Cond050$FoodGroup == "X"], pch = 15, type = "b", lty = 4)
+legend(1,0.04,legend =c("A", "B", "X"), pch = c(0,16,15))
+
+emptyPlot(c(0,16),c(0,8), xmark = c(1:16), ymark=c(0,1,2,3,4,5,6,7,8), bty='n', main = "Original paper", xlab = "Trial", ylab = "Causal rating score")
+A <- c(4.7,5,4.6,3.6,5,3.2,4.4,5.5,4.9,3.9,5.4,4.8,5.5,3.8,4.7,5.7,5.6)
+B <- c(4.5,2,1.9,4.2,2.6,3.3,2,1.9,1.8,3.3,2.2,2,1.8,2.5,1.5,1.3,1)
+X <- c(3.8,4.6,2.8,4.5,5,3.1,2.7,4.5,3,4.8,5.1,3.3,4.8,3.2,2.8,4.2,2.9)
+points(c(0:16),A, pch = 0, type = "b")
+points(c(0:16),B, pch =16, type = "b", lty = 2)
+points(c(0:16),X, pch =15, type = "b", lty = 4)
+legend(0.05,8,legend =c("A", "B", "X"), pch = c(0,16,15))
+```
+
+#### **Van Hamme-Wasserman model prediction:**
+```{r, echo = FALSE}
+par(mfrow = c(1,2))
+par(las=1)
+emptyPlot(c(1,16),c(-0.04,0.08), xmark = c(1:16), bty='n', main= "Cond050, weights to allergic", ylab = "Weight", xlab = "Trial")
+points(c(1:16), (Cond050_2$Allergic)[Cond050_2$FoodGroup == "A"], pch = 0, type = "b")
+points(c(1:16), (Cond050_2$Allergic)[Cond050_2$FoodGroup == "B"], pch = 16, type = "b", lty = 2)
+points(c(1:16), (Cond050_2$Allergic)[Cond050_2$FoodGroup == "X"], pch = 15, type = "b", lty = 4)
+legend(1,0.07,legend =c("A", "B", "X"), pch = c(0,16,15))
+
+
+emptyPlot(c(1,16),c(-0.08,0.08), xmark = c(1:16), bty='n', main= "Van Hamme-Wasserman", ylab = "Weight", xlab = "Trial")
+points(c(1:16), (Cond050_2$Allergic - Cond050_2$Not)[Cond050_2$FoodGroup == "A"], pch = 0, type = "b")
+points(c(1:16), (Cond050_2$Allergic - Cond050_2$Not)[Cond050_2$FoodGroup == "B"], pch = 16, type = "b", lty = 2)
+points(c(1:16), (Cond050_2$Allergic - Cond050_2$Not)[Cond050_2$FoodGroup == "X"], pch = 15, type = "b", lty = 4)
+legend(1,-0.02,legend =c("A", "B", "X"), pch = c(0,16,15))
+```
+
+### **Condition 1.00**
+A was either Chicken or Cheese. <br />
+B either Mustard or Pork. <br />
+X either Bananas or Blueberries. <br />
+
+
+#### **Original paper graph:**
+
+![Scores over all 16 trials (plus a pre measure), condition 1.00](C:/Users/Sanne/Dropbox/MasterProject/Modelling/ScoresPerDay100.png){width=60%}
+
+
+#### **Rescorla-Wagner model prediction:**
+```{r, echo = FALSE}
+par(mfrow = c(1,2))
+par(las=1)
+emptyPlot(c(1,16),c(-0.01,0.08), xmark = c(1:16), bty='n', main= "Cond100, weights to allergic", ylab = "Weight", xlab = "Trial")
+points(c(1:16), (Cond100$Allergic)[Cond100$FoodGroup == "A"], pch = 0, type = "b")
+points(c(1:16), (Cond100$Allergic)[Cond100$FoodGroup == "B"], pch = 16, type = "b", lty = 2)
+points(c(1:16), (Cond100$Allergic)[Cond100$FoodGroup == "X"], pch = 15, type = "b", lty = 4)
+legend(1,0.06,legend =c("A", "B", "X"), pch = c(0,16,15))
+
+
+
+emptyPlot(c(1,16),c(-0.08,0.08), xmark = c(1:16), bty='n', main= "Rescorla-Wagner", ylab = "Weight", xlab = "Trial")
+points(c(1:16), (Cond100$Allergic - Cond100$Not)[Cond100$FoodGroup == "A"], pch = 0, type = "b")
+points(c(1:16), (Cond100$Allergic - Cond100$Not)[Cond100$FoodGroup == "B"], pch = 16, type = "b", lty = 2)
+points(c(1:16), (Cond100$Allergic - Cond100$Not)[Cond100$FoodGroup == "X"], pch = 15, type = "b", lty = 4)
+legend(1,0.08,legend =c("A", "B", "X"), pch = c(0,16,15))
+
+emptyPlot(c(0,16),c(0,8), xmark = c(1:16), ymark=c(0,1,2,3,4,5,6,7,8), bty='n', main = "Original paper", xlab = "Trial", ylab = "Causal rating score")
+A <- c(5.1,5.2,4.9,5.1,6.2,6.3,6,6.6,6.5,6.5,7,6.6,7.1,7.2,7,7.2,7.2)
+B <- c(4.5,2.1,1.5,1.3,1.2,1.1,1,1,0.9,0.7,0.8,0.7,0.8,0.7,0.6,0.7,0.5)
+X <- c(3.6,4.5,2.2,1.8,3,3.3,2,3.1,1.7,1.5,2.5,1.4,2.3,2.5,1.4,2.3,1.4)
+points(c(0:16),A, pch = 0, type = "b")
+points(c(0:16),B, pch =16, type = "b", lty = 2)
+points(c(0:16),X, pch =15, type = "b", lty = 4)
+legend(0.05,8,legend =c("A", "B", "X"), pch = c(0,16,15))
+```
+
+#### **Van Hamme-Wasserman model prediction:**
+
+
+```{r, echo = FALSE}
+par(mfrow = c(1,2))
+par(las=1)
+emptyPlot(c(1,16),c(-0.07,0.09), xmark = c(1:16), bty='n', main= "Cond100, weights to allergic", ylab = "Weight", xlab = "Trial")
+points(c(1:16), (Cond100_2$Allergic)[Cond100_2$FoodGroup == "A"], pch = 0, type = "b")
+points(c(1:16), (Cond100_2$Allergic)[Cond100_2$FoodGroup == "B"], pch = 16, type = "b", lty = 2)
+points(c(1:16), (Cond100_2$Allergic)[Cond100_2$FoodGroup == "X"], pch = 15, type = "b", lty = 4)
+legend(1,-0.03,legend =c("A", "B", "X"), pch = c(0,16,15))
+
+
+
+emptyPlot(c(1,16),c(-0.15,0.15), xmark = c(1:16), bty='n', main= "Van Hamme-Wasserman", ylab = "Weight", xlab = "Trial")
+points(c(1:16), (Cond100_2$Allergic - Cond100_2$Not)[Cond100_2$FoodGroup == "A"], pch = 0, type = "b")
+points(c(1:16), (Cond100_2$Allergic - Cond100_2$Not)[Cond100_2$FoodGroup == "B"], pch = 16, type = "b", lty = 2)
+points(c(1:16), (Cond100_2$Allergic - Cond100_2$Not)[Cond100_2$FoodGroup == "X"], pch = 15, type = "b", lty = 4)
+legend(1,-0.05,legend =c("A", "B", "X"), pch = c(0,16,15))
+```
+
+## Plotting group 1 over time
+
+### RW
+
+```{r, echo = FALSE}
+listY <- list()
+FirstRun <- data.frame(Cues = Cues2, Outcomes = Outcome050, stringsAsFactors = FALSE)
+train.FR <- createTrainingData(FirstRun, random = F)
+wm.FR <- EDLearning(train.FR, progress = F, etaNeg = FALSE)
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.FR,i))
+  df$Trial <- i
+  listX<-list.append(listX, df)
+}
+#listY<- listX
+listY <- bind_rows(listX)
+
+SecondRun <- data.frame(Cues = Cues1, Outcomes = Outcome000, stringsAsFactors = FALSE)
+train.SR <- createTrainingData(SecondRun, random = F)
+wm.SR <- EDLearning(train.SR, progress = F, etaNeg = FALSE, wm = wm.FR[[16]])
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.SR,i))
+  df$Trial <- i+16
+  listX<-list.append(listX, df)
+}
+listZ<- bind_rows(listX)
+listY<- rbind(listY, listZ)
+
+ThirdRun <- data.frame(Cues = Cues3, Outcomes = Outcome100, stringsAsFactors = FALSE)
+train.TR <- createTrainingData(ThirdRun, random = F)
+wm.TR <- EDLearning(train.TR, progress = F, etaNeg = FALSE, wm = wm.SR[[16]])
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.TR,i))
+  df$Trial <- i+32
+  listX<-list.append(listX, df)
+}
+listA<- bind_rows(listX)
+listY<- rbind(listY, listA)
+
+
+word <- c("shrimp", "yoghurt", "bananas", "wheat", "corn", "blueberries", "strawberries", "bran", "chicken", "walnuts", "horseradish", "cheese", "peanuts", "cabbage", "mustard", "peaches", "lobster", "pork", "env")
+exactWord <- c("shrimp","yoghurt", "bananas", "wheat", "corn", "blueberries", "strawberries", "bran", "chicken", "walnuts", "horseradish", "cheese", "peanuts", "cabbage", "mustard", "peaches", "lobster", "pork", "env")
+exactWords <- data.frame(Word = word, exactWord = exactWord, stringsAsFactors = FALSE)
+getexactwords <- exactWords$exactWord
+names(getexactwords) <- exactWords$Word
+listY$Word <- NA
+for(i in 1:nrow(listY)){
+  listY[i,]$Word <- getexactwords[gsub("...[0-9]+", "",row.names(listY[i,]))]
+
+}
+
+#plotActivations(listY, outcome = "Allergic")
+
+```
+
+```{r, echo = FALSE}
+par(las=1)
+emptyPlot(c(1,60),c(-.03,.08), xmark = c(1:48), bty='n', main = "Weights to Allergic, RW", xlab="trial nr", ylab = "weights")
+points(c(1:48), (listY$Allergic)[listY$Word == "bran"], type = "l", col = "blue")
+points(c(1:48), (listY$Allergic)[listY$Word == "env"], type = "l", col = "black")
+points(c(1:48), (listY$Allergic)[listY$Word == "yoghurt"], type = "l", col = "cyan")
+points(c(1:48), (listY$Allergic)[listY$Word == "cabbage"], type = "l", col = "green")
+points(c(1:48), c(rep(0,16),(listY$Allergic)[listY$Word == "shrimp"]), type = "l", col = "pink")
+points(c(1:48), c(rep(0,16),(listY$Allergic)[listY$Word == "strawberries"]), type = "l", col = "red")
+points(c(1:48), c(rep(0,16),(listY$Allergic)[listY$Word == "peanuts"]), type = "l", col = "brown")
+points(c(1:48), c(rep(0,32),(listY$Allergic)[listY$Word == "bananas"]), type = "l", col = "yellow")
+points(c(1:48), c(rep(0,32),(listY$Allergic)[listY$Word == "chicken"]), type = "l", col = "orange")
+points(c(1:48), c(rep(0,32),(listY$Allergic)[listY$Word == "mustard"]), type = "l", col = "grey")
+par(xpd=TRUE)
+legend(49,0.09,c("bran", "env", "yoghurt", "cabbage", "shrimp", "strawberries", "peanuts", "bananas", "chicken", "mustard"), col = c("blue","black","cyan","green","pink","red","brown","yellow","orange","grey"), lty = c(1,1,1,1,1,1,1,1,1,1))
+abline(v=16)
+abline(v=32)
+
+par(las=1)
+emptyPlot(c(1,60),c(-.03,.08), xmark = c(1:48), bty='n', main = "Weights to Not, RW", xlab="trial nr", ylab = "weights")
+points(c(1:48), (listY$Not)[listY$Word == "bran"], type = "l", col = "blue")
+points(c(1:48), (listY$Not)[listY$Word == "env"], type = "l", col = "black")
+points(c(1:48), (listY$Not)[listY$Word == "yoghurt"], type = "l", col = "cyan")
+points(c(1:48), (listY$Not)[listY$Word == "cabbage"], type = "l", col = "green")
+points(c(1:48), c(rep(0,16),(listY$Not)[listY$Word == "shrimp"]), type = "l", col = "pink")
+points(c(1:48), c(rep(0,16),(listY$Not)[listY$Word == "strawberries"]), type = "l", col = "red")
+points(c(1:48), c(rep(0,16),(listY$Not)[listY$Word == "peanuts"]), type = "l", col = "brown")
+points(c(1:48), c(rep(0,32),(listY$Not)[listY$Word == "bananas"]), type = "l", col = "yellow")
+points(c(1:48), c(rep(0,32),(listY$Not)[listY$Word == "chicken"]), type = "l", col = "orange")
+points(c(1:48), c(rep(0,32),(listY$Not)[listY$Word == "mustard"]), type = "l", col = "grey")
+par(xpd=TRUE)
+legend(49,0.09,c("bran", "env", "yoghurt", "cabbage", "shrimp", "strawberries", "peanuts", "bananas", "chicken", "mustard"), col = c("blue","black","cyan","green","pink","red","brown","yellow","orange","grey"), lty = c(1,1,1,1,1,1,1,1,1,1))
+abline(v=16)
+abline(v=32)
+
+emptyPlot(c(1,60),c(-.08,.09), xmark = c(1:48), bty='n', main = "Weights to Allergic minus not, RW", xlab="trial nr", ylab = "weights")
+points(c(1:48), (listY$Allergic)[listY$Word == "bran"]-(listY$Not)[listY$Word=="bran"], type = "l", col = "blue")
+points(c(1:48), (listY$Allergic)[listY$Word == "env"]-(listY$Not)[listY$Word=="env"], type = "l", col = "black")
+points(c(1:48), (listY$Allergic)[listY$Word == "yoghurt"]-(listY$Not)[listY$Word=="yoghurt"], type = "l", col = "cyan")
+points(c(1:48), (listY$Allergic)[listY$Word == "cabbage"]-(listY$Not)[listY$Word=="cabbage"], type = "l", col = "green")
+points(c(1:48), c(rep(0,16),(listY$Allergic)[listY$Word == "shrimp"]-(listY$Not)[listY$Word=="shrimp"]), type = "l", col = "pink")
+points(c(1:48), c(rep(0,16),(listY$Allergic)[listY$Word == "strawberries"]-(listY$Not)[listY$Word=="strawberries"]), type = "l", col = "red")
+points(c(1:48), c(rep(0,16),(listY$Allergic)[listY$Word == "peanuts"]-(listY$Not)[listY$Word=="peanuts"]), type = "l", col = "brown")
+points(c(1:48), c(rep(0,32),(listY$Allergic)[listY$Word == "bananas"]-(listY$Not)[listY$Word=="bananas"]), type = "l", col = "yellow")
+points(c(1:48), c(rep(0,32),(listY$Allergic)[listY$Word == "chicken"]-(listY$Not)[listY$Word=="chicken"]), type = "l", col = "orange")
+points(c(1:48), c(rep(0,32),(listY$Allergic)[listY$Word == "mustard"]-(listY$Not)[listY$Word=="mustard"]), type = "l", col = "grey")
+par(xpd=TRUE)
+legend(49,0.09,c("bran", "env", "yoghurt", "cabbage", "shrimp", "strawberries", "peanuts", "bananas", "chicken", "mustard"), col = c("blue","black","cyan","green","pink","red","brown","yellow","orange","grey"), lty = c(1,1,1,1,1,1,1,1,1,1))
+abline(v=16)
+abline(v=32)
+
+```
+
+### VHW
+
+```{r, echo = FALSE}
+listY2 <- list()
+FirstRun <- data.frame(Cues = Cues2, Outcomes = Outcome050, stringsAsFactors = FALSE)
+train.FR <- createTrainingData(FirstRun, random = F)
+wm.FR <- EDLearning(train.FR, progress = F, etaNeg = TRUE)
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.FR,i))
+  df$Trial <- i
+  listX<-list.append(listX, df)
+}
+#listY<- listX
+listY2 <- bind_rows(listX)
+
+SecondRun <- data.frame(Cues = Cues1, Outcomes = Outcome000, stringsAsFactors = FALSE)
+train.SR <- createTrainingData(SecondRun, random = F)
+wm.SR <- EDLearning(train.SR, progress = F, etaNeg = TRUE, wm = wm.FR[[16]])
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.SR,i))
+  df$Trial <- i+16
+  listX<-list.append(listX, df)
+}
+listZ<- bind_rows(listX)
+listY2<- rbind(listY2, listZ)
+
+ThirdRun <- data.frame(Cues = Cues3, Outcomes = Outcome100, stringsAsFactors = FALSE)
+train.TR <- createTrainingData(ThirdRun, random = F)
+wm.TR <- EDLearning(train.TR, progress = F, etaNeg = TRUE, wm = wm.SR[[16]])
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.TR,i))
+  df$Trial <- i+32
+  listX<-list.append(listX, df)
+}
+listA<- bind_rows(listX)
+listY2<- rbind(listY2, listA)
+
+listY2$Word <- NA
+for(i in 1:nrow(listY)){
+  listY2[i,]$Word <- getexactwords[gsub("...[0-9]+", "",row.names(listY2[i,]))]
+
+}
+
+
+```
+
+```{r, echo = FALSE}
+par(las=1)
+emptyPlot(c(1,60),c(-0.15,0.15), xmark = c(1:48), bty='n', main = "Weights to Allergic, VHW", xlab="trial nr", ylab = "weights")
+points(c(1:48), (listY2$Allergic)[listY2$Word == "bran"], type = "l", col = "blue")
+points(c(1:48), (listY2$Allergic)[listY2$Word == "env"], type = "l", col = "black")
+points(c(1:48), (listY2$Allergic)[listY2$Word == "yoghurt"], type = "l", col = "cyan")
+points(c(1:48), (listY2$Allergic)[listY2$Word == "cabbage"], type = "l", col = "green")
+points(c(1:48), c(rep(0,16),(listY2$Allergic)[listY2$Word == "shrimp"]), type = "l", col = "pink")
+points(c(1:48), c(rep(0,16),(listY2$Allergic)[listY2$Word == "strawberries"]), type = "l", col = "red")
+points(c(1:48), c(rep(0,16),(listY2$Allergic)[listY2$Word == "peanuts"]), type = "l", col = "brown")
+points(c(1:48), c(rep(0,32),(listY2$Allergic)[listY2$Word == "bananas"]), type = "l", col = "yellow")
+points(c(1:48), c(rep(0,32),(listY2$Allergic)[listY2$Word == "chicken"]), type = "l", col = "orange")
+points(c(1:48), c(rep(0,32),(listY2$Allergic)[listY2$Word == "mustard"]), type = "l", col = "grey")
+par(xpd=TRUE)
+legend(49,0.09,c("bran", "env", "yoghurt", "cabbage", "shrimp", "strawberries", "peanuts", "bananas", "chicken", "mustard"), col = c("blue","black","cyan","green","pink","red","brown","yellow","orange","grey"), lty = c(1,1,1,1,1,1,1,1,1,1))
+abline(v=16)
+abline(v=32)
+
+
+par(las=1)
+emptyPlot(c(1,60),c(-0.15,0.15), xmark = c(1:48), bty='n', main = "Weights to Not, VHW", xlab="trial nr", ylab = "weights")
+points(c(1:48), (listY2$Not)[listY2$Word == "bran"], type = "l", col = "blue")
+points(c(1:48), (listY2$Not)[listY2$Word == "env"], type = "l", col = "black")
+points(c(1:48), (listY2$Not)[listY2$Word == "yoghurt"], type = "l", col = "cyan")
+points(c(1:48), (listY2$Not)[listY2$Word == "cabbage"], type = "l", col = "green")
+points(c(1:48), c(rep(0,16),(listY2$Not)[listY2$Word == "shrimp"]), type = "l", col = "pink")
+points(c(1:48), c(rep(0,16),(listY2$Not)[listY2$Word == "strawberries"]), type = "l", col = "red")
+points(c(1:48), c(rep(0,16),(listY2$Not)[listY2$Word == "peanuts"]), type = "l", col = "brown")
+points(c(1:48), c(rep(0,32),(listY2$Not)[listY2$Word == "bananas"]), type = "l", col = "yellow")
+points(c(1:48), c(rep(0,32),(listY2$Not)[listY2$Word == "chicken"]), type = "l", col = "orange")
+points(c(1:48), c(rep(0,32),(listY2$Not)[listY2$Word == "mustard"]), type = "l", col = "grey")
+par(xpd=TRUE)
+legend(49,0.09,c("bran", "env", "yoghurt", "cabbage", "shrimp", "strawberries", "peanuts", "bananas", "chicken", "mustard"), col = c("blue","black","cyan","green","pink","red","brown","yellow","orange","grey"), lty = c(1,1,1,1,1,1,1,1,1,1))
+abline(v=16)
+abline(v=32)
+
+
+
+emptyPlot(c(1,60),c(-0.08,0.09), xmark = c(1:48), bty='n', main = "Weights to Allergic minus not, VHW", xlab="trial nr", ylab = "weights")
+points(c(1:48), (listY2$Allergic)[listY2$Word == "bran"]-(listY2$Not)[listY2$Word=="bran"], type = "l", col = "blue")
+points(c(1:48), (listY2$Allergic)[listY2$Word == "env"]-(listY2$Not)[listY2$Word=="env"], type = "l", col = "black")
+points(c(1:48), (listY2$Allergic)[listY2$Word == "yoghurt"]-(listY2$Not)[listY2$Word=="yoghurt"], type = "l", col = "cyan")
+points(c(1:48), (listY2$Allergic)[listY2$Word == "cabbage"]-(listY2$Not)[listY2$Word=="cabbage"], type = "l", col = "green")
+points(c(1:48), c(rep(0,16),(listY2$Allergic)[listY2$Word == "shrimp"]-(listY2$Not)[listY2$Word=="shrimp"]), type = "l", col = "pink")
+points(c(1:48), c(rep(0,16),(listY2$Allergic)[listY2$Word == "strawberries"]-(listY2$Not)[listY2$Word=="strawberries"]), type = "l", col = "red")
+points(c(1:48), c(rep(0,16),(listY2$Allergic)[listY2$Word == "peanuts"]-(listY2$Not)[listY2$Word=="peanuts"]), type = "l", col = "brown")
+points(c(1:48), c(rep(0,32),(listY2$Allergic)[listY2$Word == "bananas"]-(listY2$Not)[listY2$Word=="bananas"]), type = "l", col = "yellow")
+points(c(1:48), c(rep(0,32),(listY2$Allergic)[listY2$Word == "chicken"]-(listY2$Not)[listY2$Word=="chicken"]), type = "l", col = "orange")
+points(c(1:48), c(rep(0,32),(listY2$Allergic)[listY2$Word == "mustard"]-(listY2$Not)[listY2$Word=="mustard"]), type = "l", col = "grey")
+par(xpd=TRUE)
+legend(49,0.09,c("bran", "env", "yoghurt", "cabbage", "shrimp", "strawberries", "peanuts", "bananas", "chicken", "mustard"), col = c("blue","black","cyan","green","pink","red","brown","yellow","orange","grey"), lty = c(1,1,1,1,1,1,1,1,1,1))
+abline(v=16)
+abline(v=32)
+
+```
+
+The order of stimuli presented was 2,1,3, which is XAB: (yoghurt, bran, cabbage), (shrimp, strawberries, peanuts), (bananas, chicken, mustard)
+
+### Comparing both on a weights to allergic level
+```{r, echo = FALSE}
+par(mfrow = c(1,2))
+par(las = 1)
+emptyPlot(c(1,60),c(-0.15,0.15), xmark = c(1,8,16,24,32,40,48), bty='n', main = "Weights to Allergic, RW", xlab="trial nr", ylab = "weights")
+points(c(1:48), (listY$Allergic)[listY$Word == "bran"], type = "l", col = "blue")
+points(c(1:48), (listY$Allergic)[listY$Word == "env"], type = "l", col = "black")
+points(c(1:48), (listY$Allergic)[listY$Word == "yoghurt"], type = "l", col = "cyan")
+points(c(1:48), (listY$Allergic)[listY$Word == "cabbage"], type = "l", col = "green")
+points(c(1:48), c(rep(0,16),(listY$Allergic)[listY$Word == "shrimp"]), type = "l", col = "pink")
+points(c(1:48), c(rep(0,16),(listY$Allergic)[listY$Word == "strawberries"]), type = "l", col = "red")
+points(c(1:48), c(rep(0,16),(listY$Allergic)[listY$Word == "peanuts"]), type = "l", col = "brown")
+points(c(1:48), c(rep(0,32),(listY$Allergic)[listY$Word == "bananas"]), type = "l", col = "yellow")
+points(c(1:48), c(rep(0,32),(listY$Allergic)[listY$Word == "chicken"]), type = "l", col = "orange")
+points(c(1:48), c(rep(0,32),(listY$Allergic)[listY$Word == "mustard"]), type = "l", col = "grey")
+par(xpd=TRUE)
+legend(49,0.09,c("bran", "env", "yoghurt", "cabbage", "shrimp", "strawberries", "peanuts", "bananas", "chicken", "mustard"), col = c("blue","black","cyan","green","pink","red","brown","yellow","orange","grey"), lty = c(1,1,1,1,1,1,1,1,1,1))
+abline(v=16)
+abline(v=32)
+
+emptyPlot(c(1,60),c(-0.15,0.15), xmark = c(1,8,16,24,32,40,48), bty='n', main = "Weights to Allergic, VHW", xlab="trial nr", ylab = "weights")
+points(c(1:48), (listY2$Allergic)[listY2$Word == "bran"], type = "l", col = "blue")
+points(c(1:48), (listY2$Allergic)[listY2$Word == "env"], type = "l", col = "black")
+points(c(1:48), (listY2$Allergic)[listY2$Word == "yoghurt"], type = "l", col = "cyan")
+points(c(1:48), (listY2$Allergic)[listY2$Word == "cabbage"], type = "l", col = "green")
+points(c(1:48), c(rep(0,16),(listY2$Allergic)[listY2$Word == "shrimp"]), type = "l", col = "pink")
+points(c(1:48), c(rep(0,16),(listY2$Allergic)[listY2$Word == "strawberries"]), type = "l", col = "red")
+points(c(1:48), c(rep(0,16),(listY2$Allergic)[listY2$Word == "peanuts"]), type = "l", col = "brown")
+points(c(1:48), c(rep(0,32),(listY2$Allergic)[listY2$Word == "bananas"]), type = "l", col = "yellow")
+points(c(1:48), c(rep(0,32),(listY2$Allergic)[listY2$Word == "chicken"]), type = "l", col = "orange")
+points(c(1:48), c(rep(0,32),(listY2$Allergic)[listY2$Word == "mustard"]), type = "l", col = "grey")
+par(xpd=TRUE)
+legend(49,0.09,c("bran", "env", "yoghurt", "cabbage", "shrimp", "strawberries", "peanuts", "bananas", "chicken", "mustard"), col = c("blue","black","cyan","green","pink","red","brown","yellow","orange","grey"), lty = c(1,1,1,1,1,1,1,1,1,1))
+abline(v=16)
+abline(v=32)
+```
+
+
+### Comparing both on a weights to allergic minus weights to not level
+```{r, echo = FALSE}
+par(mfrow = c(1,2), las = 1)
+emptyPlot(c(1,60),c(-.08,.09), xmark = c(1:48), bty='n', main = "Weights to Allergic minus not, RW", xlab="trial nr", ylab = "weights")
+points(c(1:48), (listY$Allergic)[listY$Word == "bran"]-(listY$Not)[listY$Word=="bran"], type = "l", col = "blue")
+points(c(1:48), (listY$Allergic)[listY$Word == "env"]-(listY$Not)[listY$Word=="env"], type = "l", col = "black")
+points(c(1:48), (listY$Allergic)[listY$Word == "yoghurt"]-(listY$Not)[listY$Word=="yoghurt"], type = "l", col = "cyan")
+points(c(1:48), (listY$Allergic)[listY$Word == "cabbage"]-(listY$Not)[listY$Word=="cabbage"], type = "l", col = "green")
+points(c(1:48), c(rep(0,16),(listY$Allergic)[listY$Word == "shrimp"]-(listY$Not)[listY$Word=="shrimp"]), type = "l", col = "pink")
+points(c(1:48), c(rep(0,16),(listY$Allergic)[listY$Word == "strawberries"]-(listY$Not)[listY$Word=="strawberries"]), type = "l", col = "red")
+points(c(1:48), c(rep(0,16),(listY$Allergic)[listY$Word == "peanuts"]-(listY$Not)[listY$Word=="peanuts"]), type = "l", col = "brown")
+points(c(1:48), c(rep(0,32),(listY$Allergic)[listY$Word == "bananas"]-(listY$Not)[listY$Word=="bananas"]), type = "l", col = "yellow")
+points(c(1:48), c(rep(0,32),(listY$Allergic)[listY$Word == "chicken"]-(listY$Not)[listY$Word=="chicken"]), type = "l", col = "orange")
+points(c(1:48), c(rep(0,32),(listY$Allergic)[listY$Word == "mustard"]-(listY$Not)[listY$Word=="mustard"]), type = "l", col = "grey")
+par(xpd=TRUE)
+legend(49,0.09,c("bran", "env", "yoghurt", "cabbage", "shrimp", "strawberries", "peanuts", "bananas", "chicken", "mustard"), col = c("blue","black","cyan","green","pink","red","brown","yellow","orange","grey"), lty = c(1,1,1,1,1,1,1,1,1,1))
+abline(v=16)
+abline(v=32)
+
+
+emptyPlot(c(1,60),c(-0.08,0.09), xmark = c(1:48), bty='n', main = "Weights to Allergic minus not, VHW", xlab="trial nr", ylab = "weights")
+points(c(1:48), (listY2$Allergic)[listY2$Word == "bran"]-(listY2$Not)[listY2$Word=="bran"], type = "l", col = "blue")
+points(c(1:48), (listY2$Allergic)[listY2$Word == "env"]-(listY2$Not)[listY2$Word=="env"], type = "l", col = "black")
+points(c(1:48), (listY2$Allergic)[listY2$Word == "yoghurt"]-(listY2$Not)[listY2$Word=="yoghurt"], type = "l", col = "cyan")
+points(c(1:48), (listY2$Allergic)[listY2$Word == "cabbage"]-(listY2$Not)[listY2$Word=="cabbage"], type = "l", col = "green")
+points(c(1:48), c(rep(0,16),(listY2$Allergic)[listY2$Word == "shrimp"]-(listY2$Not)[listY2$Word=="shrimp"]), type = "l", col = "pink")
+points(c(1:48), c(rep(0,16),(listY2$Allergic)[listY2$Word == "strawberries"]-(listY2$Not)[listY2$Word=="strawberries"]), type = "l", col = "red")
+points(c(1:48), c(rep(0,16),(listY2$Allergic)[listY2$Word == "peanuts"]-(listY2$Not)[listY2$Word=="peanuts"]), type = "l", col = "brown")
+points(c(1:48), c(rep(0,32),(listY2$Allergic)[listY2$Word == "bananas"]-(listY2$Not)[listY2$Word=="bananas"]), type = "l", col = "yellow")
+points(c(1:48), c(rep(0,32),(listY2$Allergic)[listY2$Word == "chicken"]-(listY2$Not)[listY2$Word=="chicken"]), type = "l", col = "orange")
+points(c(1:48), c(rep(0,32),(listY2$Allergic)[listY2$Word == "mustard"]-(listY2$Not)[listY2$Word=="mustard"]), type = "l", col = "grey")
+par(xpd=TRUE)
+legend(49,0.09,c("bran", "env", "yoghurt", "cabbage", "shrimp", "strawberries", "peanuts", "bananas", "chicken", "mustard"), col = c("blue","black","cyan","green","pink","red","brown","yellow","orange","grey"), lty = c(1,1,1,1,1,1,1,1,1,1))
+abline(v=16)
+abline(v=32)
+```
