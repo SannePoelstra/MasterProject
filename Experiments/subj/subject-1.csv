@@ -1,0 +1,1369 @@
+"A","A1","A2","A3","B","B1","B2","B3","NewAnswers","Outcome","RatingA","RatingB","RatingX","Responses000","Responses050","Responses100","Stim1","Stim2","T1","T10","T11","T12","T13","T14","T15","T16","T2","T3","T4","T5","T6","T7","T8","T9","Trial","X","X1","X2","X3","background","block1","block2","block3","canvas_backend","clock_backend","color_backend","compensation","coordinates","count_Cond000Outcome","count_Cond000Sequence","count_Cond000Stim","count_Cond050Outcome","count_Cond050Sequence","count_Cond050Stim","count_Cond100Outcome","count_Cond100Sequence","count_Cond100Stim","count_Conditions_Stimuli","count_Current_Problems","count_Explanation","count_Introduction","count_Stimuli","count_Testphaseintro","count_To_dos","count__000","count__050","count__100","count_experiment","count_main_sequence","count_new_form_text_display","count_new_logger","count_new_logger_1","count_new_logger_1_1","count_new_sketchpad_1","count_new_sketchpad_2","count_test_phase","count_training_phase","count_welcome","datetime","description","disable_garbage_collection","empty_column","experiment_file","experiment_path","font_bold","font_family","font_italic","font_size","font_underline","foreground","form_clicks","form_response","fullscreen","height","j","k","keyboard_backend","l","live_row","live_row__000","live_row_training_phase","locations","logfile","mouse_backend","opensesame_codename","opensesame_version","pos1","pos1X","pos1Y","pos2","pos2X","pos2Y","repeat_cycle","response","response_new_sketchpad_1","response_new_sketchpad_2","response_time","response_time_new_sketchpad_1","response_time_new_sketchpad_2","response_time_welcome","response_welcome","round_decimals","sampler_backend","sound_buf_size","sound_channels","sound_freq","sound_sample_size","start","subject_nr","subject_parity","temp","time_Cond000Outcome","time_Cond000Sequence","time_Cond000Stim","time_Cond050Outcome","time_Cond050Sequence","time_Cond050Stim","time_Cond100Outcome","time_Cond100Sequence","time_Cond100Stim","time_Conditions_Stimuli","time_Current_Problems","time_Explanation","time_Introduction","time_Stimuli","time_Testphaseintro","time_To_dos","time__000","time__050","time__100","time_experiment","time_main_sequence","time_new_form_text_display","time_new_logger","time_new_logger_1","time_new_logger_1_1","time_new_sketchpad_1","time_new_sketchpad_2","time_test_phase","time_training_phase","time_welcome","title","uniform_coordinates","width"
+"[A1]","Footsteps.png","fork.png","Marble.png","[B1]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           1           1           1","Diamond.png","1","1","1","   ResponsesA  ResponsesB  ResponsesX
+0           1           1           1","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","[A1]","[X1]","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F8108>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F8188>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F8248>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F8E08>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F8FC8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B3DED08>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B3DE6C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B3DE7C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F8688>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F8388>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F8448>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F8588>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F8488>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F8148>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F86C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F8A48>","1","[X1]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","0","0","0","NA","NA","NA","NA","NA","NA","0","0","0","0","NA","0","0","0","0","0","0","0","NA","0","NA","NA","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","NA","NA","psycho","NA","0","0","0","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[2, 5]","2","5","[0, 11]","0","11","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13]]","10552.384399999937","10552.32049999995","10552.368900000147","NA","NA","NA","NA","NA","NA","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","NA","NA","2024.4509000003745","4830.269699999917","NA","10552.397200000087","NA","NA","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A1]","Footsteps.png","fork.png","Marble.png","[B1]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           2           2           2","NoDiamond.png","2","2","2","   ResponsesA  ResponsesB  ResponsesX
+0           1           1           1
+1           2           2           2","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","[B1]","[X1]","<libopensesame.widgets.widget_factory.Label object at 0x000002546D315F08>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D308988>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D308188>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D308288>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D308B48>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D308BC8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D308508>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D308B08>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D315A08>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D315BC8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546A6C7A08>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D308FC8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D308F48>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D308B88>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D3080C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D308F88>","2","[X1]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","1","1","1","NA","NA","NA","NA","NA","NA","0","0","0","0","NA","0","0","0","0","0","0","0","NA","1","NA","NA","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","1","1","psycho","1","1","1","0","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[0, 12]","0","12","[2, 12]","2","12","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","14589.147100000446","14589.082500000586","14589.131400000042","NA","NA","NA","NA","NA","NA","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","NA","NA","2024.4509000003745","4830.269699999917","NA","14589.160000000447","NA","NA","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A1]","Footsteps.png","fork.png","Marble.png","[B1]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           3           3           3","Diamond.png","3","3","3","   ResponsesA  ResponsesB  ResponsesX
+0           1           1           1
+1           2           2           2
+2           3           3           3","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","[B1]","[X1]","<libopensesame.widgets.widget_factory.Label object at 0x0000025471FCF348>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B3E9548>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B3E9E88>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B3E9C48>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B3E9508>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B3E90C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B3E93C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2ED1C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2E6688>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2E6BC8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546818CF88>","<libopensesame.widgets.widget_factory.Label object at 0x000002546818C208>","<libopensesame.widgets.widget_factory.Label object at 0x000002546818CB48>","<libopensesame.widgets.widget_factory.Label object at 0x000002546818C0C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B3E9448>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B3E9108>","3","[X1]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","2","2","2","NA","NA","NA","NA","NA","NA","0","0","0","0","NA","0","0","0","0","0","0","0","NA","2","NA","NA","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","2","2","psycho","2","2","2","0","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[0, 11]","0","11","[2, 6]","2","6","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","18759.420299999874","18759.35339999978","18759.403699999893","NA","NA","NA","NA","NA","NA","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","NA","NA","2024.4509000003745","4830.269699999917","NA","18759.434100000362","NA","NA","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A1]","Footsteps.png","fork.png","Marble.png","[B1]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           4           4           4","NoDiamond.png","4","4","4","   ResponsesA  ResponsesB  ResponsesX
+0           1           1           1
+1           2           2           2
+2           3           3           3
+3           4           4           4","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","[A1]","[X1]","<libopensesame.widgets.widget_factory.Label object at 0x0000025472409088>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D3158C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D315788>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D315C88>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D315F48>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D3152C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D315A88>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D315148>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D59188>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D59A88>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D59908>","<libopensesame.widgets.widget_factory.Label object at 0x000002546A692508>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D3159C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D315688>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D3156C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D315348>","4","[X1]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","3","3","3","NA","NA","NA","NA","NA","NA","0","0","0","0","NA","0","0","0","0","0","0","0","NA","3","NA","NA","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","3","3","psycho","3","3","3","0","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[0, 7]","0","7","[2, 10]","2","10","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","22829.404799999793","22829.32450000044","22829.388000000108","NA","NA","NA","NA","NA","NA","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","NA","NA","2024.4509000003745","4830.269699999917","NA","22829.41850000043","NA","NA","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A1]","Footsteps.png","fork.png","Marble.png","[B1]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           5           5           5","NoDiamond.png","5","5","5","   ResponsesA  ResponsesB  ResponsesX
+0           1           1           1
+1           2           2           2
+2           3           3           3
+3           4           4           4
+4           5           5           5","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","[A1]","[X1]","<libopensesame.widgets.widget_factory.Label object at 0x000002546B3DE2C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2E6848>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2E6108>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472A01CC8>","<libopensesame.widgets.widget_factory.Label object at 0x00000254681936C8>","<libopensesame.widgets.widget_factory.Label object at 0x00000254681935C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468193148>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468193808>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B3DEDC8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D302188>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2E6388>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2E6188>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2E6748>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2E6A88>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2E6808>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2E6CC8>","5","[X1]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","4","4","4","NA","NA","NA","NA","NA","NA","0","0","0","0","NA","0","0","0","0","0","0","0","NA","4","NA","NA","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","4","4","psycho","4","4","4","0","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[2, 11]","2","11","[0, 10]","0","10","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13]]","26832.659599999715","26832.532600000377","26832.64220000001","NA","NA","NA","NA","NA","NA","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","NA","NA","2024.4509000003745","4830.269699999917","NA","26832.672800000182","NA","NA","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A1]","Footsteps.png","fork.png","Marble.png","[B1]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           6           6           6","Diamond.png","6","6","6","   ResponsesA  ResponsesB  ResponsesX
+0           1           1           1
+1           2           2           2
+2           3           3           3
+3           4           4           4
+4           5           5           5
+5           6           6           6","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","[B1]","[X1]","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F2508>","<libopensesame.widgets.widget_factory.Label object at 0x00000254681948C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468194248>","<libopensesame.widgets.widget_factory.Label object at 0x0000025471FCFBC8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D302888>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D302A08>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D302148>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D302A88>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F2408>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F2748>","<libopensesame.widgets.widget_factory.Label object at 0x00000254677F4348>","<libopensesame.widgets.widget_factory.Label object at 0x000002546A692D08>","<libopensesame.widgets.widget_factory.Label object at 0x000002546A692788>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2EDB48>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2EDC48>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468194B48>","6","[X1]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","5","5","5","NA","NA","NA","NA","NA","NA","0","0","0","0","NA","0","0","0","0","0","0","0","NA","5","NA","NA","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","5","5","psycho","5","5","5","0","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[2, 5]","2","5","[0, 9]","0","9","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13]]","31035.803400000077","31035.73899999992","31035.787700000583","NA","NA","NA","NA","NA","NA","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","NA","NA","2024.4509000003745","4830.269699999917","NA","31035.816700000396","NA","NA","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A1]","Footsteps.png","fork.png","Marble.png","[B1]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           7           7           7","Diamond.png","7","7","7","   ResponsesA  ResponsesB  ResponsesX
+0           1           1           1
+1           2           2           2
+2           3           3           3
+3           4           4           4
+4           5           5           5
+5           6           6           6
+6           7           7           7","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","[A1]","[X1]","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D59408>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B3E9F08>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B3E9408>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B3E99C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B3E9308>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B3E9648>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B3E9948>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B3E9148>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D59D48>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D59248>","<libopensesame.widgets.widget_factory.Label object at 0x000002546A692648>","<libopensesame.widgets.widget_factory.Label object at 0x00000254689D6B88>","<libopensesame.widgets.widget_factory.Label object at 0x00000254689D6948>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B3E9188>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B3E9A08>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B3E9048>","7","[X1]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","6","6","6","NA","NA","NA","NA","NA","NA","0","0","0","0","NA","0","0","0","0","0","0","0","NA","6","NA","NA","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","6","6","psycho","6","6","6","0","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[2, 12]","2","12","[0, 13]","0","13","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13]]","35222.86309999981","35222.789999999804","35222.84649999983","NA","NA","NA","NA","NA","NA","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","NA","NA","2024.4509000003745","4830.269699999917","NA","35222.87719999986","NA","NA","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A1]","Footsteps.png","fork.png","Marble.png","[B1]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           8           8           8","NoDiamond.png","8","8","8","   ResponsesA  ResponsesB  ResponsesX
+0           1           1           1
+1           2           2           2
+2           3           3           3
+3           4           4           4
+4           5           5           5
+5           6           6           6
+6           7           7           7
+7           8           8           8","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","[B1]","[X1]","<libopensesame.widgets.widget_factory.Label object at 0x0000025472411AC8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D59D88>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D59088>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D59CC8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D59A48>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B199948>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B199788>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B199D48>","<libopensesame.widgets.widget_factory.Label object at 0x00000254690E93C8>","<libopensesame.widgets.widget_factory.Label object at 0x00000254690E9E08>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D59AC8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D59D48>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D59DC8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D59E48>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D59F08>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D59F48>","8","[X1]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","7","7","7","NA","NA","NA","NA","NA","NA","0","0","0","0","NA","0","0","0","0","0","0","0","NA","7","NA","NA","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","7","7","psycho","7","7","7","0","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[0, 3]","0","3","[2, 13]","2","13","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","39176.16319999979","39176.09369999991","39176.14649999996","NA","NA","NA","NA","NA","NA","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","NA","NA","2024.4509000003745","4830.269699999917","NA","39176.17690000043","NA","NA","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A1]","Footsteps.png","fork.png","Marble.png","[B1]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           0           0           0","Diamond.png","0","0","0","   ResponsesA  ResponsesB  ResponsesX
+0           1           1           1
+1           2           2           2
+2           3           3           3
+3           4           4           4
+4           5           5           5
+5           6           6           6
+6           7           7           7
+7           8           8           8
+8           0           0           0","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","[B1]","[X1]","<libopensesame.widgets.widget_factory.Label object at 0x0000025468180C48>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F0E08>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F0688>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F0B48>","<libopensesame.widgets.widget_factory.Label object at 0x000002546A6669C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546A666408>","<libopensesame.widgets.widget_factory.Label object at 0x000002546A666A08>","<libopensesame.widgets.widget_factory.Label object at 0x000002546A666088>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472409088>","<libopensesame.widgets.widget_factory.Label object at 0x00000254724094C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472409D08>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472409248>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472409B08>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472409308>","<libopensesame.widgets.widget_factory.Label object at 0x00000254724090C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472409948>","9","[X1]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","8","8","8","NA","NA","NA","NA","NA","NA","0","0","0","0","NA","0","0","0","0","0","0","0","NA","8","NA","NA","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","8","8","psycho","8","8","8","0","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[0, 7]","0","7","[2, 11]","2","11","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","45364.5862000003","45364.45230000027","45364.569200000005","NA","NA","NA","NA","NA","NA","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","NA","NA","2024.4509000003745","4830.269699999917","NA","45364.599100000305","NA","NA","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A1]","Footsteps.png","fork.png","Marble.png","[B1]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           1           1           1","NoDiamond.png","1","1","1","   ResponsesA  ResponsesB  ResponsesX
+0           1           1           1
+1           2           2           2
+2           3           3           3
+3           4           4           4
+4           5           5           5
+5           6           6           6
+6           7           7           7
+7           8           8           8
+8           0           0           0
+9           1           1           1","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","[A1]","[X1]","<libopensesame.widgets.widget_factory.Label object at 0x00000254735BF108>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B18DBC8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B18DE88>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B18D388>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B18DDC8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B18DF08>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B18DF48>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B18DE08>","<libopensesame.widgets.widget_factory.Label object at 0x00000254735BF748>","<libopensesame.widgets.widget_factory.Label object at 0x00000254735BF6C8>","<libopensesame.widgets.widget_factory.Label object at 0x00000254735BF608>","<libopensesame.widgets.widget_factory.Label object at 0x00000254735BFF88>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B18D188>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B18D508>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B18D608>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B18D888>","10","[X1]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","9","9","9","NA","NA","NA","NA","NA","NA","0","0","0","0","NA","0","0","0","0","0","0","0","NA","9","NA","NA","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","0","0","psycho","0","9","9","0","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[2, 9]","2","9","[0, 4]","0","4","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13]]","49768.1720999999","49768.09409999987","49768.154200000026","NA","NA","NA","NA","NA","NA","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","NA","NA","2024.4509000003745","4830.269699999917","NA","49768.18660000026","NA","NA","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A1]","Footsteps.png","fork.png","Marble.png","[B1]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           2           2           2","NoDiamond.png","2","2","2","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            1           1           1
+10           2           2           2","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","[B1]","[X1]","<libopensesame.widgets.widget_factory.Label object at 0x000002546818C108>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468E65A48>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468E65AC8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468E658C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468E65BC8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468E65048>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468E65588>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468E65488>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F5488>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F59C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F5108>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F5308>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F53C8>","<libopensesame.widgets.widget_factory.Label object at 0x00000254735C4C88>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468E65CC8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468E65D88>","11","[X1]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","10","10","10","NA","NA","NA","NA","NA","NA","0","0","0","0","NA","0","0","0","0","0","0","0","NA","10","NA","NA","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","1","1","psycho","1","10","10","0","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[0, 3]","0","3","[2, 7]","2","7","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","53988.50810000022","53988.42760000025","53988.49179999979","NA","NA","NA","NA","NA","NA","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","NA","NA","2024.4509000003745","4830.269699999917","NA","53988.52200000056","NA","NA","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A1]","Footsteps.png","fork.png","Marble.png","[B1]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           3           3           3","Diamond.png","3","3","3","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            1           1           1
+10           2           2           2
+11           3           3           3","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","[A1]","[X1]","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F5F88>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472411A88>","<libopensesame.widgets.widget_factory.Label object at 0x00000254724113C8>","<libopensesame.widgets.widget_factory.Label object at 0x00000254724117C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472411448>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472411708>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472411508>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472411188>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F59C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F5E48>","<libopensesame.widgets.widget_factory.Label object at 0x00000254689D6A08>","<libopensesame.widgets.widget_factory.Label object at 0x00000254689D6E08>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472411D88>","<libopensesame.widgets.widget_factory.Label object at 0x00000254724118C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472411A08>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472411488>","12","[X1]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","11","11","11","NA","NA","NA","NA","NA","NA","0","0","0","0","NA","0","0","0","0","0","0","0","NA","11","NA","NA","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","2","2","psycho","2","11","11","0","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[2, 4]","2","4","[0, 4]","0","4","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13]]","58124.76169999991","58124.69609999971","58124.74530000054","NA","NA","NA","NA","NA","NA","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","NA","NA","2024.4509000003745","4830.269699999917","NA","58124.77500000023","NA","NA","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A1]","Footsteps.png","fork.png","Marble.png","[B1]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           4           4           4","NoDiamond.png","4","4","4","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            1           1           1
+10           2           2           2
+11           3           3           3
+12           4           4           4","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","[A1]","[X1]","<libopensesame.widgets.widget_factory.Label object at 0x00000254689D6908>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D79088>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D794C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D79708>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D79788>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D79E88>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D79A48>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D79648>","<libopensesame.widgets.widget_factory.Label object at 0x00000254689D6D08>","<libopensesame.widgets.widget_factory.Label object at 0x000002546A66CA08>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468180948>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D79388>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D79908>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D79E48>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D79D48>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D79448>","13","[X1]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","12","12","12","NA","NA","NA","NA","NA","NA","0","0","0","0","NA","0","0","0","0","0","0","0","NA","12","NA","NA","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","3","3","psycho","3","12","12","0","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[2, 11]","2","11","[0, 9]","0","9","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13]]","62828.72700000007","62828.66370000011","62828.71130000058","NA","NA","NA","NA","NA","NA","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","NA","NA","2024.4509000003745","4830.269699999917","NA","62828.740500000094","NA","NA","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A1]","Footsteps.png","fork.png","Marble.png","[B1]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           5           5           5","Diamond.png","5","5","5","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            1           1           1
+10           2           2           2
+11           3           3           3
+12           4           4           4
+13           5           5           5","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","[B1]","[X1]","<libopensesame.widgets.widget_factory.Label object at 0x000002546A6BE9C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B199B48>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F0388>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F0E48>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F0648>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F0DC8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F0D08>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F0C88>","<libopensesame.widgets.widget_factory.Label object at 0x000002546A6BEBC8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546A6BED48>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468EA1788>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2E6848>","<libopensesame.widgets.widget_factory.Label object at 0x00000254681903C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468190388>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468190588>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B1990C8>","14","[X1]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","13","13","13","NA","NA","NA","NA","NA","NA","0","0","0","0","NA","0","0","0","0","0","0","0","NA","13","NA","NA","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","4","4","psycho","4","13","13","0","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[0, 0]","0","0","[2, 11]","2","11","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","66882.2207000003","66882.1466999998","66882.20360000014","NA","NA","NA","NA","NA","NA","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","NA","NA","2024.4509000003745","4830.269699999917","NA","66882.23459999972","NA","NA","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A1]","Footsteps.png","fork.png","Marble.png","[B1]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           6           6           6","Diamond.png","6","6","6","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            1           1           1
+10           2           2           2
+11           3           3           3
+12           4           4           4
+13           5           5           5
+14           6           6           6","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","[A1]","[X1]","<libopensesame.widgets.widget_factory.Label object at 0x000002546FE4D3C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472A01648>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472A01DC8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468F56348>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468F561C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468F56248>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468F56308>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468F56C88>","<libopensesame.widgets.widget_factory.Label object at 0x000002546FE4DE48>","<libopensesame.widgets.widget_factory.Label object at 0x000002546FE4D388>","<libopensesame.widgets.widget_factory.Label object at 0x000002546FE4DB88>","<libopensesame.widgets.widget_factory.Label object at 0x000002546FE4D5C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546FE4DF48>","<libopensesame.widgets.widget_factory.Label object at 0x000002546FE4DA48>","<libopensesame.widgets.widget_factory.Label object at 0x000002546FE4DAC8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546FE4D748>","15","[X1]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","14","14","14","NA","NA","NA","NA","NA","NA","0","0","0","0","NA","0","0","0","0","0","0","0","NA","14","NA","NA","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","5","5","psycho","5","14","14","0","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[0, 13]","0","13","[2, 11]","2","11","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","71052.25990000053","71052.19080000007","71052.24340000041","NA","NA","NA","NA","NA","NA","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","NA","NA","2024.4509000003745","4830.269699999917","NA","71052.27360000026","NA","NA","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A1]","Footsteps.png","fork.png","Marble.png","[B1]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           4           5           6","NoDiamond.png","4","5","6","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            1           1           1
+10           2           2           2
+11           3           3           3
+12           4           4           4
+13           5           5           5
+14           6           6           6
+15           4           5           6","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","[B1]","[X1]","<libopensesame.widgets.widget_factory.Label object at 0x0000025468EA1308>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2EE2C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2EE408>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2EEE08>","<libopensesame.widgets.widget_factory.Label object at 0x0000025467E15108>","<libopensesame.widgets.widget_factory.Label object at 0x0000025467E15CC8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025467E15388>","<libopensesame.widgets.widget_factory.Label object at 0x0000025467E15648>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468EA1148>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468EA16C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468EA1748>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468EA1548>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468F56BC8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468F56508>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2EEDC8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2EEC08>","16","[X1]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","15","15","15","NA","NA","NA","NA","NA","NA","0","0","0","0","NA","0","0","0","0","0","0","0","NA","15","NA","NA","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","6","6","psycho","6","15","15","0","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[2, 3]","2","3","[0, 10]","0","10","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13]]","75172.25340000005","75172.12480000034","75172.23530000047","NA","NA","NA","NA","NA","NA","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","NA","NA","2024.4509000003745","4830.269699999917","NA","75172.26690000008","NA","NA","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A2]","Footsteps.png","fork.png","Marble.png","[B2]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           2           3           3","Diamond.png","2","3","3","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            1           1           1
+10           2           2           2
+11           3           3           3
+12           4           4           4
+13           5           5           5
+14           6           6           6
+15           4           5           6","   ResponsesA  ResponsesB  ResponsesX
+0           2           3           3","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","[A2]","[X2]","<libopensesame.widgets.widget_factory.Label object at 0x00000254693CA148>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D74C08>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D5EC88>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D5E9C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472A01F08>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472A01108>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472A01E48>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472A01C08>","<libopensesame.widgets.widget_factory.Label object at 0x00000254693CA408>","<libopensesame.widgets.widget_factory.Label object at 0x00000254693CA8C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D74B08>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D74748>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D74DC8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D74888>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D74488>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D74208>","1","[X2]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","15","15","15","0","0","0","NA","NA","NA","0","0","0","0","NA","0","0","1","1","1","0","1","NA","15","0","NA","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","6","6","psycho","6","0","15","1","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[0, 3]","0","3","[2, 6]","2","6","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","75172.25340000005","75172.12480000034","75172.23530000047","80359.86990000037","80359.79649999991","80359.85290000009","NA","NA","NA","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","75275.03280000019","NA","2024.4509000003745","75274.68010000029","NA","75172.26690000008","80359.88350000026","NA","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A2]","Footsteps.png","fork.png","Marble.png","[B2]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           1           1           1","NoDiamond.png","1","1","1","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            1           1           1
+10           2           2           2
+11           3           3           3
+12           4           4           4
+13           5           5           5
+14           6           6           6
+15           4           5           6","   ResponsesA  ResponsesB  ResponsesX
+0           2           3           3
+1           1           1           1","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","[B2]","[X2]","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D54448>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D3153C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D315348>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D315188>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D3154C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D315288>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D315548>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D315588>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D54C88>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D54188>","<libopensesame.widgets.widget_factory.Label object at 0x0000025467C9E7C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025467C9E488>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468C489C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D315988>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D315888>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D315508>","2","[X2]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","15","15","15","1","1","1","NA","NA","NA","0","0","0","0","NA","0","0","1","1","1","0","1","NA","15","1","NA","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","2","3","psycho","3","1","15","1","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[2, 12]","2","12","[0, 2]","0","2","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13]]","75172.25340000005","75172.12480000034","75172.23530000047","84463.59440000015","84463.51419999974","84463.57679999984","NA","NA","NA","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","75275.03280000019","NA","2024.4509000003745","75274.68010000029","NA","75172.26690000008","84463.60920000006","NA","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A2]","Footsteps.png","fork.png","Marble.png","[B2]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           1           1           1","Diamond.png","1","1","1","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            1           1           1
+10           2           2           2
+11           3           3           3
+12           4           4           4
+13           5           5           5
+14           6           6           6
+15           4           5           6","   ResponsesA  ResponsesB  ResponsesX
+0           2           3           3
+1           1           1           1
+2           1           1           1","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","[B2]","[X2]","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D59288>","<libopensesame.widgets.widget_factory.Label object at 0x00000254724114C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472411808>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472411188>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472411B48>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472411B08>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472411A48>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472411948>","<libopensesame.widgets.widget_factory.Label object at 0x000002547574ED48>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B199608>","<libopensesame.widgets.widget_factory.Label object at 0x0000025467C9ED88>","<libopensesame.widgets.widget_factory.Label object at 0x0000025467C9E188>","<libopensesame.widgets.widget_factory.Label object at 0x0000025467C9E2C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F2708>","<libopensesame.widgets.widget_factory.Label object at 0x00000254729FF648>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472411388>","3","[X2]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","15","15","15","2","2","2","NA","NA","NA","0","0","0","0","NA","0","0","1","1","1","0","1","NA","15","2","NA","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","1","1","psycho","1","2","15","1","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[0, 8]","0","8","[2, 13]","2","13","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","75172.25340000005","75172.12480000034","75172.23530000047","88499.91330000012","88499.84370000038","88499.89740000002","NA","NA","NA","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","75275.03280000019","NA","2024.4509000003745","75274.68010000029","NA","75172.26690000008","88499.92629999996","NA","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A2]","Footsteps.png","fork.png","Marble.png","[B2]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           1           1           1","Diamond.png","1","1","1","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            1           1           1
+10           2           2           2
+11           3           3           3
+12           4           4           4
+13           5           5           5
+14           6           6           6
+15           4           5           6","   ResponsesA  ResponsesB  ResponsesX
+0           2           3           3
+1           1           1           1
+2           1           1           1
+3           1           1           1","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","[A2]","[X2]","<libopensesame.widgets.widget_factory.Label object at 0x00000254694D7788>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468E65E08>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468E655C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468E65208>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468E65148>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468E65388>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468E654C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468E65588>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F8888>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D315288>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D315D08>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D315548>","<libopensesame.widgets.widget_factory.Label object at 0x000002546A66CF08>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468E65188>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468E65E88>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468E656C8>","4","[X2]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","15","15","15","3","3","3","NA","NA","NA","0","0","0","0","NA","0","0","1","1","1","0","1","NA","15","3","NA","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","1","1","psycho","1","3","15","1","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[0, 7]","0","7","[2, 5]","2","5","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","75172.25340000005","75172.12480000034","75172.23530000047","92469.75079999992","92469.67779999977","92469.73440000057","NA","NA","NA","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","75275.03280000019","NA","2024.4509000003745","75274.68010000029","NA","75172.26690000008","92469.76420000009","NA","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A2]","Footsteps.png","fork.png","Marble.png","[B2]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           1           1           1","NoDiamond.png","1","1","1","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            1           1           1
+10           2           2           2
+11           3           3           3
+12           4           4           4
+13           5           5           5
+14           6           6           6
+15           4           5           6","   ResponsesA  ResponsesB  ResponsesX
+0           2           3           3
+1           1           1           1
+2           1           1           1
+3           1           1           1
+4           1           1           1","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","[A2]","[X2]","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F29C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472411A08>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472411B48>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472411448>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472411E88>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472411908>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472411DC8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472411708>","<libopensesame.widgets.widget_factory.Label object at 0x0000025467B4A388>","<libopensesame.widgets.widget_factory.Label object at 0x0000025467B4A888>","<libopensesame.widgets.widget_factory.Label object at 0x0000025467B4AFC8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025467B4AD08>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468EA17C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472411488>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472411B08>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472411108>","5","[X2]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","15","15","15","4","4","4","NA","NA","NA","0","0","0","0","NA","0","0","1","1","1","0","1","NA","15","4","NA","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","1","1","psycho","1","4","15","1","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[2, 6]","2","6","[0, 7]","0","7","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13]]","75172.25340000005","75172.12480000034","75172.23530000047","96473.1708999998","96473.03999999986","96473.15359999993","NA","NA","NA","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","75275.03280000019","NA","2024.4509000003745","75274.68010000029","NA","75172.26690000008","96473.1842000001","NA","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A2]","Footsteps.png","fork.png","Marble.png","[B2]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           1           1           1","NoDiamond.png","1","1","1","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            1           1           1
+10           2           2           2
+11           3           3           3
+12           4           4           4
+13           5           5           5
+14           6           6           6
+15           4           5           6","   ResponsesA  ResponsesB  ResponsesX
+0           2           3           3
+1           1           1           1
+2           1           1           1
+3           1           1           1
+4           1           1           1
+5           1           1           1","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","[B2]","[X2]","<libopensesame.widgets.widget_factory.Label object at 0x000002546A95B7C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472409308>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472409A88>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472409A08>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472409108>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472409188>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472409348>","<libopensesame.widgets.widget_factory.Label object at 0x000002546809A4C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546A95B0C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546A95BEC8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546809E588>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468AA7988>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472409B08>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472409D48>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472409708>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472409E48>","6","[X2]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","15","15","15","5","5","5","NA","NA","NA","0","0","0","0","NA","0","0","1","1","1","0","1","NA","15","5","NA","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","1","1","psycho","1","5","15","1","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[2, 12]","2","12","[0, 11]","0","11","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13]]","75172.25340000005","75172.12480000034","75172.23530000047","100993.43260000023","100993.35169999994","100993.41520000053","NA","NA","NA","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","75275.03280000019","NA","2024.4509000003745","75274.68010000029","NA","75172.26690000008","100993.4460000004","NA","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A2]","Footsteps.png","fork.png","Marble.png","[B2]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           1           1           1","Diamond.png","1","1","1","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            1           1           1
+10           2           2           2
+11           3           3           3
+12           4           4           4
+13           5           5           5
+14           6           6           6
+15           4           5           6","   ResponsesA  ResponsesB  ResponsesX
+0           2           3           3
+1           1           1           1
+2           1           1           1
+3           1           1           1
+4           1           1           1
+5           1           1           1
+6           1           1           1","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","[A2]","[X2]","<libopensesame.widgets.widget_factory.Label object at 0x000002547574EF48>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468C488C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468C48748>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472A081C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472A08688>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472A087C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472A08988>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472A088C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546A658E08>","<libopensesame.widgets.widget_factory.Label object at 0x00000254689D6A88>","<libopensesame.widgets.widget_factory.Label object at 0x00000254689D6D88>","<libopensesame.widgets.widget_factory.Label object at 0x00000254689D6A48>","<libopensesame.widgets.widget_factory.Label object at 0x00000254689D6188>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468C485C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468C482C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468C48A88>","7","[X2]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","15","15","15","6","6","6","NA","NA","NA","0","0","0","0","NA","0","0","1","1","1","0","1","NA","15","6","NA","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","1","1","psycho","1","6","15","1","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[0, 7]","0","7","[2, 4]","2","4","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","75172.25340000005","75172.12480000034","75172.23530000047","104913.52389999974","104913.39960000005","104913.50669999974","NA","NA","NA","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","75275.03280000019","NA","2024.4509000003745","75274.68010000029","NA","75172.26690000008","104913.53720000006","NA","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A2]","Footsteps.png","fork.png","Marble.png","[B2]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           1           1           1","NoDiamond.png","1","1","1","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            1           1           1
+10           2           2           2
+11           3           3           3
+12           4           4           4
+13           5           5           5
+14           6           6           6
+15           4           5           6","   ResponsesA  ResponsesB  ResponsesX
+0           2           3           3
+1           1           1           1
+2           1           1           1
+3           1           1           1
+4           1           1           1
+5           1           1           1
+6           1           1           1
+7           1           1           1","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","[B2]","[X2]","<libopensesame.widgets.widget_factory.Label object at 0x0000025468194188>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2ED488>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2EDB48>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2ED388>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F0308>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F07C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F0648>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F0888>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D307DC8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468621288>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468621DC8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468621C08>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468621D88>","<libopensesame.widgets.widget_factory.Label object at 0x00000254686218C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468621C48>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468A9C288>","8","[X2]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","15","15","15","7","7","7","NA","NA","NA","0","0","0","0","NA","0","0","1","1","1","0","1","NA","15","7","NA","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","1","1","psycho","1","7","15","1","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[0, 7]","0","7","[2, 11]","2","11","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","75172.25340000005","75172.12480000034","75172.23530000047","108766.4663000005","108766.39470000009","108766.44990000023","NA","NA","NA","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","75275.03280000019","NA","2024.4509000003745","75274.68010000029","NA","75172.26690000008","108766.48060000024","NA","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A2]","Footsteps.png","fork.png","Marble.png","[B2]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           1           1           1","Diamond.png","1","1","1","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            1           1           1
+10           2           2           2
+11           3           3           3
+12           4           4           4
+13           5           5           5
+14           6           6           6
+15           4           5           6","   ResponsesA  ResponsesB  ResponsesX
+0           2           3           3
+1           1           1           1
+2           1           1           1
+3           1           1           1
+4           1           1           1
+5           1           1           1
+6           1           1           1
+7           1           1           1
+8           1           1           1","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","[B2]","[X2]","<libopensesame.widgets.widget_factory.Label object at 0x000002546D308C08>","<libopensesame.widgets.widget_factory.Label object at 0x000002546809A448>","<libopensesame.widgets.widget_factory.Label object at 0x000002546809AE08>","<libopensesame.widgets.widget_factory.Label object at 0x000002546809AF08>","<libopensesame.widgets.widget_factory.Label object at 0x000002546809AC08>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472A01808>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472A01588>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472A01988>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D308948>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D3089C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D3081C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D308048>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D308CC8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D308E08>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D3083C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546809A608>","9","[X2]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","15","15","15","8","8","8","NA","NA","NA","0","0","0","0","NA","0","0","1","1","1","0","1","NA","15","8","NA","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","1","1","psycho","1","8","15","1","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[2, 12]","2","12","[0, 2]","0","2","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13]]","75172.25340000005","75172.12480000034","75172.23530000047","113486.77560000033","113486.71190000005","113486.75950000051","NA","NA","NA","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","75275.03280000019","NA","2024.4509000003745","75274.68010000029","NA","75172.26690000008","113486.78889999974","NA","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A2]","Footsteps.png","fork.png","Marble.png","[B2]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           1           1           1","Diamond.png","1","1","1","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            1           1           1
+10           2           2           2
+11           3           3           3
+12           4           4           4
+13           5           5           5
+14           6           6           6
+15           4           5           6","   ResponsesA  ResponsesB  ResponsesX
+0           2           3           3
+1           1           1           1
+2           1           1           1
+3           1           1           1
+4           1           1           1
+5           1           1           1
+6           1           1           1
+7           1           1           1
+8           1           1           1
+9           1           1           1","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","[A2]","[X2]","<libopensesame.widgets.widget_factory.Label object at 0x00000254690E9608>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D315508>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D3150C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D315BC8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D3153C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D315308>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D315348>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D315648>","<libopensesame.widgets.widget_factory.Label object at 0x0000025467F9ED08>","<libopensesame.widgets.widget_factory.Label object at 0x0000025467F9EE88>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468ADB188>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468ADB2C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472409548>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472409248>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472409648>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D315248>","10","[X2]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","15","15","15","9","9","9","NA","NA","NA","0","0","0","0","NA","0","0","1","1","1","0","1","NA","15","9","NA","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","1","1","psycho","1","9","15","1","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[0, 10]","0","10","[2, 11]","2","11","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","75172.25340000005","75172.12480000034","75172.23530000047","117390.15650000056","117390.08310000008","117390.14020000014","NA","NA","NA","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","75275.03280000019","NA","2024.4509000003745","75274.68010000029","NA","75172.26690000008","117390.17090000016","NA","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A2]","Footsteps.png","fork.png","Marble.png","[B2]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           1           1           1","NoDiamond.png","1","1","1","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            1           1           1
+10           2           2           2
+11           3           3           3
+12           4           4           4
+13           5           5           5
+14           6           6           6
+15           4           5           6","    ResponsesA  ResponsesB  ResponsesX
+0            2           3           3
+1            1           1           1
+2            1           1           1
+3            1           1           1
+4            1           1           1
+5            1           1           1
+6            1           1           1
+7            1           1           1
+8            1           1           1
+9            1           1           1
+10           1           1           1","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","[B2]","[X2]","<libopensesame.widgets.widget_factory.Label object at 0x0000025468621E88>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D302E48>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472411D48>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472411A88>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472411EC8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472411C48>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472411508>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472411E88>","<libopensesame.widgets.widget_factory.Label object at 0x000002546A697B88>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468F56508>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468F56BC8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468F56788>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468E65388>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468E65E88>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D302888>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D302548>","11","[X2]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","15","15","15","10","10","10","NA","NA","NA","0","0","0","0","NA","0","0","1","1","1","0","1","NA","15","10","NA","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","1","1","psycho","1","10","15","1","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[2, 0]","2","0","[0, 3]","0","3","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13]]","75172.25340000005","75172.12480000034","75172.23530000047","121546.87759999979","121546.80680000002","121546.86089999996","NA","NA","NA","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","75275.03280000019","NA","2024.4509000003745","75274.68010000029","NA","75172.26690000008","121546.89150000013","NA","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A2]","Footsteps.png","fork.png","Marble.png","[B2]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           1           1           1","Diamond.png","1","1","1","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            1           1           1
+10           2           2           2
+11           3           3           3
+12           4           4           4
+13           5           5           5
+14           6           6           6
+15           4           5           6","    ResponsesA  ResponsesB  ResponsesX
+0            2           3           3
+1            1           1           1
+2            1           1           1
+3            1           1           1
+4            1           1           1
+5            1           1           1
+6            1           1           1
+7            1           1           1
+8            1           1           1
+9            1           1           1
+10           1           1           1
+11           1           1           1","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","[A2]","[X2]","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F0A88>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D74908>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D74B48>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D74488>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D74A08>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D74948>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D74988>","<libopensesame.widgets.widget_factory.Label object at 0x0000025467D2AC48>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F0DC8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F04C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546A666088>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D74088>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D74308>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D74DC8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D74748>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D74EC8>","12","[X2]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","15","15","15","11","11","11","NA","NA","NA","0","0","0","0","NA","0","0","1","1","1","0","1","NA","15","11","NA","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","1","1","psycho","1","11","15","1","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[2, 11]","2","11","[0, 11]","0","11","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13]]","75172.25340000005","75172.12480000034","75172.23530000047","125530.72900000006","125530.60019999975","125530.71230000023","NA","NA","NA","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","75275.03280000019","NA","2024.4509000003745","75274.68010000029","NA","75172.26690000008","125530.74230000039","NA","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A2]","Footsteps.png","fork.png","Marble.png","[B2]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           1           1           1","NoDiamond.png","1","1","1","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            1           1           1
+10           2           2           2
+11           3           3           3
+12           4           4           4
+13           5           5           5
+14           6           6           6
+15           4           5           6","    ResponsesA  ResponsesB  ResponsesX
+0            2           3           3
+1            1           1           1
+2            1           1           1
+3            1           1           1
+4            1           1           1
+5            1           1           1
+6            1           1           1
+7            1           1           1
+8            1           1           1
+9            1           1           1
+10           1           1           1
+11           1           1           1
+12           1           1           1","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","[A2]","[X2]","<libopensesame.widgets.widget_factory.Label object at 0x000002546A692508>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468880488>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468880748>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468352C48>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468352F08>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468352CC8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468352748>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468352148>","<libopensesame.widgets.widget_factory.Label object at 0x00000254694D76C8>","<libopensesame.widgets.widget_factory.Label object at 0x00000254694D7748>","<libopensesame.widgets.widget_factory.Label object at 0x00000254694D7C88>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468190948>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468190288>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468190788>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468190A88>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468190D88>","13","[X2]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","15","15","15","12","12","12","NA","NA","NA","0","0","0","0","NA","0","0","1","1","1","0","1","NA","15","12","NA","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","1","1","psycho","1","12","15","1","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[2, 5]","2","5","[0, 2]","0","2","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13]]","75172.25340000005","75172.12480000034","75172.23530000047","129450.3126999998","129450.23480000054","129450.29580000028","NA","NA","NA","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","75275.03280000019","NA","2024.4509000003745","75274.68010000029","NA","75172.26690000008","129450.32710000032","NA","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A2]","Footsteps.png","fork.png","Marble.png","[B2]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           1           1           1","NoDiamond.png","1","1","1","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            1           1           1
+10           2           2           2
+11           3           3           3
+12           4           4           4
+13           5           5           5
+14           6           6           6
+15           4           5           6","    ResponsesA  ResponsesB  ResponsesX
+0            2           3           3
+1            1           1           1
+2            1           1           1
+3            1           1           1
+4            1           1           1
+5            1           1           1
+6            1           1           1
+7            1           1           1
+8            1           1           1
+9            1           1           1
+10           1           1           1
+11           1           1           1
+12           1           1           1
+13           1           1           1","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","[B2]","[X2]","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D748C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472A087C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472A08808>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472A08288>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472A08C08>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472A088C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472A08088>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472A08208>","<libopensesame.widgets.widget_factory.Label object at 0x00000254690E9A08>","<libopensesame.widgets.widget_factory.Label object at 0x00000254690E90C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546818C248>","<libopensesame.widgets.widget_factory.Label object at 0x000002546818CEC8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472A08048>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472A08F08>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472A08648>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472A08188>","14","[X2]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","15","15","15","13","13","13","NA","NA","NA","0","0","0","0","NA","0","0","1","1","1","0","1","NA","15","13","NA","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","1","1","psycho","1","13","15","1","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[0, 12]","0","12","[2, 13]","2","13","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","75172.25340000005","75172.12480000034","75172.23530000047","133353.18300000016","133353.11180000007","133353.16630000033","NA","NA","NA","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","75275.03280000019","NA","2024.4509000003745","75274.68010000029","NA","75172.26690000008","133353.1966999999","NA","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A2]","Footsteps.png","fork.png","Marble.png","[B2]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           1           1           1","Diamond.png","1","1","1","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            1           1           1
+10           2           2           2
+11           3           3           3
+12           4           4           4
+13           5           5           5
+14           6           6           6
+15           4           5           6","    ResponsesA  ResponsesB  ResponsesX
+0            2           3           3
+1            1           1           1
+2            1           1           1
+3            1           1           1
+4            1           1           1
+5            1           1           1
+6            1           1           1
+7            1           1           1
+8            1           1           1
+9            1           1           1
+10           1           1           1
+11           1           1           1
+12           1           1           1
+13           1           1           1
+14           1           1           1","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","[A2]","[X2]","<libopensesame.widgets.widget_factory.Label object at 0x00000254683FFA08>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D59A88>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D59808>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D59D48>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D59148>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D59248>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D59DC8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D59108>","<libopensesame.widgets.widget_factory.Label object at 0x00000254683FFA88>","<libopensesame.widgets.widget_factory.Label object at 0x000002546ADC4108>","<libopensesame.widgets.widget_factory.Label object at 0x000002546ADC4B88>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D59B08>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D59C08>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D59B88>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D59088>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D595C8>","15","[X2]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","15","15","15","14","14","14","NA","NA","NA","0","0","0","0","NA","0","0","1","1","1","0","1","NA","15","14","NA","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","1","1","psycho","1","14","15","1","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[0, 12]","0","12","[2, 1]","2","1","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","75172.25340000005","75172.12480000034","75172.23530000047","137206.5634999999","137206.3564","137206.54230000038","NA","NA","NA","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","75275.03280000019","NA","2024.4509000003745","75274.68010000029","NA","75172.26690000008","137206.57780000055","NA","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A2]","Footsteps.png","fork.png","Marble.png","[B2]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           1           1           1","NoDiamond.png","1","1","1","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            1           1           1
+10           2           2           2
+11           3           3           3
+12           4           4           4
+13           5           5           5
+14           6           6           6
+15           4           5           6","    ResponsesA  ResponsesB  ResponsesX
+0            2           3           3
+1            1           1           1
+2            1           1           1
+3            1           1           1
+4            1           1           1
+5            1           1           1
+6            1           1           1
+7            1           1           1
+8            1           1           1
+9            1           1           1
+10           1           1           1
+11           1           1           1
+12           1           1           1
+13           1           1           1
+14           1           1           1
+15           1           1           1","Empty DataFrame
+Columns: [ResponsesA, ResponsesB, ResponsesX]
+Index: []","[B2]","[X2]","<libopensesame.widgets.widget_factory.Label object at 0x0000025468ADBEC8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468190648>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468190288>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468190888>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468190D88>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468190308>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468190148>","<libopensesame.widgets.widget_factory.Label object at 0x0000025467E15088>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472A08108>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472A08E88>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472A08A88>","<libopensesame.widgets.widget_factory.Label object at 0x000002546806DA08>","<libopensesame.widgets.widget_factory.Label object at 0x000002546806D848>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468190B08>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468190208>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468190448>","16","[X2]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","15","15","15","15","15","15","NA","NA","NA","0","0","0","0","NA","0","0","1","1","1","0","1","NA","15","15","NA","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","1","1","psycho","1","15","15","1","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[0, 6]","0","6","[2, 1]","2","1","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","75172.25340000005","75172.12480000034","75172.23530000047","140976.07049999989","140976.00150000016","140976.0537000002","NA","NA","NA","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","75275.03280000019","NA","2024.4509000003745","75274.68010000029","NA","75172.26690000008","140976.08469999977","NA","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A3]","Footsteps.png","fork.png","Marble.png","[B3]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           1           1           1","Diamond.png","1","1","1","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            1           1           1
+10           2           2           2
+11           3           3           3
+12           4           4           4
+13           5           5           5
+14           6           6           6
+15           4           5           6","    ResponsesA  ResponsesB  ResponsesX
+0            2           3           3
+1            1           1           1
+2            1           1           1
+3            1           1           1
+4            1           1           1
+5            1           1           1
+6            1           1           1
+7            1           1           1
+8            1           1           1
+9            1           1           1
+10           1           1           1
+11           1           1           1
+12           1           1           1
+13           1           1           1
+14           1           1           1
+15           1           1           1","   ResponsesA  ResponsesB  ResponsesX
+0           1           1           1","[A3]","[X3]","<libopensesame.widgets.widget_factory.Label object at 0x000002545D973108>","<libopensesame.widgets.widget_factory.Label object at 0x00000254688800C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468880D88>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468190088>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468190188>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468190208>","<libopensesame.widgets.widget_factory.Label object at 0x00000254681902C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468190148>","<libopensesame.widgets.widget_factory.Label object at 0x0000025467B62DC8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025467B62AC8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025467B62688>","<libopensesame.widgets.widget_factory.Label object at 0x0000025467B626C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025467B62248>","<libopensesame.widgets.widget_factory.Label object at 0x0000025467B62788>","<libopensesame.widgets.widget_factory.Label object at 0x0000025467B62A08>","<libopensesame.widgets.widget_factory.Label object at 0x0000025467B62748>","1","[X3]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","15","15","15","15","15","15","0","0","0","0","0","0","0","NA","0","0","2","2","2","0","2","NA","15","15","0","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","1","1","psycho","1","0","15","2","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[0, 13]","0","13","[2, 13]","2","13","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","75172.25340000005","75172.12480000034","75172.23530000047","140976.07049999989","140976.00150000016","140976.0537000002","145546.42560000048","145546.35469999994","145546.40670000025","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","75275.03280000019","141083.71510000053","2024.4509000003745","141083.3696999998","NA","75172.26690000008","140976.08469999977","145546.44160000043","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A3]","Footsteps.png","fork.png","Marble.png","[B3]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           2           2           2","NoDiamond.png","2","2","2","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            1           1           1
+10           2           2           2
+11           3           3           3
+12           4           4           4
+13           5           5           5
+14           6           6           6
+15           4           5           6","    ResponsesA  ResponsesB  ResponsesX
+0            2           3           3
+1            1           1           1
+2            1           1           1
+3            1           1           1
+4            1           1           1
+5            1           1           1
+6            1           1           1
+7            1           1           1
+8            1           1           1
+9            1           1           1
+10           1           1           1
+11           1           1           1
+12           1           1           1
+13           1           1           1
+14           1           1           1
+15           1           1           1","   ResponsesA  ResponsesB  ResponsesX
+0           1           1           1
+1           2           2           2","[B3]","[X3]","<libopensesame.widgets.widget_factory.Label object at 0x0000025468088888>","<libopensesame.widgets.widget_factory.Label object at 0x000002547574E248>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468352708>","<libopensesame.widgets.widget_factory.Label object at 0x000002546866B508>","<libopensesame.widgets.widget_factory.Label object at 0x000002546866BD48>","<libopensesame.widgets.widget_factory.Label object at 0x000002546866BD88>","<libopensesame.widgets.widget_factory.Label object at 0x000002546866B848>","<libopensesame.widgets.widget_factory.Label object at 0x000002546866B808>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472411C08>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472411A08>","<libopensesame.widgets.widget_factory.Label object at 0x0000025467C9EA88>","<libopensesame.widgets.widget_factory.Label object at 0x000002546FE4D208>","<libopensesame.widgets.widget_factory.Label object at 0x000002547574E8C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002547574EA08>","<libopensesame.widgets.widget_factory.Label object at 0x000002547574E2C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002547574E588>","2","[X3]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","15","15","15","15","15","15","1","1","1","0","0","0","0","NA","0","0","2","2","2","0","2","NA","15","15","1","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","1","1","psycho","1","1","15","2","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[0, 6]","0","6","[2, 6]","2","6","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","75172.25340000005","75172.12480000034","75172.23530000047","140976.07049999989","140976.00150000016","140976.0537000002","150634.33290000012","150634.19570000042","150634.3155000004","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","75275.03280000019","141083.71510000053","2024.4509000003745","141083.3696999998","NA","75172.26690000008","140976.08469999977","150634.34700000015","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A3]","Footsteps.png","fork.png","Marble.png","[B3]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           3           3           3","NoDiamond.png","3","3","3","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            1           1           1
+10           2           2           2
+11           3           3           3
+12           4           4           4
+13           5           5           5
+14           6           6           6
+15           4           5           6","    ResponsesA  ResponsesB  ResponsesX
+0            2           3           3
+1            1           1           1
+2            1           1           1
+3            1           1           1
+4            1           1           1
+5            1           1           1
+6            1           1           1
+7            1           1           1
+8            1           1           1
+9            1           1           1
+10           1           1           1
+11           1           1           1
+12           1           1           1
+13           1           1           1
+14           1           1           1
+15           1           1           1","   ResponsesA  ResponsesB  ResponsesX
+0           1           1           1
+1           2           2           2
+2           3           3           3","[B3]","[X3]","<libopensesame.widgets.widget_factory.Label object at 0x00000254689D6A08>","<libopensesame.widgets.widget_factory.Label object at 0x000002546ADC4D48>","<libopensesame.widgets.widget_factory.Label object at 0x000002546ADC4648>","<libopensesame.widgets.widget_factory.Label object at 0x000002546ADC4988>","<libopensesame.widgets.widget_factory.Label object at 0x000002546ADC4C88>","<libopensesame.widgets.widget_factory.Label object at 0x000002546ADC4F88>","<libopensesame.widgets.widget_factory.Label object at 0x000002546ADC4F48>","<libopensesame.widgets.widget_factory.Label object at 0x000002546ADC4DC8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468670CC8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B18D848>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2E60C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468190288>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468190908>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468621F88>","<libopensesame.widgets.widget_factory.Label object at 0x000002546ADC46C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546ADC4A08>","3","[X3]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","15","15","15","15","15","15","2","2","2","0","0","0","0","NA","0","0","2","2","2","0","2","NA","15","15","2","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","2","2","psycho","2","2","15","2","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[2, 11]","2","11","[0, 12]","0","12","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13]]","75172.25340000005","75172.12480000034","75172.23530000047","140976.07049999989","140976.00150000016","140976.0537000002","154737.17190000025","154737.10889999985","154737.15580000044","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","75275.03280000019","141083.71510000053","2024.4509000003745","141083.3696999998","NA","75172.26690000008","140976.08469999977","154737.18499999994","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A3]","Footsteps.png","fork.png","Marble.png","[B3]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           4           4           4","Diamond.png","4","4","4","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            1           1           1
+10           2           2           2
+11           3           3           3
+12           4           4           4
+13           5           5           5
+14           6           6           6
+15           4           5           6","    ResponsesA  ResponsesB  ResponsesX
+0            2           3           3
+1            1           1           1
+2            1           1           1
+3            1           1           1
+4            1           1           1
+5            1           1           1
+6            1           1           1
+7            1           1           1
+8            1           1           1
+9            1           1           1
+10           1           1           1
+11           1           1           1
+12           1           1           1
+13           1           1           1
+14           1           1           1
+15           1           1           1","   ResponsesA  ResponsesB  ResponsesX
+0           1           1           1
+1           2           2           2
+2           3           3           3
+3           4           4           4","[A3]","[X3]","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F8208>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468670FC8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468670CC8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468670448>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468670A08>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468670C88>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468670BC8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468670D08>","<libopensesame.widgets.widget_factory.Label object at 0x000002546A66CBC8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025469140188>","<libopensesame.widgets.widget_factory.Label object at 0x0000025469140248>","<libopensesame.widgets.widget_factory.Label object at 0x0000025469140408>","<libopensesame.widgets.widget_factory.Label object at 0x00000254691408C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025469140F88>","<libopensesame.widgets.widget_factory.Label object at 0x0000025469140E08>","<libopensesame.widgets.widget_factory.Label object at 0x0000025469140D48>","4","[X3]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","15","15","15","15","15","15","3","3","3","0","0","0","0","NA","0","0","2","2","2","0","2","NA","15","15","3","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","3","3","psycho","3","3","15","2","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[2, 5]","2","5","[0, 7]","0","7","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13]]","75172.25340000005","75172.12480000034","75172.23530000047","140976.07049999989","140976.00150000016","140976.0537000002","158724.09380000044","158723.99099999983","158724.07639999985","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","75275.03280000019","141083.71510000053","2024.4509000003745","141083.3696999998","NA","75172.26690000008","140976.08469999977","158724.10700000002","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A3]","Footsteps.png","fork.png","Marble.png","[B3]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           5           5           5","Diamond.png","5","5","5","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            1           1           1
+10           2           2           2
+11           3           3           3
+12           4           4           4
+13           5           5           5
+14           6           6           6
+15           4           5           6","    ResponsesA  ResponsesB  ResponsesX
+0            2           3           3
+1            1           1           1
+2            1           1           1
+3            1           1           1
+4            1           1           1
+5            1           1           1
+6            1           1           1
+7            1           1           1
+8            1           1           1
+9            1           1           1
+10           1           1           1
+11           1           1           1
+12           1           1           1
+13           1           1           1
+14           1           1           1
+15           1           1           1","   ResponsesA  ResponsesB  ResponsesX
+0           1           1           1
+1           2           2           2
+2           3           3           3
+3           4           4           4
+4           5           5           5","[A3]","[X3]","<libopensesame.widgets.widget_factory.Label object at 0x0000025468F31248>","<libopensesame.widgets.widget_factory.Label object at 0x0000025475CEDF88>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472409D48>","<libopensesame.widgets.widget_factory.Label object at 0x0000025467F9E188>","<libopensesame.widgets.widget_factory.Label object at 0x0000025467F9EC88>","<libopensesame.widgets.widget_factory.Label object at 0x0000025467F9EDC8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025467F9E448>","<libopensesame.widgets.widget_factory.Label object at 0x0000025467F9EF48>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468F31C88>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468C48B48>","<libopensesame.widgets.widget_factory.Label object at 0x0000025475CED788>","<libopensesame.widgets.widget_factory.Label object at 0x0000025475CED8C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025475CED688>","<libopensesame.widgets.widget_factory.Label object at 0x0000025475CEDC48>","<libopensesame.widgets.widget_factory.Label object at 0x0000025475CEDAC8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025475CED808>","5","[X3]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","15","15","15","15","15","15","4","4","4","0","0","0","0","NA","0","0","2","2","2","0","2","NA","15","15","4","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","4","4","psycho","4","4","15","2","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[0, 4]","0","4","[2, 8]","2","8","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","75172.25340000005","75172.12480000034","75172.23530000047","140976.07049999989","140976.00150000016","140976.0537000002","163794.76669999986","163794.6971000001","163794.75000000003","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","75275.03280000019","141083.71510000053","2024.4509000003745","141083.3696999998","NA","75172.26690000008","140976.08469999977","163794.7807999999","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A3]","Footsteps.png","fork.png","Marble.png","[B3]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           6           6           6","NoDiamond.png","6","6","6","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            1           1           1
+10           2           2           2
+11           3           3           3
+12           4           4           4
+13           5           5           5
+14           6           6           6
+15           4           5           6","    ResponsesA  ResponsesB  ResponsesX
+0            2           3           3
+1            1           1           1
+2            1           1           1
+3            1           1           1
+4            1           1           1
+5            1           1           1
+6            1           1           1
+7            1           1           1
+8            1           1           1
+9            1           1           1
+10           1           1           1
+11           1           1           1
+12           1           1           1
+13           1           1           1
+14           1           1           1
+15           1           1           1","   ResponsesA  ResponsesB  ResponsesX
+0           1           1           1
+1           2           2           2
+2           3           3           3
+3           4           4           4
+4           5           5           5
+5           6           6           6","[B3]","[X3]","<libopensesame.widgets.widget_factory.Label object at 0x0000025468194F88>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468A9C988>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468CF01C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468095148>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468095BC8>","<libopensesame.widgets.widget_factory.Label object at 0x00000254680959C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468095A08>","<libopensesame.widgets.widget_factory.Label object at 0x000002547574E608>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F5DC8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F5448>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F5948>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472411488>","<libopensesame.widgets.widget_factory.Label object at 0x00000254724118C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468A9C1C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468A9CBC8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468A9CDC8>","6","[X3]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","15","15","15","15","15","15","5","5","5","0","0","0","0","NA","0","0","2","2","2","0","2","NA","15","15","5","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","5","5","psycho","5","5","15","2","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[2, 7]","2","7","[0, 13]","0","13","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13]]","75172.25340000005","75172.12480000034","75172.23530000047","140976.07049999989","140976.00150000016","140976.0537000002","167731.53660000025","167731.46439999982","167731.5195000001","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","75275.03280000019","141083.71510000053","2024.4509000003745","141083.3696999998","NA","75172.26690000008","140976.08469999977","167731.5507000003","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A3]","Footsteps.png","fork.png","Marble.png","[B3]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           7           7           7","Diamond.png","7","7","7","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            1           1           1
+10           2           2           2
+11           3           3           3
+12           4           4           4
+13           5           5           5
+14           6           6           6
+15           4           5           6","    ResponsesA  ResponsesB  ResponsesX
+0            2           3           3
+1            1           1           1
+2            1           1           1
+3            1           1           1
+4            1           1           1
+5            1           1           1
+6            1           1           1
+7            1           1           1
+8            1           1           1
+9            1           1           1
+10           1           1           1
+11           1           1           1
+12           1           1           1
+13           1           1           1
+14           1           1           1
+15           1           1           1","   ResponsesA  ResponsesB  ResponsesX
+0           1           1           1
+1           2           2           2
+2           3           3           3
+3           4           4           4
+4           5           5           5
+5           6           6           6
+6           7           7           7","[A3]","[X3]","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F25C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472409548>","<libopensesame.widgets.widget_factory.Label object at 0x00000254690E9048>","<libopensesame.widgets.widget_factory.Label object at 0x00000254690E9C88>","<libopensesame.widgets.widget_factory.Label object at 0x00000254689CA5C8>","<libopensesame.widgets.widget_factory.Label object at 0x00000254689CA108>","<libopensesame.widgets.widget_factory.Label object at 0x00000254689CAD88>","<libopensesame.widgets.widget_factory.Label object at 0x00000254689CA748>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F2D48>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F2B88>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F23C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468EA1608>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468D79608>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B19FC48>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B19F348>","<libopensesame.widgets.widget_factory.Label object at 0x00000254724093C8>","7","[X3]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","15","15","15","15","15","15","6","6","6","0","0","0","0","NA","0","0","2","2","2","0","2","NA","15","15","6","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","6","6","psycho","6","6","15","2","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[0, 0]","0","0","[2, 3]","2","3","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","75172.25340000005","75172.12480000034","75172.23530000047","140976.07049999989","140976.00150000016","140976.0537000002","172468.52649999983","172468.45510000002","172468.5094000006","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","75275.03280000019","141083.71510000053","2024.4509000003745","141083.3696999998","NA","75172.26690000008","140976.08469999977","172468.5405","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A3]","Footsteps.png","fork.png","Marble.png","[B3]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           8           8           8","NoDiamond.png","8","8","8","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            1           1           1
+10           2           2           2
+11           3           3           3
+12           4           4           4
+13           5           5           5
+14           6           6           6
+15           4           5           6","    ResponsesA  ResponsesB  ResponsesX
+0            2           3           3
+1            1           1           1
+2            1           1           1
+3            1           1           1
+4            1           1           1
+5            1           1           1
+6            1           1           1
+7            1           1           1
+8            1           1           1
+9            1           1           1
+10           1           1           1
+11           1           1           1
+12           1           1           1
+13           1           1           1
+14           1           1           1
+15           1           1           1","   ResponsesA  ResponsesB  ResponsesX
+0           1           1           1
+1           2           2           2
+2           3           3           3
+3           4           4           4
+4           5           5           5
+5           6           6           6
+6           7           7           7
+7           8           8           8","[B3]","[X3]","<libopensesame.widgets.widget_factory.Label object at 0x0000025468095608>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B6ED508>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B6ED208>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B6EDAC8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B6ED848>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B6ED4C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B6ED708>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B6EDBC8>","<libopensesame.widgets.widget_factory.Label object at 0x00000254695C7288>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472A08108>","<libopensesame.widgets.widget_factory.Label object at 0x0000025472A081C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025467B62A08>","<libopensesame.widgets.widget_factory.Label object at 0x0000025467B62C88>","<libopensesame.widgets.widget_factory.Label object at 0x0000025467B62DC8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546AEAEAC8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B6EDE88>","8","[X3]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","15","15","15","15","15","15","7","7","7","0","0","0","0","NA","0","0","2","2","2","0","2","NA","15","15","7","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","7","7","psycho","7","7","15","2","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[2, 4]","2","4","[0, 6]","0","6","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13]]","75172.25340000005","75172.12480000034","75172.23530000047","140976.07049999989","140976.00150000016","140976.0537000002","177672.7651000001","177672.69800000032","177672.74850000013","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","75275.03280000019","141083.71510000053","2024.4509000003745","141083.3696999998","NA","75172.26690000008","140976.08469999977","177672.77920000016","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A3]","Footsteps.png","fork.png","Marble.png","[B3]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           0           0           0","NoDiamond.png","0","0","0","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            1           1           1
+10           2           2           2
+11           3           3           3
+12           4           4           4
+13           5           5           5
+14           6           6           6
+15           4           5           6","    ResponsesA  ResponsesB  ResponsesX
+0            2           3           3
+1            1           1           1
+2            1           1           1
+3            1           1           1
+4            1           1           1
+5            1           1           1
+6            1           1           1
+7            1           1           1
+8            1           1           1
+9            1           1           1
+10           1           1           1
+11           1           1           1
+12           1           1           1
+13           1           1           1
+14           1           1           1
+15           1           1           1","   ResponsesA  ResponsesB  ResponsesX
+0           1           1           1
+1           2           2           2
+2           3           3           3
+3           4           4           4
+4           5           5           5
+5           6           6           6
+6           7           7           7
+7           8           8           8
+8           0           0           0","[B3]","[X3]","<libopensesame.widgets.widget_factory.Label object at 0x00000254724111C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F5188>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F52C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F5E48>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F5448>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F5408>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F59C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F5048>","<libopensesame.widgets.widget_factory.Label object at 0x0000025469140108>","<libopensesame.widgets.widget_factory.Label object at 0x00000254691402C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025469140F08>","<libopensesame.widgets.widget_factory.Label object at 0x0000025469140188>","<libopensesame.widgets.widget_factory.Label object at 0x00000254691400C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025469140748>","<libopensesame.widgets.widget_factory.Label object at 0x000002546AEA6D08>","<libopensesame.widgets.widget_factory.Label object at 0x000002546AEA6288>","9","[X3]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","15","15","15","15","15","15","8","8","8","0","0","0","0","NA","0","0","2","2","2","0","2","NA","15","15","8","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","8","8","psycho","8","8","15","2","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[2, 11]","2","11","[0, 2]","0","2","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13]]","75172.25340000005","75172.12480000034","75172.23530000047","140976.07049999989","140976.00150000016","140976.0537000002","181893.11129999987","181892.9353000003","181893.09380000032","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","75275.03280000019","141083.71510000053","2024.4509000003745","141083.3696999998","NA","75172.26690000008","140976.08469999977","181893.1247999999","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A3]","Footsteps.png","fork.png","Marble.png","[B3]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           0           0           0","Diamond.png","0","0","0","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            1           1           1
+10           2           2           2
+11           3           3           3
+12           4           4           4
+13           5           5           5
+14           6           6           6
+15           4           5           6","    ResponsesA  ResponsesB  ResponsesX
+0            2           3           3
+1            1           1           1
+2            1           1           1
+3            1           1           1
+4            1           1           1
+5            1           1           1
+6            1           1           1
+7            1           1           1
+8            1           1           1
+9            1           1           1
+10           1           1           1
+11           1           1           1
+12           1           1           1
+13           1           1           1
+14           1           1           1
+15           1           1           1","   ResponsesA  ResponsesB  ResponsesX
+0           1           1           1
+1           2           2           2
+2           3           3           3
+3           4           4           4
+4           5           5           5
+5           6           6           6
+6           7           7           7
+7           8           8           8
+8           0           0           0
+9           0           0           0","[A3]","[X3]","<libopensesame.widgets.widget_factory.Label object at 0x0000025467F9EDC8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B6ED6C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B6EDCC8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B6ED088>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B6EDF08>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B6ED8C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B6EDEC8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B6ED908>","<libopensesame.widgets.widget_factory.Label object at 0x0000025467F9ED48>","<libopensesame.widgets.widget_factory.Label object at 0x0000025467F9E808>","<libopensesame.widgets.widget_factory.Label object at 0x0000025467F9E7C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025467F9E608>","<libopensesame.widgets.widget_factory.Label object at 0x0000025467F9E288>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468F560C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546ADB8048>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B6ED108>","10","[X3]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","15","15","15","15","15","15","9","9","9","0","0","0","0","NA","0","0","2","2","2","0","2","NA","15","15","9","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","0","0","psycho","0","9","15","2","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[0, 3]","0","3","[2, 10]","2","10","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","75172.25340000005","75172.12480000034","75172.23530000047","140976.07049999989","140976.00150000016","140976.0537000002","186113.01950000052","186112.91210000037","186113.00260000007","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","75275.03280000019","141083.71510000053","2024.4509000003745","141083.3696999998","NA","75172.26690000008","140976.08469999977","186113.03270000007","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A3]","Footsteps.png","fork.png","Marble.png","[B3]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           2           3           3","NoDiamond.png","2","3","3","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            1           1           1
+10           2           2           2
+11           3           3           3
+12           4           4           4
+13           5           5           5
+14           6           6           6
+15           4           5           6","    ResponsesA  ResponsesB  ResponsesX
+0            2           3           3
+1            1           1           1
+2            1           1           1
+3            1           1           1
+4            1           1           1
+5            1           1           1
+6            1           1           1
+7            1           1           1
+8            1           1           1
+9            1           1           1
+10           1           1           1
+11           1           1           1
+12           1           1           1
+13           1           1           1
+14           1           1           1
+15           1           1           1","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            0           0           0
+10           2           3           3","[B3]","[X3]","<libopensesame.widgets.widget_factory.Label object at 0x0000025468CF0F88>","<libopensesame.widgets.widget_factory.Label object at 0x00000254686219C8>","<libopensesame.widgets.widget_factory.Label object at 0x00000254681948C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468194CC8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2ED808>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2ED3C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2EDB48>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2ED588>","<libopensesame.widgets.widget_factory.Label object at 0x000002546A6929C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546A692D88>","<libopensesame.widgets.widget_factory.Label object at 0x000002546A692048>","<libopensesame.widgets.widget_factory.Label object at 0x000002546A6925C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546A692648>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468621408>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468621DC8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468621748>","11","[X3]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","15","15","15","15","15","15","10","10","10","0","0","0","0","NA","0","0","2","2","2","0","2","NA","15","15","10","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","0","0","psycho","0","10","15","2","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[2, 5]","2","5","[0, 1]","0","1","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13]]","75172.25340000005","75172.12480000034","75172.23530000047","140976.07049999989","140976.00150000016","140976.0537000002","191467.57619999972","191467.50249999968","191467.55870000017","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","75275.03280000019","141083.71510000053","2024.4509000003745","141083.3696999998","NA","75172.26690000008","140976.08469999977","191467.59079999992","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A3]","Footsteps.png","fork.png","Marble.png","[B3]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           3           4           3","Diamond.png","3","4","3","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            1           1           1
+10           2           2           2
+11           3           3           3
+12           4           4           4
+13           5           5           5
+14           6           6           6
+15           4           5           6","    ResponsesA  ResponsesB  ResponsesX
+0            2           3           3
+1            1           1           1
+2            1           1           1
+3            1           1           1
+4            1           1           1
+5            1           1           1
+6            1           1           1
+7            1           1           1
+8            1           1           1
+9            1           1           1
+10           1           1           1
+11           1           1           1
+12           1           1           1
+13           1           1           1
+14           1           1           1
+15           1           1           1","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            0           0           0
+10           2           3           3
+11           3           4           3","[A3]","[X3]","<libopensesame.widgets.widget_factory.Label object at 0x0000025468352088>","<libopensesame.widgets.widget_factory.Label object at 0x00000254680887C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468088B08>","<libopensesame.widgets.widget_factory.Label object at 0x00000254690B63C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B18DB88>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B18DB08>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B18D708>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B18DF88>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D0B3048>","<libopensesame.widgets.widget_factory.Label object at 0x00000254681900C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468088408>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468088788>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468088FC8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468088E88>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468088C48>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468088E48>","12","[X3]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","15","15","15","15","15","15","11","11","11","0","0","0","0","NA","0","0","2","2","2","0","2","NA","15","15","11","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","2","3","psycho","3","11","15","2","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[2, 3]","2","3","[0, 8]","0","8","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13]]","75172.25340000005","75172.12480000034","75172.23530000047","140976.07049999989","140976.00150000016","140976.0537000002","195937.66700000013","195937.6008999998","195937.65080000047","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","75275.03280000019","141083.71510000053","2024.4509000003745","141083.3696999998","NA","75172.26690000008","140976.08469999977","195937.6801999997","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A3]","Footsteps.png","fork.png","Marble.png","[B3]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           3           4           3","Diamond.png","3","4","3","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            1           1           1
+10           2           2           2
+11           3           3           3
+12           4           4           4
+13           5           5           5
+14           6           6           6
+15           4           5           6","    ResponsesA  ResponsesB  ResponsesX
+0            2           3           3
+1            1           1           1
+2            1           1           1
+3            1           1           1
+4            1           1           1
+5            1           1           1
+6            1           1           1
+7            1           1           1
+8            1           1           1
+9            1           1           1
+10           1           1           1
+11           1           1           1
+12           1           1           1
+13           1           1           1
+14           1           1           1
+15           1           1           1","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            0           0           0
+10           2           3           3
+11           3           4           3
+12           3           4           3","[A3]","[X3]","<libopensesame.widgets.widget_factory.Label object at 0x0000025468E654C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025469140B08>","<libopensesame.widgets.widget_factory.Label object at 0x0000025469140C48>","<libopensesame.widgets.widget_factory.Label object at 0x0000025469140A48>","<libopensesame.widgets.widget_factory.Label object at 0x0000025469140BC8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F2388>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F2988>","<libopensesame.widgets.widget_factory.Label object at 0x000002546D2F26C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468E65C08>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468095048>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468F84D08>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468F84B88>","<libopensesame.widgets.widget_factory.Label object at 0x0000025469140C08>","<libopensesame.widgets.widget_factory.Label object at 0x00000254691408C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025469140AC8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025469140248>","13","[X3]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","15","15","15","15","15","15","12","12","12","0","0","0","0","NA","0","0","2","2","2","0","2","NA","15","15","12","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","3","4","psycho","3","12","15","2","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[0, 11]","0","11","[2, 2]","2","2","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","75172.25340000005","75172.12480000034","75172.23530000047","140976.07049999989","140976.00150000016","140976.0537000002","201826.10579999982","201826.03689999995","201826.08880000043","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","75275.03280000019","141083.71510000053","2024.4509000003745","141083.3696999998","NA","75172.26690000008","140976.08469999977","201826.11970000016","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A3]","Footsteps.png","fork.png","Marble.png","[B3]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           2           3           2","NoDiamond.png","2","3","2","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            1           1           1
+10           2           2           2
+11           3           3           3
+12           4           4           4
+13           5           5           5
+14           6           6           6
+15           4           5           6","    ResponsesA  ResponsesB  ResponsesX
+0            2           3           3
+1            1           1           1
+2            1           1           1
+3            1           1           1
+4            1           1           1
+5            1           1           1
+6            1           1           1
+7            1           1           1
+8            1           1           1
+9            1           1           1
+10           1           1           1
+11           1           1           1
+12           1           1           1
+13           1           1           1
+14           1           1           1
+15           1           1           1","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            0           0           0
+10           2           3           3
+11           3           4           3
+12           3           4           3
+13           2           3           2","[B3]","[X3]","<libopensesame.widgets.widget_factory.Label object at 0x0000025468194188>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B1AA0C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B1AA088>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B1AA508>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B1AAAC8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B1AAE08>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B1AA3C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B1AA688>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B1AACC8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B1AAEC8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B1AAA08>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B1AAC08>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B1AA1C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B1AA048>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B1AAFC8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B1AA488>","14","[X3]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","15","15","15","15","15","15","13","13","13","0","0","0","0","NA","0","0","2","2","2","0","2","NA","15","15","13","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","3","4","psycho","3","13","15","2","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[0, 9]","0","9","[2, 12]","2","12","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","75172.25340000005","75172.12480000034","75172.23530000047","140976.07049999989","140976.00150000016","140976.0537000002","206096.17580000032","206096.10560000056","206096.1588","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","75275.03280000019","141083.71510000053","2024.4509000003745","141083.3696999998","NA","75172.26690000008","140976.08469999977","206096.1895999999","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A3]","Footsteps.png","fork.png","Marble.png","[B3]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           1           2           3","Diamond.png","1","2","3","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            1           1           1
+10           2           2           2
+11           3           3           3
+12           4           4           4
+13           5           5           5
+14           6           6           6
+15           4           5           6","    ResponsesA  ResponsesB  ResponsesX
+0            2           3           3
+1            1           1           1
+2            1           1           1
+3            1           1           1
+4            1           1           1
+5            1           1           1
+6            1           1           1
+7            1           1           1
+8            1           1           1
+9            1           1           1
+10           1           1           1
+11           1           1           1
+12           1           1           1
+13           1           1           1
+14           1           1           1
+15           1           1           1","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            0           0           0
+10           2           3           3
+11           3           4           3
+12           3           4           3
+13           2           3           2
+14           1           2           3","[A3]","[X3]","<libopensesame.widgets.widget_factory.Label object at 0x000002546FE4DCC8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468E681C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468E68288>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468E68088>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468E684C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468E680C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468E68408>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468E68788>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B1AA548>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B1AA5C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B1AA2C8>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B1AA648>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B1AAB88>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B1AAF48>","<libopensesame.widgets.widget_factory.Label object at 0x00000254690E9AC8>","<libopensesame.widgets.widget_factory.Label object at 0x00000254690E9988>","15","[X3]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","15","15","15","15","15","15","14","14","14","0","0","0","0","NA","0","0","2","2","2","0","2","NA","15","15","14","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","2","3","psycho","2","14","15","2","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[0, 4]","0","4","[2, 3]","2","3","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","75172.25340000005","75172.12480000034","75172.23530000047","140976.07049999989","140976.00150000016","140976.0537000002","210316.3800000002","210316.29760000034","210316.3620000005","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","75275.03280000019","141083.71510000053","2024.4509000003745","141083.3696999998","NA","75172.26690000008","140976.08469999977","210316.39470000027","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
+"[A3]","Footsteps.png","fork.png","Marble.png","[B3]","Acorn.png","shoe.png","beetle.png","   ResponsesA  ResponsesB  ResponsesX
+0           3           4           3","NoDiamond.png","3","4","3","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            1           1           1
+10           2           2           2
+11           3           3           3
+12           4           4           4
+13           5           5           5
+14           6           6           6
+15           4           5           6","    ResponsesA  ResponsesB  ResponsesX
+0            2           3           3
+1            1           1           1
+2            1           1           1
+3            1           1           1
+4            1           1           1
+5            1           1           1
+6            1           1           1
+7            1           1           1
+8            1           1           1
+9            1           1           1
+10           1           1           1
+11           1           1           1
+12           1           1           1
+13           1           1           1
+14           1           1           1
+15           1           1           1","    ResponsesA  ResponsesB  ResponsesX
+0            1           1           1
+1            2           2           2
+2            3           3           3
+3            4           4           4
+4            5           5           5
+5            6           6           6
+6            7           7           7
+7            8           8           8
+8            0           0           0
+9            0           0           0
+10           2           3           3
+11           3           4           3
+12           3           4           3
+13           2           3           2
+14           1           2           3
+15           3           4           3","[B3]","[X3]","<libopensesame.widgets.widget_factory.Label object at 0x000002546806D108>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468C48748>","<libopensesame.widgets.widget_factory.Label object at 0x0000025468C48B88>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B6ED788>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B3E9B88>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B3E9E48>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B3E9E08>","<libopensesame.widgets.widget_factory.Label object at 0x000002546B3E91C8>","<libopensesame.widgets.widget_factory.Label object at 0x0000025469140B08>","<libopensesame.widgets.widget_factory.Label object at 0x0000025469140408>","<libopensesame.widgets.widget_factory.Label object at 0x00000254729F6848>","<libopensesame.widgets.widget_factory.Label object at 0x00000254729F6648>","<libopensesame.widgets.widget_factory.Label object at 0x000002546809E308>","<libopensesame.widgets.widget_factory.Label object at 0x000002546809E188>","<libopensesame.widgets.widget_factory.Label object at 0x000002546809ED48>","<libopensesame.widgets.widget_factory.Label object at 0x00000254681900C8>","16","[X3]","flower.png","Playing Card.png","lof.png","#f1f1f1","0","1","2","psycho","psycho","psycho","0","uniform","15","15","15","15","15","15","15","15","15","0","0","0","0","NA","0","0","2","2","2","0","2","NA","15","15","15","NA","NA","NA","0","NA","Sun Jan 17 13:02:21 2021","The main experiment item","yes","","Experiment1.osexp","C:\Users\Sanne\Dropbox\MasterProject\Experiments","no","mono","no","18","no","#000000","no","Next","no","768","1","2","psycho","3","15","15","2","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11], [2, 12], [2, 13]]","C:/Users/Sanne/Dropbox/MasterProject/Experiments/subj/subject-1.csv","psycho","Lentiform Loewenfeld","3.3.6","[2, 10]","2","10","[0, 13]","0","13","0","NA","NA","NA","NA","NA","NA","NA","NA","2","psycho","1024","2","48000","-16","experiment","1","odd","[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [0, 13]]","75172.25340000005","75172.12480000034","75172.23530000047","140976.07049999989","140976.00150000016","140976.0537000002","214169.31290000048","214169.24459999974","214169.29590000017","2024.805699999888","NA","2862.617200000386","2029.071699999804","NA","NA","NA","4830.336300000454","75275.03280000019","141083.71510000053","2024.4509000003745","141083.3696999998","NA","75172.26690000008","140976.08469999977","214169.3266000002","NA","NA","NA","4829.697000000124","NA","Experiment1","yes","1024"
