@@ -137,6 +137,7 @@ FillInCues <- function(A, B, X, Cue){
 
 #food conditions and their outcomes can be given
 wm_total <- list()
+wm_totalTest <- list()
 ParticipantRun <- function(FC1, FC2, FC3, O1, O2, O3, NrOfPart, etaNeg = FALSE, NrOfTrials = 16){
   #for each participant
   for(i in 1:NrOfPart){
@@ -156,6 +157,7 @@ ParticipantRun <- function(FC1, FC2, FC3, O1, O2, O3, NrOfPart, etaNeg = FALSE, 
     if(identical(O1, Outcome000)) Run1$Cond <- "Outcome000"
     if(identical(O1, Outcome050)) Run1$Cond <- "Outcome050"
     if(identical(O1, Outcome100)) Run1$Cond <- "Outcome100"
+    Run1$Stage <- "Train"
     ###
     
     SecondRun <- data.frame(Cues = FC2, Outcomes = O2, stringsAsFactors = FALSE)
@@ -177,6 +179,7 @@ ParticipantRun <- function(FC1, FC2, FC3, O1, O2, O3, NrOfPart, etaNeg = FALSE, 
     if(identical(O2, Outcome000)) Run2$Cond <- "Outcome000"
     if(identical(O2, Outcome050)) Run2$Cond <- "Outcome050"
     if(identical(O2, Outcome100)) Run2$Cond <- "Outcome100"
+    Run2$Stage <- "Train"
     
     ###
     
@@ -198,19 +201,94 @@ ParticipantRun <- function(FC1, FC2, FC3, O1, O2, O3, NrOfPart, etaNeg = FALSE, 
     if(identical(O3, Outcome000)) Run3$Cond <- "Outcome000"
     if(identical(O3, Outcome050)) Run3$Cond <- "Outcome050"
     if(identical(O3, Outcome100)) Run3$Cond <- "Outcome100"
+    Run3$Stage <- "Train"
     wm_total <- list.append(wm_total, Run1, Run2, Run3)
+    #We now have wm_total which is a list
+    
+    ################################################################
+    #That was train now test
+    wm_list4 <- list()
+    wm_list5 <- list()
+    wm_list6 <- list()
+    
+    
+    XBlock1 <- str_split(FC1[1], pattern = "_", simplify = TRUE)[1,3] #this will give the 3rd item (so the X), such that we can paste it onto the X from the new one
+    NewCue <- str_replace("env_toadstool_X", "X", XBlock1)
+    #These are the cues for test phase 1 AX, AX, BX, BX, New one, new one, AX, AX, BX, BX
+    CuesTP1 <- c(FC1[1], FC1[1], FC1[2], FC1[2], NewCue, NewCue, FC3[1], FC3[1], FC3[2], FC3[2])
+    CuesTP2 <- c(FC1[1], FC1[1], FC1[2], FC1[2], NewCue, NewCue, FC3[1], FC3[1], FC3[2], FC3[2]) #THIS ONE TOO
+    CuesTP3 <- c("env_straw_shrimp", "env_straw_shrimp", "env_straw_shrimp", "env_peanuts_shrimp", "env_peanuts_shrimp", "env_peanuts_shrimp", 
+                 "env_yoghurt_shrimp", "env_yoghurt_shrimp", "env_yoghurt_shrimp", "env_bran_pork", "env_bran_pork", "env_bran_pork",
+                 "env_chicken_pork", "env_chicken_pork", "env_chicken_pork") #THIS ONE SHOULD BE RANDOM
+    
+    Outcomes1 <- c("Diamond", "Fossil", "Diamond", "Fossil","Diamond", "Fossil", "Diamond", "Fossil", "Diamond", "Fossil")
+    Outcomes2 <- c("Diamond", "Fossil", "Diamond", "Fossil","Diamond", "Fossil", "Diamond", "Fossil", "Diamond", "Fossil")
+    Outcomes3 <- c("Diamond", "Fossil", "NoDiamond", "Diamond", "Fossil", "NoDiamond", "Diamond", "Fossil", "NoDiamond", "Diamond", "Fossil", "NoDiamond", "Diamond", "Fossil", "NoDiamond")
+    
+    
+    FirstTestRun <- data.frame(Cues = CuesTP1, Outcomes = Outcomes1, stringsAsFactors = FALSE)
+    train.FTR <- createTrainingData(FirstTestRun, random = F)
+    wm.FTR <- EDLearning(train.FTR, progress = F, etaNeg = etaNeg, wm = wm.TR[[16]])
+    for (i in 1:10){ 
+      wm4<-as.data.frame(getWM(wm.FTR,i)) 
+      wm4$Trial <- i
+      for(j in 1:nrow(wm4)){ 
+        cue = rownames(wm4) 
+        if(!(cue[j] %in% rownames(wm.FTR[[10]]))| cue[j] == "env"){
+          wm_list4 <- list.append(wm_list4, wm4[cue[j],]) 
+        }
+      }
+    }
+    Run4 <- bind_rows(wm_list4)
+    Run4$Cond <- "Phase1"
+    Run4$Stage <- "Test"
+    
+    ###
+    
+    SecondTestRun <- data.frame(Cues = CuesTP2, Outcomes = Outcomes2, stringsAsFactors = FALSE)
+    train.STR <- createTrainingData(SecondTestRun, random = T)
+    wm.STR <- EDLearning(train.STR, progress = F, etaNeg = etaNeg, wm = wm.FTR[[10]])
+    for (i in 1:10){
+      wm5<-as.data.frame(getWM(wm.STR, i))
+      wm5$Trial <- i
+      for (j in 1:nrow(wm5)){
+        cue = rownames(wm5)
+        if(!(cue[j] %in% rownames(wm.STR[[10]]))|cue[j] == "env") {
+          wm_list5 <- list.append(wm_list5, wm5[cue[j],])
+        }
+      }
+    }
+    Run5 <- bind_rows(wm_list5)
+    Run5$Cond <- "Phase2"
+    Run5$Stage <- "Test"
+    
+    ###
+    
+    ThirdTestRun <- data.frame(Cues = CuesTP3, Outcomes = Outcomes3, StringsAsFactors = FALSE)
+    train.TTR <- createTrainingData(ThirdTestRun, random = T)
+    wm.TTR <- EDLearning(train.TTR, progress = F, etaNeg = etaNeg, wm = wm.STR[[10]])
+    for (i in 1:15){
+      wm6 <- as.data.frame(getWM(wm.TTR, i))
+      wm6$Trial <- i
+      for(j in 1:nrow(wm6)){
+        cue = rownames(wm6)
+        if(!(cue[j] %in% rownames(wm.TTR[[15]]))|cue[j] == "env"){
+          wm_list6 <- list.append(wm_list6, wm6[cue[j],])
+        }
+      }
+    }
+    Run6 <- bind_rows(wm_list6)
+    Run6$Cond <- "Phase3"
+    Run6$Stage <- "Test"
+    wm_totalTest <- list.append(wm_totalTest, Run4, Run5, Run6)
     
   }
+  wm_total <- list.append(wm_total, wm_totalTest)
   wm_total <- bind_rows(wm_total)
   return(wm_total)
 }
 
 
 #########################################################################
-word <- c("shrimp", "yoghurt", "bananas", "wheat", "corn", "blueberries", "strawberries", "bran", "chicken", "walnuts", "horseradish", "cheese", "peanuts", "cabbage", "mustard", "peaches", "lobster", "pork")
-wordType <- c("X","X","X","X","X","X","A","A","A","A","A","A","B","B","B","B","B","B")
-words <- data.frame(Word = word, wordType = wordType, stringsAsFactors = FALSE)
-getwords <- words$wordType
-names(getwords) <- words$Word
 
 ############################
