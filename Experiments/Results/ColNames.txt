@@ -1,0 +1,28 @@
+Explanation of all the columns:
+<A, A1, A1_alt and any of the variations on that> are the stimuli that were chosen to be A, B or X in block 1, 2 and 3 and which alternative stimuli would belong to that in the last test phase.
+<Col0 until Col6 and Row0 until Row17> These are variables for the locations on the screen. Since they're global variables the logger saved them
+<NewAnswers> contains responseR1, responseR2 and responseR3 of that trial, to append to the Responses array later
+<Outcome> the outcome asked
+<Practice, Reponses000, Reponses050 and Reponeses100> arrays of the responses
+<Stim1, Stim3> What the two stimuli on the screen were at that trial
+<T1A/B/X till T15A/B/X> global vars to display previous answers on screen
+<Trial> Trial number, resets with a new condition
+<TrialCoordinate> Coordinates to place the text boxes on, global vars
+<acc> accuracy, but I never gave a "correct" answer, so it's always 0
+<accept_status, accuracy, background> OS global vars
+<average_response, avg_rt> NOT SURE, I think the average time to press the keyboard in ms? --> LOOK UP LATER
+<block1,2,3> 0 is cond 000, 1 is cond050, 2 is cond100. So this indicates the order in which participants saw the conditions.
+<Cond> For analysis, which condition
+<count_> any "count_" has to do with how often this specific screen appeared. not really interesting
+<current> the currently selected box 
+<i, j> global vars used as counters
+<jatosStudyResultsID> the nr that Jatos gave the participants. Condition order based on this
+<locations> global var of possible locations for the stimuli to appear in
+<pos1X, pos1Y, pos2X, pos2Y> The location Stim1 and Stim2 appeared in
+<prolific_id> the nr that Prolific gave the participants. Need to check who to exclude
+<Train_Test> was it practice? Train? Test?
+<response> the last keyboard response given before going to the next trial
+<responseR1, responseR2, responseR3> These are the scores given to A, B and X respectively. 
+<time_> any "time_" as to do with the amount of time the screen was displayed, not sure in what until --> LOOK UP LATER
+
+The rest pretty much speak for themselves or are things that OpenSesame logs automatically (fontsize, type of browser etc)
