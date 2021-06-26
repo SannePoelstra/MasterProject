@@ -1,0 +1,45 @@
+---
+title: "PieCharts"
+author: "Sanne Poelstra"
+date: "21/05/2021"
+output: html_document
+---
+
+```{r, include = FALSE}
+rm(list=ls())
+library(plotfunctions)
+library(ggplot2)
+```
+
+```{r}
+Exp1B <- c(6,4,3)
+Exp2 <- c(14,2,2)
+
+pie(Exp1B, labels = c("Yes", "No", "Unsure"))
+pie(Exp2, labels = c("Yes", "No", "Unsure"))
+
+Exp1B <- data.frame(label = c("Yes", "No", "Unsure"), value = c(6,4,3))
+
+bp<- ggplot(Exp1B, aes(x="", y = value , fill = label)) + geom_bar(width = 1, stat = "identity")
+bp
+pie <- bp + coord_polar('y', start = 0)
+pie
+
+pie + scale_fill_manual(values=c("lightcoral","gold", "darkolivegreen2" )) + theme_minimal()
+
+
+
+
+blank_theme <- theme_minimal()+
+  theme(
+  axis.title.x = element_blank(),
+  axis.title.y = element_blank(),
+  panel.border = element_blank(),
+  panel.grid=element_blank(),
+  axis.ticks = element_blank(),
+  plot.title=element_text(size=14, face="bold")
+  )
+
+pie + scale_fill_manual(values=c("lightcoral","gold", "darkolivegreen2" )) + blank_theme
+
+```

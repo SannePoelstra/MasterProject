@@ -1,0 +1,733 @@
+---
+title: "Experiment 1B Plots"
+author: "Sanne Poelstra"
+date: "14/03/2021"
+output:
+  html_document:
+    toc: true
+    theme: united
+---
+
+# Preparing the data
+```{r, include = FALSE}
+rm(list=ls())
+library(plotfunctions)
+library("plotrix")
+library("phonTools")
+```
+
+```{r, reading in the csv file}
+d <- read.csv("Experiment1_5.csv", header = TRUE, sep = ',')
+#This is quite a lot so I want to trim it somewhat, e.g. things such as font are not needed
+dat <- d[, c("A", "A1", "A1_alt", "A2", "A3", "A3_alt", "B", "B1", "B1_alt", "B2", "B3", "B3_alt", "X", "X1", "X1_alt", "X2", "X3", "X3_alt", "C", "C_alt", "Outcome", "Stim1", "Stim2", "responseR1", "responseR2", "responseR3",  "block1", "block2", "block3", "average_response_time", "avg_rt", "NewAnswers", "Practice", "date_starttime", "jatosStudyResultId", "pos1X", "pos1Y", "pos2X", "pos2Y", "prolific_id", "response_time", "Cond", "Train_Test", "screen_availableHeight", "screen_availableWidth",  "timeout_occurred", "total_response_time", "Trial")]
+
+head(dat)
+
+#now there were also some prolific IDs that were rejected, so I have to remove them
+dat <- dat[which(dat$prolific_id != "5c055cbe4692a7000166a1f5" & dat$prolific_id != "602a79ad86b0770624288e16" & dat$prolific_id != "5f3ab64e0dda76127bcc344e" & dat$prolific_id != "5fe150610a5e7fbea05b7c92" & dat$prolific_id != "5db8b0df497a6e000afdf49a" & dat$prolific_id != "5f2b24c4224df7527baee383" & dat$prolific_id != "5f6b36e1ab9578230dd425df"),]
+#5f6b36e1ab9578230dd425df is me
+
+table(unique(dat$prolific_id)) #10 participants!
+table(dat$prolific_id) #one participant did less
+```
+```{r, warning = FALSE}
+#As we don't know yet which condition was the first block, I'm going to have to assign a new column with that value
+#blockNr depends on the value of block 1. If block 1 was 0 (internally 0 meant condition 0) and the condition of this current trial is 0, then we give this the value "block 1"
+
+dat$blockNr <- ""
+dat <- within(dat, blockNr[block1 == '0' & Cond == 0] <- 'Block1')
+dat <- within(dat, blockNr[block1 == '1' & Cond == 50] <- 'Block1')
+dat <- within(dat, blockNr[block1 == '2' & Cond == 100] <- 'Block1')
+dat <- within(dat, blockNr[block2 == '0' & Cond == 0] <- 'Block2')
+dat <- within(dat, blockNr[block2 == '1' & Cond == 50] <- 'Block2')
+dat <- within(dat, blockNr[block2 == '2' & Cond == 100] <- 'Block2')
+dat <- within(dat, blockNr[block3 == '0' & Cond == 0] <- 'Block3')
+dat <- within(dat, blockNr[block3 == '1' & Cond == 50] <- 'Block3')
+dat <- within(dat, blockNr[block3 == '2' & Cond == 100] <- 'Block3')
+
+dat$CondFirstBlock <- ''
+dat$CondSecondBlock <- ''
+dat$CondThirdBlock <- '' 
+
+#dat$prolific_id <- as.factor(dat$prolific_id)
+
+#to later compare the cues in the test phase to the condition they were originally asked in, we need another new column
+#so for each participant, what condition was block 1? Save that in a row, what condition was block 3?
+for(i in unique(dat$prolific_id)){
+  dat <- within(dat, CondFirstBlock[prolific_id == i] <- Cond[prolific_id == i & blockNr == "Block1"])
+  dat <- within(dat, CondSecondBlock[prolific_id == i] <- Cond[prolific_id == i & blockNr == "Block2"])
+  dat <- within(dat, CondThirdBlock[prolific_id == i] <- Cond[prolific_id == i & blockNr == "Block3"])
+} #HAAKJES
+```
+
+
+```{r, collect the data for the graphs}
+#averages per condition, for X A and B
+#responseR1 is always A, R2 is always B and R3 is always X
+
+#train is the training phase. I want to make both a plot with 1's as answers removed, and one with all the answers, so I'll create two "train" dataframes
+train1 <- dat[which(dat$Train_Test == "Train"),]
+train <- dat[which(dat$Train_Test == "Train"),]
+
+#Filter the 999 ones
+train$responseR1[train$responseR1 == 999] <- NA
+train$responseR2[train$responseR2 == 999] <- NA
+train$responseR3[train$responseR3 == 999] <- NA
+
+train1$responseR1[train1$responseR1 == 999] <- NA
+train1$responseR2[train1$responseR2 == 999] <- NA
+train1$responseR3[train1$responseR3 == 999] <- NA
+
+train1$responseR1[train$responseR1 == 1] <- NA
+train1$responseR2[train$responseR2 == 1] <- NA
+train1$responseR3[train$responseR3 == 1] <- NA
+
+train$Cond <- as.factor(train$Cond)
+train$Cond <- factor(train$Cond, levels = c("0", "50", "100"))
+
+train1$Cond <- as.factor(train1$Cond)
+train1$Cond <- factor(train1$Cond, levels = c("0", "50", "100"))
+
+a <- aggregate(list(train$responseR1, train$responseR2, train$responseR3), list(train$Cond), mean, na.rm = T)
+b <- aggregate(list(train1$responseR1, train1$responseR2, train1$responseR3), list(train1$Cond), mean, na.rm = T)
+
+colnames(a) <- c("Cond", "A", "B", "X")
+colnames(b) <- c("Cond", "A", "B", "X")
+head(a)
+head(b)
+
+SECondA <- c(std.error(train$responseR1[train$Cond == "0"]), std.error(train$responseR1[train$Cond == "50"]), std.error(train$responseR1[train$Cond == "100"]))
+SECondB <- c(std.error(train$responseR2[train$Cond == "0"]), std.error(train$responseR2[train$Cond == "50"]), std.error(train$responseR2[train$Cond == "100"]))
+SECondX <- c(std.error(train$responseR3[train$Cond == "0"]), std.error(train$responseR3[train$Cond == "50"]), std.error(train$responseR3[train$Cond == "100"]))
+
+SECondA
+SECondB
+SECondX
+```
+
+# Frequencies
+```{r}
+par(mfrow = c(2,2))
+hist(train$responseR1[train$Cond == "0"], breaks = 10, main = "Frequency of each score given to\n A in the 50-50 Condition", xlab = "Score", ylim = c(0,80), cex.lab = 1.2, cex.sub = 1.5)
+hist(train$responseR2[train$Cond == "0"], breaks = 10, main = "Frequency of each score given to\n B in the 50-50 Condition", xlab = "Score", ylim = c(0,80), cex.lab = 1.2, cex.sub = 1.5)
+hist(train$responseR3[train$Cond == "0"], breaks = 10, main = "Frequency of each score given to\n X in the 50-50 Condition", xlab = "Score", ylim = c(0,80), cex.lab = 1.2, cex.sub = 1.5)
+
+par(mfrow = c(2,2))
+hist(train$responseR1[train$Cond == "50"], breaks = 10, main = "Frequency of each score given to\n A in the 75-25 Condition", xlab = "Score", ylim = c(0,95), cex.lab = 1.2, cex.sub = 1.5)
+hist(train$responseR2[train$Cond == "50"], breaks = 10, main = "Frequency of each score given to\n B in the 75-25 Condition", xlab = "Score", ylim = c(0,95), cex.lab = 1.2, cex.sub = 1.5)
+hist(train$responseR3[train$Cond == "50"], breaks = 10, main = "Frequency of each score given to\n X in the 75-25 Condition", xlab = "Score", ylim = c(0,95), cex.lab = 1.2, cex.sub = 1.5)
+
+par(mfrow = c(2,2))
+hist(train$responseR1[train$Cond == "100"], breaks = 10, main = "Frequency of each score given to\n A in the 100-0 Condition", xlab = "Score", ylim = c(0,95), cex.lab = 1.2, cex.sub = 1.5)
+hist(train$responseR2[train$Cond == "100"], breaks = 10, main = "Frequency of each score given to\n B in the 100-0 Condition", xlab = "Score", ylim = c(0,95), cex.lab = 1.2, cex.sub = 1.5)
+hist(train$responseR3[train$Cond == "100"], breaks = 10, main = "Frequency of each score given to\n X in the 100-0 Condition", xlab = "Score", ylim = c(0,95), cex.lab = 1.2, cex.sub = 1.5)
+```
+
+
+```{r}
+#As there are lots of 1's let's see how often people scored 1's on average for A B and X (over all conditions)
+
+#Create a subset of data with just the 1's in there
+OnesR1 <- subset(train, train$responseR1 == 1)
+OnesR2 <- subset(train, train$responseR2 == 1)
+OnesR3 <- subset(train, train$responseR3 == 1)
+#Take the sum of these ones over participants (as we want to know how often (on average) one participant scored a 1 for A, B or X)
+SumOnesR1 <- aggregate(OnesR1$responseR1, list(OnesR1$prolific_id), sum)
+SumOnesR2 <- aggregate(OnesR2$responseR2, list(OnesR2$prolific_id), sum)
+SumOnesR3 <- aggregate(OnesR3$responseR3, list(OnesR3$prolific_id), sum)
+#then take the mean
+AvgOnesR1 <- mean(SumOnesR1$x)
+AvgOnesR2 <- mean(SumOnesR2$x)
+AvgOnesR3 <- mean(SumOnesR3$x)
+AvgOnesR1
+AvgOnesR2
+AvgOnesR3
+```
+The average amount of 1's given to A is 16, which is 33.3% of all trails, and 4 higher than in the original experiment. <br/>
+The average amount of 1's given to B is 23, which is 47,9% of all trials, and is 7 higher than in the original experiment. <br/>
+And the average amount of 1's given to X is 6, which is 12.5% of all trials, and is 1 lower than the original experiment. <br/>
+You would expect that B is scored lower over all (as it's the least predictive over all), and A to be scored higher over all, so have less 1's than the rest. However what we see here is that X, the stimuli that always appears is actually scored 1 the least amount of times.
+
+
+```{r}
+#over the 16 trials, for each of the conditions, get the average response for A, B and X
+AllTrials <- aggregate(list(train$responseR1, train$responseR2, train$responseR3), list(train$Cond, train$Trial), mean, na.rm = T)
+AllTrials1 <- aggregate(list(train1$responseR1, train1$responseR2, train1$responseR3), list(train1$Cond, train1$Trial), mean, na.rm = T)
+colnames(AllTrials) <- c("Cond", "Trial", "A", "B", "X") 
+colnames(AllTrials1) <- c("Cond", "Trial", "A", "B", "X")
+
+#Then split this into the different conditions
+Cond000 <- AllTrials[which(AllTrials$Cond==0),]
+Cond050 <- AllTrials[which(AllTrials$Cond==50),]
+Cond100 <- AllTrials[which(AllTrials$Cond==100),]
+
+#This is then the one without 1's
+Cond0001 <- AllTrials1[which(AllTrials1$Cond==0),]
+Cond0501 <- AllTrials1[which(AllTrials1$Cond==50),]
+Cond1001 <- AllTrials1[which(AllTrials1$Cond==100),]
+
+SETrials000A <- c(std.error(train$responseR1[train$Cond == "0" & train$Trial == '1']), std.error(train$responseR1[train$Cond == "0" & train$Trial == '2']), std.error(train$responseR1[train$Cond == "0" & train$Trial == '3']), std.error(train$responseR1[train$Cond == "0" & train$Trial == '4']), std.error(train$responseR1[train$Cond == "0" & train$Trial == '5']), std.error(train$responseR1[train$Cond == "0" & train$Trial == '6']), std.error(train$responseR1[train$Cond == "0" & train$Trial == '7']), std.error(train$responseR1[train$Cond == "0" & train$Trial == '8']), std.error(train$responseR1[train$Cond == "0" & train$Trial == '9']), std.error(train$responseR1[train$Cond == "0" & train$Trial == '10']), std.error(train$responseR1[train$Cond == "0" & train$Trial == '11']), std.error(train$responseR1[train$Cond == "0" & train$Trial == '12']), std.error(train$responseR1[train$Cond == "0" & train$Trial == '13']), std.error(train$responseR1[train$Cond == "0" & train$Trial == '14']), std.error(train$responseR1[train$Cond == "0" & train$Trial == '15']), std.error(train$responseR1[train$Cond == "0" & train$Trial == '16']))
+SETrials000B <- c(std.error(train$responseR2[train$Cond == "0" & train$Trial == '1']), std.error(train$responseR2[train$Cond == "0" & train$Trial == '2']), std.error(train$responseR2[train$Cond == "0" & train$Trial == '3']), std.error(train$responseR2[train$Cond == "0" & train$Trial == '4']), std.error(train$responseR2[train$Cond == "0" & train$Trial == '5']), std.error(train$responseR2[train$Cond == "0" & train$Trial == '6']), std.error(train$responseR2[train$Cond == "0" & train$Trial == '7']), std.error(train$responseR2[train$Cond == "0" & train$Trial == '8']), std.error(train$responseR2[train$Cond == "0" & train$Trial == '9']), std.error(train$responseR2[train$Cond == "0" & train$Trial == '10']), std.error(train$responseR2[train$Cond == "0" & train$Trial == '11']), std.error(train$responseR2[train$Cond == "0" & train$Trial == '12']), std.error(train$responseR2[train$Cond == "0" & train$Trial == '13']), std.error(train$responseR2[train$Cond == "0" & train$Trial == '14']), std.error(train$responseR2[train$Cond == "0" & train$Trial == '15']), std.error(train$responseR2[train$Cond == "0" & train$Trial == '16']))
+SETrials000X <- c(std.error(train$responseR3[train$Cond == "0" & train$Trial == '1']), std.error(train$responseR3[train$Cond == "0" & train$Trial == '2']), std.error(train$responseR3[train$Cond == "0" & train$Trial == '3']), std.error(train$responseR3[train$Cond == "0" & train$Trial == '4']), std.error(train$responseR3[train$Cond == "0" & train$Trial == '5']), std.error(train$responseR3[train$Cond == "0" & train$Trial == '6']), std.error(train$responseR3[train$Cond == "0" & train$Trial == '7']), std.error(train$responseR3[train$Cond == "0" & train$Trial == '8']), std.error(train$responseR3[train$Cond == "0" & train$Trial == '9']), std.error(train$responseR3[train$Cond == "0" & train$Trial == '10']), std.error(train$responseR3[train$Cond == "0" & train$Trial == '11']), std.error(train$responseR3[train$Cond == "0" & train$Trial == '12']), std.error(train$responseR3[train$Cond == "0" & train$Trial == '13']), std.error(train$responseR3[train$Cond == "0" & train$Trial == '14']), std.error(train$responseR3[train$Cond == "0" & train$Trial == '15']), std.error(train$responseR3[train$Cond == "0" & train$Trial == '16']))
+
+
+SETrials050A <- c(std.error(train$responseR1[train$Cond == "50" & train$Trial == '1']), std.error(train$responseR1[train$Cond == "50" & train$Trial == '2']), std.error(train$responseR1[train$Cond == "50" & train$Trial == '3']), std.error(train$responseR1[train$Cond == "50" & train$Trial == '4']), std.error(train$responseR1[train$Cond == "50" & train$Trial == '5']), std.error(train$responseR1[train$Cond == "50" & train$Trial == '6']), std.error(train$responseR1[train$Cond == "50" & train$Trial == '7']), std.error(train$responseR1[train$Cond == "50" & train$Trial == '8']), std.error(train$responseR1[train$Cond == "50" & train$Trial == '9']), std.error(train$responseR1[train$Cond == "50" & train$Trial == '10']), std.error(train$responseR1[train$Cond == "50" & train$Trial == '11']), std.error(train$responseR1[train$Cond == "50" & train$Trial == '12']), std.error(train$responseR1[train$Cond == "50" & train$Trial == '13']), std.error(train$responseR1[train$Cond == "50" & train$Trial == '14']), std.error(train$responseR1[train$Cond == "50" & train$Trial == '15']), std.error(train$responseR1[train$Cond == "50" & train$Trial == '16']))
+SETrials050B <- c(std.error(train$responseR2[train$Cond == "50" & train$Trial == '1']), std.error(train$responseR2[train$Cond == "50" & train$Trial == '2']), std.error(train$responseR2[train$Cond == "50" & train$Trial == '3']), std.error(train$responseR2[train$Cond == "50" & train$Trial == '4']), std.error(train$responseR2[train$Cond == "50" & train$Trial == '5']), std.error(train$responseR2[train$Cond == "50" & train$Trial == '6']), std.error(train$responseR2[train$Cond == "50" & train$Trial == '7']), std.error(train$responseR2[train$Cond == "50" & train$Trial == '8']), std.error(train$responseR2[train$Cond == "50" & train$Trial == '9']), std.error(train$responseR2[train$Cond == "50" & train$Trial == '10']), std.error(train$responseR2[train$Cond == "50" & train$Trial == '11']), std.error(train$responseR2[train$Cond == "50" & train$Trial == '12']), std.error(train$responseR2[train$Cond == "50" & train$Trial == '13']), std.error(train$responseR2[train$Cond == "50" & train$Trial == '14']), std.error(train$responseR2[train$Cond == "50" & train$Trial == '15']), std.error(train$responseR2[train$Cond == "50" & train$Trial == '16']))
+SETrials050X <- c(std.error(train$responseR3[train$Cond == "50" & train$Trial == '1']), std.error(train$responseR3[train$Cond == "50" & train$Trial == '2']), std.error(train$responseR3[train$Cond == "50" & train$Trial == '3']), std.error(train$responseR3[train$Cond == "50" & train$Trial == '4']), std.error(train$responseR3[train$Cond == "50" & train$Trial == '5']), std.error(train$responseR3[train$Cond == "50" & train$Trial == '6']), std.error(train$responseR3[train$Cond == "50" & train$Trial == '7']), std.error(train$responseR3[train$Cond == "50" & train$Trial == '8']), std.error(train$responseR3[train$Cond == "50" & train$Trial == '9']), std.error(train$responseR3[train$Cond == "50" & train$Trial == '10']), std.error(train$responseR3[train$Cond == "50" & train$Trial == '11']), std.error(train$responseR3[train$Cond == "50" & train$Trial == '12']), std.error(train$responseR3[train$Cond == "50" & train$Trial == '13']), std.error(train$responseR3[train$Cond == "50" & train$Trial == '14']), std.error(train$responseR3[train$Cond == "50" & train$Trial == '15']), std.error(train$responseR3[train$Cond == "50" & train$Trial == '16']))
+
+SETrials100A <- c(std.error(train$responseR1[train$Cond == "100" & train$Trial == '1']), std.error(train$responseR1[train$Cond == "100" & train$Trial == '2']), std.error(train$responseR1[train$Cond == "100" & train$Trial == '3']), std.error(train$responseR1[train$Cond == "100" & train$Trial == '4']), std.error(train$responseR1[train$Cond == "100" & train$Trial == '5']), std.error(train$responseR1[train$Cond == "100" & train$Trial == '6']), std.error(train$responseR1[train$Cond == "100" & train$Trial == '7']), std.error(train$responseR1[train$Cond == "100" & train$Trial == '8']), std.error(train$responseR1[train$Cond == "100" & train$Trial == '9']), std.error(train$responseR1[train$Cond == "100" & train$Trial == '10']), std.error(train$responseR1[train$Cond == "100" & train$Trial == '11']), std.error(train$responseR1[train$Cond == "100" & train$Trial == '12']), std.error(train$responseR1[train$Cond == "100" & train$Trial == '13']), std.error(train$responseR1[train$Cond == "100" & train$Trial == '14']), std.error(train$responseR1[train$Cond == "100" & train$Trial == '15']), std.error(train$responseR1[train$Cond == "100" & train$Trial == '16']))
+SETrials100B <- c(std.error(train$responseR2[train$Cond == "100" & train$Trial == '1']), std.error(train$responseR2[train$Cond == "100" & train$Trial == '2']), std.error(train$responseR2[train$Cond == "100" & train$Trial == '3']), std.error(train$responseR2[train$Cond == "100" & train$Trial == '4']), std.error(train$responseR2[train$Cond == "100" & train$Trial == '5']), std.error(train$responseR2[train$Cond == "100" & train$Trial == '6']), std.error(train$responseR2[train$Cond == "100" & train$Trial == '7']), std.error(train$responseR2[train$Cond == "100" & train$Trial == '8']), std.error(train$responseR2[train$Cond == "100" & train$Trial == '9']), std.error(train$responseR2[train$Cond == "100" & train$Trial == '10']), std.error(train$responseR2[train$Cond == "100" & train$Trial == '11']), std.error(train$responseR2[train$Cond == "100" & train$Trial == '12']), std.error(train$responseR2[train$Cond == "100" & train$Trial == '13']), std.error(train$responseR2[train$Cond == "100" & train$Trial == '14']), std.error(train$responseR2[train$Cond == "100" & train$Trial == '15']), std.error(train$responseR2[train$Cond == "100" & train$Trial == '16']))
+SETrials100X <- c(std.error(train$responseR3[train$Cond == "100" & train$Trial == '1']), std.error(train$responseR3[train$Cond == "100" & train$Trial == '2']), std.error(train$responseR3[train$Cond == "100" & train$Trial == '3']), std.error(train$responseR3[train$Cond == "100" & train$Trial == '4']), std.error(train$responseR3[train$Cond == "100" & train$Trial == '5']), std.error(train$responseR3[train$Cond == "100" & train$Trial == '6']), std.error(train$responseR3[train$Cond == "100" & train$Trial == '7']), std.error(train$responseR3[train$Cond == "100" & train$Trial == '8']), std.error(train$responseR3[train$Cond == "100" & train$Trial == '9']), std.error(train$responseR3[train$Cond == "100" & train$Trial == '10']), std.error(train$responseR3[train$Cond == "100" & train$Trial == '11']), std.error(train$responseR3[train$Cond == "100" & train$Trial == '12']), std.error(train$responseR3[train$Cond == "100" & train$Trial == '13']), std.error(train$responseR3[train$Cond == "100" & train$Trial == '14']), std.error(train$responseR3[train$Cond == "100" & train$Trial == '15']), std.error(train$responseR3[train$Cond == "100" & train$Trial == '16']))
+
+
+SETrials000A
+SETrials000B
+SETrials000X
+#A LOT higher (almost double of Exp 1). With def more variation (1! but also 0.6)
+
+
+SETrials050A
+SETrials050B
+SETrials050X
+#Same here, also when compared to 000
+
+
+SETrials100A
+SETrials100B
+SETrials100X
+#Same heren
+
+```
+Here too, the values in Cond000, Cond050 and Cond100 differ ever so slightly from the averages in a (the one that is used to plot the plot below). This could be due to rounding errors (as here we first aggregate over trial as well instead of just fully over condition). But it's important to note!
+
+# Averages
+```{r}
+par(mfrow = c(1,2))
+par(las=1)
+#original plot
+emptyPlot(c(-5,105),c(0,8), xaxt = "none", ymark=c(0,1,2,3,4,5,6,7,8), bty='n', main = "Van Hamme & Wasserman 1994", xlab = "Condition", ylab = "Causal rating score")
+A <- c(4.3,5.7,7.6)
+B <- c(2.7, 1.1, 0.2)
+X <- c(3.2,3,1.6)
+points(c(0, 50, 100),A, pch = 0, type = "b", col = "indianred1")
+points(c(0, 50, 100),B, pch =16, type = "b", lty = 2, col = "steelblue1")
+points(c(0, 50, 100),X, pch =15, type = "b", lty = 4, col = "limegreen")
+legend(0.05,8,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+axis(1, at = c(0,50,100), labels = c("50-50", "75-25", "100-0")) 
+
+#Our experiment
+emptyPlot(c(-5,105),c(1,9), xaxt = "none", ymark=c(1,2,3,4,5,6,7,8,9), bty='n', main = "Experiment 1B", xlab = "Condition", ylab = "Causal rating score")
+A <- c(a$A)
+B <- c(a$B)
+X <- c(a$X)
+points(c(0, 50, 100),A, pch = 0, type = "b", col = "indianred1")
+points(c(0, 50, 100),B, pch =16, type = "b", lty = 2, col = "steelblue1")
+points(c(0, 50, 100),X, pch =15, type = "b", lty = 4, col = "limegreen")
+legend(0.05,9,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+axis(1, at = c(0,50,100), labels = c("50-50", "75-25", "100-0")) 
+
+#Our experiment with 1's removed
+emptyPlot(c(-5,105),c(1,9), xaxt = "none", ymark=c(1,2,3,4,5,6,7,8,9), bty='n', main = "Experiment 1B with 1's\n removed", xlab = "Condition", ylab = "Causal rating score")
+A <- c(b$A)
+B <- c(b$B)
+X <- c(b$X)
+points(c(0, 50, 100),A, pch = 0, type = "b", col = "indianred1")
+points(c(0, 50, 100),B, pch =16, type = "b", lty = 2, col = "steelblue1")
+points(c(0, 50, 100),X, pch =15, type = "b", lty = 4, col = "limegreen")
+legend(0.05,9,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+axis(1, at = c(0,50,100), labels = c("50-50", "75-25", "100-0")) 
+
+```
+
+## Averages Thicker lines
+```{r}
+par(mfrow = c(1,2))
+par(las=1)
+#original plot
+emptyPlot(c(-5,105),c(0,8), xaxt = "none", ymark=c(0,1,2,3,4,5,6,7,8), bty='n', main = "Van Hamme & Wasserman 1994", xlab = "Condition", ylab = "Causal rating score")
+A <- c(4.3,5.7,7.6)
+B <- c(2.7, 1.1, 0.2)
+X <- c(3.2,3,1.6)
+points(c(0, 50, 100),A, pch = 0, type = "b", col = "indianred1", lwd = 2)
+points(c(0, 50, 100),B, pch =16, type = "b", lty = 2, col = "steelblue1", lwd = 2)
+points(c(0, 50, 100),X, pch =15, type = "b", lty = 4, col = "limegreen", lwd = 2)
+legend(0.05,8,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+axis(1, at = c(0,50,100), labels = c("50-50", "75-25", "100-0")) 
+
+#Our experiment
+emptyPlot(c(-5,105),c(1,9), xaxt = "none", ymark=c(1,2,3,4,5,6,7,8,9), bty='n', main = "Experiment 1B", xlab = "Condition", ylab = "Causal rating score")
+A <- c(a$A)
+B <- c(a$B)
+X <- c(a$X)
+points(c(0, 50, 100),A, pch = 0, type = "b", col = "indianred1", lwd =2 )
+points(c(0, 50, 100),B, pch =16, type = "b", lty = 2, col = "steelblue1", lwd =2)
+points(c(0, 50, 100),X, pch =15, type = "b", lty = 4, col = "limegreen", lwd = 2)
+legend(0.05,9,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+axis(1, at = c(0,50,100), labels = c("50-50", "75-25", "100-0")) 
+
+#Our experiment with 1's removed
+emptyPlot(c(-5,105),c(1,9), xaxt = "none", ymark=c(1,2,3,4,5,6,7,8,9), bty='n', main = "Experiment 1B with 1's\n removed", xlab = "Condition", ylab = "Causal rating score")
+A <- c(b$A)
+B <- c(b$B)
+X <- c(b$X)
+points(c(0, 50, 100),A, pch = 0, type = "b", col = "indianred1", lwd = 2)
+points(c(0, 50, 100),B, pch =16, type = "b", lty = 2, col = "steelblue1", lwd =2)
+points(c(0, 50, 100),X, pch =15, type = "b", lty = 4, col = "limegreen", lwd =2)
+legend(0.05,9,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+axis(1, at = c(0,50,100), labels = c("50-50", "75-25", "100-0")) 
+
+```
+
+## Averages SE
+```{r}
+par(mfrow = c(1,2))
+par(las=1)
+#original plot
+emptyPlot(c(-5,105),c(0,8), xaxt = "none", ymark=c(0,1,2,3,4,5,6,7,8), bty='n', main = "Van Hamme & Wasserman 1994", xlab = "Condition", ylab = "Causal rating score")
+A <- c(4.3,5.7,7.6)
+B <- c(2.7, 1.1, 0.2)
+X <- c(3.2,3,1.6)
+points(c(0, 50, 100),A, pch = 0, type = "b", col = "indianred1")
+points(c(0, 50, 100),B, pch =16, type = "b", lty = 2, col = "steelblue1")
+points(c(0, 50, 100),X, pch =15, type = "b", lty = 4, col = "limegreen")
+legend(0.05,8,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+axis(1, at = c(0,50,100), labels = c("50-50", "75-25", "100-0")) 
+
+#Our experiment
+emptyPlot(c(-5,105),c(1,9), xaxt = "none", ymark=c(1,2,3,4,5,6,7,8,9), bty='n', main = "Experiment 1B, with SE", xlab = "Condition", ylab = "Causal rating score")
+A <- c(a$A)
+B <- c(a$B)
+X <- c(a$X)
+points(c(0, 50, 100),A, pch = 0, type = "b", col = "indianred1")
+points(c(0, 50, 100),B, pch =16, type = "b", lty = 2, col = "steelblue1")
+points(c(0, 50, 100),X, pch =15, type = "b", lty = 4, col = "limegreen")
+errorbars(x= c(0,50,100), y = a$A, top = SECondA, bottom = SECondA, add = TRUE, length = 0.05)
+errorbars(x= c(0,50,100), y = a$B, top = SECondB, bottom = SECondB, add = TRUE, length = 0.05)
+errorbars(x= c(0,50,100), y = a$X, top = SECondX, bottom = SECondX, add = TRUE, length = 0.05)
+legend(0.05,9,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+axis(1, at = c(0,50,100), labels = c("50-50", "75-25", "100-0")) 
+```
+</br> def bigger SE than in the first experiment
+
+## Cond 000 
+```{r}
+par(mfrow = c(1,2))
+par(las=1)
+#original plot
+emptyPlot(c(0,16),c(0,8), xmark = c(1,4,8,12,16), ymark=c(0,1,2,3,4,5,6,7,8), bty='n', main = "Van Hamme & Wasserman 1994 \nCond 50-50", xlab = "Trial", ylab = "Causal rating score")
+A <- c(4.9, 5, 5.1, 3.2, 2.8, 2.4, 2.2, 4.5, 4, 3, 2.2, 3.4, 4.7, 2.8, 2.6, 4.3, 4.1)
+B <- c(3.8, 1.9, 1.5, 3.9, 3.7, 3.8, 4.7, 2.9, 2.7, 4.5, 4.3, 2.8, 2.5, 3.5, 4.5, 3, 2.4)
+X <- c(4.5, 5, 2.1, 4.9, 2.7, 2.4, 4.3, 4.9, 3.3, 4.9, 3, 2.8, 4.8,2.8, 4.8, 5.1, 3.1)
+points(c(0:16),A, pch = 0, type = "b", col = "indianred1")
+points(c(0:16),B, pch =16, type = "b", lty = 2, col = "steelblue1")
+points(c(0:16),X, pch =15, type = "b", lty = 4, col = "limegreen")
+abline(v=0.5, col="grey", lty = 1)
+legend(0.05,8,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+
+emptyPlot(c(0,16),c(1,9), xmark = c(1,4,8,12,16), ymark=c(1,2,3,4,5,6,7,8, 9), bty='n', main = "Experiment 1B \nCond 50-50", xlab = "Trial", ylab = "Causal rating score")
+A <- Cond000$A
+B <- Cond000$B
+X <- Cond000$X
+points(c(1:16),A, pch = 0, type = "b", col = "indianred1")
+points(c(1:16),B, pch =16, type = "b", lty = 2, col = "steelblue1")
+points(c(1:16),X, pch =15, type = "b", lty = 4, col = "limegreen")
+legend(0.05,9,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+```
+
+## Cond 000 Thicker lines
+```{r}
+par(mfrow = c(1,2))
+par(las=1)
+#original plot
+emptyPlot(c(0,16),c(0,8), xmark = c(1,4,8,12,16), ymark=c(0,1,2,3,4,5,6,7,8), bty='n', main = "Van Hamme & Wasserman 1994 \nCond 50-50", xlab = "Trial", ylab = "Causal rating score")
+A <- c(4.9, 5, 5.1, 3.2, 2.8, 2.4, 2.2, 4.5, 4, 3, 2.2, 3.4, 4.7, 2.8, 2.6, 4.3, 4.1)
+B <- c(3.8, 1.9, 1.5, 3.9, 3.7, 3.8, 4.7, 2.9, 2.7, 4.5, 4.3, 2.8, 2.5, 3.5, 4.5, 3, 2.4)
+X <- c(4.5, 5, 2.1, 4.9, 2.7, 2.4, 4.3, 4.9, 3.3, 4.9, 3, 2.8, 4.8,2.8, 4.8, 5.1, 3.1)
+points(c(0:16),A, pch = 0, type = "b", col = "indianred1", lwd = 2)
+points(c(0:16),B, pch =16, type = "b", lty = 2, col = "steelblue1", lwd = 2)
+points(c(0:16),X, pch =15, type = "b", lty = 4, col = "limegreen", lwd =2)
+abline(v=0.5, col="grey", lty = 1)
+legend(0.05,8,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+
+emptyPlot(c(0,16),c(1,9), xmark = c(1,4,8,12,16), ymark=c(1,2,3,4,5,6,7,8, 9), bty='n', main = "Experiment 1B \nCond 50-50", xlab = "Trial", ylab = "Causal rating score")
+A <- Cond000$A
+B <- Cond000$B
+X <- Cond000$X
+points(c(1:16),A, pch = 0, type = "b", col = "indianred1", lwd = 2)
+points(c(1:16),B, pch =16, type = "b", lty = 2, col = "steelblue1", lwd =2 )
+points(c(1:16),X, pch =15, type = "b", lty = 4, col = "limegreen", lwd = 2)
+legend(0.05,9,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+```
+
+## Cond 000 SE
+```{r}
+par(mfrow = c(1,2))
+par(las=1)
+#original plot
+emptyPlot(c(0,16),c(0,8), xmark = c(1,4,8,12,16), ymark=c(0,1,2,3,4,5,6,7,8), bty='n', main = "Van Hamme & Wasserman 1994 \nCond 50-50", xlab = "Trial", ylab = "Causal rating score")
+A <- c(4.9, 5, 5.1, 3.2, 2.8, 2.4, 2.2, 4.5, 4, 3, 2.2, 3.4, 4.7, 2.8, 2.6, 4.3, 4.1)
+B <- c(3.8, 1.9, 1.5, 3.9, 3.7, 3.8, 4.7, 2.9, 2.7, 4.5, 4.3, 2.8, 2.5, 3.5, 4.5, 3, 2.4)
+X <- c(4.5, 5, 2.1, 4.9, 2.7, 2.4, 4.3, 4.9, 3.3, 4.9, 3, 2.8, 4.8,2.8, 4.8, 5.1, 3.1)
+points(c(0:16),A, pch = 0, type = "b", col = "indianred1")
+points(c(0:16),B, pch =16, type = "b", lty = 2, col = "steelblue1")
+points(c(0:16),X, pch =15, type = "b", lty = 4, col = "limegreen")
+abline(v=0.5, col="grey", lty = 1)
+legend(0.05,8,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+
+emptyPlot(c(0,16),c(1,9), xmark = c(1,4,8,12,16), ymark=c(1,2,3,4,5,6,7,8, 9), bty='n', main = "Experiment 1B \nCond 50-50, with SE", xlab = "Trial", ylab = "Causal rating score")
+A <- Cond000$A
+B <- Cond000$B
+X <- Cond000$X
+points(c(1:16),A, pch = 0, type = "b", col = "indianred1")
+points(c(1:16),B, pch =16, type = "b", lty = 2, col = "steelblue1")
+points(c(1:16),X, pch =15, type = "b", lty = 4, col = "limegreen")
+errorbars(x= c(1:16), y = Cond000$A, top = SETrials000A, bottom = SETrials000A, add = TRUE, length = 0.05)
+errorbars(x= c(1:16), y = Cond000$B, top = SETrials000B, bottom = SETrials000B, add = TRUE, length = 0.05)
+errorbars(x= c(1:16), y = Cond000$X, top = SETrials000X, bottom = SETrials000X, add = TRUE, length = 0.05)
+legend(0.05,9,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+```
+
+## Cond 050 
+```{r}
+par(mfrow = c(1,2))
+par(las=1)
+#original plot
+emptyPlot(c(0,16),c(0,8), xmark = c(1,4,8,12,16), ymark=c(0,1,2,3,4,5,6,7,8), bty='n', main = "Van Hamme & Wasserman 1994 \nCond 75-25", xlab = "Trial", ylab = "Causal rating score")
+A <- c(4.7,5,4.6,3.6,5,3.2,4.4,5.5,4.9,3.9,5.4,4.8,5.5,3.8,4.7,5.7,5.6)
+B <- c(4.5,2,1.9,4.2,2.6,3.3,2,1.9,1.8,3.3,2.2,2,1.8,2.5,1.5,1.3,1)
+X <- c(3.8,4.6,2.8,4.5,5,3.1,2.7,4.5,3,4.8,5.1,3.3,4.8,3.2,2.8,4.2,2.9)
+points(c(0:16),A, pch = 0, type = "b", col = "indianred1")
+points(c(0:16),B, pch =16, type = "b", lty = 2, col = "steelblue1")
+points(c(0:16),X, pch =15, type = "b", lty = 4, col = "limegreen")
+abline(v=0.5, col="grey", lty = 1)
+legend(0.05,8,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+
+emptyPlot(c(0,16),c(1,9), xmark = c(1,4,8,12,16), ymark=c(1,2,3,4,5,6,7,8, 9), bty='n', main = "Experiment 1B \nCond 75-25", xlab = "Trial", ylab = "Causal rating score")
+A <- Cond050$A
+B <- Cond050$B
+X <- Cond050$X
+points(c(1:16),A, pch = 0, type = "b", col = "indianred1")
+points(c(1:16),B, pch =16, type = "b", lty = 2, col = "steelblue1")
+points(c(1:16),X, pch =15, type = "b", lty = 4, col = "limegreen")
+legend(0.05,9,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+```
+
+## Cond 050 Thicker lines 
+```{r}
+par(mfrow = c(1,2))
+par(las=1)
+#original plot
+emptyPlot(c(0,16),c(0,8), xmark = c(1,4,8,12,16), ymark=c(0,1,2,3,4,5,6,7,8), bty='n', main = "Van Hamme & Wasserman 1994 \nCond 75-25", xlab = "Trial", ylab = "Causal rating score")
+A <- c(4.7,5,4.6,3.6,5,3.2,4.4,5.5,4.9,3.9,5.4,4.8,5.5,3.8,4.7,5.7,5.6)
+B <- c(4.5,2,1.9,4.2,2.6,3.3,2,1.9,1.8,3.3,2.2,2,1.8,2.5,1.5,1.3,1)
+X <- c(3.8,4.6,2.8,4.5,5,3.1,2.7,4.5,3,4.8,5.1,3.3,4.8,3.2,2.8,4.2,2.9)
+points(c(0:16),A, pch = 0, type = "b", col = "indianred1", lwd = 2)
+points(c(0:16),B, pch =16, type = "b", lty = 2, col = "steelblue1", lwd =2)
+points(c(0:16),X, pch =15, type = "b", lty = 4, col = "limegreen", lwd = 2)
+abline(v=0.5, col="grey", lty = 1)
+legend(0.05,8,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+
+emptyPlot(c(0,16),c(1,9), xmark = c(1,4,8,12,16), ymark=c(1,2,3,4,5,6,7,8, 9), bty='n', main = "Experiment 1B \nCond 75-25", xlab = "Trial", ylab = "Causal rating score")
+A <- Cond050$A
+B <- Cond050$B
+X <- Cond050$X
+points(c(1:16),A, pch = 0, type = "b", col = "indianred1", lwd = 2)
+points(c(1:16),B, pch =16, type = "b", lty = 2, col = "steelblue1", lwd =2)
+points(c(1:16),X, pch =15, type = "b", lty = 4, col = "limegreen", lwd =2)
+legend(0.05,9,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+```
+
+## Cond 050 
+```{r}
+par(mfrow = c(1,2))
+par(las=1)
+#original plot
+emptyPlot(c(0,16),c(0,8), xmark = c(1,4,8,12,16), ymark=c(0,1,2,3,4,5,6,7,8), bty='n', main = "Van Hamme & Wasserman 1994 \nCond 75-25", xlab = "Trial", ylab = "Causal rating score")
+A <- c(4.7,5,4.6,3.6,5,3.2,4.4,5.5,4.9,3.9,5.4,4.8,5.5,3.8,4.7,5.7,5.6)
+B <- c(4.5,2,1.9,4.2,2.6,3.3,2,1.9,1.8,3.3,2.2,2,1.8,2.5,1.5,1.3,1)
+X <- c(3.8,4.6,2.8,4.5,5,3.1,2.7,4.5,3,4.8,5.1,3.3,4.8,3.2,2.8,4.2,2.9)
+points(c(0:16),A, pch = 0, type = "b", col = "indianred1")
+points(c(0:16),B, pch =16, type = "b", lty = 2, col = "steelblue1")
+points(c(0:16),X, pch =15, type = "b", lty = 4, col = "limegreen")
+abline(v=0.5, col="grey", lty = 1)
+legend(0.05,8,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+
+emptyPlot(c(0,16),c(1,9), xmark = c(1,4,8,12,16), ymark=c(1,2,3,4,5,6,7,8, 9), bty='n', main = "Experiment 1B \nCond 75-25, with SE", xlab = "Trial", ylab = "Causal rating score")
+A <- Cond050$A
+B <- Cond050$B
+X <- Cond050$X
+points(c(1:16),A, pch = 0, type = "b", col = "indianred1")
+points(c(1:16),B, pch =16, type = "b", lty = 2, col = "steelblue1")
+points(c(1:16),X, pch =15, type = "b", lty = 4, col = "limegreen")
+errorbars(x= c(1:16), y = Cond050$A, top = SETrials050A, bottom = SETrials050A, add = TRUE, length = 0.05)
+errorbars(x= c(1:16), y = Cond050$B, top = SETrials050B, bottom = SETrials050B, add = TRUE, length = 0.05)
+errorbars(x= c(1:16), y = Cond050$X, top = SETrials050X, bottom = SETrials050X, add = TRUE, length = 0.05)
+legend(0.05,9,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+```
+
+## Cond 100 
+```{r}
+par(mfrow = c(1,2))
+par(las=1)
+#original plot
+emptyPlot(c(0,16),c(0,8), xmark = c(1,4,8,12,16), ymark=c(0,1,2,3,4,5,6,7,8), bty='n', main = "Van Hamme & Wasserman 1994 \nCond 100-0", xlab = "Trial", ylab = "Causal rating score")
+A <- c(5.1,5.2,4.9,5.1,6.2,6.3,6,6.6,6.5,6.5,7,6.6,7.1,7.2,7,7.2,7.2)
+B <- c(4.5,2.1,1.5,1.3,1.2,1.1,1,1,0.9,0.7,0.8,0.7,0.8,0.7,0.6,0.7,0.5)
+X <- c(3.6,4.5,2.2,1.8,3,3.3,2,3.1,1.7,1.5,2.5,1.4,2.3,2.5,1.4,2.3,1.4)
+points(c(0:16),A, pch = 0, type = "b", col = "indianred1")
+points(c(0:16),B, pch =16, type = "b", lty = 2, col = "steelblue1")
+points(c(0:16),X, pch =15, type = "b", lty = 4, col = "limegreen")
+abline(v=0.5, col="grey", lty = 1)
+legend(0.05,8,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+
+emptyPlot(c(0,16),c(1,9), xmark = c(1,4,8,12,16), ymark=c(1,2,3,4,5,6,7,8, 9), bty='n', main = "Experiment 1B\nCond 100-0", xlab = "Trial", ylab = "Causal rating score")
+A <- Cond100$A
+B <- Cond100$B
+X <- Cond100$X
+points(c(1:16),A, pch = 0, type = "b", col = "indianred1")
+points(c(1:16),B, pch =16, type = "b", lty = 2, col = "steelblue1")
+points(c(1:16),X, pch =15, type = "b", lty = 4, col = "limegreen")
+
+legend(0.05,9,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+```
+
+## Cond 100 Thicker lines
+```{r}
+par(mfrow = c(1,2))
+par(las=1)
+#original plot
+emptyPlot(c(0,16),c(0,8), xmark = c(1,4,8,12,16), ymark=c(0,1,2,3,4,5,6,7,8), bty='n', main = "Van Hamme & Wasserman 1994 \nCond 100-0", xlab = "Trial", ylab = "Causal rating score")
+A <- c(5.1,5.2,4.9,5.1,6.2,6.3,6,6.6,6.5,6.5,7,6.6,7.1,7.2,7,7.2,7.2)
+B <- c(4.5,2.1,1.5,1.3,1.2,1.1,1,1,0.9,0.7,0.8,0.7,0.8,0.7,0.6,0.7,0.5)
+X <- c(3.6,4.5,2.2,1.8,3,3.3,2,3.1,1.7,1.5,2.5,1.4,2.3,2.5,1.4,2.3,1.4)
+points(c(0:16),A, pch = 0, type = "b", col = "indianred1", lwd = 2)
+points(c(0:16),B, pch =16, type = "b", lty = 2, col = "steelblue1", lwd = 2)
+points(c(0:16),X, pch =15, type = "b", lty = 4, col = "limegreen", lwd = 2)
+abline(v=0.5, col="grey", lty = 1)
+legend(0.05,8,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+
+emptyPlot(c(0,16),c(1,9), xmark = c(1,4,8,12,16), ymark=c(1,2,3,4,5,6,7,8, 9), bty='n', main = "Experiment 1B\nCond 100-0", xlab = "Trial", ylab = "Causal rating score")
+A <- Cond100$A
+B <- Cond100$B
+X <- Cond100$X
+points(c(1:16),A, pch = 0, type = "b", col = "indianred1", lwd = 2)
+points(c(1:16),B, pch =16, type = "b", lty = 2, col = "steelblue1", lwd =2)
+points(c(1:16),X, pch =15, type = "b", lty = 4, col = "limegreen", lwd = 2)
+
+legend(0.05,9,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+```
+
+## Cond 100 
+```{r}
+par(mfrow = c(1,2))
+par(las=1)
+#original plot
+emptyPlot(c(0,16),c(0,8), xmark = c(1,4,8,12,16), ymark=c(0,1,2,3,4,5,6,7,8), bty='n', main = "Van Hamme & Wasserman 1994 \nCond 100-0", xlab = "Trial", ylab = "Causal rating score")
+A <- c(5.1,5.2,4.9,5.1,6.2,6.3,6,6.6,6.5,6.5,7,6.6,7.1,7.2,7,7.2,7.2)
+B <- c(4.5,2.1,1.5,1.3,1.2,1.1,1,1,0.9,0.7,0.8,0.7,0.8,0.7,0.6,0.7,0.5)
+X <- c(3.6,4.5,2.2,1.8,3,3.3,2,3.1,1.7,1.5,2.5,1.4,2.3,2.5,1.4,2.3,1.4)
+points(c(0:16),A, pch = 0, type = "b", col = "indianred1")
+points(c(0:16),B, pch =16, type = "b", lty = 2, col = "steelblue1")
+points(c(0:16),X, pch =15, type = "b", lty = 4, col = "limegreen")
+abline(v=0.5, col="grey", lty = 1)
+legend(0.05,8,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+
+emptyPlot(c(0,16),c(1,9), xmark = c(1,4,8,12,16), ymark=c(1,2,3,4,5,6,7,8, 9), bty='n', main = "Experiment 1B\nCond 100-0, with SE", xlab = "Trial", ylab = "Causal rating score")
+A <- Cond100$A
+B <- Cond100$B
+X <- Cond100$X
+points(c(1:16),A, pch = 0, type = "b", col = "indianred1")
+points(c(1:16),B, pch =16, type = "b", lty = 2, col = "steelblue1")
+points(c(1:16),X, pch =15, type = "b", lty = 4, col = "limegreen")
+errorbars(x= c(1:16), y = Cond100$A, top = SETrials100A, bottom = SETrials100A, add = TRUE, length = 0.05)
+errorbars(x= c(1:16), y = Cond100$B, top = SETrials100B, bottom = SETrials100B, add = TRUE, length = 0.05)
+errorbars(x= c(1:16), y = Cond100$X, top = SETrials100X, bottom = SETrials100X, add = TRUE, length = 0.05)
+
+legend(0.05,9,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+```
+
+
+# Participants
+```{r}
+#I'm sampling 3 here
+#sample(unique(dat$prolific_id), 3, replace = TRUE)
+#"5ffa1ea174ea4b3b304bef6a" "5bc79f652885710001a0e82a" "60021cc6d5be39201d34f6bf"
+#so I'll plot those three people
+P1 <- subset(train, train$prolific_id == "5ffa1ea174ea4b3b304bef6a")
+P2 <- subset(train, train$prolific_id == "5bc79f652885710001a0e82a")
+P3 <- subset(train, train$prolific_id == "5ec7ec8d0125920a254a6cfa")
+```
+
+```{r}
+#p1 had Cond 50, 100, 0
+par(mfrow = c(1,1))
+par(las = 1)
+emptyPlot(c(1,60), c(1,9), xmark = c(1,16,32,48), ymark= c(1,2,3,4,5,6,7,8,9), bty = 'n', main = "Participant 1 Training phase run\n Experiment 1B", xlab = "", ylab = "Causal rating score")
+points(c(1:16), P1$responseR1[P1$blockNr == "Block1"], type = 'l', col = "red", lty = 1, lwd = 1)
+points(c(1:16), P1$responseR2[P1$blockNr == "Block1"], type = 'l', col = "black", lty = 1, lwd = 1)
+points(c(1:16), P1$responseR3[P1$blockNr == "Block1"], type = 'l', col = "green", lty = 1, lwd = 1)
+points(c(17:32), P1$responseR1[P1$blockNr == "Block2"], type = 'l', col = "grey", lty = 1, lwd = 1)
+points(c(17:32), P1$responseR2[P1$blockNr == "Block2"], type = 'l', col = "cyan", lty = 1, lwd = 1)
+points(c(17:32), P1$responseR3[P1$blockNr == "Block2"], type = 'l', col = "pink", lty = 1, lwd = 1)
+points(c(33:48), P1$responseR1[P1$blockNr == "Block3"], type = 'l', col = "brown", lty = 1, lwd = 1)
+points(c(33:48), P1$responseR2[P1$blockNr == "Block3"], type = 'l', col = "yellow2", lty = 1, lwd = 1)
+points(c(33:48), P1$responseR3[P1$blockNr == "Block3"], type = 'l', col = "orange", lty = 1, lwd = 1)
+mtext("75-25", side = 1, at = 8, line = 2.5)
+mtext("100-0", side = 1, at = 24, line = 2.5)
+mtext("50-50", side = 1, at = 40, line = 2.5)
+
+
+#still P1
+par(mfrow = c(1,1))
+par(las = 1)
+emptyPlot(c(1,60), c(1,9), xmark = c(1,16,32,48), ymark= c(1,2,3,4,5,6,7,8,9), bty = 'n', main = "Participant 1 Training phase run\n Experiment 1B", xlab = "", ylab = "Causal rating score")
+points(c(1:48), P1$responseR1, type = 'l', col = "indianred1", lty = 1, lwd = 1)
+points(c(1:48), P1$responseR2, type = 'l', col = "steelblue1", lty = 1, lwd = 1)
+points(c(1:48), P1$responseR3, type = 'l', col = "limegreen", lty = 1, lwd = 1)
+mtext("75-25", side = 1, at = 8, line = 2.5)
+mtext("100-0", side = 1, at = 24, line = 2.5)
+mtext("50-50", side = 1, at = 40, line = 2.5)
+legend(0.02,9,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+
+```
+```{r}
+#p2 had Cond 50, 100, 0.
+par(mfrow = c(1,1))
+par(las = 1)
+emptyPlot(c(1,60), c(1,9), xmark = c(1,16,32,48), ymark= c(1,2,3,4,5,6,7,8,9), bty = 'n', main = "Participant 2 Training phase run\n Experiment 1B", xlab = "", ylab = "Causal rating score")
+points(c(1:16), P2$responseR1[P2$blockNr == "Block1"], type = 'l', col = "red", lty = 1, lwd = 1)
+points(c(1:16), P2$responseR2[P2$blockNr == "Block1"], type = 'l', col = "black", lty = 1, lwd = 1)
+points(c(1:16), P2$responseR3[P2$blockNr == "Block1"], type = 'l', col = "green", lty = 1, lwd = 1)
+points(c(17:32), P2$responseR1[P2$blockNr == "Block2"], type = 'l', col = "grey", lty = 1, lwd = 1)
+points(c(17:32), P2$responseR2[P2$blockNr == "Block2"], type = 'l', col = "cyan", lty = 1, lwd = 1)
+points(c(17:32), P2$responseR3[P2$blockNr == "Block2"], type = 'l', col = "pink", lty = 1, lwd = 1)
+points(c(33:48), P2$responseR1[P2$blockNr == "Block3"], type = 'l', col = "brown", lty = 1, lwd = 1)
+points(c(33:48), P2$responseR2[P2$blockNr == "Block3"], type = 'l', col = "yellow2", lty = 1, lwd = 1)
+points(c(33:48), P2$responseR3[P2$blockNr == "Block3"], type = 'l', col = "orange", lty = 1, lwd = 1)
+mtext("75-25", side = 1, at = 8, line = 2.5)
+mtext("100-0", side = 1, at = 24, line = 2.5)
+mtext("50-50", side = 1, at = 40, line = 2.5)
+
+
+#still P2
+par(mfrow = c(1,1))
+par(las = 1)
+emptyPlot(c(1,60), c(1,9), xmark = c(1,16,32,48), ymark= c(1,2,3,4,5,6,7,8,9), bty = 'n', main = "Participant 2 Training phase run\n Experiment 1B", xlab = "", ylab = "Causal rating score")
+points(c(1:48), P2$responseR1, type = 'l', col = "indianred1", lty = 1, lwd = 1)
+points(c(1:48), P2$responseR2, type = 'l', col = "steelblue1", lty = 1, lwd = 1)
+points(c(1:48), P2$responseR3, type = 'l', col = "limegreen", lty = 1, lwd = 1)
+mtext("75-25", side = 1, at = 8, line = 2.5)
+mtext("100-0", side = 1, at = 24, line = 2.5)
+mtext("50-50", side = 1, at = 40, line = 2.5)
+legend(0.02,9,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+```
+```{r}
+#p3 had Cond 100, 0, 50.
+par(mfrow = c(1,1))
+par(las = 1)
+emptyPlot(c(1,60), c(1,9), xmark = c(1,16,32,48), ymark= c(1,2,3,4,5,6,7,8,9), bty = 'n', main = "Participant 3 Training phase run\n Experiment 1B", xlab = "", ylab = "Causal rating score")
+points(c(1:16), P3$responseR1[P3$blockNr == "Block1"], type = 'l', col = "red", lty = 1, lwd = 1)
+points(c(1:16), P3$responseR2[P3$blockNr == "Block1"], type = 'l', col = "black", lty = 1, lwd = 1)
+points(c(1:16), P3$responseR3[P3$blockNr == "Block1"], type = 'l', col = "green", lty = 1, lwd = 1)
+points(c(17:32), P3$responseR1[P3$blockNr == "Block2"], type = 'l', col = "grey", lty = 1, lwd = 1)
+points(c(17:32), P3$responseR2[P3$blockNr == "Block2"], type = 'l', col = "cyan", lty = 1, lwd = 1)
+points(c(17:32), P3$responseR3[P3$blockNr == "Block2"], type = 'l', col = "pink", lty = 1, lwd = 1)
+points(c(33:48), P3$responseR1[P3$blockNr == "Block3"], type = 'l', col = "brown", lty = 1, lwd = 1)
+points(c(33:48), P3$responseR2[P3$blockNr == "Block3"], type = 'l', col = "yellow2", lty = 1, lwd = 1)
+points(c(33:48), P3$responseR3[P3$blockNr == "Block3"], type = 'l', col = "orange", lty = 1, lwd = 1)
+mtext("100-0", side = 1, at = 8, line = 2.5)
+mtext("50-50", side = 1, at = 24, line = 2.5)
+mtext("75-25", side = 1, at = 40, line = 2.5)
+
+
+#still P3
+par(mfrow = c(1,1))
+par(las = 1)
+emptyPlot(c(1,60), c(1,9), xmark = c(1,16,32,48), ymark= c(1,2,3,4,5,6,7,8,9), bty = 'n', main = "Participant 3 Training phase run\n Experiment 1B", xlab = "", ylab = "Causal rating score")
+points(c(1:48), P3$responseR1, type = 'l', col = "indianred1", lty = 1, lwd = 1)
+points(c(1:48), P3$responseR2, type = 'l', col = "steelblue1", lty = 1, lwd = 1)
+points(c(1:48), P3$responseR3, type = 'l', col = "limegreen", lty = 1, lwd = 1)
+mtext("100-0", side = 1, at = 8, line = 2.5)
+mtext("50-50", side = 1, at = 24, line = 2.5)
+mtext("75-25", side = 1, at = 40, line = 2.5)
+legend(0.02,9,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+```
+
+# Diamond vs no diamond
+```{r}
+#Calculating the average scores on the trials where "Diamond" was the outcome, and on trials where "No Diamond" was the outcome
+#We would expect that the scores to the No Diamond would be lower on average
+Diamond <- subset(train, train$Outcome == "Diamond.png")
+NoDiamond <- subset(train, train$Outcome == "NoDiamond.png")
+
+DiamondAvg <- aggregate(list(Diamond$responseR1, Diamond$responseR2, Diamond$responseR3), list(Diamond$Cond), mean, na.rm = T)
+NoDiamondAvg <- aggregate(list(NoDiamond$responseR1, NoDiamond$responseR2, NoDiamond$responseR3), list(NoDiamond$Cond), mean, na.rm = T)
+SE <- c(std.error(Diamond$responseR1[Diamond$Cond == "0"]), std.error(NoDiamond$responseR1[NoDiamond$Cond == "0"]), std.error(Diamond$responseR2[Diamond$Cond == "0"]), std.error(NoDiamond$responseR2[NoDiamond$Cond == "0"]), std.error(Diamond$responseR3[Diamond$Cond == "0"]), std.error(NoDiamond$responseR3[NoDiamond$Cond == "0"]),  std.error(Diamond$responseR1[Diamond$Cond == "50"]), std.error(NoDiamond$responseR1[NoDiamond$Cond == "50"]), std.error(Diamond$responseR2[Diamond$Cond == "50"]), std.error(NoDiamond$responseR2[NoDiamond$Cond == "50"]), std.error(Diamond$responseR3[Diamond$Cond == "50"]), std.error(NoDiamond$responseR3[NoDiamond$Cond == "50"]),  std.error(Diamond$responseR1[Diamond$Cond == "100"]), std.error(NoDiamond$responseR1[NoDiamond$Cond == "100"]), std.error(Diamond$responseR2[Diamond$Cond == "100"]), std.error(NoDiamond$responseR2[NoDiamond$Cond == "100"]), std.error(Diamond$responseR3[Diamond$Cond == "100"]), std.error(NoDiamond$responseR3[NoDiamond$Cond == "100"]))
+colnames(DiamondAvg) <- c("Cond", "A", "B", "X")
+colnames(NoDiamondAvg) <- c("Cond", "A", "B", "X")
+
+DiamondAvg
+NoDiamondAvg
+
+par(mfrow = c(1,1))
+par(las = 1)
+emptyPlot(c(1,130), c(1,9.5), xaxt = "none", ymark= c(1,2,3,4,5,6, 7, 8,9), bty = 'n', main = "Average scores to Diamond and No Diamond Trials", xlab = "", ylab = "Causal rating score")
+add_bars(x=c(0,5,15,20,30,35, 45,50,60,65,75,80, 90,95,105,110,120,125), y=c(DiamondAvg$A[DiamondAvg$Cond == "0"], NoDiamondAvg$A[NoDiamondAvg$Cond == "0"], DiamondAvg$B[DiamondAvg$Cond == "0"], NoDiamondAvg$B[NoDiamondAvg$Cond == "0"],DiamondAvg$X[DiamondAvg$Cond == "0"], NoDiamondAvg$X[NoDiamondAvg$Cond == "0"], DiamondAvg$A[DiamondAvg$Cond == "50"], NoDiamondAvg$A[NoDiamondAvg$Cond == "50"], DiamondAvg$B[DiamondAvg$Cond == "50"], NoDiamondAvg$B[NoDiamondAvg$Cond == "50"],DiamondAvg$X[DiamondAvg$Cond == "50"], NoDiamondAvg$X[NoDiamondAvg$Cond == "50"], DiamondAvg$A[DiamondAvg$Cond == "100"], NoDiamondAvg$A[NoDiamondAvg$Cond == "100"], DiamondAvg$B[DiamondAvg$Cond == "100"], NoDiamondAvg$B[NoDiamondAvg$Cond == "100"],DiamondAvg$X[DiamondAvg$Cond == "100"], NoDiamondAvg$X[NoDiamondAvg$Cond == "100"]), width = 5, col = c("indianred1", "indianred1", "steelblue1", "steelblue1", "limegreen", "limegreen"), density = c(200,6))
+
+errorbars(x=c(0,5,15,20,30,35, 45,50,60,65,75,80, 90,95,105,110,120,125), y=c(DiamondAvg$A[DiamondAvg$Cond == "0"], NoDiamondAvg$A[NoDiamondAvg$Cond == "0"], DiamondAvg$B[DiamondAvg$Cond == "0"], NoDiamondAvg$B[NoDiamondAvg$Cond == "0"],DiamondAvg$X[DiamondAvg$Cond == "0"], NoDiamondAvg$X[NoDiamondAvg$Cond == "0"], DiamondAvg$A[DiamondAvg$Cond == "50"], NoDiamondAvg$A[NoDiamondAvg$Cond == "50"], DiamondAvg$B[DiamondAvg$Cond == "50"], NoDiamondAvg$B[NoDiamondAvg$Cond == "50"],DiamondAvg$X[DiamondAvg$Cond == "50"], NoDiamondAvg$X[NoDiamondAvg$Cond == "50"], DiamondAvg$A[DiamondAvg$Cond == "100"], NoDiamondAvg$A[NoDiamondAvg$Cond == "100"], DiamondAvg$B[DiamondAvg$Cond == "100"], NoDiamondAvg$B[NoDiamondAvg$Cond == "100"],DiamondAvg$X[DiamondAvg$Cond == "100"], NoDiamondAvg$X[NoDiamondAvg$Cond == "100"]) , top = SE , bottom = SE, add = TRUE, length = .05)
+
+abline(v=40, col="grey2", lty = 1)
+abline(v=85, col="grey2", lty = 1)
+#condition text
+mtext("50-50", side = 1, at = 18, line = 1)
+mtext("75-25", side = 1, at = 63, line = 1)
+mtext("100-0", side = 1, at = 108, line = 1)
+#letters
+text(x=2.5, y = 7.3, labels = "A")
+text(x=47.5, y = 7.3, labels = "A")
+text(x=92.5, y = 7.3, labels = "A")
+text(x=17.5, y = 7.3, labels = "B")
+text(x=62.5, y = 7.3, labels = "B")
+text(x=107.5, y = 7.3, labels = "B")
+text(x=32.5, y = 7.3, labels = "X")
+text(x=77.5, y = 7.3, labels = "X")
+text(x=122.5, y = 7.3, labels = "X")
+legend(x=0, y = 9.5, legend =c("Diamond", "No Diamond"), density = c(200,20), col= c("indianred1"))
+
+
+#c("indianred1", "indianred3", "steelblue1", "steelblue3", "limegreen", "palegreen4"))
+
+SE
+range(SE)
+```
+
+
+## Diamond and Fossils
+<br/> This one needs to be updated!!
+```{r}
+# SE_FD <- c(std.error(A1D$responseR1), std.error(A1F$responseR1),std.error(B1D$responseR1), std.error(B1F$responseR1), std.error(X1D$responseR2), std.error(X1F$responseR2), std.error(CD$responseR1), std.error(CF$responseR1), std.error(A3D$responseR1), std.error(A3F$responseR1),std.error(B3D$responseR1), std.error(B3F$responseR1), std.error(X3D$responseR2), std.error(X3F$responseR2))
+# 
+# par(mfrow = c(1,1))
+# par(las = 1)
+# emptyPlot(c(1,100), c(1,9), xaxt = "none", ymark= c(1,2,3,4,5,6,7,8,9), bty = 'n', main = "Average scores to Diamond and Fossil trials\n in test phase 1", xlab = "", ylab = "Causal rating score")
+# add_bars(x=c(0,5,15,20,30,35,45,50,60,65,75,80,90,95), y=c(avgA1D, avgA1F, avgA1D, avgB1F, avgX1D, avgX1F, avgCD, avgCF, avgA3D, avgA3F, avgB3D, avgB3F, avgX3D, avgX3F), width = 5, col = c("indianred1", "indianred1", "steelblue1", "steelblue1", "limegreen", "limegreen","gold", "gold", "indianred1", "indianred1", "steelblue1", "steelblue1", "limegreen", "limegreen"), density = c(200,6))
+# 
+# errorbars(x=c(0,5,15,20,30,35,45,50,60,65,75,80,90,95), y=c(avgA1D, avgA1F, avgA1D, avgB1F, avgX1D, avgX1F, avgCD, avgCF, avgA3D, avgA3F, avgB3D, avgB3F, avgX3D, avgX3F) , top = SE_FD , bottom = SE_FD, add = TRUE, length = .05)
+# 
+# abline(v=40, col="grey2", lty = 1)
+# abline(v=55, col="grey2", lty = 1)
+# #condition text
+# mtext("Cues from block 1", side = 1, at = 17, line = 1)
+# mtext("New cue", side = 1, at = 47, line = 1)
+# mtext("Cues from block 3", side = 1, at = 77, line = 1)
+# #letters
+# text(x=2.5, y = 8, labels = "A")
+# text(x=17.5, y = 8, labels = "B")
+# text(x=32.5, y = 8, labels = "X")
+# text(x=47.5, y = 8, labels = "C")
+# text(x=62.5, y = 8, labels = "A")
+# text(x=77.5, y = 8, labels = "B")
+# text(x=92.5, y = 8, labels = "X")
+# legend(x=0, y = 7, legend =c("Diamond", "Fossil"), density = c(200,20))
+
+```

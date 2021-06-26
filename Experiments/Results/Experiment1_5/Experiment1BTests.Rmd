@@ -1,0 +1,1549 @@
+---
+title: "Experiment 1B T-tests"
+author: "Sanne Poelstra"
+date: "14/03/2021"
+output:
+  html_document:
+    toc: true
+    theme: united
+---
+
+```{r, include = FALSE}
+rm(list=ls())
+library(plotfunctions)
+library("plotrix")
+library("phonTools")
+```
+
+# Preparing data
+
+```{r, reading in the csv file}
+d <- read.csv("Experiment1_5.csv", header = TRUE, sep = ',')
+#This is quite a lot so I want to trim it somewhat, e.g. things such as font are not needed
+dat <- d[, c("A", "A1", "A1_alt", "A2", "A3", "A3_alt", "B", "B1", "B1_alt", "B2", "B3", "B3_alt", "X", "X1", "X1_alt", "X2", "X3", "X3_alt", "C", "C_alt", "Outcome", "Stim1", "Stim2", "responseR1", "responseR2", "responseR3",  "block1", "block2", "block3", "average_response_time", "avg_rt", "NewAnswers", "Practice", "date_starttime", "jatosStudyResultId", "pos1X", "pos1Y", "pos2X", "pos2Y", "prolific_id", "response_time", "Cond", "Train_Test", "screen_availableHeight", "screen_availableWidth",  "timeout_occurred", "total_response_time", "Trial")]
+
+head(dat)
+
+#now there were also some prolific IDs that were rejected, so I have to remove them
+dat <- dat[which(dat$prolific_id != "5c055cbe4692a7000166a1f5" & dat$prolific_id != "602a79ad86b0770624288e16" & dat$prolific_id != "5f3ab64e0dda76127bcc344e" & dat$prolific_id != "5fe150610a5e7fbea05b7c92" & dat$prolific_id != "5db8b0df497a6e000afdf49a" & dat$prolific_id != "5f2b24c4224df7527baee383" & dat$prolific_id != "5f6b36e1ab9578230dd425df"),]
+#5f6b36e1ab9578230dd425df is me
+
+table(unique(dat$prolific_id)) #10 participants!
+table(dat$prolific_id)
+```
+
+```{r, warning = FALSE}
+#As we don't know yet which condition was the first block, I'm going to have to assign a new column with that value
+#blockNr depends on the value of block 1. If block 1 was 0 (internally 0 meant condition 0) and the condition of this current trial is 0, then we give this the value "block 1"
+
+dat$blockNr <- ""
+dat <- within(dat, blockNr[block1 == '0' & Cond == 0] <- 'Block1')
+dat <- within(dat, blockNr[block1 == '1' & Cond == 50] <- 'Block1')
+dat <- within(dat, blockNr[block1 == '2' & Cond == 100] <- 'Block1')
+dat <- within(dat, blockNr[block2 == '0' & Cond == 0] <- 'Block2')
+dat <- within(dat, blockNr[block2 == '1' & Cond == 50] <- 'Block2')
+dat <- within(dat, blockNr[block2 == '2' & Cond == 100] <- 'Block2')
+dat <- within(dat, blockNr[block3 == '0' & Cond == 0] <- 'Block3')
+dat <- within(dat, blockNr[block3 == '1' & Cond == 50] <- 'Block3')
+dat <- within(dat, blockNr[block3 == '2' & Cond == 100] <- 'Block3')
+
+dat$CondFirstBlock <- ''
+dat$CondSecondBlock <- ''
+dat$CondThirdBlock <- '' 
+
+#dat$prolific_id <- as.factor(dat$prolific_id)
+
+#to later compare the cues in the test phase to the condition they were originally asked in, we need another new column
+#so for each participant, what condition was block 1? Save that in a row, what condition was block 3?
+for(i in unique(dat$prolific_id)){
+  dat <- within(dat, CondFirstBlock[prolific_id == i] <- Cond[prolific_id == i & blockNr == "Block1"])
+  dat <- within(dat, CondSecondBlock[prolific_id == i] <- Cond[prolific_id == i & blockNr == "Block2"])
+  dat <- within(dat, CondThirdBlock[prolific_id == i] <- Cond[prolific_id == i & blockNr == "Block3"])
+} #HAAKJES
+```
+
+
+```{r, collect the data for the graphs}
+#averages per condition, for X A and B
+#responseR1 is always A, R2 is always B and R3 is always X
+
+#train is the training phase. I want to make both a plot with 1's as answers removed, and one with all the answers, so I'll create two "train" dataframes
+train1 <- dat[which(dat$Train_Test == "Train"),]
+train <- dat[which(dat$Train_Test == "Train"),]
+
+#Filter the 999 ones
+train$responseR1[train$responseR1 == 999] <- NA
+train$responseR2[train$responseR2 == 999] <- NA
+train$responseR3[train$responseR3 == 999] <- NA
+
+train1$responseR1[train1$responseR1 == 999] <- NA
+train1$responseR2[train1$responseR2 == 999] <- NA
+train1$responseR3[train1$responseR3 == 999] <- NA
+
+train1$responseR1[train$responseR1 == 1] <- NA
+train1$responseR2[train$responseR2 == 1] <- NA
+train1$responseR3[train$responseR3 == 1] <- NA
+
+train$Cond <- as.factor(train$Cond)
+train$Cond <- factor(train$Cond, levels = c("0", "50", "100"))
+
+train1$Cond <- as.factor(train1$Cond)
+train1$Cond <- factor(train1$Cond, levels = c("0", "50", "100"))
+
+a <- aggregate(list(train$responseR1, train$responseR2, train$responseR3), list(train$Cond), mean, na.rm = T)
+b <- aggregate(list(train1$responseR1, train1$responseR2, train1$responseR3), list(train1$Cond), mean, na.rm = T)
+
+colnames(a) <- c("Cond", "A", "B", "X")
+colnames(b) <- c("Cond", "A", "B", "X")
+head(a)
+head(b)
+```
+
+```{r}
+#over the 16 trials, for each of the conditions, get the average response for A, B and X
+AllTrials <- aggregate(list(train$responseR1, train$responseR2, train$responseR3), list(train$Cond, train$Trial), mean, na.rm = T)
+AllTrials1 <- aggregate(list(train1$responseR1, train1$responseR2, train1$responseR3), list(train1$Cond, train1$Trial), mean, na.rm = T)
+colnames(AllTrials) <- c("Cond", "Trial", "A", "B", "X") 
+colnames(AllTrials1) <- c("Cond", "Trial", "A", "B", "X")
+
+#Then split this into the different conditions
+Cond000 <- AllTrials[which(AllTrials$Cond==0),]
+Cond050 <- AllTrials[which(AllTrials$Cond==50),]
+Cond100 <- AllTrials[which(AllTrials$Cond==100),]
+
+#This is then the one without 1's
+Cond0001 <- AllTrials1[which(AllTrials1$Cond==0),]
+Cond0501 <- AllTrials1[which(AllTrials1$Cond==50),]
+Cond1001 <- AllTrials1[which(AllTrials1$Cond==100),]
+```
+
+# Diamond vs no diamond
+```{r}
+#Calculating the average scores on the trials where "Diamond" was the outcome, and on trials where "No Diamond" was the outcome
+#We would expect that the scores to the No Diamond would be lower on average
+Diamond <- subset(train, train$Outcome == "Diamond.png")
+NoDiamond <- subset(train, train$Outcome == "NoDiamond.png")
+
+DiamondAvg <- aggregate(list(Diamond$responseR1, Diamond$responseR2, Diamond$responseR3), list(Diamond$Cond), mean, na.rm = T)
+NoDiamondAvg <- aggregate(list(NoDiamond$responseR1, NoDiamond$responseR2, NoDiamond$responseR3), list(NoDiamond$Cond), mean, na.rm = T)
+SE <- c(std.error(Diamond$responseR1[Diamond$Cond == "0"]), std.error(NoDiamond$responseR1[NoDiamond$Cond == "0"]), std.error(Diamond$responseR2[Diamond$Cond == "0"]), std.error(NoDiamond$responseR2[NoDiamond$Cond == "0"]), std.error(Diamond$responseR3[Diamond$Cond == "0"]), std.error(NoDiamond$responseR3[NoDiamond$Cond == "0"]),  std.error(Diamond$responseR1[Diamond$Cond == "50"]), std.error(NoDiamond$responseR1[NoDiamond$Cond == "50"]), std.error(Diamond$responseR2[Diamond$Cond == "50"]), std.error(NoDiamond$responseR2[NoDiamond$Cond == "50"]), std.error(Diamond$responseR3[Diamond$Cond == "50"]), std.error(NoDiamond$responseR3[NoDiamond$Cond == "50"]),  std.error(Diamond$responseR1[Diamond$Cond == "100"]), std.error(NoDiamond$responseR1[NoDiamond$Cond == "100"]), std.error(Diamond$responseR2[Diamond$Cond == "100"]), std.error(NoDiamond$responseR2[NoDiamond$Cond == "100"]), std.error(Diamond$responseR3[Diamond$Cond == "100"]), std.error(NoDiamond$responseR3[NoDiamond$Cond == "100"]))
+colnames(DiamondAvg) <- c("Cond", "A", "B", "X")
+colnames(NoDiamondAvg) <- c("Cond", "A", "B", "X")
+
+DiamondAvg
+NoDiamondAvg
+```
+<br/> For a t.test you need 1 datapoint per participant
+```{r}
+Diamond <- aggregate(list(Diamond$responseR1, Diamond$responseR2, Diamond$responseR3), by = list(Diamond$prolific_id, Diamond$Cond), mean, na.rm = T)
+names(Diamond) <- c("Participant", "Cond", "responseR1", "responseR2", "responseR3")
+
+NoDiamond <- aggregate(list(NoDiamond$responseR1, NoDiamond$responseR2, NoDiamond$responseR3), by = list(NoDiamond$prolific_id, NoDiamond$Cond), mean, na.rm = T)
+names(NoDiamond) <- c("Participant", "Cond", "responseR1", "responseR2", "responseR3")
+
+# compute the difference
+d <- Diamond$responseR1[Diamond$Cond == "0"] - NoDiamond$responseR1[NoDiamond$Cond == "0"] #NOT NORM DIST
+shapiro.test(d) # => p-value = 0.20
+d <- Diamond$responseR2[Diamond$Cond == "0"] - NoDiamond$responseR2[NoDiamond$Cond == "0"] #NOT NORM DIST
+shapiro.test(d) # => p-value = 0.43
+d <- Diamond$responseR3[Diamond$Cond == "0"] - NoDiamond$responseR3[NoDiamond$Cond == "0"] #NOT NORM DIST
+shapiro.test(d) # => p-value = 0.24
+
+d <- Diamond$responseR1[Diamond$Cond == "50"] - NoDiamond$responseR1[NoDiamond$Cond == "50"] #NOT NORM DIST
+shapiro.test(d) # => p-value = 0.62
+d <- Diamond$responseR2[Diamond$Cond == "50"] - NoDiamond$responseR2[NoDiamond$Cond == "50"] #NOT NORM DIST
+shapiro.test(d) # => p-value = 0.51
+d <- Diamond$responseR3[Diamond$Cond == "50"] - NoDiamond$responseR3[NoDiamond$Cond == "50"] #NOT NORM DIST
+shapiro.test(d) # => p-value = 0.41
+
+d <- Diamond$responseR1[Diamond$Cond == "100"] - NoDiamond$responseR1[NoDiamond$Cond == "100"]
+shapiro.test(d) # => p-value = 0.01
+d <- Diamond$responseR2[Diamond$Cond == "100"] - NoDiamond$responseR2[NoDiamond$Cond == "100"] #NOT NORM DIST
+shapiro.test(d) # => p-value = 0.23
+d <- Diamond$responseR3[Diamond$Cond == "100"] - NoDiamond$responseR3[NoDiamond$Cond == "100"] #NOT NORM DIST
+shapiro.test(d) # => p-value = 0.74
+
+#as it's recommended to also do visual inspection with less than 30 points:
+library(car)
+#qqPlot(Diamond$responseR1[Diamond$Cond == "0"] - NoDiamond$responseR1[NoDiamond$Cond == "0"])
+#qqPlot(Diamond$responseR2[Diamond$Cond == "0"] - NoDiamond$responseR2[NoDiamond$Cond == "0"])
+#qqPlot(Diamond$responseR3[Diamond$Cond == "0"] - NoDiamond$responseR3[NoDiamond$Cond == "0"])
+#qqPlot(Diamond$responseR1[Diamond$Cond == "50"] - NoDiamond$responseR1[NoDiamond$Cond == "50"])
+#qqPlot(Diamond$responseR2[Diamond$Cond == "50"] - NoDiamond$responseR2[NoDiamond$Cond == "50"])
+#qqPlot(Diamond$responseR3[Diamond$Cond == "50"] - NoDiamond$responseR3[NoDiamond$Cond == "50"])
+#qqPlot(Diamond$responseR1[Diamond$Cond == "100"] - NoDiamond$responseR1[NoDiamond$Cond == "100"])
+#qqPlot(Diamond$responseR2[Diamond$Cond == "100"] - NoDiamond$responseR2[NoDiamond$Cond == "100"])
+#qqPlot(Diamond$responseR3[Diamond$Cond == "100"] - NoDiamond$responseR3[NoDiamond$Cond == "100"])
+
+```
+
+```{r}
+wilcox.test(Diamond$responseR1[Diamond$Cond == "0"], NoDiamond$responseR1[NoDiamond$Cond == "0"], alternative = "two.sided", paired = T) #sign, diamond higher than not diamond
+wilcox.test(Diamond$responseR2[Diamond$Cond == "0"], NoDiamond$responseR2[NoDiamond$Cond == "0"], alternative = "two.sided", paired = T) #not sign
+wilcox.test(Diamond$responseR3[Diamond$Cond == "0"], NoDiamond$responseR3[NoDiamond$Cond == "0"], alternative = "two.sided", paired = T) #sign, diamond higher than not diamond
+
+wilcox.test(Diamond$responseR1[Diamond$Cond == "50"], NoDiamond$responseR1[NoDiamond$Cond == "50"], alternative = "two.sided", paired = T) #sign, diamond higher than not diamond
+wilcox.test(Diamond$responseR2[Diamond$Cond == "50"], NoDiamond$responseR2[NoDiamond$Cond == "50"], alternative = "two.sided", paired = T) #not sign
+wilcox.test(Diamond$responseR3[Diamond$Cond == "50"], NoDiamond$responseR3[NoDiamond$Cond == "50"], alternative = "two.sided", paired = T) #sign, diamond higher than not diamond
+
+wilcox.test(Diamond$responseR1[Diamond$Cond == "100"], NoDiamond$responseR1[NoDiamond$Cond == "100"], alternative = "two.sided", paired = T) #sign, diamond higher than not diamond
+wilcox.test(Diamond$responseR2[Diamond$Cond == "100"], NoDiamond$responseR2[NoDiamond$Cond == "100"], alternative = "two.sided", paired = T) #not sign
+wilcox.test(Diamond$responseR3[Diamond$Cond == "100"], NoDiamond$responseR3[NoDiamond$Cond == "100"], alternative = "two.sided", paired = T) #sign, diamond higher than not diamond
+```
+```{r}
+p <- c(0.01418, 0.4772, 0.001953, 0.02734, 0.8328, 0.009766, 0.001953, 0.7789, 0.009152)
+p.adjust(p, method = "holm", n = length(p)) #holm is a more lenient way
+#p.adjust(p, method = "bonferroni", n = length(p))
+
+#not sign, not, yes, not, not, not, yes, not, not
+```
+
+# TEST PHASE
+
+```{r}
+#First getting the test phase data 
+test <- dat[which(dat$Train_Test == "Test"),] 
+test$responseR1[test$responseR1 == 999] <- NA
+test$responseR2[test$responseR2 == 999] <- NA
+test$responseR3[test$responseR3 == 999] <- NA
+
+#And also splitting them into the different phases
+testP1 <- test[which(test$Cond == "Phase1"),]
+testP2 <- test[which(test$Cond == "Phase2"),]
+testP3 <- test[which(test$Cond == "Phase3"),]
+testP12 <- test[which(test$Cond == "Phase1" | test$Cond == "Phase2"),]
+```
+
+## Phase 1
+<br/> This phase was in the same order for each participant. At first the cues from the first block were seen, then a new cue (together with X of the first block) and then those of the third block were seen. This time participants were asked how likely they thought these items would lead to outcome Y, with Y being either a diamond (which they've seen before) or a fossil (a new outcome)
+```{r}
+#Phase 1
+
+#I want to look at the outcome to fossil and that to diamond
+testF <- testP1[which(testP1$Outcome == "Fossil.png"),]
+testD <- testP1[which(testP1$Outcome == "Diamond.png"),]
+
+#Now I want the average scores for A B and X for each of these outcomes, but also specifically A1, B1 etc. Therefore I will have to look at specific responses to trials. Therefore aggregate isn't very useful to use here.
+
+#X
+X1F <- testF[which(testF$Trial == 2 | testF$Trial == 4 | testF$Trial == 6),]
+avgX1F <- mean(X1F$responseR2, na.rm = T)
+X1D <- testD[which(testD$Trial == 1 | testD$Trial == 3 | testD$Trial == 5),]
+avgX1D <- mean(X1D$responseR2, na.rm = T)
+X3F <- testF[which(testF$Trial == 8 | testF$Trial == 10),]
+avgX3F <- mean(X3F$responseR2, na.rm = T)
+X3D <- testD[which(testD$Trial == 7 | testD$Trial == 9),]
+avgX3D <- mean(X3D$responseR2, na.rm = T)
+
+#A
+A1F <- testF[which(testF$Trial == 2),]
+avgA1F <- mean(A1F$responseR1, na.rm = T)
+A1D <- testD[which(testD$Trial == 1),]
+avgA1D <- mean(A1D$responseR1, na.rm = T)
+
+A3F <- testF[which(testF$Trial == 8),]
+avgA3F <- mean(A3F$responseR1, na.rm = T)
+A3D <- testD[which(testD$Trial == 7),]
+avgA3D <- mean(A3D$responseR1, na.rm = T)
+
+#B
+B1F <- testF[which(testF$Trial == 4),]
+avgB1F <- mean(B1F$responseR1, na.rm = T)
+B1D <- testD[which(testD$Trial == 3),]
+avgB1D <- mean(B1D$responseR1, na.rm = T)
+
+B3F <- testF[which(testF$Trial == 10),]
+avgB3F <- mean(B3F$responseR1, na.rm = T)
+B3D <- testD[which(testD$Trial == 9),]
+avgB3D <- mean(B3D$responseR1, na.rm = T)
+
+#C
+CF <- testF[which(testF$Trial == 6),]
+avgCF <- mean(CF$responseR1, na.rm = T)
+CD <- testD[which(testD$Trial == 5),]
+avgCD <- mean(CD$responseR1, na.rm = T)
+
+
+Cue <- c("A1", "B1", "X1", "C", "A3", "B3", "X3")
+Diamond <- c(avgA1D, avgB1D, avgX1D, avgCD, avgA3D, avgB3D, avgX3D)
+Fossil <- c(avgA1F, avgB1F, avgX1F, avgCF, avgA3F, avgB3F, avgX3F)
+Phase1 <- data.frame(Cue, Diamond, Fossil)
+Phase1
+
+``` 
+<br/>
+So there are some differences between scoring to diamond (seems a lot higher, expect for C and B3) and Fossil. The thing here is though that these are all categories collapsed. Later we will split those categories and see what happens then. <br />
+Now I'll get the scores over the entire block.
+
+```{r}
+#now that we know what was asked when in the training phase 
+
+ABl1 <- mean(train$responseR1[train$blockNr == "Block1" & train$Trial == 15], na.rm = T)
+BBl1 <- mean(train$responseR2[train$blockNr == "Block1" & train$Trial == 16], na.rm = T)
+XBl1 <- mean(train$responseR3[train$blockNr == "Block1" & train$Trial == 16], na.rm = T)
+
+ABl3 <- mean(train$responseR1[train$blockNr == "Block3" & train$Trial == 15], na.rm = T)
+BBl3 <- mean(train$responseR2[train$blockNr == "Block3" & train$Trial == 16], na.rm = T)
+XBl3 <- mean(train$responseR3[train$blockNr == "Block3" & train$Trial == 16], na.rm = T)
+
+Cues <- c("A1", "B1", "X1", "A3", "B3", "X3")
+Mean <- c(ABl1, BBl1, XBl1, ABl3, BBl3, XBl3)
+TrainAvgBl1_3 <- data.frame(Cues, Mean) 
+TrainAvgBl1_3
+
+Original <- c(ABl1, BBl1, XBl1, "NA", ABl3, BBl3, XBl3)
+Phase1$Original <- as.numeric(Original)
+Phase1
+
+```
+<br/> Here we can see the differences in scores to diamond in the test phase (1), fossil (test phase 1) and the original scores to A, B and X in block 1 and 3. This is averaged over all conditions. We will now perform t-tests to see if there is a difference between these values.
+
+#### Conditions taken together
+ <br/> Note that trial 16 is taken for B and X as that is the last time BX is shown, but 15 is the last time AX is shown, so 15 is used for A cues
+ 
+```{r}
+#Technically speaking for A and B there is already 1 datapoint per participant, but for safety reasons I'll still aggregate them!
+A1D <- aggregate(list(A1D$responseR1), by = list(A1D$prolific_id), mean, na.rm = T)
+names(A1D) <- c("Participant", "responseR1")
+B1D <- aggregate(list(B1D$responseR1), by = list(B1D$prolific_id), mean, na.rm = T)
+names(B1D) <- c("Participant", "responseR1")
+X1D <- aggregate(list(X1D$responseR2), by = list(X1D$prolific_id), mean, na.rm = T)
+names(X1D) <- c("Participant", "responseR2")
+
+A3D <- aggregate(list(A3D$responseR1), by = list(A3D$prolific_id), mean, na.rm = T)
+names(A3D) <- c("Participant", "responseR1")
+B3D <- aggregate(list(B3D$responseR1), by = list(B3D$prolific_id), mean, na.rm = T)
+names(B3D) <- c("Participant", "responseR1")
+X3D <- aggregate(list(X3D$responseR2), by = list(X3D$prolific_id), mean, na.rm = T)
+names(X3D) <- c("Participant", "responseR2")
+
+CD <- aggregate(list(CD$responseR1), by = list(CD$prolific_id), mean, na.rm = T)
+names(CD) <- c("Participant", "responseR1")
+
+
+A1F <- aggregate(list(A1F$responseR1), by = list(A1F$prolific_id), mean, na.rm = T)
+names(A1F) <- c("Participant", "responseR1")
+B1F <- aggregate(list(B1F$responseR1), by = list(B1F$prolific_id), mean, na.rm = T)
+names(B1F) <- c("Participant", "responseR1")
+X1F <- aggregate(list(X1F$responseR2), by = list(X1F$prolific_id), mean, na.rm = T)
+names(X1F) <- c("Participant", "responseR2")
+
+A3F <- aggregate(list(A3F$responseR1), by = list(A3F$prolific_id), mean, na.rm = T)
+names(A3F) <- c("Participant", "responseR1")
+B3F <- aggregate(list(B3F$responseR1), by = list(B3F$prolific_id), mean, na.rm = T)
+names(B3F) <- c("Participant", "responseR1")
+X3F <- aggregate(list(X3F$responseR2), by = list(X3F$prolific_id), mean, na.rm = T)
+names(X3F) <- c("Participant", "responseR2")
+
+CF <- aggregate(list(CF$responseR1), by = list(CF$prolific_id), mean, na.rm = T)
+names(CF) <- c("Participant", "responseR1")
+
+d <- A1D$responseR1 - train$responseR1[train$blockNr == "Block1" & train$Trial == 15] #NOT NORMALLY DIST
+shapiro.test(d) # p = 0.98
+d <- B1D$responseR1 - train$responseR2[train$blockNr == "Block1" & train$Trial == 16] #NOT NORMALLY DIST
+shapiro.test(d) # p = 0.63
+d <- X1D$responseR2 - train$responseR3[train$blockNr == "Block1" & train$Trial == 16] #NOT NORMALLY DIST 
+shapiro.test(d) # p = 0.55
+
+d <- A3D$responseR1 - train$responseR1[train$blockNr == "Block3" & train$Trial == 15] #NOT NORMALLY DIST
+shapiro.test(d) # p = 0.84
+d <- B3D$responseR1 - train$responseR2[train$blockNr == "Block3" & train$Trial == 16] #NOT NORMALLY DIST
+shapiro.test(d) # p = 0.48
+d <- X3D$responseR2 - train$responseR3[train$blockNr == "Block3" & train$Trial == 16] #NOT NORMALLY DIST
+shapiro.test(d) # p = 0.30
+```
+
+#### Difference training and test phase 
+```{r}
+#1) Are there significant differences between A, B and X when asked in their original block 1 and in the test phase
+wilcox.test(A1D$responseR1, train$responseR1[train$blockNr == "Block1" & train$Trial == 15], alternative = "two.sided", paired = T) #sign, decrease
+wilcox.test(B1D$responseR1, train$responseR2[train$blockNr == "Block1" & train$Trial == 16], alternative = "two.sided", paired = T) #no sign             (DIFF FROM 1)
+wilcox.test(X1D$responseR2, train$responseR3[train$blockNr == "Block1" & train$Trial == 16], alternative = "two.sided", paired = T) #sign diff, increase
+
+
+#2) Are there sign differences between A, B and X when asked in block 3 and in the test phase
+wilcox.test(A3D$responseR1, train$responseR1[train$blockNr == "Block3" & train$Trial == 15], alternative = "two.sided", paired = T) #no diff 
+wilcox.test(B3D$responseR1, train$responseR2[train$blockNr == "Block3" & train$Trial == 16], alternative = "two.sided", paired = T) #no diff
+wilcox.test(X3D$responseR2, train$responseR3[train$blockNr == "Block3" & train$Trial == 16], alternative = "two.sided", paired = T) #no diff
+```
+
+```{r}
+p <- c(0.03236, 0.1991, 0.02484, 0.3973, 0.8646, 0.5068)
+p.adjust(p, method = "holm", n = length(p)) 
+
+#all no
+```
+
+#### Difference C and rest of the cues
+```{r}
+d <- CD$responseR1 - A1D$responseR1 #NOT NORMALLY DIST
+shapiro.test(d) # p = 0.43
+d <- CD$responseR1 - B1D$responseR1 #NOT NORMALLY DIST
+shapiro.test(d) # p = 0.57
+d <- CD$responseR1 - X1D$responseR2 #NOT NORMALLY DIST
+shapiro.test(d) # p = 0.69
+
+d <- CD$responseR1 - A3D$responseR1 
+shapiro.test(d) # p = 0.02
+d <- CD$responseR1 - B3D$responseR1 #NOT NORMALLY DIST
+shapiro.test(d) # p = 0.46
+d <- CD$responseR1 - X3D$responseR2 #NOT NORMALLY DIST
+shapiro.test(d) # p = 0.82
+
+```
+
+```{r}
+#3) Is there a sign difference between the C value and that of A B and X in the test phase 
+wilcox.test(CD$responseR1, A3D$responseR1, alternative = "two.sided", paired = T) #sign diff C is lower
+wilcox.test(CD$responseR1, B3D$responseR1, alternative = "two.sided", paired = T) #no sign diff
+wilcox.test(CD$responseR1, X3D$responseR2, alternative = "two.sided", paired = T) #sign diff, score to C is lower 
+
+
+wilcox.test(CD$responseR1, A1D$responseR1, alternative = "two.sided", paired = T) #sign diff, C is lower               (DIFF FROM 1)
+wilcox.test(CD$responseR1, B1D$responseR1, alternative = "two.sided", paired = T) #sign diff, C lower 
+wilcox.test(CD$responseR1, X1D$responseR2, alternative = "two.sided", paired = T) #sign diff, score to C is lower
+```
+
+```{r}
+p <- c(0.005264, 0.1052, 0.008004, 0.04819, 0.02435, 0.001953)
+p.adjust(p, method = "holm", n = length(p)) 
+
+#yes,no,yes,no,no,yes
+```
+
+#### Difference fossil and Diamond
+
+```{r} 
+d <- A1D$responseR1 - A1F$responseR1 #NOT NORM DIST
+shapiro.test(d) # p = 0.92
+d <- B1D$responseR1 - B1F$responseR1 #NOT NORM DIST
+shapiro.test(d) # p = 0.70
+d <- X1D$responseR2 - X1F$responseR2 #NOT NORM DIST
+shapiro.test(d) # p = 0.59
+d <- CD$responseR1 - CF$responseR1 #NOT NORM DIST
+shapiro.test(d) # p = 0.11
+d <- A3D$responseR1 - A3F$responseR1 #NOT NORM DIST
+shapiro.test(d) # p = 0.058
+d <- B3D$responseR1 - B3F$responseR1 #NOT NORM DIST
+shapiro.test(d) # p = 0.61
+d <- X3D$responseR2 - X3F$responseR2 #NOT NORM DIST
+shapiro.test(d) # p = 0.94
+```
+
+
+```{r}
+#4) Is there a difference between the ratings to fossil and those to diamond?
+wilcox.test(A1D$responseR1, A1F$responseR1, alternative = "two.sided", paired = T) #not sign (marginally, then fossil lower than diamond)
+wilcox.test(B1D$responseR1, B1F$responseR1, alternative = "two.sided", paired = T) #sign, lower score on the fossil than on the diamond
+wilcox.test(X1D$responseR2, X1F$responseR2, alternative = "two.sided", paired = T) #sign, lower score on the fossil than on the diamond
+wilcox.test(CD$responseR1, CF$responseR1, alternative = "two.sided", paired = T)   #no sign (makes sense! The cue is new)
+wilcox.test(A3D$responseR1, A3F$responseR1, alternative = "two.sided", paired = T) #sign, lower score on the fossil than on the diamond
+wilcox.test(B3D$responseR1, B3F$responseR1, alternative = "two.sided", paired = T) #not sign                                                     
+wilcox.test(X3D$responseR2, X3F$responseR2, alternative = "two.sided", paired = T) #sign, lower score fossil than on diamond                    
+```
+
+```{r}
+p <- c(0.08198, 0.04939, 0.005889, 0.14, 0.01723, 1, 0.06445)
+p.adjust(p, method = "holm", n = length(p)) 
+
+#no,no,yes,no,no,no,no
+```
+
+## Phase 2
+<br/>
+In this phase participants saw the same stimuli as in Phase 1, but now in random order. We want to caclulate the average values of A, B and X to allergic and fever and see if they differ from those of Phase 1 (ideally they shouldnt).
+```{r}
+testF2 <- testP2[which(testP2$Outcome == "Fossil.png"),]
+testD2 <- testP2[which(testP2$Outcome == "Diamond.png"),]
+
+#Now I want the average scores for A B and X for each of these outcomes, but also specifically A1, B1 etc. Therefore I will have to look at specific responses to trials. Therefore aggregate isn't very useful to use here.
+
+#X
+X1F2 <- testF2[which(testF2$Trial == 2 | testF2$Trial == 4 | testF2$Trial == 6),]
+avgX1F2 <- mean(X1F2$responseR2, na.rm = T)
+X1D2 <- testD2[which(testD2$Trial == 1 | testD2$Trial == 3 | testD2$Trial == 5),]
+avgX1D2 <- mean(X1D2$responseR2, na.rm = T)
+X3F2 <- testF2[which(testF2$Trial == 8 | testF2$Trial == 10),]
+avgX3F2 <- mean(X3F2$responseR2, na.rm = T)
+X3D2 <- testD2[which(testD2$Trial == 7 | testD2$Trial == 9),]
+avgX3D2 <- mean(X3D2$responseR2, na.rm = T)
+
+#A
+A1F2 <- testF2[which(testF2$Trial == 2),]
+avgA1F2 <- mean(A1F2$responseR1, na.rm = T)
+A1D2 <- testD2[which(testD2$Trial == 1),]
+avgA1D2 <- mean(A1D2$responseR1, na.rm = T)
+
+A3F2 <- testF2[which(testF2$Trial == 8),]
+avgA3F2 <- mean(A3F2$responseR1, na.rm = T)
+A3D2 <- testD2[which(testD2$Trial == 7),]
+avgA3D2 <- mean(A3D2$responseR1, na.rm = T)
+
+#B
+B1F2 <- testF2[which(testF2$Trial == 4),]
+avgB1F2 <- mean(B1F2$responseR1, na.rm = T)
+B1D2 <- testD2[which(testD2$Trial == 3),]
+avgB1D2 <- mean(B1D2$responseR1, na.rm = T)
+
+B3F2 <- testF2[which(testF2$Trial == 10),]
+avgB3F2 <- mean(B3F2$responseR1, na.rm = T)
+B3D2 <- testD2[which(testD2$Trial == 9),]
+avgB3D2 <- mean(B3D2$responseR1, na.rm = T)
+
+#C
+CF2 <- testF2[which(testF2$Trial == 6),]
+avgCF2 <- mean(CF2$responseR1, na.rm = T)
+CD2 <- testD2[which(testD2$Trial == 5),]
+avgCD2 <- mean(CD2$responseR1, na.rm = T)
+
+
+Cue <- c("A1", "B1", "X1", "C", "A3", "B3", "X3")
+Diamond2 <- c(avgA1D2, avgB1D2, avgX1D2, avgCD2, avgA3D2, avgB3D2, avgX3D2)
+Fossil2 <- c(avgA1F2, avgB1F2, avgX1F2, avgCF2, avgA3F2, avgB3F2, avgX3F2)
+Phase2 <- data.frame(Cue, Diamond2, Fossil2)
+Phase2
+Phase1_2 <- data.frame(Cue, Diamond, Fossil, Diamond2, Fossil2)
+Phase1_2
+
+```
+<br/> From first glace there do seem to be some differences, especially betwen the fossil socres, but also between some diamond scores. Let's find out if they are significantly different
+
+```{r}
+A1D2 <- aggregate(list(A1D2$responseR1), by = list(A1D2$prolific_id), mean, na.rm = T)
+names(A1D2) <- c("Participant", "responseR1")
+B1D2 <- aggregate(list(B1D2$responseR1), by = list(B1D2$prolific_id), mean, na.rm = T)
+names(B1D2) <- c("Participant", "responseR1")
+X1D2 <- aggregate(list(X1D2$responseR2), by = list(X1D2$prolific_id), mean, na.rm = T)
+names(X1D2) <- c("Participant", "responseR2")
+
+A3D2 <- aggregate(list(A3D2$responseR1), by = list(A3D2$prolific_id), mean, na.rm = T)
+names(A3D2) <- c("Participant", "responseR1")
+B3D2 <- aggregate(list(B3D2$responseR1), by = list(B3D2$prolific_id), mean, na.rm = T)
+names(B3D2) <- c("Participant", "responseR1")
+X3D2 <- aggregate(list(X3D2$responseR2), by = list(X3D2$prolific_id), mean, na.rm = T)
+names(X3D2) <- c("Participant", "responseR2")
+
+A1F2 <- aggregate(list(A1F2$responseR1), by = list(A1F2$prolific_id), mean, na.rm = T)
+names(A1F2) <- c("Participant", "responseR1")
+B1F2 <- aggregate(list(B1F2$responseR1), by = list(B1F2$prolific_id), mean, na.rm = T)
+names(B1F2) <- c("Participant", "responseR1")
+X1F2 <- aggregate(list(X1F2$responseR2), by = list(X1F2$prolific_id), mean, na.rm = T)
+names(X1F2) <- c("Participant", "responseR2")
+
+A3F2 <- aggregate(list(A3F2$responseR1), by = list(A3F2$prolific_id), mean, na.rm = T)
+names(A3F2) <- c("Participant", "responseR1")
+B3F2 <- aggregate(list(B3F2$responseR1), by = list(B3F2$prolific_id), mean, na.rm = T)
+names(B3F2) <- c("Participant", "responseR1")
+X3F2 <- aggregate(list(X3F2$responseR2), by = list(X3F2$prolific_id), mean, na.rm = T)
+names(X3F2) <- c("Participant", "responseR2")
+
+CD2 <- aggregate(list(CD2$responseR1), by = list(CD2$prolific_id), mean, na.rm =T)
+names(CD2) <- c("Participant", "responseR1")
+CF2 <- aggregate(list(CF2$responseR1), by = list(CF2$prolific_id), mean, na.rm =T)
+names(CF2) <- c("Participant", "responseR1")
+
+d <- A1D$responseR1 - A1D2$responseR1 #NOT NORM DIST
+shapiro.test(d) # p = 0.45
+d <- B1D$responseR1 - B1D2$responseR1 #NOT NORM DIST
+shapiro.test(d) # p = 0.15
+d <- X1D$responseR2 - X1D2$responseR2
+shapiro.test(d) # p = 0.02
+d <- CD$responseR1 - CD2$responseR1 #NOT NORM DIST
+shapiro.test(d) # p = 0.67
+d <- A3D$responseR1 - A3D2$responseR1
+shapiro.test(d) # p = 0.02
+d <- B3D$responseR1 - B3D2$responseR1 #NOT NORM DIST
+shapiro.test(d) # p = 0.05
+d <- X3D$responseR2 - X3D2$responseR2
+shapiro.test(d) # p = 0.03
+
+d <- A1F$responseR1 - A1F2$responseR1
+shapiro.test(d) # p = 0.006
+d <- B1F$responseR1 - B1F2$responseR1 #NOT NORM DIST
+shapiro.test(d) # p = 0.05
+d <- X1F$responseR2 - X1F2$responseR2 #NOT NORM DIST
+shapiro.test(d) # p = 0.18
+d <- CF$responseR1 - CF2$responseR1
+shapiro.test(d) # p = 0.001
+d <- A3F$responseR1 - A3F2$responseR1
+shapiro.test(d) # p = 0.001
+d <- B3F$responseR1 - B3F2$responseR1
+shapiro.test(d) # p < 0.001
+d <- X3F$responseR2 - X3F2$responseR2 #NOT NORM DIST
+shapiro.test(d) # p = 0.14
+```
+
+```{r}
+#All no diff, so there is no difference between the scores in Phase 2 and Phase 1 to Diamond
+t.test(A1D$responseR1, A1D2$responseR1, alternative = "two.sided", paired = T)
+t.test(B1D$responseR1, B1D2$responseR1, alternative = "two.sided", paired = T)
+t.test(X1D$responseR2, X1D2$responseR2, alternative = "two.sided", paired = T) 
+t.test(CD$responseR1, CD2$responseR1, alternative = "two.sided", paired = T)
+t.test(A3D$responseR1, A3D2$responseR1, alternative = "two.sided", paired = T)
+t.test(B3D$responseR1, B3D2$responseR1, alternative = "two.sided", paired = T)
+t.test(X3D$responseR2, X3D2$responseR2, alternative = "two.sided", paired = T)
+
+#all no diff too! So Phase 1 and 2 also don't differ in their scores to Fossil.
+t.test(A1F$responseR1, A1F2$responseR1, alternative = "two.sided", paired = T) #diff, 2 higher than 1
+t.test(B1F$responseR1, B1F2$responseR1, alternative = "two.sided", paired = T)
+t.test(X1F$responseR2, X1F2$responseR2, alternative = "two.sided", paired = T)
+t.test(CF$responseR1, CF2$responseR1, alternative = "two.sided", paired = T)
+t.test(A3F$responseR1, A3F2$responseR1, alternative = "two.sided", paired = T)
+t.test(B3F$responseR1, B3F2$responseR1, alternative = "two.sided", paired = T) #diff, 2 higher than 1
+t.test(X3F$responseR2, X3F2$responseR2, alternative = "two.sided", paired = T)
+
+
+```
+
+```{r}
+p <- c(0.1286, 0.5086, 1,0.1382, 0.4433, 0.6618, 0.6618)
+p.adjust(p, method = "holm", n = length(p)) 
+#all no
+
+p <- c(0.04509, 0.2229, 0.1226, 0.1382, 1,0.03679, 0.295)
+p.adjust(p, method = "holm", n = length(p)) 
+#all no
+```
+
+## Test phase 1 and 2 combined
+```{r}
+testF12 <- testP12[which(testP12$Outcome == "Fossil.png"),]
+testD12 <- testP12[which(testP12$Outcome == "Diamond.png"),]
+
+#X
+X1F12 <- testF12[which(testF12$Trial == 2 | testF12$Trial == 4 | testF12$Trial == 6),]
+avgX1F12 <- mean(X1F12$responseR2, na.rm = T)
+X1D12 <- testD12[which(testD12$Trial == 1 | testD12$Trial == 3 | testD12$Trial == 5),]
+avgX1D12 <- mean(X1D12$responseR2, na.rm = T)
+X3F12 <- testF12[which(testF12$Trial == 8 | testF12$Trial == 10),]
+avgX3F12 <- mean(X3F12$responseR2, na.rm = T)
+X3D12 <- testD12[which(testD12$Trial == 7 | testD12$Trial == 9),]
+avgX3D12 <- mean(X3D12$responseR2, na.rm = T)
+
+#A
+A1F12 <- testF12[which(testF12$Trial == 2),]
+avgA1F12 <- mean(A1F12$responseR1, na.rm = T)
+A1D12 <- testD12[which(testD12$Trial == 1),]
+avgA1D12 <- mean(A1D12$responseR1, na.rm = T)
+
+A3F12 <- testF12[which(testF12$Trial == 8),]
+avgA3F12 <- mean(A3F12$responseR1, na.rm = T)
+A3D12 <- testD12[which(testD12$Trial == 7),]
+avgA3D12 <- mean(A3D12$responseR1, na.rm = T)
+
+#B
+B1F12 <- testF12[which(testF12$Trial == 4),]
+avgB1F12 <- mean(B1F12$responseR1, na.rm = T)
+B1D12 <- testD12[which(testD12$Trial == 3),]
+avgB1D12 <- mean(B1D12$responseR1, na.rm = T)
+
+B3F12 <- testF12[which(testF12$Trial == 10),]
+avgB3F12 <- mean(B3F12$responseR1, na.rm = T)
+B3D12 <- testD12[which(testD12$Trial == 9),]
+avgB3D12 <- mean(B3D12$responseR1, na.rm = T)
+
+#C
+CF12 <- testF12[which(testF12$Trial == 6),]
+avgCF12 <- mean(CF12$responseR1, na.rm = T)
+CD12 <- testD12[which(testD12$Trial == 5),]
+avgCD12 <- mean(CD12$responseR1, na.rm = T)
+
+ABl1 <- mean(train$responseR1[train$blockNr == "Block1" & train$Trial == 15], na.rm = T)
+BBl1 <- mean(train$responseR2[train$blockNr == "Block1" & train$Trial == 16], na.rm = T)
+XBl1 <- mean(train$responseR3[train$blockNr == "Block1" & train$Trial == 16], na.rm = T)
+
+ABl3 <- mean(train$responseR1[train$blockNr == "Block3" & train$Trial == 15], na.rm = T)
+BBl3 <- mean(train$responseR2[train$blockNr == "Block3" & train$Trial == 16], na.rm = T)
+XBl3 <- mean(train$responseR3[train$blockNr == "Block3" & train$Trial == 16], na.rm = T)
+
+
+Cue <- c("A1", "B1", "X1", "C", "A3", "B3", "X3")
+Diamond12 <- c(avgA1D12, avgB1D12, avgX1D12, avgCD12, avgA3D12, avgB3D12, avgX3D12)
+Fossil12 <- c(avgA1F12, avgB1F12, avgX1F12, avgCF12, avgA3F12, avgB3F12, avgX3F12)
+Original <- c(ABl1, BBl1, XBl1, "NA", ABl3, BBl3, XBl3)
+Phase12 <- data.frame(Cue, Diamond12, Fossil12, Original)
+Phase12
+```
+
+```{r}
+A1D12 <- aggregate(list(A1D12$responseR1), by = list(A1D12$prolific_id), mean, na.rm = T)
+names(A1D12) <- c("Participant", "responseR1")
+B1D12 <- aggregate(list(B1D12$responseR1), by = list(B1D12$prolific_id), mean, na.rm = T)
+names(B1D12) <- c("Participant", "responseR1")
+X1D12 <- aggregate(list(X1D12$responseR2), by = list(X1D12$prolific_id), mean, na.rm = T)
+names(X1D12) <- c("Participant", "responseR2")
+
+A3D12 <- aggregate(list(A3D12$responseR1), by = list(A3D12$prolific_id), mean, na.rm = T)
+names(A3D12) <- c("Participant", "responseR1")
+B3D12 <- aggregate(list(B3D12$responseR1), by = list(B3D12$prolific_id), mean, na.rm = T)
+names(B3D12) <- c("Participant", "responseR1")
+X3D12 <- aggregate(list(X3D12$responseR2), by = list(X3D12$prolific_id), mean, na.rm = T)
+names(X3D12) <- c("Participant", "responseR2")
+
+A1F12 <- aggregate(list(A1F12$responseR1), by = list(A1F12$prolific_id), mean, na.rm = T)
+names(A1F12) <- c("Participant", "responseR1")
+B1F12 <- aggregate(list(B1F12$responseR1), by = list(B1F12$prolific_id), mean, na.rm = T)
+names(B1F12) <- c("Participant", "responseR1")
+X1F12 <- aggregate(list(X1F12$responseR2), by = list(X1F12$prolific_id), mean, na.rm = T)
+names(X1F12) <- c("Participant", "responseR2")
+
+A3F12 <- aggregate(list(A3F12$responseR1), by = list(A3F12$prolific_id), mean, na.rm = T)
+names(A3F12) <- c("Participant", "responseR1")
+B3F12 <- aggregate(list(B3F12$responseR1), by = list(B3F12$prolific_id), mean, na.rm = T)
+names(B3F12) <- c("Participant", "responseR1")
+X3F12 <- aggregate(list(X3F12$responseR2), by = list(X3F12$prolific_id), mean, na.rm = T)
+names(X3F12) <- c("Participant", "responseR2")
+
+CD12 <- aggregate(list(CD12$responseR1), by = list(CD12$prolific_id), mean, na.rm =T)
+names(CD12) <- c("Participant", "responseR1")
+CF12 <- aggregate(list(CF12$responseR1), by = list(CF12$prolific_id), mean, na.rm =T)
+names(CF12) <- c("Participant", "responseR1")
+
+d <- A1D12$responseR1 - train$responseR1[train$blockNr == "Block1" & train$Trial == 15] #NOT NORM DIST
+shapiro.test(d) # p = 0.73
+d <- B1D12$responseR1 - train$responseR2[train$blockNr == "Block1" & train$Trial == 16] #NOT NORM DIST
+shapiro.test(d) #p = 0.21
+d <- X1D12$responseR2 - train$responseR3[train$blockNr == "Block1" & train$Trial == 16] #NOT NORM DIST
+shapiro.test(d) #p = 0.50
+ 
+d <- A3D12$responseR1 - train$responseR1[train$blockNr == "Block3" & train$Trial == 15] #NOT NORM DIST
+shapiro.test(d) #p = 0.83
+d <- B3D12$responseR1 - train$responseR2[train$blockNr == "Block3" & train$Trial == 16] #NOT NORM DIST
+shapiro.test(d) #p = 0.46
+d <- X3D12$responseR2 - train$responseR3[train$blockNr == "Block3" & train$Trial == 16] #NOT NORM DIST
+shapiro.test(d) # 0.35
+```
+
+```{r}
+#1) Are there significant differences between A, B and X when asked in their original block 1 and in the test phase
+wilcox.test(A1D12$responseR1, train$responseR1[train$blockNr == "Block1" & train$Trial == 15], alternative = "two.sided", paired = T) #sign diff, decrease
+wilcox.test(B1D12$responseR1, train$responseR2[train$blockNr == "Block1" & train$Trial == 16], alternative = "two.sided", paired = T) #no diff
+wilcox.test(X1D12$responseR2, train$responseR3[train$blockNr == "Block1" & train$Trial == 16], alternative = "two.sided", paired = T) #diff, increase 
+
+
+#2) Are there sign differences between A, B and X when asked in block 3 and in the test phase
+wilcox.test(A3D12$responseR1, train$responseR1[train$blockNr == "Block3" & train$Trial == 15], alternative = "two.sided", paired = T) #no diff
+wilcox.test(B3D12$responseR1, train$responseR2[train$blockNr == "Block3" & train$Trial == 16], alternative = "two.sided", paired = T) #no diff
+wilcox.test(X3D12$responseR2, train$responseR3[train$blockNr == "Block3" & train$Trial == 16], alternative = "two.sided", paired = T) #no diff
+
+```
+```{r}
+p <- c(0.03798 , 0.1379, 0.01953, 0.2341, 0.8328, 0.6344)
+p.adjust(p, method = "holm", n = length(p))
+#no,no,no,no,no,no
+```
+
+
+```{r}
+d <- CD12$responseR1 - A3D12$responseR1 #NOT NORM DIST
+shapiro.test(d) # p = 0.38
+d <- CD12$responseR1 - B3D12$responseR1 #NOT NORM DIST
+shapiro.test(d) #p = 0.33
+d <- CD12$responseR1 - X3D12$responseR2 #NOT NORM DIST
+shapiro.test(d) #p = 0.40
+ 
+d <- CD12$responseR1 - A1D12$responseR1 #NOT NORM DIST
+shapiro.test(d) #p = 0.63
+d <- CD12$responseR1 - B1D12$responseR1 #NOT NORM DIST
+shapiro.test(d) #p = 0.45
+d <- CD12$responseR1 - X1D12$responseR2 #NOT NORM DIST
+shapiro.test(d) # 0.53
+```
+
+```{r}
+#3) Is there a sign difference between the C value and that of A B and X in the test phase 
+wilcox.test(CD12$responseR1, A3D12$responseR1, alternative = "two.sided", paired = T) #diff, lower C
+wilcox.test(CD12$responseR1, B3D12$responseR1, alternative = "two.sided", paired = T) #no diff
+wilcox.test(CD12$responseR1, X3D12$responseR2, alternative = "two.sided", paired = T) #diff, lower C
+
+wilcox.test(CD12$responseR1, A1D12$responseR1, alternative = "two.sided", paired = T) #diff lower C
+wilcox.test(CD12$responseR1, B1D12$responseR1, alternative = "two.sided", paired = T) #diff lower C
+wilcox.test(CD12$responseR1, X1D12$responseR2, alternative = "two.sided", paired = T) #diff lower C
+```
+
+```{r}
+p <- c(0.007842 ,0.1755, 0.01498, 0.03236, 0.03282, 0.001953)
+p.adjust(p, method = "holm", n = length(p))
+#yes,no,no(marg), no,no,yes
+```
+
+
+```{r}
+d <- A1D12$responseR1 - A1F12$responseR1 #NOT NORM DIST
+shapiro.test(d) # p = 0.9
+d <- B1D12$responseR1 - B1F12$responseR1 #NOT NORM DIST
+shapiro.test(d) #p = 0.32
+d <- X1D12$responseR2 - X1F12$responseR2 #NOT NORM DIST
+shapiro.test(d) #p = 0.83
+d<- CD12$responseR1 - CF12$responseR1 #NOT NORM DIST
+shapiro.test(d) # p = 0.14
+d <- A3D12$responseR1 - A3F12$responseR1  #NOT NORM DIST
+shapiro.test(d) #p= 0.29
+d <- B3D12$responseR1 - B3F12$responseR1 #NOT NORM DIST
+shapiro.test(d) #p = 0.40
+d <- X3D12$responseR2 - X3F12$responseR2 #NOT NORM DIST
+shapiro.test(d) #p = 0.61
+```
+
+```{r}
+#4) Is there a difference between the ratings to fossil and those to diamond?
+wilcox.test(A1D12$responseR1, A1F12$responseR1, alternative = "two.sided", paired = T) #no diff
+wilcox.test(B1D12$responseR1, B1F12$responseR1, alternative = "two.sided", paired = T) #no diff
+wilcox.test(X1D12$responseR2, X1F12$responseR2, alternative = "two.sided", paired = T) #sign, fossil lower
+wilcox.test(CD12$responseR1, CF12$responseR1, alternative = "two.sided", paired = T)   #no sign (makes sense! The cue is new)
+wilcox.test(A3D12$responseR1, A3F12$responseR1, alternative = "two.sided", paired = T) #sign, fossil lower
+wilcox.test(B3D12$responseR1, B3F12$responseR1, alternative = "two.sided", paired = T) #no diff
+wilcox.test(X3D12$responseR2, X3F12$responseR2, alternative = "two.sided", paired = T) #sign, fossil lower
+```
+
+```{r}
+p <- c(0.09603 ,0.0584, 0.001953, 0.2072, 0.009116, 1, 0.03711)
+p.adjust(p, method = "holm", n = length(p))
+#no,no,yes,no,no(marg), no,no
+```
+
+## Condition split
+```{r}
+#X000
+X1F12000 <- testF12[which( (testF12$Trial == 2 | testF12$Trial == 4 | testF12$Trial == 6) & testF12$CondFirstBlock == "0") ,]
+avgX1F12000 <- mean(X1F12000$responseR2, na.rm = T)
+X1D12000 <- testD12[which( (testD12$Trial == 1 | testD12$Trial == 3 | testD12$Trial == 5) & testD12$CondFirstBlock == "0") ,]
+avgX1D12000 <- mean(X1D12000$responseR2, na.rm = T)
+
+X3F12000 <- testF12[which( (testF12$Trial == 8 | testF12$Trial == 10) & testF12$CondThirdBlock == "0"),]
+avgX3F12000 <- mean(X3F12000$responseR2, na.rm = T)
+X3D12000 <- testD12[which( (testD12$Trial == 7 | testD12$Trial == 9) & testD12$CondThirdBlock == "0"),]
+avgX3D12000 <- mean(X3D12000$responseR2, na.rm = T)
+
+#X050
+X1F12050 <- testF12[which( (testF12$Trial == 2 | testF12$Trial == 4 | testF12$Trial == 6) & testF12$CondFirstBlock == "50") ,]
+avgX1F12050 <- mean(X1F12050$responseR2, na.rm = T)
+X1D12050 <- testD12[which( (testD12$Trial == 1 | testD12$Trial == 3 | testD12$Trial == 5) & testD12$CondFirstBlock == "50") ,]
+avgX1D12050 <- mean(X1D12050$responseR2, na.rm = T)
+
+X3F12050 <- testF12[which( (testF12$Trial == 8 | testF12$Trial == 10) & testF12$CondThirdBlock == "50"),]
+avgX3F12050 <- mean(X3F12050$responseR2, na.rm = T)
+X3D12050 <- testD12[which( (testD12$Trial == 7 | testD12$Trial == 9) & testD12$CondThirdBlock == "50"),]
+avgX3D12050 <- mean(X3D12050$responseR2, na.rm = T)
+
+#X100
+X1F12100 <- testF12[which( (testF12$Trial == 2 | testF12$Trial == 4 | testF12$Trial == 6) & testF12$CondFirstBlock == "100") ,]
+avgX1F12100 <- mean(X1F12100$responseR2, na.rm = T)
+X1D12100 <- testD12[which( (testD12$Trial == 1 | testD12$Trial == 3 | testD12$Trial == 5) & testD12$CondFirstBlock == "100") ,]
+avgX1D12100 <- mean(X1D12100$responseR2, na.rm = T)
+
+X3F12100 <- testF12[which( (testF12$Trial == 8 | testF12$Trial == 10) & testF12$CondThirdBlock == "100"),]
+avgX3F12100 <- mean(X3F12100$responseR2, na.rm = T)
+X3D12100 <- testD12[which( (testD12$Trial == 7 | testD12$Trial == 9) & testD12$CondThirdBlock == "100"),]
+avgX3D12100 <- mean(X3D12100$responseR2, na.rm = T)
+
+#######################################
+#A000
+A1F12000 <- testF12[which( (testF12$Trial == 2 ) & testF12$CondFirstBlock == "0") ,]
+avgA1F12000 <- mean(A1F12000$responseR1, na.rm = T)
+A1D12000 <- testD12[which( (testD12$Trial == 1) & testD12$CondFirstBlock == "0") ,]
+avgA1D12000 <- mean(A1D12000$responseR1, na.rm = T)
+
+A3F12000 <- testF12[which( (testF12$Trial == 8) & testF12$CondThirdBlock == "0"),]
+avgA3F12000 <- mean(A3F12000$responseR1, na.rm = T)
+A3D12000 <- testD12[which( (testD12$Trial == 7) & testD12$CondThirdBlock == "0"),]
+avgA3D12000 <- mean(A3D12000$responseR1, na.rm = T)
+
+#A050
+A1F12050 <- testF12[which( (testF12$Trial == 2) & testF12$CondFirstBlock == "50") ,]
+avgA1F12050 <- mean(A1F12050$responseR1, na.rm = T)
+A1D12050 <- testD12[which( (testD12$Trial == 1) & testD12$CondFirstBlock == "50") ,]
+avgA1D12050 <- mean(A1D12050$responseR1, na.rm = T)
+
+A3F12050 <- testF12[which( (testF12$Trial == 8) & testF12$CondThirdBlock == "50"),]
+avgA3F12050 <- mean(A3F12050$responseR1, na.rm = T)
+A3D12050 <- testD12[which( (testD12$Trial == 7) & testD12$CondThirdBlock == "50"),]
+avgA3D12050 <- mean(A3D12050$responseR1, na.rm = T)
+
+#A100
+A1F12100 <- testF12[which( (testF12$Trial == 2) & testF12$CondFirstBlock == "100") ,]
+avgA1F12100 <- mean(A1F12100$responseR1, na.rm = T)
+A1D12100 <- testD12[which( (testD12$Trial == 1) & testD12$CondFirstBlock == "100") ,]
+avgA1D12100 <- mean(A1D12100$responseR1, na.rm = T)
+
+A3F12100 <- testF12[which( (testF12$Trial == 8) & testF12$CondThirdBlock == "100"),]
+avgA3F12100 <- mean(A3F12100$responseR1, na.rm = T)
+A3D12100 <- testD12[which( (testD12$Trial == 7) & testD12$CondThirdBlock == "100"),]
+avgA3D12100 <- mean(A3D12100$responseR1, na.rm = T)
+
+#######################################
+
+#B000
+B1F12000 <- testF12[which( (testF12$Trial == 4) & testF12$CondFirstBlock == "0") ,]
+avgB1F12000 <- mean(B1F12000$responseR1, na.rm = T)
+B1D12000 <- testD12[which( (testD12$Trial == 3) & testD12$CondFirstBlock == "0") ,]
+avgB1D12000 <- mean(B1D12000$responseR1, na.rm = T)
+
+B3F12000 <- testF12[which( (testF12$Trial == 10) & testF12$CondThirdBlock == "0"),]
+avgB3F12000 <- mean(B3F12000$responseR1, na.rm = T)
+B3D12000 <- testD12[which( (testD12$Trial == 9) & testD12$CondThirdBlock == "0"),]
+avgB3D12000 <- mean(B3D12000$responseR1, na.rm = T)
+
+#B050
+B1F12050 <- testF12[which( (testF12$Trial == 4) & testF12$CondFirstBlock == "50") ,]
+avgB1F12050 <- mean(B1F12050$responseR1, na.rm = T)
+B1D12050 <- testD12[which( (testD12$Trial == 3) & testD12$CondFirstBlock == "50") ,]
+avgB1D12050 <- mean(B1D12050$responseR1, na.rm = T)
+
+B3F12050 <- testF12[which( (testF12$Trial == 10) & testF12$CondThirdBlock == "50"),]
+avgB3F12050 <- mean(B3F12050$responseR1, na.rm = T)
+B3D12050 <- testD12[which( (testD12$Trial == 9) & testD12$CondThirdBlock == "50"),]
+avgB3D12050 <- mean(B3D12050$responseR1, na.rm = T)
+
+#B100
+B1F12100 <- testF12[which( (testF12$Trial == 4) & testF12$CondFirstBlock == "100") ,]
+avgB1F12100 <- mean(B1F12100$responseR1, na.rm = T)
+B1D12100 <- testD12[which( (testD12$Trial == 3) & testD12$CondFirstBlock == "100") ,]
+avgB1D12100 <- mean(B1D12100$responseR1, na.rm = T)
+
+B3F12100 <- testF12[which( (testF12$Trial == 10) & testF12$CondThirdBlock == "100"),]
+avgB3F12100 <- mean(B3F12100$responseR1, na.rm = T)
+B3D12100 <- testD12[which( (testD12$Trial == 9) & testD12$CondThirdBlock == "100"),]
+avgB3D12100 <- mean(B3D12100$responseR1, na.rm = T)
+
+
+#as C was never askeD12 beF12ore we cannot really compare it over conD12itions
+#C
+CF12 <- testF12[which(testF12$Trial == 6),]
+avgCF12 <- mean(CF12$responseR1, na.rm = T)
+CD12 <- testD12[which(testD12$Trial == 5),]
+avgCD12 <- mean(CD12$responseR1, na.rm = T)
+
+
+Cue <- c("A1","A1","A1", "B1", "B1", "B1", "X1", "X1", "X1", "C", "A3", "A3", "A3", "B3", "B3", "B3", "X3", "X3", "X3")
+Cond <- c("0", "50", "100", "0", "50", "100", "0", "50", "100", "NA", "0", "50", "100", "0", "50", "100", "0", "50", "100")
+Diamond <- c(avgA1D12000, avgA1D12050, avgA1D12100, avgB1D12000, avgB1D12050, avgB1D12100, avgX1D12000, avgX1D12050, avgX1D12100, avgCD12, avgA3D12000, avgA3D12050, avgA3D12100, avgB3D12000, avgB3D12050, avgB3D12100, avgX3D12000, avgX3D12050, avgX3D12100)
+Fossil <- c(avgA1F12000, avgA1F12050, avgA1F12100, avgB1F12000, avgB1F12050, avgB1F12100, avgX1F12000, avgX1F12050, avgX1F12100, avgCF12, avgA3F12000, avgA3F12050, avgA3F12100, avgB3F12000, avgB3F12050, avgB3F12100, avgX3F12000, avgX3F12050, avgX3F12100)
+Phase1Split <- data.frame(Cue, Cond, Diamond, Fossil)
+Phase1Split
+```
+```{r}
+#and now to add on to that, the original ones
+
+#now that we know what was asked when in the training phase 
+#we only take the last response just as before
+ABl1000 <- mean(train$responseR1[train$blockNr == "Block1" & train$Cond == "0" & train$Trial == 15], na.rm = T)
+ABl1050 <- mean(train$responseR1[train$blockNr == "Block1" & train$Cond == "50" & train$Trial == 15], na.rm = T)
+ABl1100 <- mean(train$responseR1[train$blockNr == "Block1" & train$Cond == "100" & train$Trial == 15], na.rm = T)
+
+BBl1000 <- mean(train$responseR2[train$blockNr == "Block1" & train$Cond == "0" & train$Trial == 16], na.rm = T)
+BBl1050 <- mean(train$responseR2[train$blockNr == "Block1" & train$Cond == "50" & train$Trial == 16], na.rm = T)
+BBl1100 <- mean(train$responseR2[train$blockNr == "Block1" & train$Cond == "100" & train$Trial == 16], na.rm = T)
+
+XBl1000 <- mean(train$responseR3[train$blockNr == "Block1" & train$Cond == "0" & train$Trial == 16], na.rm = T)
+XBl1050 <- mean(train$responseR3[train$blockNr == "Block1" & train$Cond == "50" & train$Trial == 16], na.rm = T)
+XBl1100 <- mean(train$responseR3[train$blockNr == "Block1" & train$Cond == "100" & train$Trial == 16], na.rm = T)
+
+ABl3000 <- mean(train$responseR1[train$blockNr == "Block3" & train$Cond == "0" & train$Trial == 15], na.rm = T)
+ABl3050 <- mean(train$responseR1[train$blockNr == "Block3" & train$Cond == "50" & train$Trial == 15], na.rm = T)
+ABl3100 <- mean(train$responseR1[train$blockNr == "Block3" & train$Cond == "100" & train$Trial == 15], na.rm = T)
+
+BBl3000 <- mean(train$responseR2[train$blockNr == "Block3" & train$Cond == "0" & train$Trial == 16], na.rm = T)
+BBl3050 <- mean(train$responseR2[train$blockNr == "Block3" & train$Cond == "50" & train$Trial == 16], na.rm = T)
+BBl3100 <- mean(train$responseR2[train$blockNr == "Block3" & train$Cond == "100" & train$Trial == 16], na.rm = T)
+
+XBl3000 <- mean(train$responseR3[train$blockNr == "Block3" & train$Cond == "0"& train$Trial == 16], na.rm = T)
+XBl3050 <- mean(train$responseR3[train$blockNr == "Block3" & train$Cond == "50"& train$Trial == 16], na.rm = T)
+XBl3100 <- mean(train$responseR3[train$blockNr == "Block3" & train$Cond == "100"& train$Trial == 16], na.rm = T)
+
+Original <- c(ABl1000, ABl1050, ABl1100, BBl1000, BBl1050, BBl1100, XBl1000, XBl1050, XBl1100, "NA", ABl3000, ABl3050, ABl3100, BBl3000, BBl3050, BBl3100, XBl3000, XBl3050, XBl3100)
+Phase1Split$Original <- as.numeric(Original)
+Phase1Split
+```
+
+```{r}
+A1D12000 <- aggregate(list(A1D12000$responseR1), by = list(A1D12000$prolific_id), mean, na.rm = T)
+names(A1D12000) <- c("Participant", "responseR1")
+A1D12050 <- aggregate(list(A1D12050$responseR1), by = list(A1D12050$prolific_id), mean, na.rm = T)
+names(A1D12050) <- c("Participant", "responseR1")
+A1D12100 <- aggregate(list(A1D12100$responseR1), by = list(A1D12100$prolific_id), mean, na.rm = T)
+names(A1D12100) <- c("Participant", "responseR1")
+
+B1D12000 <- aggregate(list(B1D12000$responseR1), by = list(B1D12000$prolific_id), mean, na.rm = T)
+names(B1D12000) <- c("Participant", "responseR1")
+B1D12050 <- aggregate(list(B1D12050$responseR1), by = list(B1D12050$prolific_id), mean, na.rm = T)
+names(B1D12050) <- c("Participant", "responseR1")
+B1D12100 <- aggregate(list(B1D12100$responseR1), by = list(B1D12100$prolific_id), mean, na.rm = T)
+names(B1D12100) <- c("Participant", "responseR1")
+
+
+X1D12000 <- aggregate(list(X1D12000$responseR2), by = list(X1D12000$prolific_id), mean, na.rm = T)
+names(X1D12000) <- c("Participant", "responseR2")
+X1D12050 <- aggregate(list(X1D12050$responseR2), by = list(X1D12050$prolific_id), mean, na.rm = T)
+names(X1D12050) <- c("Participant", "responseR2")
+X1D12100 <- aggregate(list(X1D12100$responseR2), by = list(X1D12100$prolific_id), mean, na.rm = T)
+names(X1D12100) <- c("Participant", "responseR2")
+
+A3D12000 <- aggregate(list(A3D12000$responseR1), by = list(A3D12000$prolific_id), mean, na.rm = T)
+names(A3D12000) <- c("Participant", "responseR1")
+A3D12050 <- aggregate(list(A3D12050$responseR1), by = list(A3D12050$prolific_id), mean, na.rm = T)
+names(A3D12050) <- c("Participant", "responseR1")
+A3D12100 <- aggregate(list(A3D12100$responseR1), by = list(A3D12100$prolific_id), mean, na.rm = T)
+names(A3D12100) <- c("Participant", "responseR1")
+
+B3D12000 <- aggregate(list(B3D12000$responseR1), by = list(B3D12000$prolific_id), mean, na.rm = T)
+names(B3D12000) <- c("Participant", "responseR1")
+B3D12050 <- aggregate(list(B3D12050$responseR1), by = list(B3D12050$prolific_id), mean, na.rm = T)
+names(B3D12050) <- c("Participant", "responseR1")
+B3D12100 <- aggregate(list(B3D12100$responseR1), by = list(B3D12100$prolific_id), mean, na.rm = T)
+names(B3D12100) <- c("Participant", "responseR1")
+
+
+X3D12000 <- aggregate(list(X3D12000$responseR2), by = list(X3D12000$prolific_id), mean, na.rm = T)
+names(X3D12000) <- c("Participant", "responseR2")
+X3D12050 <- aggregate(list(X3D12050$responseR2), by = list(X3D12050$prolific_id), mean, na.rm = T)
+names(X3D12050) <- c("Participant", "responseR2")
+X3D12100 <- aggregate(list(X3D12100$responseR2), by = list(X3D12100$prolific_id), mean, na.rm = T)
+names(X3D12100) <- c("Participant", "responseR2")
+
+
+A1F12000 <- aggregate(list(A1F12000$responseR1), by = list(A1F12000$prolific_id), mean, na.rm = T)
+names(A1F12000) <- c("Participant", "responseR1")
+A1F12050 <- aggregate(list(A1F12050$responseR1), by = list(A1F12050$prolific_id), mean, na.rm = T)
+names(A1F12050) <- c("Participant", "responseR1")
+A1F12100 <- aggregate(list(A1F12100$responseR1), by = list(A1F12100$prolific_id), mean, na.rm = T)
+names(A1F12100) <- c("Participant", "responseR1")
+
+B1F12000 <- aggregate(list(B1F12000$responseR1), by = list(B1F12000$prolific_id), mean, na.rm = T)
+names(B1F12000) <- c("Participant", "responseR1")
+B1F12050 <- aggregate(list(B1F12050$responseR1), by = list(B1F12050$prolific_id), mean, na.rm = T)
+names(B1F12050) <- c("Participant", "responseR1")
+B1F12100 <- aggregate(list(B1F12100$responseR1), by = list(B1F12100$prolific_id), mean, na.rm = T)
+names(B1F12100) <- c("Participant", "responseR1")
+
+X1F12000 <- aggregate(list(X1F12000$responseR2), by = list(X1F12000$prolific_id), mean, na.rm = T)
+names(X1F12000) <- c("Participant", "responseR2")
+X1F12050 <- aggregate(list(X1F12050$responseR2), by = list(X1F12050$prolific_id), mean, na.rm = T)
+names(X1F12050) <- c("Participant", "responseR2")
+X1F12100 <- aggregate(list(X1F12100$responseR2), by = list(X1F12100$prolific_id), mean, na.rm = T)
+names(X1F12100) <- c("Participant", "responseR2")
+
+A3F12000 <- aggregate(list(A3F12000$responseR1), by = list(A3F12000$prolific_id), mean, na.rm = T)
+names(A3F12000) <- c("Participant", "responseR1")
+A3F12050 <- aggregate(list(A3F12050$responseR1), by = list(A3F12050$prolific_id), mean, na.rm = T)
+names(A3F12050) <- c("Participant", "responseR1")
+A3F12100 <- aggregate(list(A3F12100$responseR1), by = list(A3F12100$prolific_id), mean, na.rm = T)
+names(A3F12100) <- c("Participant", "responseR1")
+
+B3F12000 <- aggregate(list(B3F12000$responseR1), by = list(B3F12000$prolific_id), mean, na.rm = T)
+names(B3F12000) <- c("Participant", "responseR1")
+B3F12050 <- aggregate(list(B3F12050$responseR1), by = list(B3F12050$prolific_id), mean, na.rm = T)
+names(B3F12050) <- c("Participant", "responseR1")
+B3F12100 <- aggregate(list(B3F12100$responseR1), by = list(B3F12100$prolific_id), mean, na.rm = T)
+names(B3F12100) <- c("Participant", "responseR1")
+
+
+X3F12000 <- aggregate(list(X3F12000$responseR2), by = list(X3F12000$prolific_id), mean, na.rm = T)
+names(X3F12000) <- c("Participant", "responseR2")
+X3F12050 <- aggregate(list(X3F12050$responseR2), by = list(X3F12050$prolific_id), mean, na.rm = T)
+names(X3F12050) <- c("Participant", "responseR2")
+X3F12100 <- aggregate(list(X3F12100$responseR2), by = list(X3F12100$prolific_id), mean, na.rm = T)
+names(X3F12100) <- c("Participant", "responseR2")
+```
+
+### Differences between scoring per cond?
+
+```{r}
+d <- A1D12000$responseR1 - A1D12050$responseR1 #NOT NORM DIST
+shapiro.test(d) #p = 0.56
+d <- A1D12050$responseR1 - A1D12100$responseR1 #NOT NORM DIST
+shapiro.test(d) #p = 0.85
+d <- A1D12100$responseR1 - A1D12000$responseR1 #NOT NORM DIST
+shapiro.test(d) #p = 0.15
+
+d <- B1D12000$responseR1 - B1D12050$responseR1 #NOT NORM DIST
+shapiro.test(d) #p = 0.26
+d <- B1D12050$responseR1 - B1D12100$responseR1 #NOT NORM DIST
+shapiro.test(d) #p = 0.46
+d <- B1D12100$responseR1 - B1D12000$responseR1 #NOT NORM DIST
+shapiro.test(d) #p = 0.65
+
+d <- X1D12000$responseR2 - X1D12050$responseR2 #NOT NORM DIST
+shapiro.test(d) #p = 0.50
+d <- X1D12050$responseR2 - X1D12100$responseR2 #NOT NORM DIST
+shapiro.test(d) #p = 0.18
+d <- X1D12100$responseR2 - X1D12000$responseR2 #NOT NORM DIST
+shapiro.test(d) #p = 0.97
+
+d <- A3D12000$responseR1 - A3D12050$responseR1 #NOT NORM DIST
+shapiro.test(d) #p = 0.97
+d <- A3D12050$responseR1 - A3D12100$responseR1 #NOT NORM DIST
+shapiro.test(d) #p = 0.97
+d <- A3D12100$responseR1 - A3D12000$responseR1 #NOT NORM DIST
+shapiro.test(d) #p = 0.72
+
+d <- B3D12000$responseR1 - B3D12050$responseR1 #NOT NORM DIST
+shapiro.test(d) #p = 0.73
+d <- B3D12050$responseR1 - B3D12100$responseR1 #NOT NORM DIST
+shapiro.test(d) #p = 0.11
+d <- B3D12100$responseR1 - B3D12000$responseR1 #NOT NORM DIST
+shapiro.test(d) #p = 0.79
+
+d <- X3D12000$responseR2 - X3D12050$responseR2 #NOT NORM DIST
+shapiro.test(d) #p = 0.71
+d <- X3D12050$responseR2 - X3D12100$responseR2 #NOT NORM DIST
+shapiro.test(d) #p = 0.74
+d <- X3D12100$responseR2 - X3D12000$responseR2 #NOT NORM DIST
+shapiro.test(d) #p = 0.38
+
+
+```
+
+<br/> Now we no longer have the same group of people (some did 50-50 in their first block, but they were not the same as the people that did 75-25 in their first block), so here it's unpaired data!
+```{r}
+wilcox.test(A1D12000$responseR1, A1D12050$responseR1, alternative = "two.sided", paired = F) #no diff 
+wilcox.test(A1D12050$responseR1, A1D12100$responseR1, alternative = "two.sided", paired = F) #no diff
+wilcox.test(A1D12100$responseR1, A1D12000$responseR1, alternative = "two.sided", paired = F) #no diff
+
+wilcox.test(B1D12000$responseR1, B1D12050$responseR1, alternative = "two.sided", paired = F) #no diff 
+wilcox.test(B1D12050$responseR1, B1D12100$responseR1, alternative = "two.sided", paired = F) #no diff
+wilcox.test(B1D12100$responseR1, B1D12000$responseR1, alternative = "two.sided", paired = F) #no diff
+
+wilcox.test(X1D12000$responseR2, X1D12050$responseR2, alternative = "two.sided", paired = F) #no diff 
+wilcox.test(X1D12050$responseR2, X1D12100$responseR2, alternative = "two.sided", paired = F) #no diff
+wilcox.test(X1D12100$responseR2, X1D12000$responseR2, alternative = "two.sided", paired = F) #no diff
+```
+
+```{r}
+wilcox.test(A3D12000$responseR1, A3D12050$responseR1, alternative = "two.sided", paired = F) #no diff 
+wilcox.test(A3D12050$responseR1, A3D12100$responseR1, alternative = "two.sided", paired = F) #no diff
+wilcox.test(A3D12100$responseR1, A3D12000$responseR1, alternative = "two.sided", paired = F) #no diff
+
+wilcox.test(B3D12000$responseR1, B3D12050$responseR1, alternative = "two.sided", paired = F) #no diff
+wilcox.test(B3D12050$responseR1, B3D12100$responseR1, alternative = "two.sided", paired = F) #no diff
+wilcox.test(B3D12100$responseR1, B3D12000$responseR1, alternative = "two.sided", paired = F) #no diff
+
+wilcox.test(X3D12000$responseR2, X3D12050$responseR2, alternative = "two.sided", paired = F) #no diff
+wilcox.test(X3D12050$responseR2, X3D12100$responseR2, alternative = "two.sided", paired = F) #no diff
+wilcox.test(X3D12100$responseR2, X3D12000$responseR2, alternative = "two.sided", paired = F) #no diff
+```
+```{r}
+p <- c(0.3065 ,1, 0.4811,   1, 0.8, 1,  0.6631, 0.6631, 0.8,  1,0.4651,1,  0.3476,0.3065,0.6386,  0.3476,0.4857,0.8)
+p.adjust(p, method = "holm", n = length(p))
+#all no
+```
+
+
+###  Difference training and test phase
+
+```{r}
+d <- A1D12000$responseR1 - (train$responseR1[train$Cond == "0" & train$Trial == 15 & train$blockNr == "Block1"]) #NOT NORM DIST
+shapiro.test(d) # p = 0.37
+d <- A1D12050$responseR1 - (train$responseR1[train$Cond == "50" & train$Trial == 15 & train$blockNr == "Block1"])
+shapiro.test(d) # p = 0.001
+#d <- A1D12100$responseR1 - (train$responseR1[train$Cond == "100" & train$Trial == 15 & train$blockNr == "Block1"]) #NOT NORM DIST
+#shapiro.test(d) # p = 0.49
+#only two participants did phase 100-0 for A1, so we cannot calculate normal distribution
+
+d <- B1D12000$responseR1 - (train$responseR2[train$Cond == "0" & train$Trial == 16 & train$blockNr == "Block1"])
+shapiro.test(d) # p = 0.18
+d <- B1D12050$responseR1 - (train$responseR2[train$Cond == "50" & train$Trial == 16 & train$blockNr == "Block1"]) #NOT NORM DIST
+shapiro.test(d) # p = 0.40
+#d <- B1D12100$responseR1 - (train$responseR2[train$Cond == "100" & train$Trial == 16 & train$blockNr == "Block1"]) #NOT NORM DIST
+#shapiro.test(d) # p = 0.88
+
+d <- X1D12000$responseR2 - (train$responseR3[train$Cond == "0" & train$Trial == 16 & train$blockNr == "Block1"]) #NOT NORM DIST
+shapiro.test(d) # p = 0.15
+d <- X1D12050$responseR2 - (train$responseR3[train$Cond == "50" & train$Trial == 16 & train$blockNr == "Block1"]) #NOT NORM DIST
+shapiro.test(d) # p = 0.07
+#d <- X1D12100$responseR2 - (train$responseR3[train$Cond == "100" & train$Trial == 16 & train$blockNr == "Block1"]) #NOT NORM DIST
+#shapiro.test(d) # p = 0.96
+
+#d <- A3D12000$responseR1 - (train$responseR1[train$Cond == "0" & train$Trial == 15 & train$blockNr == "Block3"]) #NOT NORM DIST
+#shapiro.test(d) # p = 0.33
+d <- A3D12050$responseR1 - (train$responseR1[train$Cond == "50" & train$Trial == 15 & train$blockNr == "Block3"]) #NOT NORM DIST
+shapiro.test(d) # p = 0.20
+d <- A3D12100$responseR1 - (train$responseR1[train$Cond == "100" & train$Trial == 15 & train$blockNr == "Block3"]) #NOT NORM DIST
+shapiro.test(d) # p = 0.02
+
+#d <- B3D12000$responseR1 - (train$responseR2[train$Cond == "0" & train$Trial == 16 & train$blockNr == "Block3"]) #NOT NORM DIST
+#shapiro.test(d) # p = 0.41
+d <- B3D12050$responseR1 - (train$responseR2[train$Cond == "50" & train$Trial == 16 & train$blockNr == "Block3"]) 
+shapiro.test(d) # p = 0.01
+d <- B3D12100$responseR1 - (train$responseR2[train$Cond == "100" & train$Trial == 16 & train$blockNr == "Block3"]) #NOT NORM DIST
+shapiro.test(d) # p = 0.79
+
+#d <- X3D12000$responseR2 - (train$responseR3[train$Cond == "0" & train$Trial == 16 & train$blockNr == "Block3"]) #NOT NORM DIST
+#shapiro.test(d) # p = 0.44
+d <- X3D12050$responseR2 - (train$responseR3[train$Cond == "50" & train$Trial == 16 & train$blockNr == "Block3"]) #NOT NORM DIST
+shapiro.test(d) # p = 0.51
+d <- X3D12100$responseR2 - (train$responseR3[train$Cond == "100" & train$Trial == 16 & train$blockNr == "Block3"]) #NOT NORM DIST
+shapiro.test(d) # p = 0.68
+```
+
+
+```{r}
+#1) Are there significant differences between A, B and X when asked in their original block 1 and in the test phase
+wilcox.test(A1D12000$responseR1, (train$responseR1[train$Cond == "0" & train$Trial == 15 & train$blockNr == "Block1"]), alternative = "two.sided", paired = T) #no diff
+wilcox.test(A1D12050$responseR1, (train$responseR1[train$Cond == "50" & train$Trial == 15 & train$blockNr == "Block1"]), alternative = "two.sided", paired = T) #no diff
+wilcox.test(A1D12100$responseR1, (train$responseR1[train$Cond == "100" & train$Trial == 15 & train$blockNr == "Block1"]), alternative = "two.sided", paired = T) #no diff
+
+wilcox.test(B1D12000$responseR1, (train$responseR2[train$Cond == "0" & train$Trial == 16 & train$blockNr == "Block1"]), alternative = "two.sided", paired = T) #no diff
+wilcox.test(B1D12050$responseR1, (train$responseR2[train$Cond == "50" & train$Trial == 16 & train$blockNr == "Block1"]), alternative = "two.sided", paired = T) #no diff
+wilcox.test(B1D12100$responseR1, (train$responseR2[train$Cond == "100" & train$Trial == 16 & train$blockNr == "Block1"]), alternative = "two.sided", paired = T) #no diff
+
+wilcox.test(X1D12000$responseR2, (train$responseR3[train$Cond == "0" & train$Trial == 16 & train$blockNr == "Block1"]), alternative = "two.sided", paired = T) #no diff
+wilcox.test(X1D12050$responseR2, (train$responseR3[train$Cond == "50" & train$Trial == 16 & train$blockNr == "Block1"]), alternative = "two.sided", paired = T) #no diff 
+wilcox.test(X1D12100$responseR2, train$responseR3[train$Cond == "100" & train$Trial == 16 & train$blockNr == "Block1"], alternative = "two.sided", paired = T) #no diff
+
+#2) Are there sign differences between A, B and X when asked in block 3 and in the test phase
+wilcox.test(A3D12000$responseR1, (train$responseR1[train$Cond == "0" & train$Trial == 15 & train$blockNr == "Block3"]), alternative = "two.sided", paired = T) #no diff
+wilcox.test(A3D12050$responseR1, (train$responseR1[train$Cond == "50" & train$Trial == 15 & train$blockNr == "Block3"]), alternative = "two.sided", paired = T) #no diff
+wilcox.test(A3D12100$responseR1, (train$responseR1[train$Cond == "100" & train$Trial == 15 & train$blockNr == "Block3"]), alternative = "two.sided", paired = T) #no diff 
+
+wilcox.test(B3D12000$responseR1, (train$responseR2[train$Cond == "0" & train$Trial == 16 & train$blockNr == "Block3"]), alternative = "two.sided", paired = T) #no diff
+wilcox.test(B3D12050$responseR1, (train$responseR2[train$Cond == "50" & train$Trial == 16 & train$blockNr == "Block3"]), alternative = "two.sided", paired = T) #no diff
+wilcox.test(B3D12100$responseR1, (train$responseR2[train$Cond == "100" & train$Trial == 16 & train$blockNr == "Block3"]), alternative = "two.sided", paired = T) #no diff
+
+wilcox.test(X3D12000$responseR2, (train$responseR3[train$Cond == "0" & train$Trial == 16 & train$blockNr == "Block3"]), alternative = "two.sided", paired = T) #no diff
+wilcox.test(X3D12050$responseR2, (train$responseR3[train$Cond == "50" & train$Trial == 16 & train$blockNr == "Block3"]), alternative = "two.sided", paired = T) #no diff
+wilcox.test(X3D12100$responseR2, (train$responseR3[train$Cond == "100" & train$Trial == 16 & train$blockNr == "Block3"]), alternative = "two.sided", paired = T) #no diff
+```
+
+```{r}
+p <- c(0.4615 ,0.08897, 0.5,   1, 0.125, 1,   0.625, 0.09751, 0.5,  1,0.3573,0.8539,  1,0.875,0.4227,  0.5,0.875,1)
+p.adjust(p, method = "holm", n = length(p))
+#all no
+```
+
+```{r}
+d <- CD12$responseR1 - A1D12000$responseR1
+shapiro.test(d) #p = 0.02
+d <- CD12$responseR1 - A1D12050$responseR1
+shapiro.test(d) #p = 0.03
+d <- CD12$responseR1 - A1D12100$responseR1 #NOT NORM DIST
+shapiro.test(d) #p = 0.05
+
+d <- CD12$responseR1 - B1D12000$responseR1 #NOT NORM DIST
+shapiro.test(d) #p = 0.21
+d <- CD12$responseR1 - B1D12050$responseR1 #NOT NORM DIST
+shapiro.test(d) #p = 0.21
+d <- CD12$responseR1 - B1D12100$responseR1
+shapiro.test(d) #p = 0.04
+
+d <- CD12$responseR1 - X1D12000$responseR2
+shapiro.test(d) #p = 0.04
+d <- CD12$responseR1 - X1D12050$responseR2
+shapiro.test(d) #p = 0.04
+d <- CD12$responseR1 - X1D12100$responseR2 #NOT NORM DIST
+shapiro.test(d) #p = 0.07
+
+d <- CD12$responseR1 - A3D12000$responseR1
+shapiro.test(d) #p = 0.04
+d <- CD12$responseR1 - A3D12050$responseR1 #NOT NORM DIST
+shapiro.test(d) #p = 0.38
+d <- CD12$responseR1 - A3D12100$responseR1 #NOT NORM DIST
+shapiro.test(d) #p = 0.22
+
+d <- CD12$responseR1 - B3D12000$responseR1 #NOT NORM DIST
+shapiro.test(d) #p = 0.05
+d <- CD12$responseR1 - B3D12050$responseR1 #NOT NORM DIST
+shapiro.test(d) #p = 0.05
+d <- CD12$responseR1 - B3D12100$responseR1 #NOT NORM DIST
+shapiro.test(d) #p = 0.11
+
+d <- CD12$responseR1 - X3D12000$responseR2 #NOT NORM DIST
+shapiro.test(d) #p = 0.05
+d <- CD12$responseR1 - X3D12050$responseR2 #NOT NORM DIST
+shapiro.test(d) #p = 0.32
+d <- CD12$responseR1 - X3D12100$responseR2 #NOT NORM DIST
+shapiro.test(d) #p = 0.28
+
+```
+<br/> unpaired here because C is not dependend on what the block of the first or third cue was. So while everyone that saw A1D12000 saw C, not everyone that saw C saw 50-50 as their first condition. 
+```{r}
+#3) Is there a sign difference between the C value and that of A B and X in the test phase 
+wilcox.test(CD12$responseR1, A1D12000$responseR1, alternative = "two.sided", paired = F) #diff, C lower
+wilcox.test(CD12$responseR1, A1D12050$responseR1, alternative = "two.sided", paired = F) #no diff (marg, C lower)
+wilcox.test(CD12$responseR1, A1D12100$responseR1, alternative = "two.sided", paired = F) #no diff
+
+wilcox.test(CD12$responseR1, B1D12000$responseR1, alternative = "two.sided", paired = F) #diff, c lower
+wilcox.test(CD12$responseR1, B1D12050$responseR1, alternative = "two.sided", paired = F) #diff, C lower
+wilcox.test(CD12$responseR1, B1D12100$responseR1, alternative = "two.sided", paired = F) #diff, C lower
+
+wilcox.test(CD12$responseR1, X1D12000$responseR2, alternative = "two.sided", paired = F) #diff, C lower
+wilcox.test(CD12$responseR1, X1D12050$responseR2, alternative = "two.sided", paired = F) #diff, C lower
+wilcox.test(CD12$responseR1, X1D12100$responseR2, alternative = "two.sided", paired = F) #diff, C lower
+
+wilcox.test(CD12$responseR1, A3D12000$responseR1, alternative = "two.sided", paired = F) #diff, C lower
+wilcox.test(CD12$responseR1, A3D12050$responseR1, alternative = "two.sided", paired = F) #diff, C lower
+wilcox.test(CD12$responseR1, A3D12100$responseR1, alternative = "two.sided", paired = F) #diff, C lower
+
+wilcox.test(CD12$responseR1, B3D12000$responseR1, alternative = "two.sided", paired = F) #no diff
+wilcox.test(CD12$responseR1, B3D12050$responseR1, alternative = "two.sided", paired = F) #no diff
+wilcox.test(CD12$responseR1, B3D12100$responseR1, alternative = "two.sided", paired = F) #no diff
+
+wilcox.test(CD12$responseR1, X3D12000$responseR2, alternative = "two.sided", paired = F) #diff, C lower
+wilcox.test(CD12$responseR1, X3D12050$responseR2, alternative = "two.sided", paired = F) #diff, C lower
+wilcox.test(CD12$responseR1, X3D12100$responseR2, alternative = "two.sided", paired = F) #diff, C lower
+```
+
+```{r}
+p <- c(0.04189 ,0.06567, 0.1572,   0.02741, 0.02426, 0.04997,   0.002194, 0.001252, 0.0433,  0.04997,0.004838,0.001256,  1,0.06763,0.383,  0.01992,0.01756,0.004808)
+p.adjust(p, method = "holm", n = length(p))
+#no,no,no  no,no,no  yes,yes,no  no,no,yes  no,no,no  no,no,no
+```
+
+```{r}
+d <- A1D12000$responseR1 - A1F12000$responseR1  #NOT NORM DIST 
+shapiro.test(d)# p = 0.90
+d <- A1D12050$responseR1 - A1F12050$responseR1 #NOT NORM DIST 
+shapiro.test(d)# p = 0.89
+#d <- A1D12100$responseR1 - A1F12100$responseR1 #NOT NORM DIST  
+#shapiro.test(d)# p = 0.056
+
+d <- B1D12000$responseR1 - B1F12000$responseR1  #NOT NORM DIST 
+shapiro.test(d)# p = 0.61
+d <- B1D12050$responseR1 - B1F12050$responseR1  #NOT NORM DIST 
+shapiro.test(d)# p = 0.57
+#d <- B1D12100$responseR1 - B1F12100$responseR1 #NOT NORM DIST  
+#shapiro.test(d)# p = 0.08
+
+d <- X1D12000$responseR2 - X1F12000$responseR2 #NOT NORM DIST 
+shapiro.test(d)# p = 0.40
+d <- X1D12050$responseR2 - X1F12050$responseR2 #NOT NORM DIST  
+shapiro.test(d)# p = 0.96
+#d <- X1D12100$responseR2 - X1F12100$responseR2 #NOT NORM DIST  
+#shapiro.test(d)# p = 0.25
+
+#d <- A3D12000$responseR1 - A3F12000$responseR1 #NOT NORM DIST  
+#shapiro.test(d)# p = 0.12
+d <- A3D12050$responseR1 - A3F12050$responseR1 #NOT NORM DIST  
+shapiro.test(d)# p = 0.74
+d <- A3D12100$responseR1 - A3F12100$responseR1  #NOT NORM DIST 
+shapiro.test(d)# p = 0.24
+
+#d <- B3D12000$responseR1 - B3F12000$responseR1 #NOT NORM DIST  
+#shapiro.test(d)# p = 0.38
+d <- B3D12050$responseR1 - B3F12050$responseR1 
+shapiro.test(d)# p = 0.02
+d <- B3D12100$responseR1 - B3F12100$responseR1 #NOT NORM DIST  
+shapiro.test(d)# p = 0.47
+
+#d <- X3D12000$responseR2 - X3F12000$responseR2 
+#shapiro.test(d)# p = 0.02
+d <- X3D12050$responseR2 - X3F12050$responseR2 #NOT NORM DIST  
+shapiro.test(d)# p = 0.88
+d <- X3D12100$responseR2 - X3F12100$responseR2  #NOT NORM DIST 
+shapiro.test(d)# p =  0.26 
+```
+
+```{r}
+#4) Is there a difference between the ratings to fossil and those to diamond?
+wilcox.test(A1D12000$responseR1, A1F12000$responseR1, alternative = "two.sided", paired = T) #no diff
+wilcox.test(A1D12050$responseR1, A1F12050$responseR1, alternative = "two.sided", paired = T) #no diff
+wilcox.test(A1D12100$responseR1, A1F12100$responseR1, alternative = "two.sided", paired = T) #no diff
+
+wilcox.test(B1D12000$responseR1, B1F12000$responseR1, alternative = "two.sided", paired = T) #no diff
+wilcox.test(B1D12050$responseR1, B1F12050$responseR1, alternative = "two.sided", paired = T) #no diff
+wilcox.test(B1D12100$responseR1, B1F12100$responseR1, alternative = "two.sided", paired = T) #no diff
+
+wilcox.test(X1D12000$responseR2, X1F12000$responseR2, alternative = "two.sided", paired = T) #no diff
+wilcox.test(X1D12050$responseR2, X1F12050$responseR2, alternative = "two.sided", paired = T) #no diff
+wilcox.test(X1D12100$responseR2, X1F12100$responseR2, alternative = "two.sided", paired = T) #no diff
+
+wilcox.test(A3D12000$responseR1, A3F12000$responseR1, alternative = "two.sided", paired = T) #no diff
+wilcox.test(A3D12050$responseR1, A3F12050$responseR1, alternative = "two.sided", paired = T) #no diff
+wilcox.test(A3D12100$responseR1, A3F12100$responseR1, alternative = "two.sided", paired = T) #no diff
+
+wilcox.test(B3D12000$responseR1, B3F12000$responseR1, alternative = "two.sided", paired = T) #no diff
+wilcox.test(B3D12050$responseR1, B3F12050$responseR1, alternative = "two.sided", paired = T) #no diff
+wilcox.test(B3D12100$responseR1, B3F12100$responseR1, alternative = "two.sided", paired = T) #no diff
+
+wilcox.test(X3D12000$responseR2, X3F12000$responseR2, alternative = "two.sided", paired = T) #no diff
+wilcox.test(X3D12050$responseR2, X3F12050$responseR2, alternative = "two.sided", paired = T) #no diff
+wilcox.test(X3D12100$responseR2, X3F12100$responseR2, alternative = "two.sided", paired = T) #no diff
+```
+
+```{r}
+p <- c(0.1814 ,0.875, 0.5,   0.4227, 0.4227, 0.5,   0.125, 0.125, 0.5,  0.5,0.25,0.125,  1,0.2693,0.7893,  0.5,0.375,0.625)
+p.adjust(p, method = "holm", n = length(p))
+#all no
+```
+
+## Phase 3
+<br/> This phase introduced alternative versions of the stimuli (e.g instead of a mouse now a hamster), and reintroduced the "no diamond" outcome again.
+<br/>
+
+We want to know several things. The first being: what the average scores of the alternatives are and compare those to average of the original blocks?
+
+```{r}
+#Phase 3
+testF3 <- testP3[which(testP3$Outcome == "Fossil.png"),]
+testD3 <- testP3[which(testP3$Outcome == "Diamond.png"),]
+testN3 <- testP3[which(testP3$Outcome == "NoDiamond.png"),]
+#We also look at the NoDiamond outcome here, as that one is asked again
+
+#the trial order this time around is different.
+
+
+#X
+X1F3 <- testF3[which(testF3$Trial == 2 | testF3$Trial == 5 | testF3$Trial == 8),]
+avgX1F3 <- mean(X1F3$responseR2, na.rm = T)
+X1D3 <- testD3[which(testD3$Trial == 1 | testD3$Trial == 4 | testD3$Trial == 7),]
+avgX1D3 <- mean(X1D3$responseR2, na.rm = T)
+X1N3 <- testN3[which(testN3$Trial == 3 | testN3$Trial == 6 | testN3$Trial == 9),]
+avgX1N3 <- mean(X1N3$responseR2, na.rm = T)
+X3F3 <- testF3[which(testF3$Trial == 11 | testF3$Trial == 14),]
+avgX3F3 <- mean(X3F3$responseR2, na.rm = T)
+X3D3 <- testD3[which(testD3$Trial == 10 | testD3$Trial == 13),]
+avgX3D3 <- mean(X3D3$responseR2, na.rm = T)
+X3N3 <- testN3[which(testN3$Trial == 12 | testN3$Trial == 15),]
+avgX3N3 <- mean(X3N3$responseR2, na.rm = T)
+
+
+#A
+A1F3 <- testF3[which(testF3$Trial == 2),]
+avgA1F3 <- mean(A1F3$responseR1, na.rm = T)
+A1D3 <- testD3[which(testD3$Trial == 1),]
+avgA1D3 <- mean(A1D3$responseR1, na.rm = T)
+A1N3 <- testN3[which(testN3$Trial == 3),]
+avgA1N3 <- mean(A1N3$responseR1, na.rm = T)
+A3F3 <- testF3[which(testF3$Trial == 11),]
+avgA3F3 <- mean(A3F3$responseR1, na.rm = T)
+A3D3 <- testD3[which(testD3$Trial == 10),]
+avgA3D3 <- mean(A3D3$responseR1, na.rm = T)
+A3N3 <- testN3[which(testN3$Trial == 12),]
+avgA3N3 <- mean(A3N3$responseR1, na.rm = T)
+
+#B
+B1F3 <- testF3[which(testF3$Trial == 5),]
+avgB1F3 <- mean(B1F3$responseR1, na.rm = T)
+B1D3 <- testD3[which(testD3$Trial == 4),]
+avgB1D3 <- mean(B1D3$responseR1, na.rm = T)
+B1N3 <- testN3[which(testN3$Trial == 6),]
+avgB1N3 <- mean(B1N3$responseR1, na.rm = T)
+B3F3 <- testF3[which(testF3$Trial == 14),]
+avgB3F3 <- mean(B3F3$responseR1, na.rm = T)
+B3D3 <- testD3[which(testD3$Trial == 13),]
+avgB3D3 <- mean(B3D3$responseR1, na.rm = T)
+B3N3 <- testN3[which(testN3$Trial == 15),]
+avgB3N3 <- mean(B3N3$responseR1, na.rm = T)
+
+#C
+CF3 <- testF3[which(testF3$Trial == 8),]
+avgCF3 <- mean(CF3$responseR1, na.rm = T)
+CD3 <- testD3[which(testD3$Trial == 7),]
+avgCD3 <- mean(CD3$responseR1, na.rm = T)
+CN3 <- testN3[which(testN3$Trial == 9),]
+avgCN3 <- mean(CN3$responseR1, na.rm = T)
+
+Diamond3 <- c(avgA1D3, avgB1D3, avgX1D3, avgCD3, avgA3D3, avgB3D3, avgX3D3)
+Fossil3 <- c(avgA1F3, avgB1F3, avgX1F3, avgCF3, avgA3F3, avgB3F3, avgX3F3)
+NoDiamond3 <- c(avgA1N3, avgB1N3, avgX1N3, avgCN3, avgA3N3, avgB3N3, avgX3N3)
+Cue <- c("A1", "B1", "X1", "C", "A3", "B3", "X3")
+Phase3 <- data.frame(Cue, Diamond3, Fossil3, NoDiamond3)
+
+Original <- c(ABl1, BBl1, XBl1, "NA", ABl3, BBl3, XBl3)
+Phase3$Original <- as.numeric(Original)
+Phase3
+```
+
+```{r}
+A1D3 <- aggregate(list(A1D3$responseR1), by = list(A1D3$prolific_id), mean, na.rm = T)
+names(A1D3) <- c("Participant", "responseR1")
+B1D3 <- aggregate(list(B1D3$responseR1), by = list(B1D3$prolific_id), mean, na.rm = T)
+names(B1D3) <- c("Participant", "responseR1")
+X1D3 <- aggregate(list(X1D3$responseR2), by = list(X1D3$prolific_id), mean, na.rm = T)
+names(X1D3) <- c("Participant", "responseR2")
+
+A3D3 <- aggregate(list(A3D3$responseR1), by = list(A3D3$prolific_id), mean, na.rm = T)
+names(A3D3) <- c("Participant", "responseR1")
+B3D3 <- aggregate(list(B3D3$responseR1), by = list(B3D3$prolific_id), mean, na.rm = T)
+names(B3D3) <- c("Participant", "responseR1")
+X3D3 <- aggregate(list(X3D3$responseR2), by = list(X3D3$prolific_id), mean, na.rm = T)
+names(X3D3) <- c("Participant", "responseR2")
+
+A1N3 <- aggregate(list(A1N3$responseR1), by = list(A1N3$prolific_id), mean, na.rm = T)
+names(A1N3) <- c("Participant", "responseR1")
+B1N3 <- aggregate(list(B1N3$responseR1), by = list(B1N3$prolific_id), mean, na.rm = T)
+names(B1N3) <- c("Participant", "responseR1")
+X1N3 <- aggregate(list(X1N3$responseR2), by = list(X1N3$prolific_id), mean, na.rm = T)
+names(X1N3) <- c("Participant", "responseR2")
+
+A3N3 <- aggregate(list(A3N3$responseR1), by = list(A3N3$prolific_id), mean, na.rm = T)
+names(A3N3) <- c("Participant", "responseR1")
+B3N3 <- aggregate(list(B3N3$responseR1), by = list(B3N3$prolific_id), mean, na.rm = T)
+names(B3N3) <- c("Participant", "responseR1")
+X3N3 <- aggregate(list(X3N3$responseR2), by = list(X3N3$prolific_id), mean, na.rm = T)
+names(X3N3) <- c("Participant", "responseR2")
+
+CD3 <- aggregate(list(CD3$responseR1), by = list(CD3$prolific_id), mean, na.rm =T)
+names(CD3) <- c("Participant", "responseR1")
+CN3 <- aggregate(list(CN3$responseR1), by = list(CN3$prolific_id), mean, na.rm =T)
+names(CN3) <- c("Participant", "responseR1")
+```
+
+```{r}
+d <- A1D3$responseR1 - train$responseR1[train$blockNr == "Block1" & train$Trial == 15] #NOT NORM DIST
+shapiro.test(d) #p = 0.16
+d <- B1D3$responseR1 - train$responseR2[train$blockNr == "Block1" & train$Trial == 16] #NOT NORM DIST
+shapiro.test(d) #p = 0.12
+d <- X1D3$responseR2 - train$responseR3[train$blockNr == "Block1" & train$Trial == 16] #NOT NORM DIST
+shapiro.test(d) #p = 0.56
+
+d <- A3D3$responseR1 - train$responseR1[train$blockNr == "Block3" & train$Trial == 15] #NOT NORM DIST
+shapiro.test(d) #p = 0.13
+d <- B3D3$responseR1 - train$responseR2[train$blockNr == "Block3" & train$Trial == 16] #NOT NORM DIST
+shapiro.test(d) #p = 0.91
+d <- X3D3$responseR2 - train$responseR3[train$blockNr == "Block3" & train$Trial == 16] #NOT NORM DIST
+shapiro.test(d) #p = 0.08
+
+```
+
+```{r}
+#differences to the original stimuli in the training phase
+wilcox.test(A1D3$responseR1, train$responseR1[train$blockNr == "Block1" & train$Trial == 15], alternative = "two.sided", paired = T) #diff train higher
+wilcox.test(B1D3$responseR1, train$responseR2[train$blockNr == "Block1" & train$Trial == 16], alternative = "two.sided", paired = T) #no diff
+wilcox.test(X1D3$responseR2, train$responseR3[train$blockNr == "Block1" & train$Trial == 16], alternative = "two.sided", paired = T) #no diff
+wilcox.test(A3D3$responseR1, train$responseR1[train$blockNr == "Block3" & train$Trial == 15], alternative = "two.sided", paired = T) #diff train higher
+wilcox.test(B3D3$responseR1, train$responseR2[train$blockNr == "Block3"& train$Trial == 16], alternative = "two.sided", paired = T) #no diff
+wilcox.test(X3D3$responseR2, train$responseR3[train$blockNr == "Block3"& train$Trial == 16], alternative = "two.sided", paired = T) #no diff
+#There are no significant differences between the scores to diamond in the test phase and the scores given in the original block. It seems as though people did notice the categories. 
+```
+
+```{r}
+p <- c(0.02465, 1, 0.8783,   0.02897, 0.888, 0.1708)
+p.adjust(p, method = "holm", n = length(p))
+#all no
+```
+
+```{r}
+d <- A1D3$responseR1 - A1N3$responseR1 #NOT NORM DIST
+shapiro.test(d) #p = 0.16
+d <- B1D3$responseR1 - B1N3$responseR1 #NOT NORM DIST
+shapiro.test(d) #p = 0.12
+d <- X1D3$responseR2 -  X1N3$responseR2 #NOT NORM DIST
+shapiro.test(d) #p = 0.56
+
+d <- A3D3$responseR1 - A3N3$responseR1 #NOT NORM DIST
+shapiro.test(d) #p = 0.13
+d <- B3D3$responseR1 - B3N3$responseR1 #NOT NORM DIST
+shapiro.test(d) #p = 0.91
+d <- X3D3$responseR2 - X3N3$responseR2 #NOT NORM DIST
+shapiro.test(d) #p = 0.08
+
+```
+
+
+```{r}
+#what happens if we see if there is a difference to the scores of A, B and X to allergic and those to no allergic?
+wilcox.test(A1D3$responseR1, A1N3$responseR1, alternative = "two.sided", paired = T) #no diff
+wilcox.test(B1D3$responseR1, B1N3$responseR1, alternative = "two.sided", paired = T) #no diff
+wilcox.test(X1D3$responseR2, X1N3$responseR2, alternative = "two.sided", paired = T) #no diff
+wilcox.test(A3D3$responseR1, A3N3$responseR1, alternative = "two.sided", paired = T) #no diff
+wilcox.test(B3D3$responseR1, B3N3$responseR1, alternative = "two.sided", paired = T) #no diff
+wilcox.test(X3D3$responseR2, X3N3$responseR2, alternative = "two.sided", paired = T) #no diff
+#No differences here. That might indicate that people just were very not sure, as there isn't a clear higher score for a diamond outcome than a non diamond outcome
+```
+
+```{r}
+p <- c(1 ,0.6698, 0.5282,   0.2065, 0.733, 0.2223)
+p.adjust(p, method = "holm", n = length(p))
+#all no
+```

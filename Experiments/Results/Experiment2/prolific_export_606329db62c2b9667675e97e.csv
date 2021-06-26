@@ -1,0 +1,31 @@
+session_id,participant_id,status,started_datetime,completed_date_time,time_taken,age,num_approvals,num_rejections,prolific_score,reviewed_at_datetime,entered_code,Country of Birth,Current Country of Residence,Employment Status,First Language,Fluent languages,Nationality,Sex,Student Status
+608926fcfd226229014d0325,5f5176476494183c40718758,APPROVED,12:33.7,28:30.0,956.28,21,36,1,99,29:50.3,NOCODE,Spain,Spain,Unemployed (and job seeking),DATA EXPIRED,"English, Galician, Spanish",Spain,Male,Yes
+608927166179984370a83225,5c879642f8e57d00168a286e,APPROVED,12:55.7,33:53.1,1257.34,24,226,7,96,29:30.2,NOCODE,Italy,Italy,Unemployed (and job seeking),Italian,"English, Italian",Italy,Male,Yes
+6089271f64b0f69b209df806,5f9ee672868a694c8b64bfbc,APPROVED,13:03.3,43:36.3,1832.987,24,60,0,100,29:13.0,NOCODE,Poland,Poland,Part-Time,,"English, Polish",Poland,Female,Yes
+60892724c4b1444986b2baad,5ebd009d6a8f8f154b919e3a,APPROVED,13:08.9,37:04.2,1435.279,20,40,2,97,06:15.1,NOCODE,Portugal,Portugal,Other,Portuguese,"Portuguese, English",Portugal,Male,Yes
+6089272a1e506f34e48ee400,602e3452f1c6b793faa7bcdd,APPROVED,13:14.9,33:48.9,1234.015,19,28,0,100,26:44.3,NOCODE,Poland,Poland,Unemployed (and job seeking),DATA EXPIRED,"English, Polish",Poland,Male,Yes
+60892731056dc92a69467752,60815ba971b96b9204d01141,APPROVED,14:05.0,39:08.8,1503.88,21,1,0,100,23:08.5,NOCODE,Poland,Poland,Unemployed (and job seeking),,"Polish, English",Poland,Male,Yes
+6089273d790e91bc8c6d1983,602fc5844525b3d343303a2a,APPROVED,13:36.4,31:43.4,1086.954,20,26,0,100,26:20.5,NOCODE,Portugal,Portugal,Other,,"English, Portuguese",Portugal,Female,Yes
+6089274337439b67b00b3104,5ef6d6808c92d83c9a8d24a5,APPROVED,19:52.5,45:56.5,1564.021,24,96,0,100,19:25.4,NOCODE,South Africa,South Africa,Unemployed (and job seeking),English,English,South Africa,Female,Yes
+608927467d39773c8b90b313,5eff169018a0e6046db7c405,APPROVED,13:58.5,40:47.8,1609.332,20,26,0,100,25:13.5,NOCODE,Poland,Poland,Other,Polish,English,Poland,Female,Yes
+60892748f4211f2f9f0e2950,6087b7e0f1f00cdd351f12ad,APPROVED,14:17.1,50:54.1,2196.94,24,1,0,100,22:44.1,NOCODE,Poland,Poland,Unemployed (and job seeking),,"French, Polish, English",Poland,Female,No
+60892752d60a2a93e22bb0d3,5f708631500db165bf081e04,APPROVED,15:05.8,39:35.6,1469.731,23,50,0,100,22:08.3,NOCODE,Colombia,,Unemployed (and job seeking),,"English, Spanish",Colombia,Female,Yes
+60892757b1736cac090dc343,5ed12d21e8cebc04aefac77c,APPROVED,13:59.4,35:12.7,1273.274,21,126,2,100,24:44.7,NOCODE,Poland,Poland,Part-Time,Polish,"Polish, Danish, English",Poland,Male,Yes
+60892758b724c4e85eb521be,6070940003d20d9faf5c1c43,APPROVED,14:04.3,20:41.6,3997.233,22,9,0,100,24:28.1,NOCODE,Italy,Italy,Unemployed (and job seeking),,"English, Italian, Spanish, French",Italy,Female,No
+608927f2f69553aef9980346,6005d880f436527f1bb4c03a,APPROVED,16:34.1,51:05.5,2071.323,24,33,0,100,21:25.5,NOCODE,Italy,Italy,Other,,"English, Italian",Italy,Female,Yes
+6089282e4eed2203be55750c,5dfe08627f08edaa7de5963f,APPROVED,17:34.9,33:03.2,928.34,23,65,0,100,20:42.1,NOCODE,Portugal,Portugal,Part-Time,DATA EXPIRED,"Portuguese, English, Spanish",DATA EXPIRED,Male,Yes
+6089285069b0d7d8953afc7f,605bd0169853b502f34b51c3,APPROVED,18:39.5,44:46.8,1567.354,24,17,0,100,19:47.9,NOCODE,Poland,Poland,Unemployed (and job seeking),,"Polish, English",Poland,Male,Yes
+608939330bd058b0faf09dd9,5fc3f24cdb80f92ddc47afa1,APPROVED,30:11.7,06:54.9,2203.242,23,48,0,100,17:46.9,NOCODE,Poland,Poland,Unemployed (and job seeking),DATA EXPIRED,"Polish, English",Poland,Female,Yes
+6089397e3082a420e6264a7a,60195de5abe00c026804d726,APPROVED,31:26.1,52:23.3,1257.174,21,43,1,100,16:33.2,NOCODE,Portugal,Portugal,Other,,"Portuguese, English",Portugal,Male,Yes
+60893e911f4a2ea3f218d948,5f41301d33e86508afed6917,APPROVED,53:12.1,05:47.8,755.688,21,72,0,100,16:07.9,NOCODE,United Kingdom,United Kingdom,Unemployed (and job seeking),DATA EXPIRED,English,United Kingdom,Female,Yes
+608bab25033955482bb9ca7b,602d84f17cdd707e9caed37a,APPROVED,03:44.0,29:32.7,1548.638,22,80,0,100,12:08.9,NOCODE,Poland,Poland,Unemployed (and job seeking),DATA EXPIRED,"English, Polish",Poland,Female,Yes
+,,,,,,22.05,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+,,,Female,11,,,,,Spain,1,,,,,,Student,18,,
+,,,Male,9,,,,,Italy,3,,,,,,Not,2,,
+,,,,,,,,,Poland,9,Again poland being the most common country,,,,,Of which,Unemployed,2,
+,,,,,,,,,Portugal,3,,,,,,,,,
+,,,,,,,,,South Africa,1,,,,,,,,,
+,,,,,,,,,Colombia,1,,,,,,,,,
+,,,,,,,,,UK,1,,,,,,,,,
+,,,,,,,,,,19,en 1 expired,,,,,,,,

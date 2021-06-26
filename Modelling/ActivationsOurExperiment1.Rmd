@@ -13,6 +13,8 @@ library(plotfunctions)
 source("C:/Users/Sanne/Dropbox/MasterProject/Modelling/OurExperiment1Run.R")
 ```
 
+
+# Condition 75-25 first (Group 1, first row)
 ```{r, echo = FALSE}
 listY <- list()
 FirstRun <- data.frame(Cues = Cues2, Outcomes = Outcome050, stringsAsFactors = FALSE)
@@ -160,10 +162,60 @@ points(c(1:48), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[7]]-(listY2$NoD
 text(51,0.088, labels = Cues[7], col = "orange" )
 points(c(1:48), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[8]]-(listY2$NoDiamond)[listY2$Word==Cues[8]]), type = "l", col = "grey")
 text(51,-0.078, labels = Cues[8], col = "grey" )
-par(xpd=TRUE)
+par(xpd=FALSE)
 abline(v=16, col = "grey", lty = 2)
 abline(v=32, col = "grey", lty = 2)
 ```
+
+```{r}
+par(mfrow = c(1,1))
+par(las = 1)
+emptyPlot(c(1,60),c(-.08,.09), xmark = c(1,16,32,48), ymark = c(-.05, .00, .05), bty='n', main = "Rescorla-Wagner \n Weights to Allergic minus Not Allergic 75-25", xlab="", ylab = "Connection weights")
+mtext("Block 1", side = 1, at = 8, line = 2.5)
+mtext("Block 2", side = 1, at = 24, line = 2.5)
+mtext("Block 3", side = 1, at = 40, line = 2.5)
+points(c(1:48), (listY$Diamond)[listY$Word == Cues[4]]-(listY$NoDiamond)[listY$Word==Cues[4]], type = "l", col = "blue",lwd = 2, lty = 2)
+text(51,0.038, labels = "bran", col = "blue" )
+points(c(1:48), (listY$Diamond)[listY$Word == "env"]-(listY$NoDiamond)[listY$Word=="env"], type = "l", col = "black", lwd = 2, lty = 1)
+text(51,0.01, labels = "env", col = "black")
+points(c(1:48), (listY$Diamond)[listY$Word == Cues[6]]-(listY$NoDiamond)[listY$Word==Cues[6]], type = "l", col = "cyan", lwd = 2, lty = 4)
+text(51,-0.017, labels = "yoghurt", col = "cyan" )
+points(c(1:48), (listY$Diamond)[listY$Word == Cues[5]]-(listY$NoDiamond)[listY$Word==Cues[5]], type = "l", col = "green", lwd = 2, lty = 5)
+text(51,-0.037, labels = "cabbage", col = "green" )
+points(c(1:48), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[3]]-(listY$NoDiamond)[listY$Word==Cues[3]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[1]]-(listY$NoDiamond)[listY$Word==Cues[1]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[2]]-(listY$NoDiamond)[listY$Word==Cues[2]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[9]]-(listY$NoDiamond)[listY$Word==Cues[9]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[7]]-(listY$NoDiamond)[listY$Word==Cues[7]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[8]]-(listY$NoDiamond)[listY$Word==Cues[8]]), type = "l", col = "grey")
+par(xpd = FALSE) 
+abline(v=16, col = "grey", lty = 2)
+abline(v=32, col = "grey", lty = 2)
+
+
+emptyPlot(c(1,60),c(-.08,.09), xmark = c(1,16,32,48), ymark = c(-.05, .00, .05), bty='n', main = "Van Hamme-Wasserman \n Weights to Allergic minus Not Allergic 75-25", xlab="", ylab = "Connection weights")
+mtext("Block 1", side = 1, at = 8, line = 2.5)
+mtext("Block 2", side = 1, at = 24, line = 2.5)
+mtext("Block 3", side = 1, at = 40, line = 2.5)
+points(c(1:48), (listY2$Diamond)[listY2$Word == Cues[4]]-(listY2$NoDiamond)[listY2$Word==Cues[4]], type = "l", col = "blue", lwd = 2, lty=2)
+text(51,0.08, labels = "bran", col = "blue" )
+points(c(1:48), (listY2$Diamond)[listY2$Word == "env"]-(listY2$NoDiamond)[listY2$Word=="env"], type = "l", col = "black", lwd = 2, lty = 1)
+text(51,0.01, labels = "env", col = "black")
+points(c(1:48), (listY2$Diamond)[listY2$Word == Cues[6]]-(listY2$NoDiamond)[listY2$Word==Cues[6]], type = "l", col = "cyan", lwd = 2, lty = 4)
+text(51,-0.017, labels = "yoghurt", col = "cyan" )
+points(c(1:48), (listY2$Diamond)[listY2$Word == Cues[5]]-(listY2$NoDiamond)[listY2$Word==Cues[5]], type = "l", col = "green", lwd = 2, lty = 5)
+text(51,-0.06, labels = "cabbage", col = "green" )
+points(c(1:48), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[3]]-(listY2$NoDiamond)[listY2$Word==Cues[3]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[1]]-(listY2$NoDiamond)[listY2$Word==Cues[1]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[2]]-(listY2$NoDiamond)[listY2$Word==Cues[2]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[9]]-(listY2$NoDiamond)[listY2$Word==Cues[9]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[7]]-(listY2$NoDiamond)[listY2$Word==Cues[7]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[8]]-(listY2$NoDiamond)[listY2$Word==Cues[8]]), type = "l", col = "grey")
+par(xpd=FALSE)
+abline(v=16, col = "grey", lty = 2)
+abline(v=32, col = "grey", lty = 2)
+```
+
 
 ```{r, echo = FALSE}
 par(las=1)
@@ -472,7 +524,7 @@ abline(v=48, col = "grey", lty = 6)
 #THIS IS AN ADJUSTED VERSION FOR IN THE PRESENTATION
 ```{r, echo = FALSE}
 par(las=1)
-emptyPlot(c(1,70),c(-.03,.08), xmark = c(1,16,32,48,58), bty='n', main = "Rescorla-Wagner\n Absent cues are not updated", xlab="", ylab = "Connection weights")
+emptyPlot(c(1,70),c(-.03,.08), xmark = c(1,16,32,48,58), bty='n', main = "Rescorla-Wagner\n Weight to Allergic 75-25", xlab="", ylab = "Connection weights")
 mtext("Block 1", side = 1, at = 8, line = 2.5)
 mtext("Block 2", side = 1, at = 24, line = 2.5)
 mtext("Block 3", side = 1, at = 40, line = 2.5)
@@ -498,7 +550,32 @@ abline(v=16, col = "grey", lty = 2)
 abline(v=32, col = "grey", lty = 2)
 abline(v=48, col = "grey", lty = 6)
 
-emptyPlot(c(1,70),c(-.03,.08), xmark = c(1,16,32,48,58), bty='n', main = "Van Hamme-Wasserman\n Absent cues are updated", xlab="", ylab = "Connection weights")
+# emptyPlot(c(1,70),c(-.03,.08), xmark = c(1,16,32,48,58), bty='n', main = "Van Hamme-Wasserman\n Weight to Allergic 75-25", xlab="", ylab = "Connection weights")
+# mtext("Block 1", side = 1, at = 8, line = 2.5)
+# mtext("Block 2", side = 1, at = 24, line = 2.5)
+# mtext("Block 3", side = 1, at = 40, line = 2.5)
+# mtext("Test Phase", side = 1, at = 56, line = 2.5)
+# points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[4]], type = "l", col = "blue", lty = 2, lwd = 2)
+# text(33,-0.01, labels = "bran", col = "blue"  , cex =1.2)
+# points(c(1:58), (listY2$Diamond)[listY2$Word == "env"], type = "l", col = "black", lty = 1, lwd = 2)
+# text(24,0.08, labels = "env", col = "black" , cex =1.2)
+# points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[6]], type = "l", col = "cyan", lty = 4, lwd = 2)
+# text(48,-0.02, labels = "yoghurt", col = "cyan" , cex =1.2 )
+# points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[5]], type = "l", col = "green", lty = 5, lwd = 2)
+# text(20,-0.02, labels = "cabbage", col = "green"  , cex =1.2)
+# points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[3]]), type = "l", col = "grey")
+# points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[1]]), type = "l", col = "grey")
+# points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[2]]), type = "l", col = "grey")
+# points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[9]]), type = "l", col = "grey")
+# points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[7]]), type = "l", col = "grey")
+# points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[8]]), type = "l", col = "grey")
+# points(c(1:58), c(rep(0,48),(listY2$Diamond)[listY2$Word == "toadstool"]), type = "l", col = "grey")
+# par(xpd=FALSE)
+# abline(v=16, col = "grey", lty = 2)
+# abline(v=32, col = "grey", lty = 2)
+# abline(v=48, col = "grey", lty = 6)
+
+emptyPlot(c(1,70),c(-.13,.08), xmark = c(1,16,32,48,58), bty='n', main = "Van Hamme-Wasserman\n Weight to Allergic 75-25", xlab="", ylab = "Connection weights")
 mtext("Block 1", side = 1, at = 8, line = 2.5)
 mtext("Block 2", side = 1, at = 24, line = 2.5)
 mtext("Block 3", side = 1, at = 40, line = 2.5)
@@ -522,6 +599,1926 @@ par(xpd=FALSE)
 abline(v=16, col = "grey", lty = 2)
 abline(v=32, col = "grey", lty = 2)
 abline(v=48, col = "grey", lty = 6)
+```
+
+```{r, echo = FALSE}
+par(las=1)
+emptyPlot(c(1,70),c(-.03,.08), xmark = c(1,16,32,48,58), bty='n', main = "Rescorla-Wagner\n Weight to Not Allergic 75-25", xlab="", ylab = "Connection weights")
+mtext("Block 1", side = 1, at = 8, line = 2.5)
+mtext("Block 2", side = 1, at = 24, line = 2.5)
+mtext("Block 3", side = 1, at = 40, line = 2.5)
+mtext("Test Phase", side = 1, at = 56, line = 2.5)
+
+points(c(1:58), (listY$NoDiamond)[listY$Word == Cues[4]], type = "l", col = "blue", lty = 2, lwd = 2)
+text(57,0.006, labels = "bran", col = "blue", cex =1.2)
+points(c(1:58), (listY$NoDiamond)[listY$Word == "env"], type = "l", col = "black",  lty = 1, lwd = 2)
+text(24,0.08, labels = "env", col = "black", cex =1.2)
+points(c(1:58), (listY$NoDiamond)[listY$Word == Cues[6]], type = "l", col = "cyan", lty = 4, lwd = 2)
+text(57,0.062, labels = "yoghurt", col = "cyan" , cex =1.2)
+points(c(1:58), (listY$NoDiamond)[listY$Word == Cues[5]], type = "l", col = "green", lty = 5, lwd =2)
+text(57,0.043, labels = "cabbage", col = "green" , cex =1.2)
+points(c(1:58), c(rep(0,16),(listY$NoDiamond)[listY$Word == Cues[3]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY$NoDiamond)[listY$Word == Cues[1]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY$NoDiamond)[listY$Word == Cues[2]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY$NoDiamond)[listY$Word == Cues[9]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY$NoDiamond)[listY$Word == Cues[7]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY$NoDiamond)[listY$Word == Cues[8]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,48),(listY$NoDiamond)[listY$Word == "toadstool"]), type = "l", col = "grey")
+par(xpd=FALSE)
+abline(v=16, col = "grey", lty = 2)
+abline(v=32, col = "grey", lty = 2)
+abline(v=48, col = "grey", lty = 6)
+
+#emptyPlot(c(1,70),c(-.03,.08), xmark = c(1,16,32,48,58), bty='n', main = "Van Hamme-Wasserman\n Weight to Not Allergic 75-25", xlab="", ylab = "Connection weights")
+#mtext("Block 1", side = 1, at = 8, line = 2.5)
+#mtext("Block 2", side = 1, at = 24, line = 2.5)
+#mtext("Block 3", side = 1, at = 40, line = 2.5)
+#mtext("Test Phase", side = 1, at = 56, line = 2.5)
+#points(c(1:58), (listY2$NoDiamond)[listY2$Word == Cues[4]], type = "l", col = "blue", lty = 2, lwd = 2)
+#text(33,-0.01, labels = "bran", col = "blue"  , cex =1.2)
+#points(c(1:58), (listY2$NoDiamond)[listY2$Word == "env"], type = "l", col = "black", lty = 1, lwd = 2)
+#text(24,0.08, labels = "env", col = "black" , cex =1.2)
+#points(c(1:58), (listY2$NoDiamond)[listY2$Word == Cues[6]], type = "l", col = "cyan", lty = 4, lwd = 2)
+#text(48,-0.02, labels = "yoghurt", col = "cyan" , cex =1.2 )
+#points(c(1:58), (listY2$NoDiamond)[listY2$Word == Cues[5]], type = "l", col = "green", lty = 5, lwd = 2)
+#text(20,-0.02, labels = "cabbage", col = "green"  , cex =1.2)
+#points(c(1:58), c(rep(0,16),(listY2$NoDiamond)[listY2$Word == Cues[3]]), type = "l", col = "grey")
+#points(c(1:58), c(rep(0,16),(listY2$NoDiamond)[listY2$Word == Cues[1]]), type = "l", col = "grey")
+#points(c(1:58), c(rep(0,16),(listY2$NoDiamond)[listY2$Word == Cues[2]]), type = "l", col = "grey")
+#points(c(1:58), c(rep(0,32),(listY2$NoDiamond)[listY2$Word == Cues[9]]), type = "l", col = "grey")
+#points(c(1:58), c(rep(0,32),(listY2$NoDiamond)[listY2$Word == Cues[7]]), type = "l", col = "grey")
+#points(c(1:58), c(rep(0,32),(listY2$NoDiamond)[listY2$Word == Cues[8]]), type = "l", col = "grey")
+#points(c(1:58), c(rep(0,48),(listY2$NoDiamond)[listY2$Word == "toadstool"]), type = "l", col = "grey")
+#par(xpd=FALSE)
+#abline(v=16, col = "grey", lty = 2)
+#abline(v=32, col = "grey", lty = 2)
+#abline(v=48, col = "grey", lty = 6)
+
+emptyPlot(c(1,70),c(-.15,.08), xmark = c(1,16,32,48,58), bty='n', main = "Van Hamme-Wasserman\n Weight to Not Allergic 75-25", xlab="", ylab = "Connection weights")
+mtext("Block 1", side = 1, at = 8, line = 2.5)
+mtext("Block 2", side = 1, at = 24, line = 2.5)
+mtext("Block 3", side = 1, at = 40, line = 2.5)
+mtext("Test Phase", side = 1, at = 56, line = 2.5)
+points(c(1:58), (listY2$NoDiamond)[listY2$Word == Cues[4]], type = "l", col = "blue", lty = 2, lwd = 2)
+text(33,-0.07, labels = "bran", col = "blue"  , cex =1.2)
+points(c(1:58), (listY2$NoDiamond)[listY2$Word == "env"], type = "l", col = "black", lty = 1, lwd = 2)
+text(24,0.08, labels = "env", col = "black" , cex =1.2)
+points(c(1:58), (listY2$NoDiamond)[listY2$Word == Cues[6]], type = "l", col = "cyan", lty = 4, lwd = 2)
+text(48,-0.02, labels = "yoghurt", col = "cyan" , cex =1.2 )
+points(c(1:58), (listY2$NoDiamond)[listY2$Word == Cues[5]], type = "l", col = "green", lty = 5, lwd = 2)
+text(50,-0.09, labels = "cabbage", col = "green"  , cex =1.2)
+points(c(1:58), c(rep(0,16),(listY2$NoDiamond)[listY2$Word == Cues[3]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY2$NoDiamond)[listY2$Word == Cues[1]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY2$NoDiamond)[listY2$Word == Cues[2]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY2$NoDiamond)[listY2$Word == Cues[9]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY2$NoDiamond)[listY2$Word == Cues[7]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY2$NoDiamond)[listY2$Word == Cues[8]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,48),(listY2$NoDiamond)[listY2$Word == "toadstool"]), type = "l", col = "grey")
+par(xpd=FALSE)
+abline(v=16, col = "grey", lty = 2)
+abline(v=32, col = "grey", lty = 2)
+abline(v=48, col = "grey", lty = 6)
+
+```
+
+```{r}
+```
+
+# Condition 50-50 first (Group 2, first row)
+```{r, echo = FALSE}
+listY <- list()
+FirstRun <- data.frame(Cues = Cues1, Outcomes = Outcome000, stringsAsFactors = FALSE)
+train.FR <- createTrainingData(FirstRun, random = F)
+wm.FR <- EDLearning(train.FR, progress = F, etaNeg = FALSE)
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.FR,i))
+  df$Trial <- i
+  listX<-list.append(listX, df)
+}
+#listY<- listX
+listY <- bind_rows(listX)
+
+SecondRun <- data.frame(Cues = Cues3, Outcomes = Outcome100, stringsAsFactors = FALSE)
+train.SR <- createTrainingData(SecondRun, random = F)
+wm.SR <- EDLearning(train.SR, progress = F, etaNeg = FALSE, wm = wm.FR[[16]])
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.SR,i))
+  df$Trial <- i+16
+  listX<-list.append(listX, df)
+}
+listZ<- bind_rows(listX)
+listY<- rbind(listY, listZ)
+
+ThirdRun <- data.frame(Cues = Cues2, Outcomes = Outcome050, stringsAsFactors = FALSE)
+train.TR <- createTrainingData(ThirdRun, random = F)
+wm.TR <- EDLearning(train.TR, progress = F, etaNeg = FALSE, wm = wm.SR[[16]])
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.TR,i))
+  df$Trial <- i+32
+  listX<-list.append(listX, df)
+}
+listA<- bind_rows(listX)
+listY<- rbind(listY, listA)
+
+
+word <- c(Cues[1], Cues[2], Cues[3], Cues[4], Cues[5], Cues[6], Cues[7], Cues[8], Cues[9], "env")
+exactWord <- c(Cues[1], Cues[2], Cues[3], Cues[4], Cues[5], Cues[6], Cues[7], Cues[8], Cues[9], "env")
+exactWords <- data.frame(Word = word, exactWord = exactWord, stringsAsFactors = FALSE)
+getexactwords <- exactWords$exactWord
+names(getexactwords) <- exactWords$Word
+listY$Word <- NA
+for(i in 1:nrow(listY)){
+  listY[i,]$Word <- getexactwords[gsub("...[0-9]+", "",row.names(listY[i,]))]
+
+}
+
+listY2 <- list()
+FirstRun <- data.frame(Cues = Cues1, Outcomes = Outcome000, stringsAsFactors = FALSE)
+train.FR <- createTrainingData(FirstRun, random = F)
+wm.FR <- EDLearning(train.FR, progress = F, etaNeg = TRUE)
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.FR,i))
+  df$Trial <- i
+  listX<-list.append(listX, df)
+}
+#listY<- listX
+listY2 <- bind_rows(listX)
+
+SecondRun <- data.frame(Cues = Cues3, Outcomes = Outcome100, stringsAsFactors = FALSE)
+train.SR <- createTrainingData(SecondRun, random = F)
+wm.SR <- EDLearning(train.SR, progress = F, etaNeg = TRUE, wm = wm.FR[[16]])
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.SR,i))
+  df$Trial <- i+16
+  listX<-list.append(listX, df)
+}
+listZ<- bind_rows(listX)
+listY2<- rbind(listY2, listZ)
+
+ThirdRun <- data.frame(Cues = Cues2, Outcomes = Outcome050, stringsAsFactors = FALSE)
+train.TR <- createTrainingData(ThirdRun, random = F)
+wm.TR <- EDLearning(train.TR, progress = F, etaNeg = TRUE, wm = wm.SR[[16]])
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.TR,i))
+  df$Trial <- i+32
+  listX<-list.append(listX, df)
+}
+listA<- bind_rows(listX)
+listY2<- rbind(listY2, listA)
+
+listY2$Word <- NA
+for(i in 1:nrow(listY)){
+  listY2[i,]$Word <- getexactwords[gsub("...[0-9]+", "",row.names(listY2[i,]))]
+
+}
+
+```
+
+
+I'm not quite sure why the numbers are like this!! Recheck!!!
+```{r, echo = FALSE}
+par(mfrow = c(1,1))
+par(las = 1)
+emptyPlot(c(1,60),c(-.08,.09), xmark = c(1,8,16,24,32,40,48), ymark = c(-.05, .00, .05), bty='n', main = "Rescorla-Wagner", xlab="", ylab = "Connection weights")
+points(c(1:48), (listY$Diamond)[listY$Word == Cues[1]]-(listY$NoDiamond)[listY$Word==Cues[1]], type = "l", col = "blue")
+text(51,0.038, labels = Cues[1], col = "blue" )
+points(c(1:48), (listY$Diamond)[listY$Word == "env"]-(listY$NoDiamond)[listY$Word=="env"], type = "l", col = "black")
+text(51,0.01, labels = "env", col = "black")
+points(c(1:48), (listY$Diamond)[listY$Word == Cues[3]]-(listY$NoDiamond)[listY$Word==Cues[3]], type = "l", col = "cyan")
+text(51,-0.017, labels = Cues[3], col = "cyan" )
+points(c(1:48), (listY$Diamond)[listY$Word == Cues[2]]-(listY$NoDiamond)[listY$Word==Cues[2]], type = "l", col = "green")
+text(51,-0.037, labels = Cues[2], col = "green" )
+points(c(1:48), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[9]]-(listY$NoDiamond)[listY$Word==Cues[9]]), type = "l", col = "grey")
+text(51,-0.005, labels = Cues[9], col = "grey" )
+points(c(1:48), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[7]]-(listY$NoDiamond)[listY$Word==Cues[7]]), type = "l", col = "grey")
+text(51,-0.01, labels = Cues[7], col = "grey" )
+points(c(1:48), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[8]]-(listY$NoDiamond)[listY$Word==Cues[8]]), type = "l", col = "grey")
+text(51,0.002, labels = Cues[8], col = "grey" )
+points(c(1:48), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[6]]-(listY$NoDiamond)[listY$Word==Cues[6]]), type = "l", col = "grey")
+text(51,0.018, labels = Cues[6], col = "grey")
+points(c(1:48), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[4]]-(listY$NoDiamond)[listY$Word==Cues[4]]), type = "l", col = "grey")
+text(51,0.07, labels = Cues[4], col = "grey" )
+points(c(1:48), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[5]]-(listY$NoDiamond)[listY$Word==Cues[5]]), type = "l", col = "grey")
+text(51,-0.06, labels = Cues[5], col = "grey" )
+par(xpd = FALSE) 
+abline(v=16, col = "grey", lty = 2)
+abline(v=32, col = "grey", lty = 2)
+
+
+emptyPlot(c(1,60),c(-.08,.09), xmark = c(1,8,16,24,32,40,48), ymark = c(-.075, -.05, -.025, .00, .025, .05, .075), bty='n', main = "Weights to Diamond minus NoDiamond, VHW", xlab="trial nr", ylab = "weights")
+points(c(1:48), (listY2$Diamond)[listY2$Word == Cues[1]]-(listY2$NoDiamond)[listY2$Word==Cues[1]], type = "l", col = "blue")
+text(51,0.08, labels = Cues[1], col = "blue" )
+points(c(1:48), (listY2$Diamond)[listY2$Word == "env"]-(listY2$NoDiamond)[listY2$Word=="env"], type = "l", col = "black")
+text(51,0.01, labels = "env", col = "black")
+points(c(1:48), (listY2$Diamond)[listY2$Word == Cues[3]]-(listY2$NoDiamond)[listY2$Word==Cues[3]], type = "l", col = "cyan")
+text(51,-0.017, labels = Cues[3], col = "cyan" )
+points(c(1:48), (listY2$Diamond)[listY2$Word == Cues[2]]-(listY2$NoDiamond)[listY2$Word==Cues[2]], type = "l", col = "green")
+text(51,-0.06, labels = Cues[2], col = "green" )
+points(c(1:48), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[9]]-(listY2$NoDiamond)[listY2$Word==Cues[9]]), type = "l", col = "pink")
+text(51,-0.005, labels = Cues[9], col = "pink" )
+points(c(1:48), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[7]]-(listY2$NoDiamond)[listY2$Word==Cues[7]]), type = "l", col = "red")
+text(51,-0.01, labels = Cues[7], col = "red" )
+points(c(1:48), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[8]]-(listY2$NoDiamond)[listY2$Word==Cues[8]]), type = "l", col = "brown")
+text(51,0.002, labels = Cues[8], col = "brown" )
+points(c(1:48), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[6]]-(listY2$NoDiamond)[listY2$Word==Cues[6]]), type = "l", col = "yellow2")
+text(51,0.018, labels = Cues[6], col = "yellow2")
+points(c(1:48), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[4]]-(listY2$NoDiamond)[listY2$Word==Cues[4]]), type = "l", col = "orange")
+text(51,0.088, labels = Cues[4], col = "orange" )
+points(c(1:48), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[5]]-(listY2$NoDiamond)[listY2$Word==Cues[5]]), type = "l", col = "grey")
+text(51,-0.078, labels = Cues[5], col = "grey" )
+par(xpd=FALSE)
+abline(v=16, col = "grey", lty = 2)
+abline(v=32, col = "grey", lty = 2)
+```
+
+```{r}
+par(mfrow = c(1,1))
+par(las = 1)
+emptyPlot(c(1,60),c(-.08,.09), xmark = c(1,16,32,48), ymark = c(-.05, .00, .05), bty='n', main = "Rescorla-Wagner \n Weights to Allergic minus Not Allergic 50-50", xlab="", ylab = "Connection weights")
+mtext("Block 1", side = 1, at = 8, line = 2.5)
+mtext("Block 2", side = 1, at = 24, line = 2.5)
+mtext("Block 3", side = 1, at = 40, line = 2.5)
+points(c(1:48), (listY$Diamond)[listY$Word == Cues[1]]-(listY$NoDiamond)[listY$Word==Cues[1]], type = "l", col = "blue",lwd = 2, lty = 2)
+text(51,0.0, labels = "bran", col = "blue" )
+points(c(1:48), (listY$Diamond)[listY$Word == "env"]-(listY$NoDiamond)[listY$Word=="env"], type = "l", col = "black", lwd = 2, lty = 1)
+text(51,0.01, labels = "env", col = "black")
+points(c(1:48), (listY$Diamond)[listY$Word == Cues[3]]-(listY$NoDiamond)[listY$Word==Cues[3]], type = "l", col = "cyan", lwd = 2, lty = 4)
+text(51,-0.01, labels = "yoghurt", col = "cyan" )
+points(c(1:48), (listY$Diamond)[listY$Word == Cues[2]]-(listY$NoDiamond)[listY$Word==Cues[2]], type = "l", col = "green", lwd = 2, lty = 5)
+text(51,-0.02, labels = "cabbage", col = "green" )
+points(c(1:48), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[9]]-(listY$NoDiamond)[listY$Word==Cues[9]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[7]]-(listY$NoDiamond)[listY$Word==Cues[7]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[8]]-(listY$NoDiamond)[listY$Word==Cues[8]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[6]]-(listY$NoDiamond)[listY$Word==Cues[6]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[4]]-(listY$NoDiamond)[listY$Word==Cues[4]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[5]]-(listY$NoDiamond)[listY$Word==Cues[5]]), type = "l", col = "grey")
+par(xpd = FALSE) 
+abline(v=16, col = "grey", lty = 2)
+abline(v=32, col = "grey", lty = 2)
+
+
+emptyPlot(c(1,60),c(-.08,.09), xmark = c(1,16,32,48), ymark = c(-.05, .00, .05), bty='n', main = "Van Hamme-Wasserman \n Weights to Allergic minus Not Allergic 50-50", xlab="", ylab = "Connection weights")
+mtext("Block 1", side = 1, at = 8, line = 2.5)
+mtext("Block 2", side = 1, at = 24, line = 2.5)
+mtext("Block 3", side = 1, at = 40, line = 2.5)
+points(c(1:48), (listY2$Diamond)[listY2$Word == Cues[1]]-(listY2$NoDiamond)[listY2$Word==Cues[1]], type = "l", col = "blue", lwd = 2, lty=2)
+text(51,-0.02, labels = "bran", col = "blue" )
+points(c(1:48), (listY2$Diamond)[listY2$Word == "env"]-(listY2$NoDiamond)[listY2$Word=="env"], type = "l", col = "black", lwd = 2, lty = 1)
+text(51,0.00, labels = "env", col = "black")
+points(c(1:48), (listY2$Diamond)[listY2$Word == Cues[3]]-(listY2$NoDiamond)[listY2$Word==Cues[3]], type = "l", col = "cyan", lwd = 2, lty = 4)
+text(51,-0.01, labels = "yoghurt", col = "cyan" )
+points(c(1:48), (listY2$Diamond)[listY2$Word == Cues[2]]-(listY2$NoDiamond)[listY2$Word==Cues[2]], type = "l", col = "green", lwd = 2, lty = 5)
+text(51,0.01, labels = "cabbage", col = "green" )
+points(c(1:48), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[9]]-(listY2$NoDiamond)[listY2$Word==Cues[9]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[7]]-(listY2$NoDiamond)[listY2$Word==Cues[7]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[8]]-(listY2$NoDiamond)[listY2$Word==Cues[8]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[6]]-(listY2$NoDiamond)[listY2$Word==Cues[6]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[4]]-(listY2$NoDiamond)[listY2$Word==Cues[4]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[5]]-(listY2$NoDiamond)[listY2$Word==Cues[5]]), type = "l", col = "grey")
+par(xpd=FALSE)
+abline(v=16, col = "grey", lty = 2)
+abline(v=32, col = "grey", lty = 2)
+```
+
+
+```{r, echo = FALSE}
+par(las=1)
+emptyPlot(c(1,60),c(-.03,.08), xmark = c(1,8,16,24,32,40,48), bty='n', main = "Weights to Diamond, RW", xlab="trial nr", ylab = "weights")
+points(c(1:48), (listY$Diamond)[listY$Word == Cues[1]], type = "l", col = "blue", lty = 2)
+text(51,0.055, labels = Cues[1], col = "blue" )
+points(c(1:48), (listY$Diamond)[listY$Word == "env"], type = "l", col = "black")
+text(24,0.08, labels = "env", col = "black")
+points(c(1:48), (listY$Diamond)[listY$Word == Cues[3]], type = "l", col = "cyan")
+text(51,0.07, labels = Cues[3], col = "cyan" )
+points(c(1:48), (listY$Diamond)[listY$Word == Cues[2]], type = "l", col = "green")
+text(51,0.018, labels = Cues[2], col = "green" )
+points(c(1:48), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[9]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[7]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[8]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[6]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[4]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[5]]), type = "l", col = "grey")
+par(xpd=FALSE)
+abline(v=16, col = "grey", lty = 2)
+abline(v=32, col = "grey", lty = 2)
+
+emptyPlot(c(1,60),c(-.03,.08), xmark = c(1,8,16,24,32,40,48), bty='n', main = "Weights to Diamond, VHW", xlab="trial nr", ylab = "weights")
+points(c(1:48), (listY2$Diamond)[listY2$Word == Cues[1]], type = "l", col = "blue", lty = 2)
+text(33,-0.01, labels = Cues[1], col = "blue" )
+points(c(1:48), (listY2$Diamond)[listY2$Word == "env"], type = "l", col = "black")
+text(24,0.08, labels = "env", col = "black")
+points(c(1:48), (listY2$Diamond)[listY2$Word == Cues[3]], type = "l", col = "cyan")
+text(48,-0.02, labels = Cues[3], col = "cyan" )
+points(c(1:48), (listY2$Diamond)[listY2$Word == Cues[2]], type = "l", col = "green")
+text(20,-0.02, labels = Cues[2], col = "green" )
+points(c(1:48), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[9]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[7]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[8]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[6]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[4]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[5]]), type = "l", col = "grey")
+par(xpd=FALSE)
+abline(v=16, col = "grey", lty = 2)
+abline(v=32, col = "grey", lty = 2)
+
+
+
+```
+
+
+```{r, echo = FALSE}
+listY <- list()
+FirstRun <- data.frame(Cues = Cues1, Outcomes = Outcome000, stringsAsFactors = FALSE)
+train.FR <- createTrainingData(FirstRun, random = F)
+wm.FR <- EDLearning(train.FR, progress = F, etaNeg = FALSE)
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.FR,i))
+  df$Trial <- i
+  listX<-list.append(listX, df)
+}
+#listY<- listX
+listY <- bind_rows(listX)
+
+SecondRun <- data.frame(Cues = Cues3, Outcomes = Outcome100, stringsAsFactors = FALSE)
+train.SR <- createTrainingData(SecondRun, random = F)
+wm.SR <- EDLearning(train.SR, progress = F, etaNeg = FALSE, wm = wm.FR[[16]])
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.SR,i))
+  df$Trial <- i+16
+  listX<-list.append(listX, df)
+}
+listZ<- bind_rows(listX)
+listY<- rbind(listY, listZ)
+
+ThirdRun <- data.frame(Cues = Cues2, Outcomes = Outcome050, stringsAsFactors = FALSE)
+train.TR <- createTrainingData(ThirdRun, random = F)
+wm.TR <- EDLearning(train.TR, progress = F, etaNeg = FALSE, wm = wm.SR[[16]])
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.TR,i))
+  df$Trial <- i+32
+  listX<-list.append(listX, df)
+}
+listA<- bind_rows(listX)
+listY<- rbind(listY, listA)
+
+listY$Fossil <- NA
+XBlock1 <- str_split(Cues2[1], pattern = "_", simplify = TRUE)[1,3]
+NewCue <- str_replace("env_toadstool_X", "X", XBlock1)
+
+CuesTP1 <- c(Cues1[1], Cues1[1], Cues1[2], Cues1[2], NewCue, NewCue, Cues2[1], Cues2[1], Cues2[2], Cues2[2])
+CuesTP2 <- c(Cues1[1], Cues1[1], Cues1[2], Cues1[2], NewCue, NewCue, Cues2[1], Cues2[1], Cues2[2], Cues2[2])
+CuesTP3 <- c("env_straw_shrimp", "env_straw_shrimp", "env_straw_shrimp", "env_peanuts_shrimp", "env_peanuts_shrimp", "env_peanuts_shrimp",
+                 "env_yoghurt_shrimp", "env_yoghurt_shrimp", "env_yoghurt_shrimp", "env_bran_pork", "env_bran_pork", "env_bran_pork",
+                 "env_chicken_pork", "env_chicken_pork", "env_chicken_pork")
+Outcomes1 <- c("Diamond", "Fossil", "Diamond", "Fossil","Diamond", "Fossil", "Diamond", "Fossil", "Diamond", "Fossil")
+Outcomes2 <- c("Diamond", "Fossil", "Diamond", "Fossil","Diamond", "Fossil", "Diamond", "Fossil", "Diamond", "Fossil")
+Outcomes3 <- c("Diamond", "Fossil", "NoDiamond", "Diamond", "Fossil", "NoDiamond", "Diamond", "Fossil", "NoDiamond", "Diamond", "Fossil", "NoDiamond", "Diamond", "Fossil", "NoDiamond")
+
+FirstTestRun <- data.frame(Cues = CuesTP1, Outcomes = Outcomes1, stringsAsFactors = FALSE)
+train.FTR <- createTrainingData(FirstTestRun, random = F)
+wm.FTR <- EDLearning(train.FTR, progress = F, etaNeg = F, wm = wm.TR[[16]])
+listX <- list()
+ for(i in 1:10){
+   df <- as.data.frame(getWM(wm.FTR,i))
+   df$Trial <- i+48
+   listX <- list.append(listX, df)
+ }
+ listB <- bind_rows(listX)
+ listY <- rbind(listY, listB)
+     
+
+    
+    # SecondTestRun <- data.frame(Cues = CuesTP2, Outcomes = Outcomes2, stringsAsFactors = FALSE)
+    # train.STR <- createTrainingData(SecondTestRun, random = T)
+    # wm.STR <- EDLearning(train.STR, progress = F, etaNeg = etaNeg, wm = wm.FTR[[10]])
+    # for (i in 1:10){
+    #   wm5<-as.data.frame(getWM(wm.STR, i))
+    #   wm5$Trial <- i
+    #   for (j in 1:nrow(wm5)){
+    #     cue = rownames(wm5)
+    #     if(!(cue[j] %in% rownames(wm.STR[[10]]))|cue[j] == "env") {
+    #       wm_list5 <- list.append(wm_list5, wm5[cue[j],])
+    #     }
+    #   }
+    # }
+    # Run5 <- bind_rows(wm_list5)
+    # Run5$Cond <- "Phase2"
+    # Run5$Stage <- "Test"
+    # 
+    # ###
+    # 
+    # ThirdTestRun <- data.frame(Cues = CuesTP3, Outcomes = Outcomes3, StringsAsFactors = FALSE)
+    # train.TTR <- createTrainingData(ThirdTestRun, random = T)
+    # wm.TTR <- EDLearning(train.TTR, progress = F, etaNeg = etaNeg, wm = wm.STR[[10]])
+    # for (i in 1:15){
+    #   wm6 <- as.data.frame(getWM(wm.TTR, i))
+    #   wm6$Trial <- i
+    #   for(j in 1:nrow(wm6)){
+    #     cue = rownames(wm6)
+    #     if(!(cue[j] %in% rownames(wm.TTR[[15]]))|cue[j] == "env"){
+    #       wm_list6 <- list.append(wm_list6, wm6[cue[j],])
+    #     }
+    #   }
+    # }
+    # Run6 <- bind_rows(wm_list6)
+    # Run6$Cond <- "Phase3"
+    # Run6$Stage <- "Test"
+    # wm_totalTest <- list.append(wm_totalTest, Run4, Run5, Run6)
+
+
+
+
+word <- c(Cues[1], Cues[2], Cues[3], Cues[4], Cues[5], Cues[6], Cues[7], Cues[8], Cues[9], "env", "toadstool")
+exactWord <- c(Cues[1], Cues[2], Cues[3], Cues[4], Cues[5], Cues[6], Cues[7], Cues[8], Cues[9], "env", "toadstool")
+exactWords <- data.frame(Word = word, exactWord = exactWord, stringsAsFactors = FALSE)
+getexactwords <- exactWords$exactWord
+names(getexactwords) <- exactWords$Word
+listY$Word <- NA
+for(i in 1:nrow(listY)){
+  listY[i,]$Word <- getexactwords[gsub("...[0-9]+", "",row.names(listY[i,]))]
+
+}
+################
+
+listY2 <- list()
+FirstRun <- data.frame(Cues = Cues1, Outcomes = Outcome000, stringsAsFactors = FALSE)
+train.FR <- createTrainingData(FirstRun, random = F)
+wm.FR <- EDLearning(train.FR, progress = F, etaNeg = TRUE)
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.FR,i))
+  df$Trial <- i
+  listX<-list.append(listX, df)
+}
+#listY<- listX
+listY2 <- bind_rows(listX)
+
+SecondRun <- data.frame(Cues = Cues3, Outcomes = Outcome100, stringsAsFactors = FALSE)
+train.SR <- createTrainingData(SecondRun, random = F)
+wm.SR <- EDLearning(train.SR, progress = F, etaNeg = TRUE, wm = wm.FR[[16]])
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.SR,i))
+  df$Trial <- i+16
+  listX<-list.append(listX, df)
+}
+listZ<- bind_rows(listX)
+listY2<- rbind(listY2, listZ)
+
+ThirdRun <- data.frame(Cues = Cues2, Outcomes = Outcome050, stringsAsFactors = FALSE)
+train.TR <- createTrainingData(ThirdRun, random = F)
+wm.TR <- EDLearning(train.TR, progress = F, etaNeg = TRUE, wm = wm.SR[[16]])
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.TR,i))
+  df$Trial <- i+32
+  listX<-list.append(listX, df)
+}
+listA<- bind_rows(listX)
+listY2<- rbind(listY2, listA)
+listY2$Fossil <- NA
+
+FirstTestRun <- data.frame(Cues = CuesTP1, Outcomes = Outcomes1, stringsAsFactors = FALSE)
+train.FTR <- createTrainingData(FirstTestRun, random = F)
+wm.FTR <- EDLearning(train.FTR, progress = F, etaNeg = F, wm = wm.TR[[16]])
+listX <- list()
+ for(i in 1:10){
+   df <- as.data.frame(getWM(wm.FTR,i))
+   df$Trial <- i+48
+   listX <- list.append(listX, df)
+ }
+ listB <- bind_rows(listX)
+ listY2 <- rbind(listY2, listB)
+
+
+listY2$Word <- NA
+for(i in 1:nrow(listY2)){
+  listY2[i,]$Word <- getexactwords[gsub("...[0-9]+", "",row.names(listY2[i,]))]
+
+}
+
+```
+
+```{r, echo = FALSE}
+par(las=1)
+emptyPlot(c(1,70),c(-.03,.08), xmark = c(1,8,16,24,32,40,48,58), bty='n', main = "Rescorla-Wagner", xlab="", ylab = "Connection weights")
+mtext("Block 1", side = 1, at = 8, line = 2.5)
+mtext("Block 2", side = 1, at = 24, line = 2.5)
+mtext("Block 3", side = 1, at = 40, line = 2.5)
+mtext("Test Phase", side = 1, at = 56, line = 2.5)
+
+points(c(1:58), (listY$Diamond)[listY$Word == Cues[1]], type = "l", col = "blue", lty = 2)
+text(57,0.050, labels = Cues[1], col = "blue" )
+points(c(1:58), (listY$Diamond)[listY$Word == "env"], type = "l", col = "black")
+text(24,0.08, labels = "env", col = "black")
+points(c(1:58), (listY$Diamond)[listY$Word == Cues[3]], type = "l", col = "cyan")
+text(57,0.075, labels = Cues[3], col = "cyan" )
+points(c(1:58), (listY$Diamond)[listY$Word == Cues[2]], type = "l", col = "green")
+text(57,0.015, labels = Cues[2], col = "green" )
+points(c(1:58), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[9]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[7]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[8]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[6]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[4]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[5]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,48),(listY$Diamond)[listY$Word == "toadstool"]), type = "l", col = "grey")
+par(xpd=FALSE)
+abline(v=16, col = "grey", lty = 2)
+abline(v=32, col = "grey", lty = 2)
+abline(v=48, col = "grey", lty = 6)
+
+emptyPlot(c(1,70),c(-.03,.08), xmark = c(1,8,16,24,32,40,48,58), bty='n', main = "Van Hamme-Wasserman", xlab="", ylab = "Connection weights")
+mtext("Block 1", side = 1, at = 8, line = 2.5)
+mtext("Block 2", side = 1, at = 24, line = 2.5)
+mtext("Block 3", side = 1, at = 40, line = 2.5)
+mtext("Test Phase", side = 1, at = 56, line = 2.5)
+points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[1]], type = "l", col = "blue", lty = 2)
+text(33,-0.01, labels = Cues[1], col = "blue" )
+points(c(1:58), (listY2$Diamond)[listY2$Word == "env"], type = "l", col = "black")
+text(24,0.08, labels = "env", col = "black")
+points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[3]], type = "l", col = "cyan")
+text(48,-0.02, labels = Cues[3], col = "cyan" )
+points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[2]], type = "l", col = "green")
+text(20,-0.02, labels = Cues[2], col = "green" )
+points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[9]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[7]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[8]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[6]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[4]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[5]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,48),(listY2$Diamond)[listY2$Word == "toadstool"]), type = "l", col = "grey")
+par(xpd=FALSE)
+abline(v=16, col = "grey", lty = 2)
+abline(v=32, col = "grey", lty = 2)
+abline(v=48, col = "grey", lty = 6)
+
+emptyPlot(c(1,70),c(-.13,.08), xmark = c(1,8,16,24,32,40,48,58), bty='n', main = "Van Hamme-Wasserman", xlab="", ylab = "Connection weights")
+mtext("Block 1", side = 1, at = 8, line = 2.5)
+mtext("Block 2", side = 1, at = 24, line = 2.5)
+mtext("Block 3", side = 1, at = 40, line = 2.5)
+mtext("Test Phase", side = 1, at = 56, line = 2.5)
+points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[1]], type = "l", col = "blue", lty = 2)
+text(33,-0.01, labels = Cues[1], col = "blue" )
+points(c(1:58), (listY2$Diamond)[listY2$Word == "env"], type = "l", col = "black")
+text(24,0.08, labels = "env", col = "black")
+points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[3]], type = "l", col = "cyan")
+text(48,-0.02, labels = Cues[3], col = "cyan" )
+points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[2]], type = "l", col = "green")
+text(20,-0.02, labels = Cues[2], col = "green" )
+points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[9]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[7]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[8]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[6]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[4]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[5]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,48),(listY2$Diamond)[listY2$Word == "toadstool"]), type = "l", col = "grey")
+par(xpd=FALSE)
+abline(v=16, col = "grey", lty = 2)
+abline(v=32, col = "grey", lty = 2)
+abline(v=48, col = "grey", lty = 6)
+
+```
+
+#THIS IS AN ADJUSTED VERSION FOR IN THE PRESENTATION
+```{r, echo = FALSE}
+par(las=1)
+emptyPlot(c(1,70),c(-.03,.08), xmark = c(1,16,32,48,58), bty='n', main = "Rescorla-Wagner\n Weight to Allergic 50-50", xlab="", ylab = "Connection weights")
+mtext("Block 1", side = 1, at = 8, line = 2.5)
+mtext("Block 2", side = 1, at = 24, line = 2.5)
+mtext("Block 3", side = 1, at = 40, line = 2.5)
+mtext("Test Phase", side = 1, at = 56, line = 2.5)
+
+points(c(1:58), (listY$Diamond)[listY$Word == Cues[1]], type = "l", col = "blue", lty = 2, lwd = 2)
+text(57,0.043, labels = "bran", col = "blue", cex =1.2)
+points(c(1:58), (listY$Diamond)[listY$Word == "env"], type = "l", col = "black",  lty = 1, lwd = 2)
+text(24,0.08, labels = "env", col = "black", cex =1.2)
+points(c(1:58), (listY$Diamond)[listY$Word == Cues[3]], type = "l", col = "cyan", lty = 4, lwd = 2)
+text(57,0.08, labels = "yoghurt", col = "cyan" , cex =1.2)
+points(c(1:58), (listY$Diamond)[listY$Word == Cues[2]], type = "l", col = "green", lty = 5, lwd =2)
+text(57,0.03, labels = "cabbage", col = "green" , cex =1.2)
+points(c(1:58), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[9]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[7]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[8]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[6]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[4]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[5]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,48),(listY$Diamond)[listY$Word == "toadstool"]), type = "l", col = "grey")
+par(xpd=FALSE)
+abline(v=16, col = "grey", lty = 2)
+abline(v=32, col = "grey", lty = 2)
+abline(v=48, col = "grey", lty = 6)
+
+# emptyPlot(c(1,70),c(-.03,.08), xmark = c(1,16,32,48,58), bty='n', main = "Van Hamme-Wasserman\n Weight to Allergic 50-50", xlab="", ylab = "Connection weights")
+# mtext("Block 1", side = 1, at = 8, line = 2.5)
+# mtext("Block 2", side = 1, at = 24, line = 2.5)
+# mtext("Block 3", side = 1, at = 40, line = 2.5)
+# mtext("Test Phase", side = 1, at = 56, line = 2.5)
+# points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[1]], type = "l", col = "blue", lty = 2, lwd = 2)
+# text(33,-0.01, labels = "bran", col = "blue"  , cex =1.2)
+# points(c(1:58), (listY2$Diamond)[listY2$Word == "env"], type = "l", col = "black", lty = 1, lwd = 2)
+# text(24,0.08, labels = "env", col = "black" , cex =1.2)
+# points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[3]], type = "l", col = "cyan", lty = 4, lwd = 2)
+# text(48,-0.02, labels = "yoghurt", col = "cyan" , cex =1.2 )
+# points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[2]], type = "l", col = "green", lty = 5, lwd = 2)
+# text(20,-0.02, labels = "cabbage", col = "green"  , cex =1.2)
+# points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[9]]), type = "l", col = "grey")
+# points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[7]]), type = "l", col = "grey")
+# points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[8]]), type = "l", col = "grey")
+# points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[6]]), type = "l", col = "grey")
+# points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[4]]), type = "l", col = "grey")
+# points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[5]]), type = "l", col = "grey")
+# points(c(1:58), c(rep(0,48),(listY2$Diamond)[listY2$Word == "toadstool"]), type = "l", col = "grey")
+# par(xpd=FALSE)
+# abline(v=16, col = "grey", lty = 2)
+# abline(v=32, col = "grey", lty = 2)
+# abline(v=48, col = "grey", lty = 6)
+
+emptyPlot(c(1,70),c(-.13,.08), xmark = c(1,16,32,48,58), bty='n', main = "Van Hamme-Wasserman\n Weight to Allergic 50-50", xlab="", ylab = "Connection weights")
+mtext("Block 1", side = 1, at = 8, line = 2.5)
+mtext("Block 2", side = 1, at = 24, line = 2.5)
+mtext("Block 3", side = 1, at = 40, line = 2.5)
+mtext("Test Phase", side = 1, at = 56, line = 2.5)
+points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[1]], type = "l", col = "blue", lty = 2, lwd = 2)
+text(39,-0.1, labels = "bran", col = "blue"  , cex =1.2)
+points(c(1:58), (listY2$Diamond)[listY2$Word == "env"], type = "l", col = "black", lty = 1, lwd = 2)
+text(24,0.08, labels = "env", col = "black" , cex =1.2)
+points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[3]], type = "l", col = "cyan", lty = 4, lwd = 2)
+text(53,-0.013, labels = "yoghurt", col = "cyan" , cex =1.2 )
+points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[2]], type = "l", col = "green", lty = 5, lwd = 2)
+text(42,-0.06, labels = "cabbage", col = "green"  , cex =1.2)
+points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[9]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[7]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[8]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[6]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[4]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[5]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,48),(listY2$Diamond)[listY2$Word == "toadstool"]), type = "l", col = "grey")
+par(xpd=FALSE)
+abline(v=16, col = "grey", lty = 2)
+abline(v=32, col = "grey", lty = 2)
+abline(v=48, col = "grey", lty = 6)
+
+```
+
+```{r, echo = FALSE}
+par(las=1)
+emptyPlot(c(1,70),c(-.03,.08), xmark = c(1,16,32,48,58), bty='n', main = "Rescorla-Wagner\n Weight to Not Allergic 50-50", xlab="", ylab = "Connection weights")
+mtext("Block 1", side = 1, at = 8, line = 2.5)
+mtext("Block 2", side = 1, at = 24, line = 2.5)
+mtext("Block 3", side = 1, at = 40, line = 2.5)
+mtext("Test Phase", side = 1, at = 56, line = 2.5)
+
+points(c(1:58), (listY$NoDiamond)[listY$Word == Cues[1]], type = "l", col = "blue", lty = 2, lwd = 2)
+text(57,0.025, labels = "bran", col = "blue", cex =1.2)
+points(c(1:58), (listY$NoDiamond)[listY$Word == "env"], type = "l", col = "black",  lty = 1, lwd = 2)
+text(24,0.08, labels = "env", col = "black", cex =1.2)
+points(c(1:58), (listY$NoDiamond)[listY$Word == Cues[3]], type = "l", col = "cyan", lty = 4, lwd = 2)
+text(57,0.062, labels = "yoghurt", col = "cyan" , cex =1.2)
+points(c(1:58), (listY$NoDiamond)[listY$Word == Cues[2]], type = "l", col = "green", lty = 5, lwd =2)
+text(57,0.035, labels = "cabbage", col = "green" , cex =1.2)
+points(c(1:58), c(rep(0,16),(listY$NoDiamond)[listY$Word == Cues[9]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY$NoDiamond)[listY$Word == Cues[7]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY$NoDiamond)[listY$Word == Cues[8]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY$NoDiamond)[listY$Word == Cues[6]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY$NoDiamond)[listY$Word == Cues[4]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY$NoDiamond)[listY$Word == Cues[5]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,48),(listY$NoDiamond)[listY$Word == "toadstool"]), type = "l", col = "grey")
+par(xpd=FALSE)
+abline(v=16, col = "grey", lty = 2)
+abline(v=32, col = "grey", lty = 2)
+abline(v=48, col = "grey", lty = 6)
+# 
+# emptyPlot(c(1,70),c(-.03,.08), xmark = c(1,16,32,48,58), bty='n', main = "Van Hamme-Wasserman\n Weight to Allergic 50-50", xlab="", ylab = "Connection weights")
+# mtext("Block 1", side = 1, at = 8, line = 2.5)
+# mtext("Block 2", side = 1, at = 24, line = 2.5)
+# mtext("Block 3", side = 1, at = 40, line = 2.5)
+# mtext("Test Phase", side = 1, at = 56, line = 2.5)
+# points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[1]], type = "l", col = "blue", lty = 2, lwd = 2)
+# text(33,-0.01, labels = "bran", col = "blue"  , cex =1.2)
+# points(c(1:58), (listY2$Diamond)[listY2$Word == "env"], type = "l", col = "black", lty = 1, lwd = 2)
+# text(24,0.08, labels = "env", col = "black" , cex =1.2)
+# points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[3]], type = "l", col = "cyan", lty = 4, lwd = 2)
+# text(48,-0.02, labels = "yoghurt", col = "cyan" , cex =1.2 )
+# points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[2]], type = "l", col = "green", lty = 5, lwd = 2)
+# text(20,-0.02, labels = "cabbage", col = "green"  , cex =1.2)
+# points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[9]]), type = "l", col = "grey")
+# points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[7]]), type = "l", col = "grey")
+# points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[8]]), type = "l", col = "grey")
+# points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[6]]), type = "l", col = "grey")
+# points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[4]]), type = "l", col = "grey")
+# points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[5]]), type = "l", col = "grey")
+# points(c(1:58), c(rep(0,48),(listY2$Diamond)[listY2$Word == "toadstool"]), type = "l", col = "grey")
+# par(xpd=FALSE)
+# abline(v=16, col = "grey", lty = 2)
+# abline(v=32, col = "grey", lty = 2)
+# abline(v=48, col = "grey", lty = 6)
+
+emptyPlot(c(1,70),c(-.13,.08), xmark = c(1,16,32,48,58), bty='n', main = "Van Hamme-Wasserman\n Weight to Not Allergic 50-50", xlab="", ylab = "Connection weights")
+mtext("Block 1", side = 1, at = 8, line = 2.5)
+mtext("Block 2", side = 1, at = 24, line = 2.5)
+mtext("Block 3", side = 1, at = 40, line = 2.5)
+mtext("Test Phase", side = 1, at = 56, line = 2.5)
+points(c(1:58), (listY2$NoDiamond)[listY2$Word == Cues[1]], type = "l", col = "blue", lty = 2, lwd = 2)
+text(52,-0.1, labels = "bran", col = "blue"  , cex =1.2)
+points(c(1:58), (listY2$NoDiamond)[listY2$Word == "env"], type = "l", col = "black", lty = 1, lwd = 2)
+text(24,0.08, labels = "env", col = "black" , cex =1.2)
+points(c(1:58), (listY2$NoDiamond)[listY2$Word == Cues[3]], type = "l", col = "cyan", lty = 4, lwd = 2)
+text(53,-0.02, labels = "yoghurt", col = "cyan" , cex =1.2 )
+points(c(1:58), (listY2$NoDiamond)[listY2$Word == Cues[2]], type = "l", col = "green", lty = 5, lwd = 2)
+text(54,-0.123, labels = "cabbage", col = "green"  , cex =1.2)
+points(c(1:58), c(rep(0,16),(listY2$NoDiamond)[listY2$Word == Cues[9]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY2$NoDiamond)[listY2$Word == Cues[7]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY2$NoDiamond)[listY2$Word == Cues[8]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY2$NoDiamond)[listY2$Word == Cues[6]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY2$NoDiamond)[listY2$Word == Cues[4]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY2$NoDiamond)[listY2$Word == Cues[5]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,48),(listY2$NoDiamond)[listY2$Word == "toadstool"]), type = "l", col = "grey")
+par(xpd=FALSE)
+abline(v=16, col = "grey", lty = 2)
+abline(v=32, col = "grey", lty = 2)
+abline(v=48, col = "grey", lty = 6)
+
+```
+
+# Condition 100-0 first (Group 3, first row)
+```{r, echo = FALSE}
+listY <- list()
+FirstRun <- data.frame(Cues = Cues3, Outcomes = Outcome100, stringsAsFactors = FALSE)
+train.FR <- createTrainingData(FirstRun, random = F)
+wm.FR <- EDLearning(train.FR, progress = F, etaNeg = FALSE)
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.FR,i))
+  df$Trial <- i
+  listX<-list.append(listX, df)
+}
+#listY<- listX
+listY <- bind_rows(listX)
+
+SecondRun <- data.frame(Cues = Cues2, Outcomes = Outcome050, stringsAsFactors = FALSE)
+train.SR <- createTrainingData(SecondRun, random = F)
+wm.SR <- EDLearning(train.SR, progress = F, etaNeg = FALSE, wm = wm.FR[[16]])
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.SR,i))
+  df$Trial <- i+16
+  listX<-list.append(listX, df)
+}
+listZ<- bind_rows(listX)
+listY<- rbind(listY, listZ)
+
+ThirdRun <- data.frame(Cues = Cues1, Outcomes = Outcome000, stringsAsFactors = FALSE)
+train.TR <- createTrainingData(ThirdRun, random = F)
+wm.TR <- EDLearning(train.TR, progress = F, etaNeg = FALSE, wm = wm.SR[[16]])
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.TR,i))
+  df$Trial <- i+32
+  listX<-list.append(listX, df)
+}
+listA<- bind_rows(listX)
+listY<- rbind(listY, listA)
+
+
+word <- c(Cues[1], Cues[2], Cues[3], Cues[4], Cues[5], Cues[6], Cues[7], Cues[8], Cues[9], "env")
+exactWord <- c(Cues[1], Cues[2], Cues[3], Cues[4], Cues[5], Cues[6], Cues[7], Cues[8], Cues[9], "env")
+exactWords <- data.frame(Word = word, exactWord = exactWord, stringsAsFactors = FALSE)
+getexactwords <- exactWords$exactWord
+names(getexactwords) <- exactWords$Word
+listY$Word <- NA
+for(i in 1:nrow(listY)){
+  listY[i,]$Word <- getexactwords[gsub("...[0-9]+", "",row.names(listY[i,]))]
+
+}
+
+listY2 <- list()
+FirstRun <- data.frame(Cues = Cues3, Outcomes = Outcome100, stringsAsFactors = FALSE)
+train.FR <- createTrainingData(FirstRun, random = F)
+wm.FR <- EDLearning(train.FR, progress = F, etaNeg = TRUE)
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.FR,i))
+  df$Trial <- i
+  listX<-list.append(listX, df)
+}
+#listY<- listX
+listY2 <- bind_rows(listX)
+
+SecondRun <- data.frame(Cues = Cues2, Outcomes = Outcome050, stringsAsFactors = FALSE)
+train.SR <- createTrainingData(SecondRun, random = F)
+wm.SR <- EDLearning(train.SR, progress = F, etaNeg = TRUE, wm = wm.FR[[16]])
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.SR,i))
+  df$Trial <- i+16
+  listX<-list.append(listX, df)
+}
+listZ<- bind_rows(listX)
+listY2<- rbind(listY2, listZ)
+
+ThirdRun <- data.frame(Cues = Cues1, Outcomes = Outcome000, stringsAsFactors = FALSE)
+train.TR <- createTrainingData(ThirdRun, random = F)
+wm.TR <- EDLearning(train.TR, progress = F, etaNeg = TRUE, wm = wm.SR[[16]])
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.TR,i))
+  df$Trial <- i+32
+  listX<-list.append(listX, df)
+}
+listA<- bind_rows(listX)
+listY2<- rbind(listY2, listA)
+
+listY2$Word <- NA
+for(i in 1:nrow(listY)){
+  listY2[i,]$Word <- getexactwords[gsub("...[0-9]+", "",row.names(listY2[i,]))]
+
+}
+
+```
+
+
+PAPER
+```{r, echo = FALSE}
+par(mfrow = c(1,1))
+par(las = 1)
+emptyPlot(c(1,60),c(-.08,.09), xmark = c(1,8,16,24,32,40,48), ymark = c(-.05, .00, .05), bty='n', main = "Rescorla-Wagner", xlab="", ylab = "Connection weights")
+points(c(1:48), (listY$Diamond)[listY$Word == Cues[7]]-(listY$NoDiamond)[listY$Word==Cues[7]], type = "l", col = "blue")
+text(51,0.038, labels = Cues[7], col = "blue" )
+points(c(1:48), (listY$Diamond)[listY$Word == "env"]-(listY$NoDiamond)[listY$Word=="env"], type = "l", col = "black")
+text(51,0.01, labels = "env", col = "black")
+points(c(1:48), (listY$Diamond)[listY$Word == Cues[9]]-(listY$NoDiamond)[listY$Word==Cues[9]], type = "l", col = "cyan")
+text(51,-0.017, labels = Cues[9], col = "cyan" )
+points(c(1:48), (listY$Diamond)[listY$Word == Cues[8]]-(listY$NoDiamond)[listY$Word==Cues[8]], type = "l", col = "green")
+text(51,-0.037, labels = Cues[8], col = "green" )
+points(c(1:48), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[6]]-(listY$NoDiamond)[listY$Word==Cues[6]]), type = "l", col = "grey")
+text(51,-0.005, labels = Cues[6], col = "grey" )
+points(c(1:48), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[4]]-(listY$NoDiamond)[listY$Word==Cues[4]]), type = "l", col = "grey")
+text(51,-0.01, labels = Cues[4], col = "grey" )
+points(c(1:48), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[5]]-(listY$NoDiamond)[listY$Word==Cues[5]]), type = "l", col = "grey")
+text(51,0.002, labels = Cues[5], col = "grey" )
+points(c(1:48), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[3]]-(listY$NoDiamond)[listY$Word==Cues[3]]), type = "l", col = "grey")
+text(51,0.018, labels = Cues[3], col = "grey")
+points(c(1:48), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[1]]-(listY$NoDiamond)[listY$Word==Cues[1]]), type = "l", col = "grey")
+text(51,0.07, labels = Cues[1], col = "grey" )
+points(c(1:48), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[2]]-(listY$NoDiamond)[listY$Word==Cues[2]]), type = "l", col = "grey")
+text(51,-0.06, labels = Cues[2], col = "grey" )
+par(xpd = FALSE) 
+abline(v=16, col = "grey", lty = 2)
+abline(v=32, col = "grey", lty = 2)
+
+
+emptyPlot(c(1,60),c(-.08,.09), xmark = c(1,8,16,24,32,40,48), ymark = c(-.075, -.05, -.025, .00, .025, .05, .075), bty='n', main = "Weights to Diamond minus NoDiamond, VHW", xlab="trial nr", ylab = "weights")
+points(c(1:48), (listY2$Diamond)[listY2$Word == Cues[7]]-(listY2$NoDiamond)[listY2$Word==Cues[7]], type = "l", col = "blue")
+text(51,0.08, labels = Cues[7], col = "blue" )
+points(c(1:48), (listY2$Diamond)[listY2$Word == "env"]-(listY2$NoDiamond)[listY2$Word=="env"], type = "l", col = "black")
+text(51,0.01, labels = "env", col = "black")
+points(c(1:48), (listY2$Diamond)[listY2$Word == Cues[9]]-(listY2$NoDiamond)[listY2$Word==Cues[9]], type = "l", col = "cyan")
+text(51,-0.017, labels = Cues[9], col = "cyan" )
+points(c(1:48), (listY2$Diamond)[listY2$Word == Cues[8]]-(listY2$NoDiamond)[listY2$Word==Cues[8]], type = "l", col = "green")
+text(51,-0.06, labels = Cues[8], col = "green" )
+points(c(1:48), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[6]]-(listY2$NoDiamond)[listY2$Word==Cues[6]]), type = "l", col = "pink")
+text(51,-0.005, labels = Cues[6], col = "pink" )
+points(c(1:48), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[4]]-(listY2$NoDiamond)[listY2$Word==Cues[4]]), type = "l", col = "red")
+text(51,-0.01, labels = Cues[4], col = "red" )
+points(c(1:48), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[5]]-(listY2$NoDiamond)[listY2$Word==Cues[5]]), type = "l", col = "brown")
+text(51,0.002, labels = Cues[5], col = "brown" )
+points(c(1:48), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[3]]-(listY2$NoDiamond)[listY2$Word==Cues[3]]), type = "l", col = "yellow2")
+text(51,0.018, labels = Cues[3], col = "yellow2")
+points(c(1:48), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[1]]-(listY2$NoDiamond)[listY2$Word==Cues[1]]), type = "l", col = "orange")
+text(51,0.088, labels = Cues[1], col = "orange" )
+points(c(1:48), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[2]]-(listY2$NoDiamond)[listY2$Word==Cues[2]]), type = "l", col = "grey")
+text(51,-0.078, labels = Cues[2], col = "grey" )
+par(xpd=FALSE)
+abline(v=16, col = "grey", lty = 2)
+abline(v=32, col = "grey", lty = 2)
+```
+
+```{r}
+par(mfrow = c(1,1))
+par(las = 1)
+emptyPlot(c(1,60),c(-.15,.15), xmark = c(1,16,32,48), bty='n', main = "Rescorla-Wagner \n Weights to Allergic minus Not Allergic 100-0", xlab="", ylab = "Connection weights")
+mtext("Block 1", side = 1, at = 8, line = 2.5)
+mtext("Block 2", side = 1, at = 24, line = 2.5)
+mtext("Block 3", side = 1, at = 40, line = 2.5)
+points(c(1:48), (listY$Diamond)[listY$Word == Cues[7]]-(listY$NoDiamond)[listY$Word==Cues[7]], type = "l", col = "blue",lwd = 2, lty = 2)
+text(51,0.083, labels = "bran", col = "blue" )
+points(c(1:48), (listY$Diamond)[listY$Word == "env"]-(listY$NoDiamond)[listY$Word=="env"], type = "l", col = "black", lwd = 2, lty = 1)
+text(51,0.00, labels = "env", col = "black")
+points(c(1:48), (listY$Diamond)[listY$Word == Cues[9]]-(listY$NoDiamond)[listY$Word==Cues[9]], type = "l", col = "cyan", lwd = 2, lty = 4)
+text(51,-0.01, labels = "yoghurt", col = "cyan" )
+points(c(1:48), (listY$Diamond)[listY$Word == Cues[8]]-(listY$NoDiamond)[listY$Word==Cues[8]], type = "l", col = "green", lwd = 2, lty = 5)
+text(51,-0.07, labels = "cabbage", col = "green" )
+points(c(1:48), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[6]]-(listY$NoDiamond)[listY$Word==Cues[6]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[4]]-(listY$NoDiamond)[listY$Word==Cues[4]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[5]]-(listY$NoDiamond)[listY$Word==Cues[5]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[3]]-(listY$NoDiamond)[listY$Word==Cues[3]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[1]]-(listY$NoDiamond)[listY$Word==Cues[1]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[2]]-(listY$NoDiamond)[listY$Word==Cues[2]]), type = "l", col = "grey")
+par(xpd = FALSE) 
+abline(v=16, col = "grey", lty = 2)
+abline(v=32, col = "grey", lty = 2)
+
+
+emptyPlot(c(1,60),c(-.15,.15), xmark = c(1,16,32,48), bty='n', main = "Van Hamme-Wasserman \n Weights to Allergic minus Not Allergic 100-0", xlab="", ylab = "Connection weights")
+mtext("Block 1", side = 1, at = 8, line = 2.5)
+mtext("Block 2", side = 1, at = 24, line = 2.5)
+mtext("Block 3", side = 1, at = 40, line = 2.5)
+points(c(1:48), (listY2$Diamond)[listY2$Word == Cues[7]]-(listY2$NoDiamond)[listY2$Word==Cues[7]], type = "l", col = "blue", lwd = 2, lty=2)
+text(51,0.15, labels = "bran", col = "blue" )
+points(c(1:48), (listY2$Diamond)[listY2$Word == "env"]-(listY2$NoDiamond)[listY2$Word=="env"], type = "l", col = "black", lwd = 2, lty = 1)
+text(51,0.00, labels = "env", col = "black")
+points(c(1:48), (listY2$Diamond)[listY2$Word == Cues[9]]-(listY2$NoDiamond)[listY2$Word==Cues[9]], type = "l", col = "cyan", lwd = 2, lty = 4)
+text(51,-0.01, labels = "yoghurt", col = "cyan" )
+points(c(1:48), (listY2$Diamond)[listY2$Word == Cues[8]]-(listY2$NoDiamond)[listY2$Word==Cues[8]], type = "l", col = "green", lwd = 2, lty = 5)
+text(51,-0.15, labels = "cabbage", col = "green" )
+points(c(1:48), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[6]]-(listY2$NoDiamond)[listY2$Word==Cues[6]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[4]]-(listY2$NoDiamond)[listY2$Word==Cues[4]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[5]]-(listY2$NoDiamond)[listY2$Word==Cues[5]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[3]]-(listY2$NoDiamond)[listY2$Word==Cues[3]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[1]]-(listY2$NoDiamond)[listY2$Word==Cues[1]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[2]]-(listY2$NoDiamond)[listY2$Word==Cues[2]]), type = "l", col = "grey")
+par(xpd=FALSE)
+abline(v=16, col = "grey", lty = 2)
+abline(v=32, col = "grey", lty = 2)
+```
+
+```{r, echo = FALSE}
+par(las=1)
+emptyPlot(c(1,60),c(-.03,.08), xmark = c(1,8,16,24,32,40,48), bty='n', main = "Weights to Diamond, RW", xlab="trial nr", ylab = "weights")
+points(c(1:48), (listY$Diamond)[listY$Word == Cues[7]], type = "l", col = "blue", lty = 2)
+text(51,0.055, labels = Cues[7], col = "blue" )
+points(c(1:48), (listY$Diamond)[listY$Word == "env"], type = "l", col = "black")
+text(24,0.08, labels = "env", col = "black")
+points(c(1:48), (listY$Diamond)[listY$Word == Cues[9]], type = "l", col = "cyan")
+text(51,0.07, labels = Cues[9], col = "cyan" )
+points(c(1:48), (listY$Diamond)[listY$Word == Cues[8]], type = "l", col = "green")
+text(51,0.018, labels = Cues[8], col = "green" )
+points(c(1:48), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[6]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[4]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[5]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[3]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[1]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[2]]), type = "l", col = "grey")
+par(xpd=FALSE)
+abline(v=16, col = "grey", lty = 2)
+abline(v=32, col = "grey", lty = 2)
+
+emptyPlot(c(1,60),c(-.03,.08), xmark = c(1,8,16,24,32,40,48), bty='n', main = "Weights to Diamond, VHW", xlab="trial nr", ylab = "weights")
+points(c(1:48), (listY2$Diamond)[listY2$Word == Cues[7]], type = "l", col = "blue", lty = 2)
+text(33,-0.01, labels = Cues[7], col = "blue" )
+points(c(1:48), (listY2$Diamond)[listY2$Word == "env"], type = "l", col = "black")
+text(24,0.08, labels = "env", col = "black")
+points(c(1:48), (listY2$Diamond)[listY2$Word == Cues[9]], type = "l", col = "cyan")
+text(48,-0.02, labels = Cues[9], col = "cyan" )
+points(c(1:48), (listY2$Diamond)[listY2$Word == Cues[8]], type = "l", col = "green")
+text(20,-0.02, labels = Cues[8], col = "green" )
+points(c(1:48), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[6]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[4]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[5]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[3]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[1]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[2]]), type = "l", col = "grey")
+par(xpd=FALSE)
+abline(v=16, col = "grey", lty = 2)
+abline(v=32, col = "grey", lty = 2)
+```
+
+
+
+
+
+```{r, echo = FALSE}
+listY <- list()
+FirstRun <- data.frame(Cues = Cues3, Outcomes = Outcome100, stringsAsFactors = FALSE)
+train.FR <- createTrainingData(FirstRun, random = F)
+wm.FR <- EDLearning(train.FR, progress = F, etaNeg = FALSE)
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.FR,i))
+  df$Trial <- i
+  listX<-list.append(listX, df)
+}
+#listY<- listX
+listY <- bind_rows(listX)
+
+SecondRun <- data.frame(Cues = Cues2, Outcomes = Outcome050, stringsAsFactors = FALSE)
+train.SR <- createTrainingData(SecondRun, random = F)
+wm.SR <- EDLearning(train.SR, progress = F, etaNeg = FALSE, wm = wm.FR[[16]])
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.SR,i))
+  df$Trial <- i+16
+  listX<-list.append(listX, df)
+}
+listZ<- bind_rows(listX)
+listY<- rbind(listY, listZ)
+
+ThirdRun <- data.frame(Cues = Cues1, Outcomes = Outcome000, stringsAsFactors = FALSE)
+train.TR <- createTrainingData(ThirdRun, random = F)
+wm.TR <- EDLearning(train.TR, progress = F, etaNeg = FALSE, wm = wm.SR[[16]])
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.TR,i))
+  df$Trial <- i+32
+  listX<-list.append(listX, df)
+}
+listA<- bind_rows(listX)
+listY<- rbind(listY, listA)
+
+listY$Fossil <- NA
+XBlock1 <- str_split(Cues2[1], pattern = "_", simplify = TRUE)[1,3]
+NewCue <- str_replace("env_toadstool_X", "X", XBlock1)
+
+CuesTP1 <- c(Cues3[1], Cues3[1], Cues3[2], Cues3[2], NewCue, NewCue, Cues1[1], Cues1[1], Cues1[2], Cues1[2])
+CuesTP2 <- c(Cues3[1], Cues3[1], Cues3[2], Cues3[2], NewCue, NewCue, Cues1[1], Cues1[1], Cues1[2], Cues1[2])
+CuesTP3 <- c("env_straw_shrimp", "env_straw_shrimp", "env_straw_shrimp", "env_peanuts_shrimp", "env_peanuts_shrimp", "env_peanuts_shrimp",
+                 "env_yoghurt_shrimp", "env_yoghurt_shrimp", "env_yoghurt_shrimp", "env_bran_pork", "env_bran_pork", "env_bran_pork",
+                 "env_chicken_pork", "env_chicken_pork", "env_chicken_pork")
+Outcomes1 <- c("Diamond", "Fossil", "Diamond", "Fossil","Diamond", "Fossil", "Diamond", "Fossil", "Diamond", "Fossil")
+Outcomes2 <- c("Diamond", "Fossil", "Diamond", "Fossil","Diamond", "Fossil", "Diamond", "Fossil", "Diamond", "Fossil")
+Outcomes3 <- c("Diamond", "Fossil", "NoDiamond", "Diamond", "Fossil", "NoDiamond", "Diamond", "Fossil", "NoDiamond", "Diamond", "Fossil", "NoDiamond", "Diamond", "Fossil", "NoDiamond")
+
+FirstTestRun <- data.frame(Cues = CuesTP1, Outcomes = Outcomes1, stringsAsFactors = FALSE)
+train.FTR <- createTrainingData(FirstTestRun, random = F)
+wm.FTR <- EDLearning(train.FTR, progress = F, etaNeg = F, wm = wm.TR[[16]])
+listX <- list()
+ for(i in 1:10){
+   df <- as.data.frame(getWM(wm.FTR,i))
+   df$Trial <- i+48
+   listX <- list.append(listX, df)
+ }
+ listB <- bind_rows(listX)
+ listY <- rbind(listY, listB)
+     
+
+    
+    # SecondTestRun <- data.frame(Cues = CuesTP2, Outcomes = Outcomes2, stringsAsFactors = FALSE)
+    # train.STR <- createTrainingData(SecondTestRun, random = T)
+    # wm.STR <- EDLearning(train.STR, progress = F, etaNeg = etaNeg, wm = wm.FTR[[10]])
+    # for (i in 1:10){
+    #   wm5<-as.data.frame(getWM(wm.STR, i))
+    #   wm5$Trial <- i
+    #   for (j in 1:nrow(wm5)){
+    #     cue = rownames(wm5)
+    #     if(!(cue[j] %in% rownames(wm.STR[[10]]))|cue[j] == "env") {
+    #       wm_list5 <- list.append(wm_list5, wm5[cue[j],])
+    #     }
+    #   }
+    # }
+    # Run5 <- bind_rows(wm_list5)
+    # Run5$Cond <- "Phase2"
+    # Run5$Stage <- "Test"
+    # 
+    # ###
+    # 
+    # ThirdTestRun <- data.frame(Cues = CuesTP3, Outcomes = Outcomes3, StringsAsFactors = FALSE)
+    # train.TTR <- createTrainingData(ThirdTestRun, random = T)
+    # wm.TTR <- EDLearning(train.TTR, progress = F, etaNeg = etaNeg, wm = wm.STR[[10]])
+    # for (i in 1:15){
+    #   wm6 <- as.data.frame(getWM(wm.TTR, i))
+    #   wm6$Trial <- i
+    #   for(j in 1:nrow(wm6)){
+    #     cue = rownames(wm6)
+    #     if(!(cue[j] %in% rownames(wm.TTR[[15]]))|cue[j] == "env"){
+    #       wm_list6 <- list.append(wm_list6, wm6[cue[j],])
+    #     }
+    #   }
+    # }
+    # Run6 <- bind_rows(wm_list6)
+    # Run6$Cond <- "Phase3"
+    # Run6$Stage <- "Test"
+    # wm_totalTest <- list.append(wm_totalTest, Run4, Run5, Run6)
+
+
+
+
+word <- c(Cues[1], Cues[2], Cues[3], Cues[4], Cues[5], Cues[6], Cues[7], Cues[8], Cues[9], "env", "toadstool")
+exactWord <- c(Cues[1], Cues[2], Cues[3], Cues[4], Cues[5], Cues[6], Cues[7], Cues[8], Cues[9], "env", "toadstool")
+exactWords <- data.frame(Word = word, exactWord = exactWord, stringsAsFactors = FALSE)
+getexactwords <- exactWords$exactWord
+names(getexactwords) <- exactWords$Word
+listY$Word <- NA
+for(i in 1:nrow(listY)){
+  listY[i,]$Word <- getexactwords[gsub("...[0-9]+", "",row.names(listY[i,]))]
+
+}
+################
+
+listY2 <- list()
+FirstRun <- data.frame(Cues = Cues3, Outcomes = Outcome100, stringsAsFactors = FALSE)
+train.FR <- createTrainingData(FirstRun, random = F)
+wm.FR <- EDLearning(train.FR, progress = F, etaNeg = TRUE)
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.FR,i))
+  df$Trial <- i
+  listX<-list.append(listX, df)
+}
+#listY<- listX
+listY2 <- bind_rows(listX)
+
+SecondRun <- data.frame(Cues = Cues2, Outcomes = Outcome050, stringsAsFactors = FALSE)
+train.SR <- createTrainingData(SecondRun, random = F)
+wm.SR <- EDLearning(train.SR, progress = F, etaNeg = TRUE, wm = wm.FR[[16]])
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.SR,i))
+  df$Trial <- i+16
+  listX<-list.append(listX, df)
+}
+listZ<- bind_rows(listX)
+listY2<- rbind(listY2, listZ)
+
+ThirdRun <- data.frame(Cues = Cues1, Outcomes = Outcome000, stringsAsFactors = FALSE)
+train.TR <- createTrainingData(ThirdRun, random = F)
+wm.TR <- EDLearning(train.TR, progress = F, etaNeg = TRUE, wm = wm.SR[[16]])
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.TR,i))
+  df$Trial <- i+32
+  listX<-list.append(listX, df)
+}
+listA<- bind_rows(listX)
+listY2<- rbind(listY2, listA)
+listY2$Fossil <- NA
+
+FirstTestRun <- data.frame(Cues = CuesTP1, Outcomes = Outcomes1, stringsAsFactors = FALSE)
+train.FTR <- createTrainingData(FirstTestRun, random = F)
+wm.FTR <- EDLearning(train.FTR, progress = F, etaNeg = F, wm = wm.TR[[16]])
+listX <- list()
+ for(i in 1:10){
+   df <- as.data.frame(getWM(wm.FTR,i))
+   df$Trial <- i+48
+   listX <- list.append(listX, df)
+ }
+ listB <- bind_rows(listX)
+ listY2 <- rbind(listY2, listB)
+
+
+listY2$Word <- NA
+for(i in 1:nrow(listY2)){
+  listY2[i,]$Word <- getexactwords[gsub("...[0-9]+", "",row.names(listY2[i,]))]
+
+}
+
+```
+
+```{r, echo = FALSE}
+par(las=1)
+emptyPlot(c(1,70),c(-.03,.08), xmark = c(1,8,16,24,32,40,48,58), bty='n', main = "Rescorla-Wagner", xlab="", ylab = "Connection weights")
+mtext("Block 1", side = 1, at = 8, line = 2.5)
+mtext("Block 2", side = 1, at = 24, line = 2.5)
+mtext("Block 3", side = 1, at = 40, line = 2.5)
+mtext("Test Phase", side = 1, at = 56, line = 2.5)
+
+points(c(1:58), (listY$Diamond)[listY$Word == Cues[7]], type = "l", col = "blue", lty = 2)
+text(57,0.050, labels = Cues[7], col = "blue" )
+points(c(1:58), (listY$Diamond)[listY$Word == "env"], type = "l", col = "black")
+text(24,0.08, labels = "env", col = "black")
+points(c(1:58), (listY$Diamond)[listY$Word == Cues[9]], type = "l", col = "cyan")
+text(57,0.075, labels = Cues[9], col = "cyan" )
+points(c(1:58), (listY$Diamond)[listY$Word == Cues[8]], type = "l", col = "green")
+text(57,0.015, labels = Cues[8], col = "green" )
+points(c(1:58), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[6]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[4]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[5]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[3]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[1]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[2]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,48),(listY$Diamond)[listY$Word == "toadstool"]), type = "l", col = "grey")
+par(xpd=FALSE)
+abline(v=16, col = "grey", lty = 2)
+abline(v=32, col = "grey", lty = 2)
+abline(v=48, col = "grey", lty = 6)
+
+emptyPlot(c(1,70),c(-.03,.08), xmark = c(1,8,16,24,32,40,48,58), bty='n', main = "Van Hamme-Wasserman", xlab="", ylab = "Connection weights")
+mtext("Block 1", side = 1, at = 8, line = 2.5)
+mtext("Block 2", side = 1, at = 24, line = 2.5)
+mtext("Block 3", side = 1, at = 40, line = 2.5)
+mtext("Test Phase", side = 1, at = 56, line = 2.5)
+points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[7]], type = "l", col = "blue", lty = 2)
+text(33,-0.01, labels = Cues[7], col = "blue" )
+points(c(1:58), (listY2$Diamond)[listY2$Word == "env"], type = "l", col = "black")
+text(24,0.08, labels = "env", col = "black")
+points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[9]], type = "l", col = "cyan")
+text(48,-0.02, labels = Cues[9], col = "cyan" )
+points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[8]], type = "l", col = "green")
+text(20,-0.02, labels = Cues[8], col = "green" )
+points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[6]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[4]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[5]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[3]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[1]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[2]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,48),(listY2$Diamond)[listY2$Word == "toadstool"]), type = "l", col = "grey")
+par(xpd=FALSE)
+abline(v=16, col = "grey", lty = 2)
+abline(v=32, col = "grey", lty = 2)
+abline(v=48, col = "grey", lty = 6)
+
+emptyPlot(c(1,70),c(-.13,.08), xmark = c(1,8,16,24,32,40,48,58), bty='n', main = "Van Hamme-Wasserman", xlab="", ylab = "Connection weights")
+mtext("Block 1", side = 1, at = 8, line = 2.5)
+mtext("Block 2", side = 1, at = 24, line = 2.5)
+mtext("Block 3", side = 1, at = 40, line = 2.5)
+mtext("Test Phase", side = 1, at = 56, line = 2.5)
+points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[7]], type = "l", col = "blue", lty = 2)
+text(33,-0.01, labels = Cues[7], col = "blue" )
+points(c(1:58), (listY2$Diamond)[listY2$Word == "env"], type = "l", col = "black")
+text(24,0.08, labels = "env", col = "black")
+points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[9]], type = "l", col = "cyan")
+text(48,-0.02, labels = Cues[9], col = "cyan" )
+points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[8]], type = "l", col = "green")
+text(20,-0.02, labels = Cues[8], col = "green" )
+points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[6]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[4]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[5]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[3]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[1]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[2]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,48),(listY2$Diamond)[listY2$Word == "toadstool"]), type = "l", col = "grey")
+par(xpd=FALSE)
+abline(v=16, col = "grey", lty = 2)
+abline(v=32, col = "grey", lty = 2)
+abline(v=48, col = "grey", lty = 6)
+
+```
+
+#THIS IS AN ADJUSTED VERSION FOR IN THE PRESENTATION
+```{r, echo = FALSE}
+par(las=1)
+emptyPlot(c(1,70),c(-.03,.08), xmark = c(1,16,32,48,58), bty='n', main = "Rescorla-Wagner\n Weight to Allergic 100-0", xlab="", ylab = "Connection weights")
+mtext("Block 1", side = 1, at = 8, line = 2.5)
+mtext("Block 2", side = 1, at = 24, line = 2.5)
+mtext("Block 3", side = 1, at = 40, line = 2.5)
+mtext("Test Phase", side = 1, at = 56, line = 2.5)
+
+points(c(1:58), (listY$Diamond)[listY$Word == Cues[7]], type = "l", col = "blue", lty = 2, lwd = 2)
+text(57,0.08, labels = "bran", col = "blue", cex =1.2)
+points(c(1:58), (listY$Diamond)[listY$Word == "env"], type = "l", col = "black",  lty = 1, lwd = 2)
+text(24,0.08, labels = "env", col = "black", cex =1.2)
+points(c(1:58), (listY$Diamond)[listY$Word == Cues[9]], type = "l", col = "cyan", lty = 4, lwd = 2)
+text(57,0.071, labels = "yoghurt", col = "cyan" , cex =1.2)
+points(c(1:58), (listY$Diamond)[listY$Word == Cues[8]], type = "l", col = "green", lty = 5, lwd =2)
+text(57,0.005, labels = "cabbage", col = "green" , cex =1.2)
+points(c(1:58), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[6]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[4]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[5]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[3]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[1]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[2]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,48),(listY$Diamond)[listY$Word == "toadstool"]), type = "l", col = "grey")
+par(xpd=FALSE)
+abline(v=16, col = "grey", lty = 2)
+abline(v=32, col = "grey", lty = 2)
+abline(v=48, col = "grey", lty = 6)
+
+# emptyPlot(c(1,70),c(-.03,.08), xmark = c(1,16,32,48,58), bty='n', main = "Van Hamme-Wasserman\n Absent cues are updated", xlab="", ylab = "Connection weights")
+# mtext("Block 1", side = 1, at = 8, line = 2.5)
+# mtext("Block 2", side = 1, at = 24, line = 2.5)
+# mtext("Block 3", side = 1, at = 40, line = 2.5)
+# mtext("Test Phase", side = 1, at = 56, line = 2.5)
+# points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[7]], type = "l", col = "blue", lty = 2, lwd = 2)
+# text(33,-0.01, labels = "bran", col = "blue"  , cex =1.2)
+# points(c(1:58), (listY2$Diamond)[listY2$Word == "env"], type = "l", col = "black", lty = 1, lwd = 2)
+# text(24,0.08, labels = "env", col = "black" , cex =1.2)
+# points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[9]], type = "l", col = "cyan", lty = 4, lwd = 2)
+# text(48,-0.02, labels = "yoghurt", col = "cyan" , cex =1.2 )
+# points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[8]], type = "l", col = "green", lty = 5, lwd = 2)
+# text(20,-0.02, labels = "cabbage", col = "green"  , cex =1.2)
+# points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[6]]), type = "l", col = "grey")
+# points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[4]]), type = "l", col = "grey")
+# points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[5]]), type = "l", col = "grey")
+# points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[3]]), type = "l", col = "grey")
+# points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[1]]), type = "l", col = "grey")
+# points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[2]]), type = "l", col = "grey")
+# points(c(1:58), c(rep(0,48),(listY2$Diamond)[listY2$Word == "toadstool"]), type = "l", col = "grey")
+# par(xpd=FALSE)
+# abline(v=16, col = "grey", lty = 2)
+# abline(v=32, col = "grey", lty = 2)
+# abline(v=48, col = "grey", lty = 6)
+
+emptyPlot(c(1,70),c(-.13,.08), xmark = c(1,16,32,48,58), bty='n', main = "Van Hamme-Wasserman\n Weight to Allergic 100-0", xlab="", ylab = "Connection weights")
+mtext("Block 1", side = 1, at = 8, line = 2.5)
+mtext("Block 2", side = 1, at = 24, line = 2.5)
+mtext("Block 3", side = 1, at = 40, line = 2.5)
+mtext("Test Phase", side = 1, at = 56, line = 2.5)
+points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[7]], type = "l", col = "blue", lty = 2, lwd = 2)
+text(52,-0.035, labels = "bran", col = "blue"  , cex =1.2)
+points(c(1:58), (listY2$Diamond)[listY2$Word == "env"], type = "l", col = "black", lty = 1, lwd = 2)
+text(24,0.08, labels = "env", col = "black" , cex =1.2)
+points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[9]], type = "l", col = "cyan", lty = 4, lwd = 2)
+text(52,-0.01, labels = "yoghurt", col = "cyan" , cex =1.2 )
+points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[8]], type = "l", col = "green", lty = 5, lwd = 2)
+text(24,-0.06, labels = "cabbage", col = "green"  , cex =1.2)
+points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[6]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[4]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[5]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[3]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[1]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[2]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,48),(listY2$Diamond)[listY2$Word == "toadstool"]), type = "l", col = "grey")
+par(xpd=FALSE)
+abline(v=16, col = "grey", lty = 2)
+abline(v=32, col = "grey", lty = 2)
+abline(v=48, col = "grey", lty = 6)
+```
+
+```{r, echo = FALSE}
+par(las=1)
+emptyPlot(c(1,70),c(-.03,.08), xmark = c(1,16,32,48,58), bty='n', main = "Rescorla-Wagner\n Weight to Not Allergic 100-0", xlab="", ylab = "Connection weights")
+mtext("Block 1", side = 1, at = 8, line = 2.5)
+mtext("Block 2", side = 1, at = 24, line = 2.5)
+mtext("Block 3", side = 1, at = 40, line = 2.5)
+mtext("Test Phase", side = 1, at = 56, line = 2.5)
+
+points(c(1:58), (listY$NoDiamond)[listY$Word == Cues[7]], type = "l", col = "blue", lty = 2, lwd = 2)
+text(57,-0.015, labels = "bran", col = "blue", cex =1.2)
+points(c(1:58), (listY$NoDiamond)[listY$Word == "env"], type = "l", col = "black",  lty = 1, lwd = 2)
+text(24,0.08, labels = "env", col = "black", cex =1.2)
+points(c(1:58), (listY$NoDiamond)[listY$Word == Cues[9]], type = "l", col = "cyan", lty = 4, lwd = 2)
+text(57,0.050, labels = "yoghurt", col = "cyan" , cex =1.2)
+points(c(1:58), (listY$NoDiamond)[listY$Word == Cues[8]], type = "l", col = "green", lty = 5, lwd =2)
+text(57,0.075, labels = "cabbage", col = "green" , cex =1.2)
+points(c(1:58), c(rep(0,16),(listY$NoDiamond)[listY$Word == Cues[6]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY$NoDiamond)[listY$Word == Cues[4]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY$NoDiamond)[listY$Word == Cues[5]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY$NoDiamond)[listY$Word == Cues[3]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY$NoDiamond)[listY$Word == Cues[1]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY$NoDiamond)[listY$Word == Cues[2]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,48),(listY$NoDiamond)[listY$Word == "toadstool"]), type = "l", col = "grey")
+par(xpd=FALSE)
+abline(v=16, col = "grey", lty = 2)
+abline(v=32, col = "grey", lty = 2)
+abline(v=48, col = "grey", lty = 6)
+
+# emptyPlot(c(1,70),c(-.03,.08), xmark = c(1,16,32,48,58), bty='n', main = "Van Hamme-Wasserman\n Absent cues are updated", xlab="", ylab = "Connection weights")
+# mtext("Block 1", side = 1, at = 8, line = 2.5)
+# mtext("Block 2", side = 1, at = 24, line = 2.5)
+# mtext("Block 3", side = 1, at = 40, line = 2.5)
+# mtext("Test Phase", side = 1, at = 56, line = 2.5)
+# points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[7]], type = "l", col = "blue", lty = 2, lwd = 2)
+# text(33,-0.01, labels = "bran", col = "blue"  , cex =1.2)
+# points(c(1:58), (listY2$Diamond)[listY2$Word == "env"], type = "l", col = "black", lty = 1, lwd = 2)
+# text(24,0.08, labels = "env", col = "black" , cex =1.2)
+# points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[9]], type = "l", col = "cyan", lty = 4, lwd = 2)
+# text(48,-0.02, labels = "yoghurt", col = "cyan" , cex =1.2 )
+# points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[8]], type = "l", col = "green", lty = 5, lwd = 2)
+# text(20,-0.02, labels = "cabbage", col = "green"  , cex =1.2)
+# points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[6]]), type = "l", col = "grey")
+# points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[4]]), type = "l", col = "grey")
+# points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[5]]), type = "l", col = "grey")
+# points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[3]]), type = "l", col = "grey")
+# points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[1]]), type = "l", col = "grey")
+# points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[2]]), type = "l", col = "grey")
+# points(c(1:58), c(rep(0,48),(listY2$Diamond)[listY2$Word == "toadstool"]), type = "l", col = "grey")
+# par(xpd=FALSE)
+# abline(v=16, col = "grey", lty = 2)
+# abline(v=32, col = "grey", lty = 2)
+# abline(v=48, col = "grey", lty = 6)
+
+emptyPlot(c(1,70),c(-.18,.08), xmark = c(1,16,32,48,58), bty='n', main = "Van Hamme-Wasserman\n Weight to Not Allergic 100-0", xlab="", ylab = "Connection weights")
+mtext("Block 1", side = 1, at = 8, line = 2.5)
+mtext("Block 2", side = 1, at = 24, line = 2.5)
+mtext("Block 3", side = 1, at = 40, line = 2.5)
+mtext("Test Phase", side = 1, at = 56, line = 2.5)
+points(c(1:58), (listY2$NoDiamond)[listY2$Word == Cues[7]], type = "l", col = "blue", lty = 2, lwd = 2)
+text(53,-0.17, labels = "bran", col = "blue"  , cex =1.2)
+points(c(1:58), (listY2$NoDiamond)[listY2$Word == "env"], type = "l", col = "black", lty = 1, lwd = 2)
+text(24,0.08, labels = "env", col = "black" , cex =1.2)
+points(c(1:58), (listY2$NoDiamond)[listY2$Word == Cues[9]], type = "l", col = "cyan", lty = 4, lwd = 2)
+text(53,-0.052, labels = "yoghurt", col = "cyan" , cex =1.2 )
+points(c(1:58), (listY2$NoDiamond)[listY2$Word == Cues[8]], type = "l", col = "green", lty = 5, lwd = 2)
+text(54,-0.022, labels = "cabbage", col = "green"  , cex =1.2)
+points(c(1:58), c(rep(0,16),(listY2$NoDiamond)[listY2$Word == Cues[6]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY2$NoDiamond)[listY2$Word == Cues[4]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY2$NoDiamond)[listY2$Word == Cues[5]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY2$NoDiamond)[listY2$Word == Cues[3]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY2$NoDiamond)[listY2$Word == Cues[1]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY2$NoDiamond)[listY2$Word == Cues[2]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,48),(listY2$NoDiamond)[listY2$Word == "toadstool"]), type = "l", col = "grey")
+par(xpd=FALSE)
+abline(v=16, col = "grey", lty = 2)
+abline(v=32, col = "grey", lty = 2)
+abline(v=48, col = "grey", lty = 6)
+```
+
+# Condition 75-25 first (Group 4, first row)
+```{r, echo = FALSE}
+listY <- list()
+FirstRun <- data.frame(Cues = Cues2, Outcomes = Outcome050, stringsAsFactors = FALSE)
+train.FR <- createTrainingData(FirstRun, random = F)
+wm.FR <- EDLearning(train.FR, progress = F, etaNeg = FALSE)
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.FR,i))
+  df$Trial <- i
+  listX<-list.append(listX, df)
+}
+#listY<- listX
+listY <- bind_rows(listX)
+
+SecondRun <- data.frame(Cues = Cues3, Outcomes = Outcome100, stringsAsFactors = FALSE)
+train.SR <- createTrainingData(SecondRun, random = F)
+wm.SR <- EDLearning(train.SR, progress = F, etaNeg = FALSE, wm = wm.FR[[16]])
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.SR,i))
+  df$Trial <- i+16
+  listX<-list.append(listX, df)
+}
+listZ<- bind_rows(listX)
+listY<- rbind(listY, listZ)
+
+ThirdRun <- data.frame(Cues = Cues1, Outcomes = Outcome000, stringsAsFactors = FALSE)
+train.TR <- createTrainingData(ThirdRun, random = F)
+wm.TR <- EDLearning(train.TR, progress = F, etaNeg = FALSE, wm = wm.SR[[16]])
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.TR,i))
+  df$Trial <- i+32
+  listX<-list.append(listX, df)
+}
+listA<- bind_rows(listX)
+listY<- rbind(listY, listA)
+
+
+word <- c(Cues[1], Cues[2], Cues[3], Cues[4], Cues[5], Cues[6], Cues[7], Cues[8], Cues[9], "env")
+exactWord <- c(Cues[1], Cues[2], Cues[3], Cues[4], Cues[5], Cues[6], Cues[7], Cues[8], Cues[9], "env")
+exactWords <- data.frame(Word = word, exactWord = exactWord, stringsAsFactors = FALSE)
+getexactwords <- exactWords$exactWord
+names(getexactwords) <- exactWords$Word
+listY$Word <- NA
+for(i in 1:nrow(listY)){
+  listY[i,]$Word <- getexactwords[gsub("...[0-9]+", "",row.names(listY[i,]))]
+
+}
+
+listY2 <- list()
+FirstRun <- data.frame(Cues = Cues2, Outcomes = Outcome050, stringsAsFactors = FALSE)
+train.FR <- createTrainingData(FirstRun, random = F)
+wm.FR <- EDLearning(train.FR, progress = F, etaNeg = TRUE)
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.FR,i))
+  df$Trial <- i
+  listX<-list.append(listX, df)
+}
+#listY<- listX
+listY2 <- bind_rows(listX)
+
+SecondRun <- data.frame(Cues = Cues3, Outcomes = Outcome100, stringsAsFactors = FALSE)
+train.SR <- createTrainingData(SecondRun, random = F)
+wm.SR <- EDLearning(train.SR, progress = F, etaNeg = TRUE, wm = wm.FR[[16]])
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.SR,i))
+  df$Trial <- i+16
+  listX<-list.append(listX, df)
+}
+listZ<- bind_rows(listX)
+listY2<- rbind(listY2, listZ)
+
+ThirdRun <- data.frame(Cues = Cues1, Outcomes = Outcome000, stringsAsFactors = FALSE)
+train.TR <- createTrainingData(ThirdRun, random = F)
+wm.TR <- EDLearning(train.TR, progress = F, etaNeg = TRUE, wm = wm.SR[[16]])
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.TR,i))
+  df$Trial <- i+32
+  listX<-list.append(listX, df)
+}
+listA<- bind_rows(listX)
+listY2<- rbind(listY2, listA)
+
+listY2$Word <- NA
+for(i in 1:nrow(listY)){
+  listY2[i,]$Word <- getexactwords[gsub("...[0-9]+", "",row.names(listY2[i,]))]
+
+}
+
+```
+
+```{r, echo = FALSE}
+par(mfrow = c(1,1))
+par(las = 1)
+emptyPlot(c(1,60),c(-.08,.09), xmark = c(1,8,16,24,32,40,48), ymark = c(-.05, .00, .05), bty='n', main = "Rescorla-Wagner", xlab="", ylab = "Connection weights")
+points(c(1:48), (listY$Diamond)[listY$Word == Cues[4]]-(listY$NoDiamond)[listY$Word==Cues[4]], type = "l", col = "blue")
+text(51,0.038, labels = Cues[4], col = "blue" )
+points(c(1:48), (listY$Diamond)[listY$Word == "env"]-(listY$NoDiamond)[listY$Word=="env"], type = "l", col = "black")
+text(51,0.01, labels = "env", col = "black")
+points(c(1:48), (listY$Diamond)[listY$Word == Cues[6]]-(listY$NoDiamond)[listY$Word==Cues[6]], type = "l", col = "cyan")
+text(51,-0.017, labels = Cues[6], col = "cyan" )
+points(c(1:48), (listY$Diamond)[listY$Word == Cues[5]]-(listY$NoDiamond)[listY$Word==Cues[5]], type = "l", col = "green")
+text(51,-0.037, labels = Cues[5], col = "green" )
+points(c(1:48), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[9]]-(listY$NoDiamond)[listY$Word==Cues[9]]), type = "l", col = "grey")
+text(51,-0.005, labels = Cues[9], col = "grey" )
+points(c(1:48), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[7]]-(listY$NoDiamond)[listY$Word==Cues[7]]), type = "l", col = "grey")
+text(51,-0.01, labels = Cues[7], col = "grey" )
+points(c(1:48), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[8]]-(listY$NoDiamond)[listY$Word==Cues[8]]), type = "l", col = "grey")
+text(51,0.002, labels = Cues[8], col = "grey" )
+points(c(1:48), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[3]]-(listY$NoDiamond)[listY$Word==Cues[3]]), type = "l", col = "grey")
+text(51,0.018, labels = Cues[3], col = "grey")
+points(c(1:48), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[1]]-(listY$NoDiamond)[listY$Word==Cues[1]]), type = "l", col = "grey")
+text(51,0.07, labels = Cues[1], col = "grey" )
+points(c(1:48), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[2]]-(listY$NoDiamond)[listY$Word==Cues[2]]), type = "l", col = "grey")
+text(51,-0.06, labels = Cues[2], col = "grey" )
+par(xpd = FALSE) 
+abline(v=16, col = "grey", lty = 2)
+abline(v=32, col = "grey", lty = 2)
+
+
+emptyPlot(c(1,60),c(-.08,.09), xmark = c(1,8,16,24,32,40,48), ymark = c(-.075, -.05, -.025, .00, .025, .05, .075), bty='n', main = "Weights to Diamond minus NoDiamond, VHW", xlab="trial nr", ylab = "weights")
+points(c(1:48), (listY2$Diamond)[listY2$Word == Cues[4]]-(listY2$NoDiamond)[listY2$Word==Cues[4]], type = "l", col = "blue")
+text(51,0.08, labels = Cues[4], col = "blue" )
+points(c(1:48), (listY2$Diamond)[listY2$Word == "env"]-(listY2$NoDiamond)[listY2$Word=="env"], type = "l", col = "black")
+text(51,0.01, labels = "env", col = "black")
+points(c(1:48), (listY2$Diamond)[listY2$Word == Cues[6]]-(listY2$NoDiamond)[listY2$Word==Cues[6]], type = "l", col = "cyan")
+text(51,-0.017, labels = Cues[6], col = "cyan" )
+points(c(1:48), (listY2$Diamond)[listY2$Word == Cues[5]]-(listY2$NoDiamond)[listY2$Word==Cues[5]], type = "l", col = "green")
+text(51,-0.06, labels = Cues[5], col = "green" )
+points(c(1:48), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[9]]-(listY2$NoDiamond)[listY2$Word==Cues[9]]), type = "l", col = "pink")
+text(51,-0.005, labels = Cues[9], col = "pink" )
+points(c(1:48), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[7]]-(listY2$NoDiamond)[listY2$Word==Cues[7]]), type = "l", col = "red")
+text(51,-0.01, labels = Cues[7], col = "red" )
+points(c(1:48), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[8]]-(listY2$NoDiamond)[listY2$Word==Cues[8]]), type = "l", col = "brown")
+text(51,0.002, labels = Cues[8], col = "brown" )
+points(c(1:48), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[3]]-(listY2$NoDiamond)[listY2$Word==Cues[3]]), type = "l", col = "yellow2")
+text(51,0.018, labels = Cues[3], col = "yellow2")
+points(c(1:48), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[1]]-(listY2$NoDiamond)[listY2$Word==Cues[1]]), type = "l", col = "orange")
+text(51,0.088, labels = Cues[1], col = "orange" )
+points(c(1:48), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[2]]-(listY2$NoDiamond)[listY2$Word==Cues[2]]), type = "l", col = "grey")
+text(51,-0.078, labels = Cues[2], col = "grey" )
+par(xpd=FALSE)
+abline(v=16, col = "grey", lty = 2)
+abline(v=32, col = "grey", lty = 2)
+```
+
+```{r, echo = FALSE}
+par(las=1)
+emptyPlot(c(1,60),c(-.03,.08), xmark = c(1,8,16,24,32,40,48), bty='n', main = "Weights to Diamond, RW", xlab="trial nr", ylab = "weights")
+points(c(1:48), (listY$Diamond)[listY$Word == Cues[4]], type = "l", col = "blue", lty = 2)
+text(51,0.055, labels = Cues[4], col = "blue" )
+points(c(1:48), (listY$Diamond)[listY$Word == "env"], type = "l", col = "black")
+text(24,0.08, labels = "env", col = "black")
+points(c(1:48), (listY$Diamond)[listY$Word == Cues[6]], type = "l", col = "cyan")
+text(51,0.07, labels = Cues[6], col = "cyan" )
+points(c(1:48), (listY$Diamond)[listY$Word == Cues[5]], type = "l", col = "green")
+text(51,0.018, labels = Cues[5], col = "green" )
+points(c(1:48), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[9]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[7]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[8]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[3]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[1]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[2]]), type = "l", col = "grey")
+par(xpd=FALSE)
+abline(v=16, col = "grey", lty = 2)
+abline(v=32, col = "grey", lty = 2)
+
+emptyPlot(c(1,60),c(-.03,.08), xmark = c(1,8,16,24,32,40,48), bty='n', main = "Weights to Diamond, VHW", xlab="trial nr", ylab = "weights")
+points(c(1:48), (listY2$Diamond)[listY2$Word == Cues[4]], type = "l", col = "blue", lty = 2)
+text(33,-0.01, labels = Cues[4], col = "blue" )
+points(c(1:48), (listY2$Diamond)[listY2$Word == "env"], type = "l", col = "black")
+text(24,0.08, labels = "env", col = "black")
+points(c(1:48), (listY2$Diamond)[listY2$Word == Cues[6]], type = "l", col = "cyan")
+text(48,-0.02, labels = Cues[6], col = "cyan" )
+points(c(1:48), (listY2$Diamond)[listY2$Word == Cues[5]], type = "l", col = "green")
+text(20,-0.02, labels = Cues[5], col = "green" )
+points(c(1:48), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[9]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[7]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[8]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[3]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[1]]), type = "l", col = "grey")
+points(c(1:48), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[2]]), type = "l", col = "grey")
+par(xpd=FALSE)
+abline(v=16, col = "grey", lty = 2)
+abline(v=32, col = "grey", lty = 2)
+
+
+
+```
+
+
+
+
+
+```{r, echo = FALSE}
+listY <- list()
+FirstRun <- data.frame(Cues = Cues2, Outcomes = Outcome050, stringsAsFactors = FALSE)
+train.FR <- createTrainingData(FirstRun, random = F)
+wm.FR <- EDLearning(train.FR, progress = F, etaNeg = FALSE)
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.FR,i))
+  df$Trial <- i
+  listX<-list.append(listX, df)
+}
+#listY<- listX
+listY <- bind_rows(listX)
+
+SecondRun <- data.frame(Cues = Cues3, Outcomes = Outcome100, stringsAsFactors = FALSE)
+train.SR <- createTrainingData(SecondRun, random = F)
+wm.SR <- EDLearning(train.SR, progress = F, etaNeg = FALSE, wm = wm.FR[[16]])
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.SR,i))
+  df$Trial <- i+16
+  listX<-list.append(listX, df)
+}
+listZ<- bind_rows(listX)
+listY<- rbind(listY, listZ)
+
+ThirdRun <- data.frame(Cues = Cues1, Outcomes = Outcome000, stringsAsFactors = FALSE)
+train.TR <- createTrainingData(ThirdRun, random = F)
+wm.TR <- EDLearning(train.TR, progress = F, etaNeg = FALSE, wm = wm.SR[[16]])
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.TR,i))
+  df$Trial <- i+32
+  listX<-list.append(listX, df)
+}
+listA<- bind_rows(listX)
+listY<- rbind(listY, listA)
+
+listY$Fossil <- NA
+XBlock1 <- str_split(Cues2[1], pattern = "_", simplify = TRUE)[1,3]
+NewCue <- str_replace("env_toadstool_X", "X", XBlock1)
+
+CuesTP1 <- c(Cues2[1], Cues2[1], Cues2[2], Cues2[2], NewCue, NewCue, Cues1[1], Cues1[1], Cues1[2], Cues1[2])
+CuesTP2 <- c(Cues2[1], Cues2[1], Cues2[2], Cues2[2], NewCue, NewCue, Cues1[1], Cues1[1], Cues1[2], Cues1[2])
+CuesTP3 <- c("env_straw_shrimp", "env_straw_shrimp", "env_straw_shrimp", "env_peanuts_shrimp", "env_peanuts_shrimp", "env_peanuts_shrimp",
+                 "env_yoghurt_shrimp", "env_yoghurt_shrimp", "env_yoghurt_shrimp", "env_bran_pork", "env_bran_pork", "env_bran_pork",
+                 "env_chicken_pork", "env_chicken_pork", "env_chicken_pork")
+Outcomes1 <- c("Diamond", "Fossil", "Diamond", "Fossil","Diamond", "Fossil", "Diamond", "Fossil", "Diamond", "Fossil")
+Outcomes2 <- c("Diamond", "Fossil", "Diamond", "Fossil","Diamond", "Fossil", "Diamond", "Fossil", "Diamond", "Fossil")
+Outcomes3 <- c("Diamond", "Fossil", "NoDiamond", "Diamond", "Fossil", "NoDiamond", "Diamond", "Fossil", "NoDiamond", "Diamond", "Fossil", "NoDiamond", "Diamond", "Fossil", "NoDiamond")
+
+FirstTestRun <- data.frame(Cues = CuesTP1, Outcomes = Outcomes1, stringsAsFactors = FALSE)
+train.FTR <- createTrainingData(FirstTestRun, random = F)
+wm.FTR <- EDLearning(train.FTR, progress = F, etaNeg = F, wm = wm.TR[[16]])
+listX <- list()
+ for(i in 1:10){
+   df <- as.data.frame(getWM(wm.FTR,i))
+   df$Trial <- i+48
+   listX <- list.append(listX, df)
+ }
+ listB <- bind_rows(listX)
+ listY <- rbind(listY, listB)
+     
+
+    
+    # SecondTestRun <- data.frame(Cues = CuesTP2, Outcomes = Outcomes2, stringsAsFactors = FALSE)
+    # train.STR <- createTrainingData(SecondTestRun, random = T)
+    # wm.STR <- EDLearning(train.STR, progress = F, etaNeg = etaNeg, wm = wm.FTR[[10]])
+    # for (i in 1:10){
+    #   wm5<-as.data.frame(getWM(wm.STR, i))
+    #   wm5$Trial <- i
+    #   for (j in 1:nrow(wm5)){
+    #     cue = rownames(wm5)
+    #     if(!(cue[j] %in% rownames(wm.STR[[10]]))|cue[j] == "env") {
+    #       wm_list5 <- list.append(wm_list5, wm5[cue[j],])
+    #     }
+    #   }
+    # }
+    # Run5 <- bind_rows(wm_list5)
+    # Run5$Cond <- "Phase2"
+    # Run5$Stage <- "Test"
+    # 
+    # ###
+    # 
+    # ThirdTestRun <- data.frame(Cues = CuesTP3, Outcomes = Outcomes3, StringsAsFactors = FALSE)
+    # train.TTR <- createTrainingData(ThirdTestRun, random = T)
+    # wm.TTR <- EDLearning(train.TTR, progress = F, etaNeg = etaNeg, wm = wm.STR[[10]])
+    # for (i in 1:15){
+    #   wm6 <- as.data.frame(getWM(wm.TTR, i))
+    #   wm6$Trial <- i
+    #   for(j in 1:nrow(wm6)){
+    #     cue = rownames(wm6)
+    #     if(!(cue[j] %in% rownames(wm.TTR[[15]]))|cue[j] == "env"){
+    #       wm_list6 <- list.append(wm_list6, wm6[cue[j],])
+    #     }
+    #   }
+    # }
+    # Run6 <- bind_rows(wm_list6)
+    # Run6$Cond <- "Phase3"
+    # Run6$Stage <- "Test"
+    # wm_totalTest <- list.append(wm_totalTest, Run4, Run5, Run6)
+
+
+
+
+word <- c(Cues[1], Cues[2], Cues[3], Cues[4], Cues[5], Cues[6], Cues[7], Cues[8], Cues[9], "env", "toadstool")
+exactWord <- c(Cues[1], Cues[2], Cues[3], Cues[4], Cues[5], Cues[6], Cues[7], Cues[8], Cues[9], "env", "toadstool")
+exactWords <- data.frame(Word = word, exactWord = exactWord, stringsAsFactors = FALSE)
+getexactwords <- exactWords$exactWord
+names(getexactwords) <- exactWords$Word
+listY$Word <- NA
+for(i in 1:nrow(listY)){
+  listY[i,]$Word <- getexactwords[gsub("...[0-9]+", "",row.names(listY[i,]))]
+
+}
+################
+
+listY2 <- list()
+FirstRun <- data.frame(Cues = Cues2, Outcomes = Outcome050, stringsAsFactors = FALSE)
+train.FR <- createTrainingData(FirstRun, random = F)
+wm.FR <- EDLearning(train.FR, progress = F, etaNeg = TRUE)
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.FR,i))
+  df$Trial <- i
+  listX<-list.append(listX, df)
+}
+#listY<- listX
+listY2 <- bind_rows(listX)
+
+SecondRun <- data.frame(Cues = Cues3, Outcomes = Outcome100, stringsAsFactors = FALSE)
+train.SR <- createTrainingData(SecondRun, random = F)
+wm.SR <- EDLearning(train.SR, progress = F, etaNeg = TRUE, wm = wm.FR[[16]])
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.SR,i))
+  df$Trial <- i+16
+  listX<-list.append(listX, df)
+}
+listZ<- bind_rows(listX)
+listY2<- rbind(listY2, listZ)
+
+ThirdRun <- data.frame(Cues = Cues1, Outcomes = Outcome000, stringsAsFactors = FALSE)
+train.TR <- createTrainingData(ThirdRun, random = F)
+wm.TR <- EDLearning(train.TR, progress = F, etaNeg = TRUE, wm = wm.SR[[16]])
+listX <- list()
+for(i in 1:16){
+  df <- as.data.frame(getWM(wm.TR,i))
+  df$Trial <- i+32
+  listX<-list.append(listX, df)
+}
+listA<- bind_rows(listX)
+listY2<- rbind(listY2, listA)
+listY2$Fossil <- NA
+
+FirstTestRun <- data.frame(Cues = CuesTP1, Outcomes = Outcomes1, stringsAsFactors = FALSE)
+train.FTR <- createTrainingData(FirstTestRun, random = F)
+wm.FTR <- EDLearning(train.FTR, progress = F, etaNeg = F, wm = wm.TR[[16]])
+listX <- list()
+ for(i in 1:10){
+   df <- as.data.frame(getWM(wm.FTR,i))
+   df$Trial <- i+48
+   listX <- list.append(listX, df)
+ }
+ listB <- bind_rows(listX)
+ listY2 <- rbind(listY2, listB)
+
+
+listY2$Word <- NA
+for(i in 1:nrow(listY2)){
+  listY2[i,]$Word <- getexactwords[gsub("...[0-9]+", "",row.names(listY2[i,]))]
+
+}
+
+```
+
+```{r, echo = FALSE}
+par(las=1)
+emptyPlot(c(1,70),c(-.03,.08), xmark = c(1,8,16,24,32,40,48,58), bty='n', main = "Rescorla-Wagner", xlab="", ylab = "Connection weights")
+mtext("Block 1", side = 1, at = 8, line = 2.5)
+mtext("Block 2", side = 1, at = 24, line = 2.5)
+mtext("Block 3", side = 1, at = 40, line = 2.5)
+mtext("Test Phase", side = 1, at = 56, line = 2.5)
+
+points(c(1:58), (listY$Diamond)[listY$Word == Cues[4]], type = "l", col = "blue", lty = 2)
+text(57,0.050, labels = Cues[4], col = "blue" )
+points(c(1:58), (listY$Diamond)[listY$Word == "env"], type = "l", col = "black")
+text(24,0.08, labels = "env", col = "black")
+points(c(1:58), (listY$Diamond)[listY$Word == Cues[6]], type = "l", col = "cyan")
+text(57,0.075, labels = Cues[6], col = "cyan" )
+points(c(1:58), (listY$Diamond)[listY$Word == Cues[5]], type = "l", col = "green")
+text(57,0.015, labels = Cues[5], col = "green" )
+points(c(1:58), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[9]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[7]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[8]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[3]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[1]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[2]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,48),(listY$Diamond)[listY$Word == "toadstool"]), type = "l", col = "grey")
+par(xpd=FALSE)
+abline(v=16, col = "grey", lty = 2)
+abline(v=32, col = "grey", lty = 2)
+abline(v=48, col = "grey", lty = 6)
+
+emptyPlot(c(1,70),c(-.03,.08), xmark = c(1,8,16,24,32,40,48,58), bty='n', main = "Van Hamme-Wasserman", xlab="", ylab = "Connection weights")
+mtext("Block 1", side = 1, at = 8, line = 2.5)
+mtext("Block 2", side = 1, at = 24, line = 2.5)
+mtext("Block 3", side = 1, at = 40, line = 2.5)
+mtext("Test Phase", side = 1, at = 56, line = 2.5)
+points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[4]], type = "l", col = "blue", lty = 2)
+text(33,-0.01, labels = Cues[4], col = "blue" )
+points(c(1:58), (listY2$Diamond)[listY2$Word == "env"], type = "l", col = "black")
+text(24,0.08, labels = "env", col = "black")
+points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[6]], type = "l", col = "cyan")
+text(48,-0.02, labels = Cues[6], col = "cyan" )
+points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[5]], type = "l", col = "green")
+text(20,-0.02, labels = Cues[5], col = "green" )
+points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[9]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[7]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[8]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[3]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[1]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[2]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,48),(listY2$Diamond)[listY2$Word == "toadstool"]), type = "l", col = "grey")
+par(xpd=FALSE)
+abline(v=16, col = "grey", lty = 2)
+abline(v=32, col = "grey", lty = 2)
+abline(v=48, col = "grey", lty = 6)
+
+emptyPlot(c(1,70),c(-.13,.08), xmark = c(1,8,16,24,32,40,48,58), bty='n', main = "Van Hamme-Wasserman", xlab="", ylab = "Connection weights")
+mtext("Block 1", side = 1, at = 8, line = 2.5)
+mtext("Block 2", side = 1, at = 24, line = 2.5)
+mtext("Block 3", side = 1, at = 40, line = 2.5)
+mtext("Test Phase", side = 1, at = 56, line = 2.5)
+points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[4]], type = "l", col = "blue", lty = 2)
+text(33,-0.01, labels = Cues[4], col = "blue" )
+points(c(1:58), (listY2$Diamond)[listY2$Word == "env"], type = "l", col = "black")
+text(24,0.08, labels = "env", col = "black")
+points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[6]], type = "l", col = "cyan")
+text(48,-0.02, labels = Cues[6], col = "cyan" )
+points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[5]], type = "l", col = "green")
+text(20,-0.02, labels = Cues[5], col = "green" )
+points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[9]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[7]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[8]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[3]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[1]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[2]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,48),(listY2$Diamond)[listY2$Word == "toadstool"]), type = "l", col = "grey")
+par(xpd=FALSE)
+abline(v=16, col = "grey", lty = 2)
+abline(v=32, col = "grey", lty = 2)
+abline(v=48, col = "grey", lty = 6)
+
+```
+
+#THIS IS AN ADJUSTED VERSION FOR IN THE PRESENTATION
+```{r, echo = FALSE}
+par(las=1)
+emptyPlot(c(1,70),c(-.03,.08), xmark = c(1,16,32,48,58), bty='n', main = "Rescorla-Wagner\n Absent cues are not updated", xlab="", ylab = "Connection weights")
+mtext("Block 1", side = 1, at = 8, line = 2.5)
+mtext("Block 2", side = 1, at = 24, line = 2.5)
+mtext("Block 3", side = 1, at = 40, line = 2.5)
+mtext("Test Phase", side = 1, at = 56, line = 2.5)
+
+points(c(1:58), (listY$Diamond)[listY$Word == Cues[4]], type = "l", col = "blue", lty = 2, lwd = 2)
+text(57,0.050, labels = "bran", col = "blue", cex =1.2)
+points(c(1:58), (listY$Diamond)[listY$Word == "env"], type = "l", col = "black",  lty = 1, lwd = 2)
+text(24,0.08, labels = "env", col = "black", cex =1.2)
+points(c(1:58), (listY$Diamond)[listY$Word == Cues[6]], type = "l", col = "cyan", lty = 4, lwd = 2)
+text(57,0.075, labels = "yoghurt", col = "cyan" , cex =1.2)
+points(c(1:58), (listY$Diamond)[listY$Word == Cues[5]], type = "l", col = "green", lty = 5, lwd =2)
+text(57,0.015, labels = "cabbage", col = "green" , cex =1.2)
+points(c(1:58), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[9]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[7]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY$Diamond)[listY$Word == Cues[8]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[3]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[1]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY$Diamond)[listY$Word == Cues[2]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,48),(listY$Diamond)[listY$Word == "toadstool"]), type = "l", col = "grey")
+par(xpd=FALSE)
+abline(v=16, col = "grey", lty = 2)
+abline(v=32, col = "grey", lty = 2)
+abline(v=48, col = "grey", lty = 6)
+
+emptyPlot(c(1,70),c(-.03,.08), xmark = c(1,16,32,48,58), bty='n', main = "Van Hamme-Wasserman\n Absent cues are updated", xlab="", ylab = "Connection weights")
+mtext("Block 1", side = 1, at = 8, line = 2.5)
+mtext("Block 2", side = 1, at = 24, line = 2.5)
+mtext("Block 3", side = 1, at = 40, line = 2.5)
+mtext("Test Phase", side = 1, at = 56, line = 2.5)
+points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[4]], type = "l", col = "blue", lty = 2, lwd = 2)
+text(33,-0.01, labels = "bran", col = "blue"  , cex =1.2)
+points(c(1:58), (listY2$Diamond)[listY2$Word == "env"], type = "l", col = "black", lty = 1, lwd = 2)
+text(24,0.08, labels = "env", col = "black" , cex =1.2)
+points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[6]], type = "l", col = "cyan", lty = 4, lwd = 2)
+text(48,-0.02, labels = "yoghurt", col = "cyan" , cex =1.2 )
+points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[5]], type = "l", col = "green", lty = 5, lwd = 2)
+text(20,-0.02, labels = "cabbage", col = "green"  , cex =1.2)
+points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[9]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[7]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[8]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[3]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[1]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[2]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,48),(listY2$Diamond)[listY2$Word == "toadstool"]), type = "l", col = "grey")
+par(xpd=FALSE)
+abline(v=16, col = "grey", lty = 2)
+abline(v=32, col = "grey", lty = 2)
+abline(v=48, col = "grey", lty = 6)
 
 emptyPlot(c(1,70),c(-.13,.08), xmark = c(1,16,32,48,58), bty='n', main = "Van Hamme-Wasserman\n Absent cues are updated", xlab="", ylab = "Connection weights")
 mtext("Block 1", side = 1, at = 8, line = 2.5)
@@ -536,12 +2533,12 @@ points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[6]], type = "l", col = "cya
 text(48,-0.02, labels = "yoghurt", col = "cyan" , cex =1.2 )
 points(c(1:58), (listY2$Diamond)[listY2$Word == Cues[5]], type = "l", col = "green", lty = 5, lwd = 2)
 text(20,-0.02, labels = "cabbage", col = "green"  , cex =1.2)
-points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[3]]), type = "l", col = "grey")
-points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[1]]), type = "l", col = "grey")
-points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[2]]), type = "l", col = "grey")
-points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[9]]), type = "l", col = "grey")
-points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[7]]), type = "l", col = "grey")
-points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[8]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[9]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[7]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,16),(listY2$Diamond)[listY2$Word == Cues[8]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[3]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[1]]), type = "l", col = "grey")
+points(c(1:58), c(rep(0,32),(listY2$Diamond)[listY2$Word == Cues[2]]), type = "l", col = "grey")
 points(c(1:58), c(rep(0,48),(listY2$Diamond)[listY2$Word == "toadstool"]), type = "l", col = "grey")
 par(xpd=FALSE)
 abline(v=16, col = "grey", lty = 2)

@@ -341,6 +341,211 @@ points(c(1:16), (Cond100_2$Diamond - Cond100_2$NoDiamond)[Cond100_2$FoodGroup ==
 legend(1,-0.05,legend =c("A", "B", "X"), pch = c(0,16,15))
 ```
 
+```{r, echo=FALSE}
+par(mfrow = c(1,2))
+par(las=1)
+#cond 000
+emptyPlot(c(0,16),c(0,8), xmark = c(1:16), ymark=c(0,1,2,3,4,5,6,7,8), bty='n', main = "Experiment Data", xlab = "Trial", ylab = "Causal rating score")
+A <- c(4.9, 5, 5.1, 3.2, 2.8, 2.4, 2.2, 4.5, 4, 3, 2.2, 3.4, 4.7, 2.8, 2.6, 4.3, 4.1)
+B <- c(3.8, 1.9, 1.5, 3.9, 3.7, 3.8, 4.7, 2.9, 2.7, 4.5, 4.3, 2.8, 2.5, 3.5, 4.5, 3, 2.4)
+X <- c(4.5, 5, 2.1, 4.9, 2.7, 2.4, 4.3, 4.9, 3.3, 4.9, 3, 2.8, 4.8,2.8, 4.8, 5.1, 3.1)
+points(c(0:16),A, pch = 0, type = "b", col = "indianred1")
+points(c(0:16),B, pch =16, type = "b", lty = 2, col = "steelblue1")
+points(c(0:16),X, pch =15, type = "b", lty = 4, col = "limegreen")
+legend(0.05,8,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+
+emptyPlot(c(1,16),c(-0.08,0.08), xmark = c(1:16), bty='n', main= "Rescorla-Wagner \n Absent cues are not updated", ylab = "Connection weight", xlab = "Trial")
+points(c(1:16), (Cond000$Diamond - Cond000$NoDiamond)[Cond000$FoodGroup == "A"], pch = 0, type = "b", col = "indianred1")
+points(c(1:16), (Cond000$Diamond - Cond000$NoDiamond)[Cond000$FoodGroup == "B"], pch = 16, type = "b", lty = 2, col = "steelblue1")
+points(c(1:16), (Cond000$Diamond - Cond000$NoDiamond)[Cond000$FoodGroup == "X"], pch = 15, type = "b", lty = 4, col = "limegreen")
+legend(1,-0.02,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+
+emptyPlot(c(1,16),c(-0.08,0.08), xmark = c(1:16), bty='n', main= "Van Hamme-Wasserman \n Absent cues are updated", ylab = "Connection weight", xlab = "Trial")
+points(c(1:16), (Cond000_2$Diamond - Cond000_2$NoDiamond)[Cond000_2$FoodGroup == "A"], pch = 0, type = "b", col = "indianred1")
+points(c(1:16), (Cond000_2$Diamond - Cond000_2$NoDiamond)[Cond000_2$FoodGroup == "B"], pch = 16, type = "b", lty = 2, col = "steelblue1")
+points(c(1:16), (Cond000_2$Diamond - Cond000_2$NoDiamond)[Cond000_2$FoodGroup == "X"], pch = 15, type = "b", lty = 4, col = "limegreen")
+legend(1,-0.02,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+
+
+#cond 100
+emptyPlot(c(0,16),c(0,8), xmark = c(1:16), ymark=c(0,1,2,3,4,5,6,7,8), bty='n', main = "Experiment Data", xlab = "Trial", ylab = "Causal rating score")
+A <- c(5.1,5.2,4.9,5.1,6.2,6.3,6,6.6,6.5,6.5,7,6.6,7.1,7.2,7,7.2,7.2)
+B <- c(4.5,2.1,1.5,1.3,1.2,1.1,1,1,0.9,0.7,0.8,0.7,0.8,0.7,0.6,0.7,0.5)
+X <- c(3.6,4.5,2.2,1.8,3,3.3,2,3.1,1.7,1.5,2.5,1.4,2.3,2.5,1.4,2.3,1.4)
+points(c(0:16),A, pch = 0, type = "b", col = "indianred1")
+points(c(0:16),B, pch =16, type = "b", lty = 2, col = "steelblue1")
+points(c(0:16),X, pch =15, type = "b", lty = 4, col = "limegreen")
+legend(0.01,8,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+
+emptyPlot(c(1,16),c(-0.08,0.08), xmark = c(1:16), bty='n', main= "Rescorla-Wagner \n Absent cues are not updated", ylab = "Connection weight", xlab = "Trial")
+points(c(1:16), (Cond100$Diamond - Cond100$NoDiamond)[Cond100$FoodGroup == "A"], pch = 0, type = "b", col = "indianred1")
+points(c(1:16), (Cond100$Diamond - Cond100$NoDiamond)[Cond100$FoodGroup == "B"], pch = 16, type = "b", lty = 2, col = "steelblue1")
+points(c(1:16), (Cond100$Diamond - Cond100$NoDiamond)[Cond100$FoodGroup == "X"], pch = 15, type = "b", lty = 4, col = "limegreen")
+legend(1,-0.04,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+
+emptyPlot(c(1,16),c(-0.08,0.08), xmark = c(1:16), bty='n', main= "Van Hamme-Wasserman \n Absent cues are updated", ylab = "Connection weight", xlab = "Trial")
+points(c(1:16), (Cond100_2$Diamond - Cond100_2$NoDiamond)[Cond100_2$FoodGroup == "A"], pch = 0, type = "b", col = "indianred1")
+points(c(1:16), (Cond100_2$Diamond - Cond100_2$NoDiamond)[Cond100_2$FoodGroup == "B"], pch = 16, type = "b", lty = 2, col = "steelblue1")
+points(c(1:16), (Cond100_2$Diamond - Cond100_2$NoDiamond)[Cond100_2$FoodGroup == "X"], pch = 15, type = "b", lty = 4, col = "limegreen")
+legend(1,-0.04,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+
+#avg
+emptyPlot(c(-5,105),c(0,8), xmark = c(0,50,100), ymark=c(0,1,2,3,4,5,6,7,8), bty='n', main = "Experiment Data", xlab = "Condition", ylab = "Causal rating score")
+A <- c(4.3,5.7,7.6)
+B <- c(2.7, 1.1, 0.2)
+X <- c(3.2,3,1.6)
+points(c(0, 50, 100),A, pch = 0, type = "b", col = "indianred1")
+points(c(0, 50, 100),B, pch =16, type = "b", lty = 2, col = "steelblue1")
+points(c(0, 50, 100),X, pch =15, type = "b", lty = 4, col = "limegreen")
+legend(0.05,8,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+
+
+A<- c(((aggAllTrain$x)[aggAllTrain$Group.1 == "Outcome000" & aggAllTrain$Group.2 == "A"] - ((aggAllNotTrain$x)[aggAllNotTrain$Group.1 == "Outcome000" & aggAllNotTrain$Group.2 == "A"])), ((aggAllTrain$x)[aggAllTrain$Group.1 == "Outcome050" & aggAllTrain$Group.2 == "A"] - ((aggAllNotTrain$x)[aggAllNotTrain$Group.1 == "Outcome050" & aggAllNotTrain$Group.2 == "A"])), ((aggAllTrain$x)[aggAllTrain$Group.1 == "Outcome100" & aggAllTrain$Group.2 == "A"] - ((aggAllNotTrain$x)[aggAllNotTrain$Group.1 == "Outcome100" & aggAllNotTrain$Group.2 == "A"])))
+B<- c(((aggAllTrain$x)[aggAllTrain$Group.1 == "Outcome000" & aggAllTrain$Group.2 == "B"] - ((aggAllNotTrain$x)[aggAllNotTrain$Group.1 == "Outcome000" & aggAllNotTrain$Group.2 == "B"])), ((aggAllTrain$x)[aggAllTrain$Group.1 == "Outcome050" & aggAllTrain$Group.2 == "B"] - ((aggAllNotTrain$x)[aggAllNotTrain$Group.1 == "Outcome050" & aggAllNotTrain$Group.2 == "B"])), ((aggAllTrain$x)[aggAllTrain$Group.1 == "Outcome100" & aggAllTrain$Group.2 == "B"] - ((aggAllNotTrain$x)[aggAllNotTrain$Group.1 == "Outcome100" & aggAllNotTrain$Group.2 == "B"])))
+X<- c(((aggAllTrain$x)[aggAllTrain$Group.1 == "Outcome000" & aggAllTrain$Group.2 == "X"] - ((aggAllNotTrain$x)[aggAllNotTrain$Group.1 == "Outcome000" & aggAllNotTrain$Group.2 == "X"])), ((aggAllTrain$x)[aggAllTrain$Group.1 == "Outcome050" & aggAllTrain$Group.2 == "X"] - ((aggAllNotTrain$x)[aggAllNotTrain$Group.1 == "Outcome050" & aggAllNotTrain$Group.2 == "X"])), ((aggAllTrain$x)[aggAllTrain$Group.1 == "Outcome100" & aggAllTrain$Group.2 == "X"] - ((aggAllNotTrain$x)[aggAllNotTrain$Group.1 == "Outcome100" & aggAllNotTrain$Group.2 == "X"])))
+emptyPlot(c(-5,105),c(-0.07,0.09), xmark = c(0,50,100), bty='n', main= "Rescorla-Wagner \n Absent cues are not updated", xlab = "Condition", ylab = "Connection weight")
+points(c(0, 50, 100),A, pch = 0, type = "b", col = "indianred1")
+points(c(0, 50, 100),B, pch =16, type = "b", lty = 2, col = "steelblue1")
+points(c(0, 50, 100),X, pch =15, type = "b", lty = 4, col = "limegreen")
+legend(0.05,-0.02,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+
+
+A<- c(((aggAllTrain2$x)[aggAllTrain2$Group.1 == "Outcome000" & aggAllTrain2$Group.2 == "A"] - ((aggAllNotTrain2$x)[aggAllNotTrain2$Group.1 == "Outcome000" & aggAllNotTrain2$Group.2 == "A"])), ((aggAllTrain2$x)[aggAllTrain2$Group.1 == "Outcome050" & aggAllTrain2$Group.2 == "A"] - ((aggAllNotTrain2$x)[aggAllNotTrain2$Group.1 == "Outcome050" & aggAllNotTrain2$Group.2 == "A"])), ((aggAllTrain2$x)[aggAllTrain2$Group.1 == "Outcome100" & aggAllTrain2$Group.2 == "A"] - ((aggAllNotTrain2$x)[aggAllNotTrain2$Group.1 == "Outcome100" & aggAllNotTrain2$Group.2 == "A"])))
+B<- c(((aggAllTrain2$x)[aggAllTrain2$Group.1 == "Outcome000" & aggAllTrain2$Group.2 == "B"] - ((aggAllNotTrain2$x)[aggAllNotTrain2$Group.1 == "Outcome000" & aggAllNotTrain2$Group.2 == "B"])), ((aggAllTrain2$x)[aggAllTrain2$Group.1 == "Outcome050" & aggAllTrain2$Group.2 == "B"] - ((aggAllNotTrain2$x)[aggAllNotTrain2$Group.1 == "Outcome050" & aggAllNotTrain2$Group.2 == "B"])), ((aggAllTrain2$x)[aggAllTrain2$Group.1 == "Outcome100" & aggAllTrain2$Group.2 == "B"] - ((aggAllNotTrain2$x)[aggAllNotTrain2$Group.1 == "Outcome100" & aggAllNotTrain2$Group.2 == "B"])))
+X<- c(((aggAllTrain2$x)[aggAllTrain2$Group.1 == "Outcome000" & aggAllTrain2$Group.2 == "X"] - ((aggAllNotTrain2$x)[aggAllNotTrain2$Group.1 == "Outcome000" & aggAllNotTrain2$Group.2 == "X"])), ((aggAllTrain2$x)[aggAllTrain2$Group.1 == "Outcome050" & aggAllTrain2$Group.2 == "X"] - ((aggAllNotTrain2$x)[aggAllNotTrain2$Group.1 == "Outcome050" & aggAllNotTrain2$Group.2 == "X"])), ((aggAllTrain2$x)[aggAllTrain2$Group.1 == "Outcome100" & aggAllTrain2$Group.2 == "X"] - ((aggAllNotTrain2$x)[aggAllNotTrain2$Group.1 == "Outcome100" & aggAllNotTrain2$Group.2 == "X"])))
+emptyPlot(c(-5,105),c(-0.07,0.09), xmark = c(0,50,100), bty='n',  main= "Van Hamme-Wasserman \n Absent cues are updated", xlab = "Condition",ylab = "Connection weight")
+points(c(0, 50, 100),A, pch = 0, type = "b", col = "indianred1")
+points(c(0, 50, 100),B, pch =16, type = "b", lty = 2, col = "steelblue1")
+points(c(0, 50, 100),X, pch =15, type = "b", lty = 4, col = "limegreen")
+legend(0.05,-0.02,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+```
+```{r, echo=FALSE}
+par(mfrow = c(1,2))
+par(las=1)
+#50-50
+emptyPlot(c(0,16),c(0,8), xmark = c(1,4,8,12,16), ymark=c(0,1,2,3,4,5,6,7,8), bty='n', main = "Van Hamme & Wasserman 1994 \n Cond 50-50", xlab = "Trial", ylab = "Causal rating score")
+A <- c(4.9, 5, 5.1, 3.2, 2.8, 2.4, 2.2, 4.5, 4, 3, 2.2, 3.4, 4.7, 2.8, 2.6, 4.3, 4.1)
+B <- c(3.8, 1.9, 1.5, 3.9, 3.7, 3.8, 4.7, 2.9, 2.7, 4.5, 4.3, 2.8, 2.5, 3.5, 4.5, 3, 2.4)
+X <- c(4.5, 5, 2.1, 4.9, 2.7, 2.4, 4.3, 4.9, 3.3, 4.9, 3, 2.8, 4.8,2.8, 4.8, 5.1, 3.1)
+points(c(0:16),A, pch = 0, type = "b", col = "indianred1", lwd = 2)
+points(c(0:16),B, pch =16, type = "b", lty = 2, col = "steelblue1", lwd = 2)
+points(c(0:16),X, pch =15, type = "b", lty = 4, col = "limegreen", lwd = 2)
+abline(v=0.5, col="grey", lty = 1)
+legend(0.05,8,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+
+emptyPlot(c(1,16),c(-0.08,0.08), xmark =c(1,4,8,12,16), bty='n', main= "Rescorla-Wagner \n Condition 50-50", ylab = "Connection weight", xlab = "Trial")
+points(c(1:16), (Cond000$Diamond - Cond000$NoDiamond)[Cond000$FoodGroup == "A"], pch = 0, type = "b", col = "indianred1", lwd = 2)
+points(c(1:16), (Cond000$Diamond - Cond000$NoDiamond)[Cond000$FoodGroup == "B"], pch = 16, type = "b", lty = 2, col = "steelblue1", lwd = 2)
+points(c(1:16), (Cond000$Diamond - Cond000$NoDiamond)[Cond000$FoodGroup == "X"], pch = 15, type = "b", lty = 4, col = "limegreen", lwd = 2)
+legend(1,-0.02,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+
+emptyPlot(c(1,16),c(-0.08,0.08), xmark = c(1,4,8,12,16), bty='n', main= "Van Hamme-Wasserman \n Condition 50-50", ylab = "Connection weight", xlab = "Trial")
+points(c(1:16), (Cond000_2$Diamond - Cond000_2$NoDiamond)[Cond000_2$FoodGroup == "A"], pch = 0, type = "b", col = "indianred1", lwd = 2)
+points(c(1:16), (Cond000_2$Diamond - Cond000_2$NoDiamond)[Cond000_2$FoodGroup == "B"], pch = 16, type = "b", lty = 2, col = "steelblue1", lwd = 2)
+points(c(1:16), (Cond000_2$Diamond - Cond000_2$NoDiamond)[Cond000_2$FoodGroup == "X"], pch = 15, type = "b", lty = 4, col = "limegreen", lwd = 2)
+legend(1,-0.02,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+
+```
+
+
+```{r, echo=FALSE}
+par(mfrow = c(1,2))
+par(las=1)
+#75-25
+emptyPlot(c(0,16),c(0,8), xmark = c(1,4,8,12,16), ymark=c(0,1,2,3,4,5,6,7,8), bty='n', main = "Van Hamme & Wasserman 1994 \n Cond 75-25", xlab = "Trial", ylab = "Causal rating score")
+A <- c(4.7,5,4.6,3.6,5,3.2,4.4,5.5,4.9,3.9,5.4,4.8,5.5,3.8,4.7,5.7,5.6)
+B <- c(4.5,2,1.9,4.2,2.6,3.3,2,1.9,1.8,3.3,2.2,2,1.8,2.5,1.5,1.3,1)
+X <- c(3.8,4.6,2.8,4.5,5,3.1,2.7,4.5,3,4.8,5.1,3.3,4.8,3.2,2.8,4.2,2.9)
+points(c(0:16),A, pch = 0, type = "b", col = "indianred1", lwd = 2)
+points(c(0:16),B, pch =16, type = "b", lty = 2, col = "steelblue1", lwd = 2)
+points(c(0:16),X, pch =15, type = "b", lty = 4, col = "limegreen", lwd = 2)
+abline(v=0.5, col="grey", lty = 1)
+legend(0.05,8,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+
+emptyPlot(c(1,16),c(-0.08,0.08), xmark =c(1,4,8,12,16), bty='n', main= "Rescorla-Wagner \n Cond 75-25", ylab = "Connection weight", xlab = "Trial")
+points(c(1:16), (Cond050$Diamond - Cond050$NoDiamond)[Cond050$FoodGroup == "A"], pch = 0, type = "b", col = "indianred1", lwd = 2)
+points(c(1:16), (Cond050$Diamond - Cond050$NoDiamond)[Cond050$FoodGroup == "B"], pch = 16, type = "b", lty = 2, col = "steelblue1", lwd = 2)
+points(c(1:16), (Cond050$Diamond - Cond050$NoDiamond)[Cond050$FoodGroup == "X"], pch = 15, type = "b", lty = 4, col = "limegreen", lwd = 2)
+legend(1,-0.02,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+
+emptyPlot(c(1,16),c(-0.08,0.08), xmark = c(1,4,8,12,16), bty='n', main= "Van Hamme-Wasserman \n Cond 75-25", ylab = "Connection weight", xlab = "Trial")
+points(c(1:16), (Cond050_2$Diamond - Cond050_2$NoDiamond)[Cond050_2$FoodGroup == "A"], pch = 0, type = "b", col = "indianred1", lwd = 2)
+points(c(1:16), (Cond050_2$Diamond - Cond050_2$NoDiamond)[Cond050_2$FoodGroup == "B"], pch = 16, type = "b", lty = 2, col = "steelblue1", lwd = 2)
+points(c(1:16), (Cond050_2$Diamond - Cond050_2$NoDiamond)[Cond050_2$FoodGroup == "X"], pch = 15, type = "b", lty = 4, col = "limegreen", lwd = 2)
+legend(1,-0.02,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+
+```
+
+
+
+```{r}
+par(mfrow = c(1,2))
+par(las=1)
+#cond 100
+emptyPlot(c(0,16),c(0,8), xmark = c(1,4,8,12,16), ymark=c(0,1,2,3,4,5,6,7,8), bty='n', main = "Van Hamme & Wasserman 1994 \n Cond 100-0", xlab = "Trial", ylab = "Causal rating score")
+A <- c(5.1,5.2,4.9,5.1,6.2,6.3,6,6.6,6.5,6.5,7,6.6,7.1,7.2,7,7.2,7.2)
+B <- c(4.5,2.1,1.5,1.3,1.2,1.1,1,1,0.9,0.7,0.8,0.7,0.8,0.7,0.6,0.7,0.5)
+X <- c(3.6,4.5,2.2,1.8,3,3.3,2,3.1,1.7,1.5,2.5,1.4,2.3,2.5,1.4,2.3,1.4)
+points(c(0:16),A, pch = 0, type = "b", col = "indianred1", lwd = 2)
+points(c(0:16),B, pch =16, type = "b", lty = 2, col = "steelblue1", lwd = 2)
+points(c(0:16),X, pch =15, type = "b", lty = 4, col = "limegreen", lwd = 2)
+abline(v=0.5, col="grey", lty = 1)
+legend(0.05,8,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+
+emptyPlot(c(1,16),c(-0.08,0.08), xmark = c(1,4,8,12,16), bty='n', main= "Rescorla-Wagner \n Cond 100-0", ylab = "Connection weight", xlab = "Trial")
+points(c(1:16), (Cond100$Diamond - Cond100$NoDiamond)[Cond100$FoodGroup == "A"], pch = 0, type = "b", col = "indianred1", lwd = 2)
+points(c(1:16), (Cond100$Diamond - Cond100$NoDiamond)[Cond100$FoodGroup == "B"], pch = 16, type = "b", lty = 2, col = "steelblue1", lwd = 2)
+points(c(1:16), (Cond100$Diamond - Cond100$NoDiamond)[Cond100$FoodGroup == "X"], pch = 15, type = "b", lty = 4, col = "limegreen", lwd = 2)
+legend(1,-0.04,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+
+emptyPlot(c(1,16),c(-0.15,0.15), xmark = c(1,4,8,12,16), bty='n', main= "Van Hamme-Wasserman \n Cond 100-0", ylab = "Connection weight", xlab = "Trial")
+points(c(1:16), (Cond100_2$Diamond - Cond100_2$NoDiamond)[Cond100_2$FoodGroup == "A"], pch = 0, type = "b", col = "indianred1", lwd = 2)
+points(c(1:16), (Cond100_2$Diamond - Cond100_2$NoDiamond)[Cond100_2$FoodGroup == "B"], pch = 16, type = "b", lty = 2, col = "steelblue1", lwd = 2)
+points(c(1:16), (Cond100_2$Diamond - Cond100_2$NoDiamond)[Cond100_2$FoodGroup == "X"], pch = 15, type = "b", lty = 4, col = "limegreen", lwd = 2)
+legend(1,-0.04,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+```
+
+
+```{r}
+par(mfrow = c(1,2))
+par(las=1)
+#avg
+emptyPlot(c(-5,105),c(0,8), xaxt = "none", ymark=c(0,1,2,3,4,5,6,7,8), bty='n', main = "Van Hamme & Wasserman 1994 \n Averages for each condition", xlab = "Condition", ylab = "Causal rating score")
+A <- c(4.3,5.7,7.6)
+B <- c(2.7, 1.1, 0.2)
+X <- c(3.2,3,1.6)
+points(c(0, 50, 100),A, pch = 0, type = "b", col = "indianred1", lwd = 2)
+points(c(0, 50, 100),B, pch =16, type = "b", lty = 2, col = "steelblue1", lwd = 2)
+points(c(0, 50, 100),X, pch =15, type = "b", lty = 4, col = "limegreen", lwd = 2)
+legend(0.05,8,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+axis(1, at = c(0,50,100), labels = c("50-50", "75-25", "100-0")) 
+
+
+A<- c(((aggAllTrain$x)[aggAllTrain$Group.1 == "Outcome000" & aggAllTrain$Group.2 == "A"] - ((aggAllNotTrain$x)[aggAllNotTrain$Group.1 == "Outcome000" & aggAllNotTrain$Group.2 == "A"])), ((aggAllTrain$x)[aggAllTrain$Group.1 == "Outcome050" & aggAllTrain$Group.2 == "A"] - ((aggAllNotTrain$x)[aggAllNotTrain$Group.1 == "Outcome050" & aggAllNotTrain$Group.2 == "A"])), ((aggAllTrain$x)[aggAllTrain$Group.1 == "Outcome100" & aggAllTrain$Group.2 == "A"] - ((aggAllNotTrain$x)[aggAllNotTrain$Group.1 == "Outcome100" & aggAllNotTrain$Group.2 == "A"])))
+B<- c(((aggAllTrain$x)[aggAllTrain$Group.1 == "Outcome000" & aggAllTrain$Group.2 == "B"] - ((aggAllNotTrain$x)[aggAllNotTrain$Group.1 == "Outcome000" & aggAllNotTrain$Group.2 == "B"])), ((aggAllTrain$x)[aggAllTrain$Group.1 == "Outcome050" & aggAllTrain$Group.2 == "B"] - ((aggAllNotTrain$x)[aggAllNotTrain$Group.1 == "Outcome050" & aggAllNotTrain$Group.2 == "B"])), ((aggAllTrain$x)[aggAllTrain$Group.1 == "Outcome100" & aggAllTrain$Group.2 == "B"] - ((aggAllNotTrain$x)[aggAllNotTrain$Group.1 == "Outcome100" & aggAllNotTrain$Group.2 == "B"])))
+X<- c(((aggAllTrain$x)[aggAllTrain$Group.1 == "Outcome000" & aggAllTrain$Group.2 == "X"] - ((aggAllNotTrain$x)[aggAllNotTrain$Group.1 == "Outcome000" & aggAllNotTrain$Group.2 == "X"])), ((aggAllTrain$x)[aggAllTrain$Group.1 == "Outcome050" & aggAllTrain$Group.2 == "X"] - ((aggAllNotTrain$x)[aggAllNotTrain$Group.1 == "Outcome050" & aggAllNotTrain$Group.2 == "X"])), ((aggAllTrain$x)[aggAllTrain$Group.1 == "Outcome100" & aggAllTrain$Group.2 == "X"] - ((aggAllNotTrain$x)[aggAllNotTrain$Group.1 == "Outcome100" & aggAllNotTrain$Group.2 == "X"])))
+emptyPlot(c(-5,105),c(-0.07,0.09), xaxt = "none", bty='n', main= "Rescorla-Wagner \n Averages for each condition", xlab = "Condition", ylab = "Connection weight")
+points(c(0, 50, 100),A, pch = 0, type = "b", col = "indianred1", lwd = 2)
+points(c(0, 50, 100),B, pch =16, type = "b", lty = 2, col = "steelblue1", lwd = 2)
+points(c(0, 50, 100),X, pch =15, type = "b", lty = 4, col = "limegreen", lwd = 2)
+legend(0.05,-0.02,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+axis(1, at = c(0,50,100), labels = c("50-50", "75-25", "100-0"))
+
+
+A<- c(((aggAllTrain2$x)[aggAllTrain2$Group.1 == "Outcome000" & aggAllTrain2$Group.2 == "A"] - ((aggAllNotTrain2$x)[aggAllNotTrain2$Group.1 == "Outcome000" & aggAllNotTrain2$Group.2 == "A"])), ((aggAllTrain2$x)[aggAllTrain2$Group.1 == "Outcome050" & aggAllTrain2$Group.2 == "A"] - ((aggAllNotTrain2$x)[aggAllNotTrain2$Group.1 == "Outcome050" & aggAllNotTrain2$Group.2 == "A"])), ((aggAllTrain2$x)[aggAllTrain2$Group.1 == "Outcome100" & aggAllTrain2$Group.2 == "A"] - ((aggAllNotTrain2$x)[aggAllNotTrain2$Group.1 == "Outcome100" & aggAllNotTrain2$Group.2 == "A"])))
+B<- c(((aggAllTrain2$x)[aggAllTrain2$Group.1 == "Outcome000" & aggAllTrain2$Group.2 == "B"] - ((aggAllNotTrain2$x)[aggAllNotTrain2$Group.1 == "Outcome000" & aggAllNotTrain2$Group.2 == "B"])), ((aggAllTrain2$x)[aggAllTrain2$Group.1 == "Outcome050" & aggAllTrain2$Group.2 == "B"] - ((aggAllNotTrain2$x)[aggAllNotTrain2$Group.1 == "Outcome050" & aggAllNotTrain2$Group.2 == "B"])), ((aggAllTrain2$x)[aggAllTrain2$Group.1 == "Outcome100" & aggAllTrain2$Group.2 == "B"] - ((aggAllNotTrain2$x)[aggAllNotTrain2$Group.1 == "Outcome100" & aggAllNotTrain2$Group.2 == "B"])))
+X<- c(((aggAllTrain2$x)[aggAllTrain2$Group.1 == "Outcome000" & aggAllTrain2$Group.2 == "X"] - ((aggAllNotTrain2$x)[aggAllNotTrain2$Group.1 == "Outcome000" & aggAllNotTrain2$Group.2 == "X"])), ((aggAllTrain2$x)[aggAllTrain2$Group.1 == "Outcome050" & aggAllTrain2$Group.2 == "X"] - ((aggAllNotTrain2$x)[aggAllNotTrain2$Group.1 == "Outcome050" & aggAllNotTrain2$Group.2 == "X"])), ((aggAllTrain2$x)[aggAllTrain2$Group.1 == "Outcome100" & aggAllTrain2$Group.2 == "X"] - ((aggAllNotTrain2$x)[aggAllNotTrain2$Group.1 == "Outcome100" & aggAllNotTrain2$Group.2 == "X"])))
+emptyPlot(c(-5,105),c(-0.07,0.09), xaxt = "none", bty='n',  main= "Van Hamme-Wasserman \n Averages for each condition", xlab = "Condition",ylab = "Connection weight")
+points(c(0, 50, 100),A, pch = 0, type = "b", col = "indianred1", lwd = 2)
+points(c(0, 50, 100),B, pch =16, type = "b", lty = 2, col = "steelblue1", lwd = 2)
+points(c(0, 50, 100),X, pch =15, type = "b", lty = 4, col = "limegreen", lwd = 2)
+legend(0.05,-0.02,legend =c("A", "B", "X"), pch = c(0,16,15), col = c("indianred1", "steelblue1", "limegreen"))
+axis(1, at = c(0,50,100), labels = c("50-50", "75-25", "100-0"))
+```
+
+
+
+
 ## Plotting group 1 over time
 
 ### RW

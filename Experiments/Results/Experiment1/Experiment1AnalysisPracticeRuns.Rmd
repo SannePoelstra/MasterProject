@@ -1,0 +1,208 @@
+---
+title: "Experiment1 Analysis"
+author: "Sanne Poelstra"
+date: "14/03/2021"
+output: html_document
+---
+
+```{r, include = FALSE}
+rm(list=ls())
+library(plotfunctions)
+```
+
+```{r, reading in the csv file}
+d <- read.csv("PracticeRuns.csv", header = TRUE, sep = ',')
+dat <- d[, c("A", "A1", "A1_alt", "A2", "A3", "A3_alt", "B", "B1", "B1_alt", "B2", "B3", "B3_alt", "X", "X1", "X1_alt", "X2", "X3", "X3_alt", "C", "C_alt", "Outcome", "Stim1", "Stim2", "responseR1", "responseR2", "responseR3",  "block1", "block2", "block3", "average_response_time", "avg_rt", "NewAnswers", "Practice", "date_starttime", "jatosStudyResultId", "pos1X", "pos1Y", "pos2X", "pos2Y", "response_time", "Cond", "Train_Test", "screen_availableHeight", "screen_availableWidth",  "timeout_occurred", "total_response_time", "Trial")]
+
+head(dat)
+
+```
+
+```{r, collect the data for the graphs}
+#averages per condition, for X A and B
+#responseR1 is always A, R2 is always B and R3 is always X
+
+#Now to figure out the conditions 
+#I need to skip the first 4 trials, as those are practice trials
+train1 <- dat[which(dat$Train_Test == "Train"),]
+train <- dat[which(dat$Train_Test == "Train"),]
+#Filter the 999 ones
+train$responseR1[train$responseR1 == 999] <- NA
+train$responseR2[train$responseR2 == 999] <- NA
+train$responseR3[train$responseR3 == 999] <- NA
+
+#train$Cond <- as.factor(train$Cond)
+
+a <- aggregate(list(train$responseR1, train$responseR2, train$responseR3), list(train$Cond), mean, na.rm = T)
+
+head(a)
+colnames(a) <- c("Cond", "A", "B", "X")
+head(a)
+
+
+```
+
+```{r}
+hist(train$responseR1[train$Cond == "100"], breaks = 10)
+mean(train$responseR1[train$Cond == "100"], na.rm = TRUE)
+```
+<br/> This histogram shows the condition where A (responseR1) always leads to a diamond outcome. Which makes it so weird that there are so many 1's in there
+
+
+```{r}
+hist(train$responseR2[train$Cond == "100"], breaks = 10)
+mean(train$responseR2[train$Cond == "100"], na.rm = TRUE)
+
+```
+<br/> This histogram shows the condition where B (responseR1) never leads to a diamond outcome. Here the amount of 1's make more sense, and I'm glad to see that at least in comparison they differ?
+
+```{r}
+#Let's see how many times people scored 1's on average.
+
+#create subset data with just the 1's
+OnesR1 <- subset(train, train$responseR1 == 1)
+OnesR2 <- subset(train, train$responseR2 == 1)
+OnesR3 <- subset(train, train$responseR3 == 1)
+SumOnesR1 <- aggregate(OnesR1$responseR1, list(OnesR1$jatosStudyResultId), sum)
+SumOnesR2 <- aggregate(OnesR2$responseR2, list(OnesR2$jatosStudyResultId), sum)
+SumOnesR3 <- aggregate(OnesR3$responseR3, list(OnesR3$jatosStudyResultId), sum)
+AvgOnesR1 <- mean(SumOnesR1$x)
+AvgOnesR2 <- mean(SumOnesR2$x)
+AvgOnesR3 <- mean(SumOnesR3$x)
+AvgOnesR1
+AvgOnesR2
+AvgOnesR3
+
+```
+
+Okay so, the average amount of 1's given to R1 is 13, the average amount of 1's given to R2 is 16 and to R3 is 8. So people seem to give the latter one less ones somehow. (this is for all the conditions, so you would expect that A is a bit lower than B, but not that X would be this low). <br />
+There are a total of 48 test trails, so in 26% of all trials A is scored a 1. For B that's 34% of all trails, and for X 17%.
+
+```{r}
+#What happens if we just remove all 1 trials, and just throw them out?
+
+#for some weird reason this doesn't work?
+#NoOnes <- subset(train, train$responseR1 != 1 | train$responseR2 != 1 | train$responseR3 != 1)
+#so we're going to do it the very ugly way
+#NoOnesR1 <- subset(train, train$responseR1 != 1)
+#NoOnesR1R2 <- subset(NoOnesR1, NoOnesR1$responseR2 != 1)
+#NoOnes <- subset(NoOnesR1R2, NoOnesR1R2$responseR3 != 1)
+
+#this leaves us with around half the data of the train set
+#AllTrialsNoOnes <- aggregate(list(NoOnes$responseR1, NoOnes$responseR2, #NoOnes$responseR3), list(NoOnes$Cond, NoOnes$Trail), mean, na.rm= T)
+
+##There is no difference if I do this actually.. So the 1's don't even seem to matter that much?
+#train$responseR1[train$responseR1 == 1] <- NA
+#train$responseR2[train$responseR2 == 1] <- NA
+#train$responseR3[train$responseR3 == 1] <- NA
+```
+The way I checked what happens if there were no 1's is by setting all the 
+
+
+```{r}
+AllTrials <- aggregate(list(train$responseR1, train$responseR2, train$responseR3), list(train$Cond, train$Trial), mean, na.rm = T)
+colnames(AllTrials) <- c("Cond", "Trial", "A", "B", "X")
+
+Cond000 <- AllTrials[which(AllTrials$Cond==0),]
+Cond050 <- AllTrials[which(AllTrials$Cond==50),]
+Cond100 <- AllTrials[which(AllTrials$Cond==100),]
+
+
+```
+
+### Averages
+```{r}
+par(mfrow = c(1,2))
+par(las=1)
+#original plot
+emptyPlot(c(-5,105),c(0,8), xmark = c(0,50,100), ymark=c(0,1,2,3,4,5,6,7,8), bty='n', main = "Original Plot", xlab = "Condition", ylab = "Causal rating score")
+A <- c(4.3,5.7,7.6)
+B <- c(2.7, 1.1, 0.2)
+X <- c(3.2,3,1.6)
+points(c(0, 50, 100),A, pch = 0, type = "b")
+points(c(0, 50, 100),B, pch =16, type = "b", lty = 2)
+points(c(0, 50, 100),X, pch =15, type = "b", lty = 4)
+legend(0.05,8,legend =c("A", "B", "X"), pch = c(0,16,15))
+
+emptyPlot(c(-5,105),c(1,9), xmark = c(0,50,100), ymark=c(1,2,3,4,5,6,7,8,9), bty='n', main = "Our Experiment", xlab = "Condition", ylab = "Causal rating score")
+A <- c(a$A)
+B <- c(a$B)
+X <- c(a$X)
+points(c(0, 50, 100),A, pch = 0, type = "b")
+points(c(0, 50, 100),B, pch =16, type = "b", lty = 2)
+points(c(0, 50, 100),X, pch =15, type = "b", lty = 4)
+legend(0.05,9,legend =c("A", "B", "X"), pch = c(0,16,15))
+
+```
+
+###Cond 000 
+```{r}
+par(mfrow = c(1,2))
+par(las=1)
+#original plot
+emptyPlot(c(0,16),c(0,8), xmark = c(1,4,8,12,16), ymark=c(0,1,2,3,4,5,6,7,8), bty='n', main = "Original plot", xlab = "Trial", ylab = "Causal rating score")
+A <- c(4.9, 5, 5.1, 3.2, 2.8, 2.4, 2.2, 4.5, 4, 3, 2.2, 3.4, 4.7, 2.8, 2.6, 4.3, 4.1)
+B <- c(3.8, 1.9, 1.5, 3.9, 3.7, 3.8, 4.7, 2.9, 2.7, 4.5, 4.3, 2.8, 2.5, 3.5, 4.5, 3, 2.4)
+X <- c(4.5, 5, 2.1, 4.9, 2.7, 2.4, 4.3, 4.9, 3.3, 4.9, 3, 2.8, 4.8,2.8, 4.8, 5.1, 3.1)
+points(c(0:16),A, pch = 0, type = "b")
+points(c(0:16),B, pch =16, type = "b", lty = 2)
+points(c(0:16),X, pch =15, type = "b", lty = 4)
+legend(0.05,8,legend =c("A", "B", "X"), pch = c(0,16,15))
+
+emptyPlot(c(0,16),c(1,9), xmark = c(1,4,8,12,16), ymark=c(1,2,3,4,5,6,7,8, 9), bty='n', main = "Our Experiment", xlab = "Trial", ylab = "Causal rating score")
+A <- Cond000$A
+B <- Cond000$B
+X <- Cond000$X
+points(c(1:16),A, pch = 0, type = "b")
+points(c(1:16),B, pch =16, type = "b", lty = 2)
+points(c(1:16),X, pch =15, type = "b", lty = 4)
+legend(0.05,9,legend =c("A", "B", "X"), pch = c(0,16,15))
+```
+
+###Cond 050 
+```{r}
+par(mfrow = c(1,2))
+par(las=1)
+#original plot
+emptyPlot(c(0,16),c(0,8), xmark = c(1,4,8,12,16), ymark=c(0,1,2,3,4,5,6,7,8), bty='n', main = "Original plot", xlab = "Trial", ylab = "Causal rating score")
+A <- c(4.7,5,4.6,3.6,5,3.2,4.4,5.5,4.9,3.9,5.4,4.8,5.5,3.8,4.7,5.7,5.6)
+B <- c(4.5,2,1.9,4.2,2.6,3.3,2,1.9,1.8,3.3,2.2,2,1.8,2.5,1.5,1.3,1)
+X <- c(3.8,4.6,2.8,4.5,5,3.1,2.7,4.5,3,4.8,5.1,3.3,4.8,3.2,2.8,4.2,2.9)
+points(c(0:16),A, pch = 0, type = "b")
+points(c(0:16),B, pch =16, type = "b", lty = 2)
+points(c(0:16),X, pch =15, type = "b", lty = 4)
+legend(0.05,8,legend =c("A", "B", "X"), pch = c(0,16,15))
+
+emptyPlot(c(0,16),c(1,9), xmark = c(1,4,8,12,16), ymark=c(1,2,3,4,5,6,7,8, 9), bty='n', main = "Our Experiment", xlab = "Trial", ylab = "Causal rating score")
+A <- Cond050$A
+B <- Cond050$B
+X <- Cond050$X
+points(c(1:16),A, pch = 0, type = "b")
+points(c(1:16),B, pch =16, type = "b", lty = 2)
+points(c(1:16),X, pch =15, type = "b", lty = 4)
+legend(0.05,8,legend =c("A", "B", "X"), pch = c(0,16,15))
+```
+
+###Cond 100 
+```{r}
+par(mfrow = c(1,2))
+par(las=1)
+#original plot
+emptyPlot(c(0,16),c(0,8), xmark = c(1,4,8,12,16), ymark=c(0,1,2,3,4,5,6,7,8), bty='n', main = "Original plot", xlab = "Trial", ylab = "Causal rating score")
+A <- c(5.1,5.2,4.9,5.1,6.2,6.3,6,6.6,6.5,6.5,7,6.6,7.1,7.2,7,7.2,7.2)
+B <- c(4.5,2.1,1.5,1.3,1.2,1.1,1,1,0.9,0.7,0.8,0.7,0.8,0.7,0.6,0.7,0.5)
+X <- c(3.6,4.5,2.2,1.8,3,3.3,2,3.1,1.7,1.5,2.5,1.4,2.3,2.5,1.4,2.3,1.4)
+points(c(0:16),A, pch = 0, type = "b")
+points(c(0:16),B, pch =16, type = "b", lty = 2)
+points(c(0:16),X, pch =15, type = "b", lty = 4)
+legend(0.05,8,legend =c("A", "B", "X"), pch = c(0,16,15))
+
+emptyPlot(c(0,16),c(1,9), xmark = c(1,4,8,12,16), ymark=c(1,2,3,4,5,6,7,8, 9), bty='n', main = "Our Experiment", xlab = "Trial", ylab = "Causal rating score")
+A <- Cond100$A
+B <- Cond100$B
+X <- Cond100$X
+points(c(1:16),A, pch = 0, type = "b")
+points(c(1:16),B, pch =16, type = "b", lty = 2)
+points(c(1:16),X, pch =15, type = "b", lty = 4)
+legend(0.05,8,legend =c("A", "B", "X"), pch = c(0,16,15))
+```
